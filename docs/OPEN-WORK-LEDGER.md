@@ -33,14 +33,15 @@ release.
 tier — is now a decided operating mode rather than a pending task, which is why the row above is
 ⛔ and not 🟡.
 
-## Track 1 — Blocking technical unknown
+## Track 1 — Blocking technical unknown — **RESOLVED**
 
 | Item | Status | Gate | Next action |
 |---|---|---|---|
-| **Which Create major version the pack targets — 6.0.x or 0.5.1.f** | 🔴 | nothing else can be pinned until this resolves | Build `docs/compatibility-matrix.md` from actual CurseForge / Modrinth version data for Create + Steam 'n' Rails + CBC + CBC Firepower + Crafts & Additions + Diesel Generators; the lowest common ceiling decides |
-| Season 2 viability under the chosen Create version (VS2 / Clockwork / TFMG / Warium) | 🔴 | downstream of the row above | Record which door the Create choice closes, as an ADR — not as a surprise found in Season 2 |
-| `packwiz` not installed on the dev machine | 🔴 | blocks `pack.toml`, and therefore the CI `build` job (ADR 0001) | Install packwiz; then `packwiz init` for MC 1.20.1 / Forge |
-| `java` not on PATH | 🔴 | blocks every boot test (§26); does not block bootstrap | Install a Java 17 JDK and confirm the launcher points at it |
+| **Which Create major version the pack targets** | ✅ | — | **Create `6.0.8` — forced, not chosen.** The CORE addons' declared ranges intersect to `[6.0.8,6.1.0)` and 6.0.8 is the newest 1.20.1 build. Read from `META-INF/mods.toml` inside the jars (**#9**), see `docs/compatibility-matrix.md` |
+| Season 2 viability under the chosen Create version (VS2 / Clockwork / TFMG / Warium) | 🔴 | now answerable — the Create pin is known | Sweep the four Season 2 mods against Create 6.0.8 and record which doors the pin closes, as an ADR |
+| `packwiz` not installed on the dev machine | ✅ | — | Built from source with Go 1.26.7 → `~/go/bin/packwiz.exe` (2026-08-25) |
+| `java` not on PATH | ✅ | — | Temurin **17.0.20.1** at `C:\Program Files\Eclipse Adoptium\jdk-17.0.20.101-hotspot`. **Prism Launcher 11.0.3** also installed — the official Minecraft launcher cannot import a modpack, so it was never a path to the goal |
+| 17 CORE mods are CurseForge-only, four of them hard Create dependencies | 🟢 | none — packwiz resolves both sources | Constrains distribution, not feasibility. Recorded in the matrix |
 
 ## Track 2 — Pack construction (handoff doc §24, in order)
 
