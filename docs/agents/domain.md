@@ -77,7 +77,7 @@ From `docs/Addon Spec — Natural Wildlife & Ecology.md`. The layer exists so th
 
 ## Distribution & release
 
-From `docs/ADDON-MODPACK-DISTRIBUTION-AND-UPDATES.md`. This vocabulary is about shipping the pack,
+From `docs/Addon Modpack — Distribution & Updates.md`. This vocabulary is about shipping the pack,
 and it is the only part of the design set that constrains this repository's own process.
 
 | Term | Definition | Aliases to avoid |
@@ -178,7 +178,7 @@ PR description, comment ใน config, identifier ของ KubeJS และใ�
 
 ## การแจกจ่ายและการปล่อยเวอร์ชัน
 
-มาจาก `docs/ADDON-MODPACK-DISTRIBUTION-AND-UPDATES.md` คำศัพท์ชุดนี้ว่าด้วยการส่ง pack ออกไป และ
+มาจาก `docs/Addon Modpack — Distribution & Updates.md` คำศัพท์ชุดนี้ว่าด้วยการส่ง pack ออกไป และ
 เป็นส่วนเดียวในชุดเอกสารออกแบบที่บังคับกระบวนการของ repository นี้เอง
 
 | คำ | ความหมาย | ห้ามใช้ |

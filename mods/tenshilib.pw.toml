@@ -1,0 +1,13 @@
+name = "TenshiLib"
+filename = "tenshilib-1.20.1-1.7.6-forge.jar"
+side = "both"
+
+[download]
+url = "https://cdn.modrinth.com/data/P2rffivS/versions/5elJ9ZTS/tenshilib-1.20.1-1.7.6-forge.jar"
+hash-format = "sha512"
+hash = "492f11b0a999af306f07b363d8edfad9849ce7294e2609755eee906d1502b00feebd4304c6cd9bfe1a85ffbda0de5b6224a37693c4eb4b42ae664d61a23d8666"
+
+[update]
+[update.modrinth]
+mod-id = "P2rffivS"
+version = "5elJ9ZTS"

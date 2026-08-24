@@ -1,0 +1,13 @@
+name = "Attract to Sound ([NEO]Forge/Fabric): Sound & Stealth."
+filename = "forge_soundattract_1.20.1-6.3.8.jar"
+side = "both"
+
+[download]
+url = "https://cdn.modrinth.com/data/zZluixcp/versions/8gTrVBFZ/forge_soundattract_1.20.1-6.3.8.jar"
+hash-format = "sha512"
+hash = "4446185515e7f18ff2412aeb397fa1eb1057992baf683d0f7adc2dfd8429447e75db68ac891f87ba415d116778716cb215ebe438007b226672f18111dd2592f4"
+
+[update]
+[update.modrinth]
+mod-id = "zZluixcp"
+version = "8gTrVBFZ"

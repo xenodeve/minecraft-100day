@@ -1,0 +1,13 @@
+name = "Industrial Civilization Survival"
+author = "xenodeve"
+version = "0.1.0-alpha"
+pack-format = "packwiz:1.1.0"
+
+[index]
+file = "index.toml"
+hash-format = "sha256"
+hash = "d41d0c3d4b92c9c8463cfde602a72a73d1989501a138a5d71fe1abc849105b6c"
+
+[versions]
+forge = "47.4.23"
+minecraft = "1.20.1"

@@ -1,0 +1,13 @@
+name = "Uranus"
+filename = "uranus-2.2.6-bugfix.2-1.20.1-forge.jar"
+side = "both"
+
+[download]
+url = "https://cdn.modrinth.com/data/3Acxy864/versions/py0cld87/uranus-2.2.6-bugfix.2-1.20.1-forge.jar"
+hash-format = "sha512"
+hash = "36c2a74cbaa483fc2f78355364a136398866947fb6ac27801b95a9f2fd503b641177d25aff85c83e17eccf77052b457525150f2464e8a2161fcbce94294b67e8"
+
+[update]
+[update.modrinth]
+mod-id = "3Acxy864"
+version = "py0cld87"

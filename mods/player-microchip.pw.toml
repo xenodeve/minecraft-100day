@@ -1,0 +1,13 @@
+name = "Player Microchip (Tracker)"
+filename = "player_tracking_chip-1.0.2-forge-1.20.1.jar"
+side = "both"
+
+[download]
+hash-format = "sha1"
+hash = "3ffd749e656b7e93c8405c31dbf5d6dbadc220d7"
+mode = "metadata:curseforge"
+
+[update]
+[update.curseforge]
+file-id = 7782898
+project-id = 1488872

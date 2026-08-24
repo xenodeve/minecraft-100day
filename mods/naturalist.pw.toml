@@ -1,0 +1,13 @@
+name = "Naturalist"
+filename = "naturalist-5.0pre4+forge-1.20.1.jar"
+side = "both"
+
+[download]
+url = "https://cdn.modrinth.com/data/F8BQNPWX/versions/wnR21jg1/naturalist-5.0pre4%2Bforge-1.20.1.jar"
+hash-format = "sha512"
+hash = "d1eef3a3bcb3a73f1df4fe6f10103d21a3812d65e78ac6216bacf30e480d87d9151db5ec2eb9319295da818d9b4df5e4fe3c068f573a5e1088284f2bf6a02588"
+
+[update]
+[update.modrinth]
+mod-id = "F8BQNPWX"
+version = "wnR21jg1"

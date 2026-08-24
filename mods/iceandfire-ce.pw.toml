@@ -1,0 +1,13 @@
+name = "IceAndFire Community Edition"
+filename = "IceAndFireCE-1.2.7-1.20.1-forge.jar"
+side = "both"
+
+[download]
+url = "https://cdn.modrinth.com/data/VpmCsizY/versions/er2PNtdp/IceAndFireCE-1.2.7-1.20.1-forge.jar"
+hash-format = "sha512"
+hash = "2623f046a39fe59da5532fe8eb14e3183173d2a759b8cf8b0716698906c176c069ca1a9957a6a967cb8a18a350601eca968d0c584b21eb16fb103cf03cd013fb"
+
+[update]
+[update.modrinth]
+mod-id = "VpmCsizY"
+version = "er2PNtdp"
