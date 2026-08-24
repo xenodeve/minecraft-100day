@@ -45,14 +45,16 @@ tier — is now a decided operating mode rather than a pending task, which is wh
 
 ## Track 2 — Pack construction (handoff doc §24, in order)
 
-Not startable until Track 1 resolves. Listed so they are visible, not so they are picked up.
-
 | Item | Status | Gate | Next action |
 |---|---|---|---|
-| Phase 0 — repository bootstrap + packwiz init + the five `docs/` files | 🔴 | packwiz | §32 Task 1–3 |
-| Phase 1 — Create baseline batch, one mod at a time | 🔴 | Create version decision | §24 Phase 1 |
-| Phase 2 — combat baseline + `docs/combat-baseline.md` TTK matrix | 🔴 | Phase 1 green | §24 Phase 2 |
-| Phases 3–13 | 🔴 | strictly sequential | see §24 |
+| Phase 0 — packwiz init, `pack.toml`, `index.toml`, `.packwizignore` | ✅ | — | MC 1.20.1 / Forge 47.4.23. **#11** |
+| Phase 1 — the Create stack | ✅ | — | Create pinned `6.0.8`; `cbc_firepower_components` removed — it cannot load with CBC 5.11 (**#11**) |
+| Mod set resolved and pinned | ✅ | — | 93 metafiles incl. the §2 performance stack (**#13**). Server boot green |
+| **Phase 2 — combat baseline, `docs/combat-baseline.md` TTK matrix** | 🟢 | **buildable now** | §24 Phase 2. Needs a launched *client* — the developer's account. This is where balance work actually starts |
+| Phases 3–13 | 🔴 | strictly sequential, after Phase 2 | see §24 |
+| Client boot test (§26 full protocol) | 🟡 | needs the developer's Microsoft account | Import per `INSTALL.md`, launch, create a world, reload, read `latest.log` |
+| Re-add `cbc_firepower_components` | 🟡 | needs an upstream release supporting CBC ≥ 5.9 | Watch the project; one `packwiz mr add` when it exists |
+| Re-evaluate `TaCZ: Accelerated` | 🟡 | needs a benchmark baseline | Performance Spec §2 calls it Core, §19 calls it CORE CANDIDATE. Resolve the contradiction with a measurement, not a reading |
 
 ## Track 3 — Addon Spec (Crafting Assistance + Tactical Tracker)
 

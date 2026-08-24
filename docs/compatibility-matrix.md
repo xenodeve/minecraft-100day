@@ -2,7 +2,13 @@
 
 **This is a record of what has been observed, not of what should work.** A row is marked `PASS` in
 **Tested** only after the pack has been launched with that exact version and the boot protocol
-(§26) has run. Every Tested cell below is empty, because nothing has been launched yet.
+(§26) has run.
+
+**Tested cells are still empty, and that is correct.** A **dedicated server** boot has passed
+(see *Boot test* below) — every mod loaded, registries built, a world generated. That is not §26.
+§26 is the **client** protocol: launch, create a world, join, save, restart, reload, read
+`latest.log` and `crash-reports/`. The client has never been launched; it needs the developer's
+Microsoft account. Do not fill a Tested cell from the server result.
 
 - **Platform:** Minecraft `1.20.1` · Forge · Java 17
 - **Create:** pinned to **`6.0.8`** — see *The Create pin* below
@@ -69,15 +75,15 @@ the jar, and a `mods.toml` entry looks identical whether the dependency is bundl
 | Create | `mc1.20.1-6.0.8` | MR | COMMON | CORE | flywheel, ponder | |
 | Create: Steam 'n' Rails | `1.7.2+forge-mc1.20.1` | MR | COMMON | CORE | create | |
 | Create Big Cannons | `5.11.4` | MR | COMMON | CORE | create, ritchiesprojectilelib | |
-| CBC: Firepower Components | `0.2.0` | MR | COMMON | CORE | create-big-cannons | |
+| ~~CBC: Firepower Components~~ | `0.2.0` | MR | COMMON | **REMOVED** | create-big-cannons `[5.8.0,5.9.0)` | ❌ blocked the server boot — see *Boot test* |
 | Create Crafts & Additions | `1.20.1-1.3.3` | MR | COMMON | CORE | create | |
 | Create: Diesel Generators | `1.20.1-1.3.12` | MR | COMMON | CORE | create | |
 | Create: New Age | `1.2.0+forge-mc1.20.1` | MR | COMMON | SEASON 2 | create, esl | |
 | Create: Copycats+ | `3.0.8+mc.1.20.1-forge` | MR | COMMON | DEPENDENCY | create | optional CBC integration |
 | FramedBlocks | `9.4.3` | MR | COMMON | DEPENDENCY | — | optional CBC integration |
-| Flywheel | *see note* | CF | — | DEPENDENCY | — | |
-| Ponder | *see note* | CF | — | DEPENDENCY | — | |
-| Ritchie's Projectile Lib | *see note* | CF | — | DEPENDENCY | — | |
+| Flywheel | bundled in Create | — | — | **DO NOT ADD** | — | inside `create-1.20.1-6.0.8.jar` |
+| Ponder | bundled in Create | — | — | **DO NOT ADD** | — | inside `create-1.20.1-6.0.8.jar` |
+| Ritchie's Projectile Lib | `2.1.1+mc.1.20.1` | MR (`rpl`) | COMMON | DEPENDENCY | — | auto-resolved with CBC |
 | Electric Sheep Library (`esl`) | *see note* | CF | — | DEPENDENCY | — | Season 2 only |
 
 ## Guns / tactical combat
@@ -170,6 +176,35 @@ the jar, and a `mods.toml` entry looks identical whether the dependency is bundl
 
 ---
 
+## Performance stack (Performance Spec §2)
+
+| Mod | Version | Source | Side | Status | Tested |
+|---|---|---|---|---|---|
+| Embeddium | `0.3.31+mc1.20.1` | MR | CLIENT | CORE | |
+| ModernFix | `5.27.77+mc1.20.1` | MR | COMMON | CORE | |
+| FerriteCore | `6.0.1` | MR | COMMON | CORE | |
+| Entity Culling | `1.10.5` | MR | CLIENT | CORE | |
+| ImmediatelyFast | `1.2.7+1.20.2` | MR | CLIENT | CORE | packwiz resolved this, not the `1.5.5+1.20.4` the sweep saw — that build is 1.20.4-first |
+| ServerCore | `1.5.2+1.20.1` | MR | SERVER | CORE | |
+| FastSuite | `5.1.2` | MR | COMMON | CORE | pulls `Placebo 8.6.3` |
+| Clumps | `12.0.0.4` | MR | COMMON | CORE | |
+| Chunky | `1.3.146` | MR | COMMON | CORE | |
+| **TaCZ: Accelerated** | — | CF (`tacza`) | — | **NOT ADDED** | see below |
+
+**Chunky vs Chunk-Pregenerator resolved itself.** §2 forbids installing both without a reason.
+Chunk Pregenerator has a Modrinth project but **no 1.20.1 Forge build**, so there was no choice to
+make.
+
+**TaCZ: Accelerated is not in the pack, and the spec contradicts itself about it.** §2 lists it as
+item 9 of the *Approved Core Performance Stack*; §19 gives its status as
+`CORE CANDIDATE / PROMOTE AFTER BENCHMARK`. The stricter reading wins: it is not promoted until a
+benchmark exists, which matches §3's discipline for every other candidate and §33's rule that
+measurement precedes tuning. There is no baseline to measure against yet. Re-read §2 against §19
+before adding it.
+
+**§3 Experimental mods are all absent by design** — AI Improvements, Let Me Despawn, Alternate
+Current, Canary, TaCZ Optimization, Smooth Boot Reloaded. Each needs its own benchmark branch.
+
 ## Boot test — 2026-08-25, Forge dedicated server
 
 The first real test of the mod set. Forge 47.4.23 dedicated server, Temurin 17.0.20.1, 6 GB heap,
@@ -220,3 +255,19 @@ Microchip. They are named in the design documents but were not in the sweep list
 
 **Naturalist's newest 1.20.1 build is `5.0pre4`, a prerelease.** Pinning a prerelease into a CORE
 slot is a decision, not a default.
+
+### Boot 3 — with the Performance Spec §2 stack (2026-08-25)
+
+Same server, 83 jars after client-only filtering.
+
+```
+[06:05:52] Done (22.295s)! For help, type "help"
+```
+
+**Green.** And measurably faster than the same set without it: **27.452s → 22.295s** on identical
+hardware and heap.
+
+That is an observation, not a benchmark. It is one cold start on one machine with no world cache,
+and startup time is not the metric the Performance Spec cares about — §33–39 define the real ones
+(MSPT, TPS, entity tick time, client FPS) across four scenarios. Do not quote 22.295s as evidence
+the pack performs well; quote it only as evidence the stack loads and does not regress startup.
