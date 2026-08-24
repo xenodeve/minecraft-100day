@@ -10,9 +10,8 @@
 **Legend:** ✅ done, pending merge · 🟢 buildable now · 🟡 gated (needs merge / resource /
 decision) · 🔴 **UNTRACKED** (MD-only, no GitHub issue — highest miss-risk)
 
-**Current state, stated plainly:** the repo has its operating layer and its design document.
-It has **no pack** — no `pack.toml`, no mods, no config, no KubeJS. Every row below is 🔴
-because no issues have been filed yet; Phase 1 fixes that.
+**Current state, stated plainly:** the repo has its operating layer and its two design
+documents. It has **no pack** — no `pack.toml`, no mods, no config, no KubeJS.
 
 ---
 
@@ -21,9 +20,10 @@ because no issues have been filed yet; Phase 1 fixes that.
 | Item | Status | Gate | Next action |
 |---|---|---|---|
 | `docs/agents/issue-tracker.md` + `docs/agents/triage-labels.md` | 🔴 | `/setup-matt-pocock-skills` is user-invocation-only — an agent cannot write these | Developer runs `/setup-matt-pocock-skills` in this repo, then the T4 delta (Component / Type / Severity groups) is appended |
-| Triage labels created on the GitHub repo | 🔴 | needs the repo to exist | `gh label create` for the five canonical roles + the T4 groups; report created / already-there / skipped |
+| Triage labels created on the GitHub repo | ✅ | — | 23 created, 2 already existed, 0 failed. `bug` renamed to `Bug` to match the vocabulary |
 | `git config core.hooksPath .githooks` on this clone | 🔴 | developer action, per-clone by design | Run it once; verify with `git config --get core.hooksPath` |
-| Branch ruleset on `main` (`lint`, `test`, `guards` required; direct push blocked) | 🔴 | the checks must run once before they are selectable | Push, let the workflow run, then create the ruleset |
+| `T4 main gate` ruleset — PR-only, no force-push, no deletion | ✅ | — | Active. Direct pushes to `main` are blocked |
+| `lint` / `test` / `guards` as **required status checks** | 🟡 | **#1** — GitHub Actions is billing-locked, so no check can ever report | Resolve the billing lock, confirm a green run, then add the three contexts to the ruleset |
 
 ## Track 1 — Blocking technical unknown
 
@@ -60,12 +60,13 @@ main pack. Not yet folded into the §24 phase list — where each lands is itsel
 
 ## Management Plan — phased execution order
 
-**Phase 0 — Unblock the tooling.** Install `packwiz` and a Java 17 JDK, run
-`git config core.hooksPath .githooks`, and run `/setup-matt-pocock-skills`. Four small actions,
-and three of the four rows in Track 0 plus two in Track 1 depend on them.
+**Phase 0 — Unblock the tooling.** Resolve the GitHub Actions billing lock (**#1**), install
+`packwiz` and a Java 17 JDK, run `git config core.hooksPath .githooks`, and run
+`/setup-matt-pocock-skills`. Five small actions, and most of Track 0 plus two rows in Track 1
+depend on them. Only #1 needs money; the rest are minutes.
 
-**Phase 1 — Tracking hygiene.** File a GitHub issue for every 🔴 row above, so the ledger stops
-being the only record. Create the triage labels first, since the issues need them.
+**Phase 1 — Tracking hygiene.** File a GitHub issue for every remaining 🔴 row above, so the
+ledger stops being the only record. The triage label vocabulary is already installed.
 
 **Phase 2 — Resolve the Create version.** This is the multiplier. Every mod pin, every KubeJS
 recipe, and the entire Season 2 branch are downstream of it, and it is answerable today with

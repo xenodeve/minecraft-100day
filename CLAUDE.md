@@ -177,11 +177,16 @@ The intended shape is in §7 of the design document.
 
 ## What is mechanically enforced
 
-| Layer | Binds | Blocks |
-|---|---|---|
-| `.claude/hooks/t4-gate` (`PreToolUse`) | Claude only | `gh pr create` with no issue · dangerous git · `gh pr merge` when `verify` fails |
-| `.githooks/pre-push` | every agent + human on this clone | push with no issue ref · large dirty tree · committed artifacts · missing gate ledger |
-| `.github/workflows/t4-verify.yml` | everyone, including a human merging on the web | a red `lint`, `test`, or `guards` check |
+| Layer | Binds | Blocks | State |
+|---|---|---|---|
+| `.claude/hooks/t4-gate` (`PreToolUse`) | Claude only | `gh pr create` with no issue · dangerous git · `gh pr merge` when `verify` fails | ✅ active |
+| `.githooks/pre-push` | every agent + human on this clone | push with no issue ref · large dirty tree · committed artifacts · missing gate ledger | ⚠️ installed, **not enabled** |
+| `T4 main gate` ruleset | everyone | direct push to `main` · force-push · branch deletion · merge with unresolved threads | ✅ active |
+| `.github/workflows/t4-verify.yml` | everyone, including a human merging on the web | a red `lint`, `test`, or `guards` check | ❌ **cannot run** — see #1 |
+
+**Actions is billing-locked on this account (#1)**, so no check can report and none is required
+by the ruleset. Do not add `required_status_checks` or set `"requireGreenCI": true` until a run
+goes green — either would deadlock every PR on a check that never reports.
 
 **The pre-push guards are opt-in per clone and not yet enabled.** Run once:
 

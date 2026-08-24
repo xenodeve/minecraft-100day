@@ -92,3 +92,25 @@ grows.
 
 - **Follow-ups:** add the `build` job and the `{ "context": "build" }` ruleset entry in the
   commit that introduces `pack.toml`. Revisit the TOML checker if it produces a false positive.
+
+## Postscript — the gate is armed, the checks are not (2026-08-25)
+
+Discovered immediately after the first push, and recorded here rather than in a second ADR
+because it does not overturn the decision above — it delays half of it.
+
+**GitHub Actions cannot run on this account** ([run 32779529796](https://github.com/xenodeve/minecraft-100day/actions/runs/32779529796)):
+*"The job was not started because your account is locked due to a billing issue."* Both jobs
+reported failure without executing a single step.
+
+So the `T4 main gate` ruleset was created **without** `required_status_checks`. It still blocks
+direct pushes to `main`, force-pushes, branch deletion, and merging with unresolved review
+threads — the parts that do not depend on a check reporting. `.claude/t4.json`
+`"requireGreenCI"` stays `false`, because with no CI at all `gh pr checks` reports non-zero and
+would deny every merge.
+
+Adding the required checks now would have been worse than omitting them: every PR would sit on
+*"Expected — waiting for status"* forever, and the first person who needs to land a PR disables
+the rule. A rule disabled once stays disabled, which is the exact failure this ADR set out to
+avoid.
+
+**Tracked as #1.** The decision above is unchanged; only its third tier is pending.

@@ -40,8 +40,19 @@ means. Left absent rather than written wrong. Tracked in the ledger, Track 0.
 
 **Report:** `docs/adr/0001-ci-gate-scoped-to-modpack-reality.md`.
 
-**Next:** ledger Phase 0 (install packwiz + Java 17, enable `core.hooksPath`, run
-`/setup-matt-pocock-skills`) and Phase 2 (resolve the Create major version) — they do not block
-each other.
+**Remote state:** `xenodeve/minecraft-100day` (public). 23 triage labels created, 2 already
+existed (`wontfix`, and GitHub's default `bug`, renamed to `Bug`), 0 failed. Ruleset
+`T4 main gate` active — PR-only, no force-push, no deletion, unresolved threads block merge.
+Secret scanning and push protection enabled; Dependabot alerts and security PRs enabled.
+`secret_scanning_validity_checks` and `secret_scanning_non_provider_patterns` were **not**
+enabled — the API accepts the PATCH, returns 200, and leaves both `disabled`.
+
+**Blocked:** GitHub Actions is billing-locked on the account, so `T4 verify` cannot run and the
+three checks are not required by the ruleset. Filed as #1 with the reasoning for omitting them
+rather than adding checks that would deadlock every PR.
+
+**Next:** ledger Phase 0 — resolve #1, install packwiz + Java 17, enable `core.hooksPath`, run
+`/setup-matt-pocock-skills` — and Phase 2 (resolve the Create major version), which is not
+blocked by any of them.
 
 ---
