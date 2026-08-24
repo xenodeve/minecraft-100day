@@ -6,6 +6,38 @@
 
 ---
 
+## Switched to the two-tier enforcement mode (2026-08-25, `/t4-project-bootstrap` follow-up, branch `chore/1-operate-without-ci`)
+
+**Goal:** the billing lock on GitHub Actions cannot be resolved, so stop treating the missing CI
+tier as a pending task and decide how the repo behaves permanently without it.
+
+**Shipped:**
+- **ADR 0002** — operate without a server-side CI tier. Records why the upstream skill's literal
+  fallback (`"requireGreenCI": true`) would break this repo rather than help it, and why a
+  self-hosted runner was rejected on security grounds rather than convenience.
+- **`T4 verify` workflow disabled** (`gh workflow disable 341588663` → `disabled_manually`). File
+  kept, correct and ready; re-enabling is one command.
+- **Guards promoted to the load-bearing tier** — `git config core.hooksPath .githooks` enabled on
+  this clone. It is now the only tier binding anything other than Claude's own tool calls.
+- **ADR 0001 corrected** — its postscript claimed the third tier was "pending". It was not.
+- `CLAUDE.md`, `docs/agents/issue-tracker.md`, `docs/OPEN-WORK-LEDGER.md` (Track 0 closed, new ⛔
+  legend entry), and a memory note `ci-tier-is-absent-by-decision`.
+
+**Validation:** `node scripts/validate/verify.mjs` → passed. `gh workflow list --all` →
+`T4 verify  disabled_manually`. `git config --get core.hooksPath` → `.githooks`. The pre-push
+guards ran for real on the push of this branch — first time they have been live.
+
+**The honest cost, recorded because it is easy to lose:** a human merging on the GitHub web UI now
+runs nothing at all. The ruleset still forces a PR; nothing inspects its contents. Merge from the
+CLI, where `t4-gate` runs `verify` first.
+
+**Report:** `docs/adr/0002-operate-without-a-server-side-ci-tier.md`.
+
+**Next:** ledger Phase 0 is down to two installs — `packwiz` and a Java 17 JDK — and Phase 2, the
+Create version sweep, which needs neither.
+
+---
+
 ## docs/agents layer completed + third design doc folded in (2026-08-25, `/setup-matt-pocock-skills`, branch `chore/3-land-agents-docs-layer`)
 
 **Goal:** close the one hole the bootstrap could not fill itself, and stop the operating layer

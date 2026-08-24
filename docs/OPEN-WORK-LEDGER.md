@@ -7,8 +7,9 @@
 > update its row here AND its GitHub issue; when you discover new work, add a row here and (for
 > anything non-trivial) file an issue so it doesn't vanish back into MD.
 
-**Legend:** ✅ done, pending merge · 🟢 buildable now · 🟡 gated (needs merge / resource /
-decision) · 🔴 **UNTRACKED** (MD-only, no GitHub issue — highest miss-risk)
+**Legend:** ✅ done · 🟢 buildable now · 🟡 gated (needs merge / resource / decision) ·
+🔴 **UNTRACKED** (MD-only, no GitHub issue — highest miss-risk) · ⛔ decided won't-do (kept
+visible so it is not re-proposed as if it were open)
 
 **Current state, stated plainly:** the repo has its operating layer and its three design
 documents. It has **no pack** — no `pack.toml`, no mods, no config, no KubeJS. The mod list now
@@ -23,9 +24,13 @@ them has been version-checked against a Create major yet.
 |---|---|---|---|
 | `docs/agents/issue-tracker.md` + `docs/agents/triage-labels.md` + `reading-domain-docs.md` | ✅ | — | Developer ran `/setup-matt-pocock-skills`; output landed with the T4 delta appended (**#3**). Consumer rules went to `reading-domain-docs.md` so the glossary at `domain.md` survived |
 | Triage labels created on the GitHub repo | ✅ | — | 23 created, 2 already existed, 0 failed. `bug` renamed to `Bug` to match the vocabulary |
-| `git config core.hooksPath .githooks` on this clone | 🔴 | developer action, per-clone by design | Run it once; verify with `git config --get core.hooksPath` |
+| `git config core.hooksPath .githooks` on this clone | ✅ | — | Enabled 2026-08-25. **Redo on every new clone** — it is per-clone local config and nothing can set it for you |
 | `T4 main gate` ruleset — PR-only, no force-push, no deletion | ✅ | — | Active. Direct pushes to `main` are blocked |
-| `lint` / `test` / `guards` as **required status checks** | 🟡 | **#1** — GitHub Actions is billing-locked, so no check can ever report | Resolve the billing lock, confirm a green run, then add the three contexts to the ruleset |
+| `lint` / `test` / `guards` as **required status checks** | ⛔ | closed as won't-do — the billing lock cannot be resolved | **ADR 0002**: workflow disabled, guards promoted to the load-bearing tier. Not open work; re-arming steps are in the ADR should that ever change |
+
+**Track 0 is closed.** Bootstrap is done. The one thing it could not deliver — a server-side CI
+tier — is now a decided operating mode rather than a pending task, which is why the row above is
+⛔ and not 🟡.
 
 ## Track 1 — Blocking technical unknown
 
@@ -80,9 +85,10 @@ MineColonies / hostile encounter design are cut **last**. Any future tuning sess
 
 ## Management Plan — phased execution order
 
-**Phase 0 — Unblock the tooling.** Resolve the GitHub Actions billing lock (**#1**), install
-`packwiz` and a Java 17 JDK, and run `git config core.hooksPath .githooks`. Three actions; only
-#1 needs money, the rest are minutes. `/setup-matt-pocock-skills` is done.
+**Phase 0 — Unblock the tooling.** Install `packwiz` and a Java 17 JDK. That is the whole of it
+now: `/setup-matt-pocock-skills` is done, the guards are enabled, and the CI tier is settled as a
+decision rather than a blocker (ADR 0002). Without `java` no boot test can run, and §26 makes the
+boot test the unit of progress — so these two installs gate all of Track 2.
 
 **Phase 1 — Tracking hygiene.** File a GitHub issue for every remaining 🔴 row above, so the
 ledger stops being the only record. The triage label vocabulary is already installed.

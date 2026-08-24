@@ -114,3 +114,9 @@ the rule. A rule disabled once stays disabled, which is the exact failure this A
 avoid.
 
 **Tracked as #1.** The decision above is unchanged; only its third tier is pending.
+
+> **Correction (2026-08-25, same day):** it was not pending. The billing lock cannot be resolved,
+> so the server-side tier is not delayed — it is unavailable indefinitely. **ADR 0002** decides how
+> the repo operates without it: the workflow is disabled rather than left permanently red, and the
+> pre-push guards are promoted from optional to the only tier binding anyone but Claude. The
+> scoping decision in *this* ADR still stands; read 0002 for the enforcement stack as it actually is.

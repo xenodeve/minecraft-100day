@@ -62,8 +62,13 @@ with `gh pr view 42` and fall back to `gh issue view 42`.
 
 `main` is protected by the `T4 main gate` ruleset: direct pushes are blocked, `main` cannot be
 force-pushed or deleted, and an unresolved review thread blocks merge. **Required status checks
-are deliberately absent** while GitHub Actions is billing-locked — see #1 and
-`docs/adr/0001-ci-gate-scoped-to-modpack-reality.md`. Do not add them until a run goes green.
+are permanently absent** — GitHub Actions is billing-locked and that cannot be resolved, so the
+`T4 verify` workflow is disabled rather than left failing on every push. See
+`docs/adr/0002-operate-without-a-server-side-ci-tier.md`.
+
+**Merge from the CLI, not the web UI.** `gh pr merge` passes through `t4-gate`, which runs
+`node scripts/validate/verify.mjs` first and blocks on failure. The web merge button runs nothing
+at all — with no CI tier, it is the one path where a broken change can reach `main` unchecked.
 
 ## When a skill says "publish to the issue tracker"
 
@@ -165,9 +170,13 @@ GitHub ใช้เลขชุดเดียวกันทั้ง issue แ
 ## ด่านก่อน merge
 
 `main` ถูกป้องกันด้วย ruleset `T4 main gate`: push ตรงถูกบล็อก `main` ถูก force-push หรือลบไม่ได้
-และ review thread ที่ยังไม่ resolve จะบล็อกการ merge **required status checks ไม่ถูกใส่ไว้โดย
-ตั้งใจ** ในขณะที่ GitHub Actions ยังถูกล็อกเรื่อง billing — ดู #1 และ
-`docs/adr/0001-ci-gate-scoped-to-modpack-reality.md` ห้ามใส่จนกว่าจะมี run ที่เขียว
+และ review thread ที่ยังไม่ resolve จะบล็อกการ merge **required status checks ไม่มีอย่างถาวร** —
+GitHub Actions ถูกล็อกเรื่อง billing และแก้ไม่ได้ workflow `T4 verify` จึงถูก disable ไว้ แทนที่จะ
+ปล่อยให้ fail ทุกครั้งที่ push ดู `docs/adr/0002-operate-without-a-server-side-ci-tier.md`
+
+**merge จาก CLI ไม่ใช่จากหน้าเว็บ** `gh pr merge` วิ่งผ่าน `t4-gate` ซึ่งจะรัน
+`node scripts/validate/verify.mjs` ก่อนและบล็อกถ้าไม่ผ่าน ส่วนปุ่ม merge บนหน้าเว็บไม่รันอะไรเลย —
+เมื่อไม่มีชั้น CI นั่นคือทางเดียวที่ของเสียจะเข้า `main` ได้โดยไม่ถูกตรวจ
 
 ## เมื่อ skill บอกว่า "publish to the issue tracker"
 

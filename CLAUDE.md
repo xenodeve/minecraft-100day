@@ -188,18 +188,36 @@ The intended shape is in §7 of the design document.
 
 ## What is mechanically enforced
 
+This repo runs **two tiers, not three** — a deliberate mode, decided in **ADR 0002**, not an
+oversight.
+
 | Layer | Binds | Blocks | State |
 |---|---|---|---|
 | `.claude/hooks/t4-gate` (`PreToolUse`) | Claude only | `gh pr create` with no issue · dangerous git · `gh pr merge` when `verify` fails | ✅ active |
-| `.githooks/pre-push` | every agent + human on this clone | push with no issue ref · large dirty tree · committed artifacts · missing gate ledger | ⚠️ installed, **not enabled** |
+| `.githooks/pre-push` | every agent + human **on this clone** | push with no issue ref · large dirty tree · committed artifacts · missing gate ledger | ✅ active — **this is now the load-bearing tier** |
 | `T4 main gate` ruleset | everyone | direct push to `main` · force-push · branch deletion · merge with unresolved threads | ✅ active |
-| `.github/workflows/t4-verify.yml` | everyone, including a human merging on the web | a red `lint`, `test`, or `guards` check | ❌ **cannot run** — see #1 |
+| `.github/workflows/t4-verify.yml` | — | — | 🚫 **disabled** — GitHub Actions is billing-locked and it cannot be resolved (ADR 0002) |
 
-**Actions is billing-locked on this account (#1)**, so no check can report and none is required
-by the ruleset. Do not add `required_status_checks` or set `"requireGreenCI": true` until a run
-goes green — either would deadlock every PR on a check that never reports.
+**What is actually unguarded, stated plainly.** A human merging on the GitHub web UI runs nothing:
+not `verify`, not the guards, nothing this repo controls. The ruleset still forces the change
+through a PR, but nothing inspects the PR's contents. **Merge from the CLI**, where `t4-gate` runs
+`verify` first.
 
-**The pre-push guards are opt-in per clone and not yet enabled.** Run once:
+**Three things not to "fix":**
+
+- **Do not re-enable the workflow** to "see if it works". It cannot; it will only start producing
+  red marks that mean nothing, which is what disabling it prevented.
+- **Do not set `"requireGreenCI": true`.** The upstream skill names it as the fallback for a repo
+  that cannot have required checks — that fallback assumes CI *runs*. Here `gh pr checks` reports
+  non-zero forever, so the flag would deny **every** merge instead of gating any.
+- **Do not add `required_status_checks` to the ruleset.** Every PR would sit on *"Expected —
+  waiting for status"* permanently.
+
+The re-arming procedure, if the billing lock is ever resolved, is written out in ADR 0002 →
+*Consequences → Follow-ups*.
+
+**A fresh clone has no guards.** `core.hooksPath` is per-clone local config and nothing can make a
+checkout set it for itself. On any new machine, first command:
 
 ```bash
 git config core.hooksPath .githooks
