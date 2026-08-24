@@ -164,6 +164,9 @@ docs/
   Addon Spec — Natural Wildlife ….md         Naturalist / Critters / Ecologics, phases W0–W9
   Addon Modpack — Distribution & Updates.md  release engineering — governs THIS repo's process
   OPEN-WORK-LEDGER.md         open work, tracked and untracked — read at session start
+  customization-map.md        WHAT STILL HAS TO BE BUILT — the 22 mods the design docs
+                              tag for custom work, with their concrete targets
+  compatibility-matrix.md     what has been OBSERVED — versions, sources, boot results
   agents/
     domain.md                 domain glossary — WHAT THE WORDS MEAN here
     reading-domain-docs.md    WHICH FILES to read before exploring, and when
