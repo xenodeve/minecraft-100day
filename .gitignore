@@ -1,0 +1,35 @@
+# --- Modpack build output & runtime -----------------------------------------
+# packwiz tracks every mod as a small `mods/*.pw.toml` metafile carrying the URL
+# and a hash. The .jar itself is NEVER committed: it is redistribution we have no
+# licence for, and it would put hundreds of MB into git history permanently.
+*.jar
+*.zip
+*.mrpack
+
+# A local test instance (world saves, logs, crash reports, the resolved mods dir)
+run/
+instance/
+.minecraft/
+saves/
+logs/
+crash-reports/
+world/
+world_nether/
+world_the_end/
+
+# packwiz export output
+build/
+dist/
+*.packwiz.zip
+
+# --- Profiling ---------------------------------------------------------------
+# spark reports are large and point-in-time; the finding belongs in
+# docs/reports/, the raw dump does not belong in git.
+spark/
+*.sparkprofile
+
+# --- Tooling -----------------------------------------------------------------
+node_modules/
+.DS_Store
+Thumbs.db
+*.log

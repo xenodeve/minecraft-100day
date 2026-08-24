@@ -1,0 +1,20 @@
+# The hook and guard scripts are POSIX shell run by `sh`/`bash` — on Windows, git's
+# autocrlf would rewrite them with CRLF endings and the interpreter fails on the
+# stray \r ("bad interpreter"). Force LF regardless of the developer's core.autocrlf.
+* text=auto eol=lf
+
+.githooks/*      text eol=lf
+.claude/hooks/*  text eol=lf
+*.sh             text eol=lf
+*.mjs            text eol=lf
+
+# Windows batch launcher — this one genuinely needs CRLF.
+*.cmd            text eol=crlf
+
+# Binary-ish assets that must never be line-ending-mangled if they ever land here.
+*.png  binary
+*.jpg  binary
+*.jar  binary
+*.zip  binary
+*.nbt  binary
+*.ogg  binary

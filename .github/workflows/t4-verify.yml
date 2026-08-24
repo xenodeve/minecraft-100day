@@ -1,0 +1,75 @@
+# T4 verify — the server-side ship gate, and the enforcement local hooks can't
+# be. Local hooks only catch agent-run commands; this also covers a human
+# merging on the web and can't be `--no-hooks`'d away.
+#
+# Required check names: `lint`, `test`, `guards`.
+#
+# The upstream T4 template also ships `typecheck` and `build`. Both are omitted
+# ON PURPOSE: this repo is a Minecraft modpack with no compiler, and packwiz is
+# not initialised yet, so those jobs would run scripts that do not exist. A
+# permanently-red required check teaches everyone to merge past red, which costs
+# more than the coverage it pretends to add. Add `build` (packwiz refresh +
+# export) to this file AND to the ruleset in the same commit that adds pack.toml.
+#
+# Keep in sync with `.claude/t4.json` "verify" — the local gate must fail for the
+# same reasons this does, just sooner.
+name: T4 verify
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+concurrency:
+  group: t4-verify-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node scripts/validate/verify.mjs lint
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node scripts/validate/verify.mjs test
+
+  # The same three scripts the local `pre-push` hook runs (.githooks/). The hook
+  # is opt-in per clone and `--no-verify`-able, so this is where the rule is
+  # actually guaranteed. One script, two callers — they cannot drift.
+  guards:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    permissions:
+      contents: read
+      pull-requests: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - run: git fetch origin "${{ github.base_ref }}" --depth=0
+      - run: sh .githooks/check-tree-budget
+      - run: sh .githooks/check-gate-ledger
+        env:
+          BASE_REF: origin/${{ github.base_ref }}
+      - run: PR_BODY="$(gh pr view "${{ github.event.number }}" --json body -q .body)" sh .githooks/check-issue-ref
+        env:
+          BASE_REF: origin/${{ github.base_ref }}
+          GH_TOKEN: ${{ github.token }}
+
+# No job sets a `name:`, so each job KEY is its required-check context (`lint`,
+# `test`, `guards`). Add a `name:` and you must update the ruleset to match, or
+# it will wait on a check that never reports — see ci-cd-layer.md.
