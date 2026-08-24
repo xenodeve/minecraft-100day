@@ -1,10 +1,17 @@
 <!-- lang:en -->
 # Installing Industrial Civilization Survival
 
-**What you get:** a CurseForge-format modpack zip — `Industrial Civilization Survival 0.1.0-alpha`,
-Minecraft **1.20.1**, Forge **47.4.23**, **93 mods**.
+**What you get:** `Industrial Civilization Survival 0.1.0-alpha` — Minecraft **1.20.1**,
+Forge **47.4.23**, **93 mods**.
 
-**The official Minecraft launcher cannot import a modpack.** You need one of the launchers below.
+Two files are built. **Use the first one.**
+
+| File | What it is |
+|---|---|
+| `…-0.1.0-alpha-instance.zip` (388 MB) | **Self-contained.** Every mod is inside it. Import and play — nothing is downloaded, nothing is fetched by hand |
+| `…-0.1.0-alpha.zip` (130 MB) | CurseForge format. The launcher resolves most mods itself; four must be downloaded manually |
+
+**The official Minecraft launcher cannot import a modpack.** You need Prism or the CurseForge App.
 This is not a limitation of this pack; the official launcher has no modpack support at all.
 
 ---
@@ -14,40 +21,49 @@ This is not a limitation of this pack; the official launcher has no modpack supp
 - **Java 17.** Forge 47.x for 1.20.1 requires it. Both launchers below can install it for you.
 - **8 GB of RAM allocated to the game**, 6 GB minimum. 93 mods with Create contraptions,
   MineColonies pathfinding and Born in Chaos is not a light pack.
-- **~2 GB of disk** for the instance once mods are downloaded.
+- **~2 GB of disk** for the instance.
 
 ---
 
-## Option A — CurseForge App *(recommended: fully automatic)*
+## Option A — Prism Launcher, self-contained *(recommended — one step)*
 
-1. Open the CurseForge App → **Minecraft** → **Create Custom Profile** → **Import**.
-2. Select `Industrial-Civilization-Survival-0.1.0-alpha.zip`.
+1. **Add Instance** → **Import from zip**
+2. Select **`Industrial-Civilization-Survival-0.1.0-alpha-instance.zip`**
+3. **Launch.**
+
+That is the whole procedure. Memory is preset to 4–8 GB and Forge 47.4.23 is pinned in the file.
+**No mods are downloaded during import** — every jar is already inside, and each one was checked
+against its recorded hash when the file was built.
+
+This works offline, and it works when a mod's download page is unreachable.
+
+## Option B — CurseForge App
+
+1. **Minecraft** → **Create Custom Profile** → **Import**
+2. Select `Industrial-Civilization-Survival-0.1.0-alpha.zip` *(the 130 MB one)*
 3. Wait for it to download the mods, then **Play**.
 
-**Why this one is recommended:** four of the mods have third-party downloads disabled by their
-authors. The CurseForge App is first-party, so it downloads them normally. Every other route
-requires you to fetch those four by hand — see below.
+Use this if you want the CurseForge App to manage the instance. It resolves the four
+API-restricted mods itself, because it is first-party.
 
-## Option B — Prism Launcher
+## Option C — CurseForge-format zip in Prism
 
-1. **Add Instance** → **Import from zip** → select the same zip → **OK**.
-2. Prism resolves what it can and will tell you that **four mods must be downloaded manually**.
-3. Download each of these and drop the `.jar` into the instance's `mods/` folder:
+Only if you specifically want launcher-managed mod updates. Prism will tell you **four mods must
+be downloaded manually**:
 
-   | Mod | Download |
-   |---|---|
-   | TakKit | <https://www.curseforge.com/minecraft/mc-mods/takkit/files/7013819> |
-   | Flashier Flashlights | <https://www.curseforge.com/minecraft/mc-mods/flashier-flashlights/files/8453760> |
-   | Client Dynamic Light | <https://www.curseforge.com/minecraft/mc-mods/client-dynamic-light/files/8627850> |
-   | Player Microchip (Tracker) | <https://www.curseforge.com/minecraft/mc-mods/player-microchip/files/7782898> |
+| Mod | Download |
+|---|---|
+| TakKit | <https://www.curseforge.com/minecraft/mc-mods/takkit/files/7013819> |
+| Flashier Flashlights | <https://www.curseforge.com/minecraft/mc-mods/flashier-flashlights/files/8453760> |
+| Client Dynamic Light | <https://www.curseforge.com/minecraft/mc-mods/client-dynamic-light/files/8627850> |
+| Player Microchip (Tracker) | <https://www.curseforge.com/minecraft/mc-mods/player-microchip/files/7782898> |
 
-4. **Edit Instance → Settings → Memory**, set max to 8 GB.
-5. **Launch.**
+> Those four are not optional and not broken — their authors turned off third-party API
+> distribution, which is their right. The self-contained build in Option A includes them, fetched
+> from CurseForge's own public download page. **Keep that file within your group**; publishing it
+> publicly is a different act from handing it to friends.
 
-> The four mods above are not optional and not broken — their authors turned off API distribution,
-> which is their right. Any tool that is not the CurseForge App has to ask you to click the link.
-
-## Option C — for development, tracking the repo
+## Option D — for development, tracking the repo
 
 The pack's source of truth is `pack.toml` in this repository, managed by
 [packwiz](https://github.com/packwiz/packwiz).
@@ -90,10 +106,17 @@ So it will run, and it will not yet play the way the design documents describe. 
 <!-- lang:th -->
 # วิธีติดตั้ง Industrial Civilization Survival
 
-**สิ่งที่คุณได้:** modpack zip รูปแบบ CurseForge — `Industrial Civilization Survival 0.1.0-alpha`,
-Minecraft **1.20.1**, Forge **47.4.23**, **93 mods**
+**สิ่งที่คุณได้:** `Industrial Civilization Survival 0.1.0-alpha` — Minecraft **1.20.1**,
+Forge **47.4.23**, **93 mods**
 
-**Launcher ทางการของ Minecraft import modpack ไม่ได้** ต้องใช้ launcher ตัวใดตัวหนึ่งด้านล่าง
+มีไฟล์ที่ build ออกมาสองตัว **ใช้ตัวแรก**
+
+| ไฟล์ | คืออะไร |
+|---|---|
+| `…-0.1.0-alpha-instance.zip` (388 MB) | **มีทุกอย่างในตัว** mod ทุกตัวอยู่ข้างใน import แล้วเล่นได้เลย — ไม่โหลดอะไร ไม่ต้องไปหยิบอะไรเอง |
+| `…-0.1.0-alpha.zip` (130 MB) | รูปแบบ CurseForge launcher ไป resolve mod ส่วนใหญ่เอง แต่มีสี่ตัวที่ต้องโหลดด้วยมือ |
+
+**Launcher ทางการของ Minecraft import modpack ไม่ได้** ต้องใช้ Prism หรือ CurseForge App
 นี่ไม่ใช่ข้อจำกัดของ pack นี้ แต่ launcher ทางการไม่มีฟีเจอร์ modpack เลย
 
 ---
@@ -103,39 +126,49 @@ Minecraft **1.20.1**, Forge **47.4.23**, **93 mods**
 - **Java 17** Forge 47.x สำหรับ 1.20.1 ต้องใช้ launcher ทั้งสองตัวด้านล่างติดตั้งให้ได้
 - **แรมที่จัดให้เกม 8 GB** ขั้นต่ำ 6 GB — 93 mod ที่มีทั้ง contraption ของ Create, pathfinding ของ
   MineColonies และ Born in Chaos ไม่ใช่ pack เบา ๆ
-- **พื้นที่ดิสก์ ~2 GB** สำหรับ instance หลังโหลด mod ครบ
+- **พื้นที่ดิสก์ ~2 GB** สำหรับ instance
 
 ---
 
-## ทางเลือก A — CurseForge App *(แนะนำ: อัตโนมัติทั้งหมด)*
+## ทางเลือก A — Prism Launcher แบบมีทุกอย่างในตัว *(แนะนำ — ขั้นตอนเดียว)*
 
-1. เปิด CurseForge App → **Minecraft** → **Create Custom Profile** → **Import**
-2. เลือกไฟล์ `Industrial-Civilization-Survival-0.1.0-alpha.zip`
+1. **Add Instance** → **Import from zip**
+2. เลือก **`Industrial-Civilization-Survival-0.1.0-alpha-instance.zip`**
+3. **Launch**
+
+จบแค่นั้น แรมถูกตั้งไว้ให้แล้ว 4–8 GB และ Forge 47.4.23 ถูก pin อยู่ในไฟล์
+**ไม่มีการดาวน์โหลด mod ระหว่าง import** — jar ทุกตัวอยู่ข้างในแล้ว และแต่ละตัวถูกตรวจ hash
+ตอน build
+
+วิธีนี้ทำงานได้แม้ออฟไลน์ และทำงานได้แม้หน้าดาวน์โหลดของ mod บางตัวเข้าไม่ได้
+
+## ทางเลือก B — CurseForge App
+
+1. **Minecraft** → **Create Custom Profile** → **Import**
+2. เลือก `Industrial-Civilization-Survival-0.1.0-alpha.zip` *(ตัว 130 MB)*
 3. รอโหลด mod เสร็จ แล้วกด **Play**
 
-**ทำไมถึงแนะนำตัวนี้:** มี mod สี่ตัวที่ผู้เขียนปิดการดาวน์โหลดจากบุคคลที่สาม CurseForge App เป็น
-first-party จึงโหลดได้ตามปกติ ส่วนทางอื่นทั้งหมดคุณต้องไปโหลดสี่ตัวนั้นเองด้วยมือ — ดูด้านล่าง
+ใช้ทางนี้ถ้าอยากให้ CurseForge App เป็นคนจัดการ instance มันจัดการ mod สี่ตัวที่ถูกจำกัดด้วย API
+ได้เอง เพราะมันเป็น first-party
 
-## ทางเลือก B — Prism Launcher
+## ทางเลือก C — zip รูปแบบ CurseForge ใน Prism
 
-1. **Add Instance** → **Import from zip** → เลือกไฟล์ zip เดิม → **OK**
-2. Prism จะ resolve เท่าที่ทำได้ และจะแจ้งว่ามี **mod สี่ตัวที่ต้องโหลดเอง**
-3. โหลดแต่ละตัวแล้วเอาไฟล์ `.jar` ไปวางในโฟลเดอร์ `mods/` ของ instance:
+ใช้เฉพาะเมื่อคุณต้องการให้ launcher จัดการอัปเดต mod ให้จริง ๆ Prism จะแจ้งว่ามี
+**mod สี่ตัวที่ต้องโหลดเอง**:
 
-   | Mod | ลิงก์ดาวน์โหลด |
-   |---|---|
-   | TakKit | <https://www.curseforge.com/minecraft/mc-mods/takkit/files/7013819> |
-   | Flashier Flashlights | <https://www.curseforge.com/minecraft/mc-mods/flashier-flashlights/files/8453760> |
-   | Client Dynamic Light | <https://www.curseforge.com/minecraft/mc-mods/client-dynamic-light/files/8627850> |
-   | Player Microchip (Tracker) | <https://www.curseforge.com/minecraft/mc-mods/player-microchip/files/7782898> |
+| Mod | ลิงก์ดาวน์โหลด |
+|---|---|
+| TakKit | <https://www.curseforge.com/minecraft/mc-mods/takkit/files/7013819> |
+| Flashier Flashlights | <https://www.curseforge.com/minecraft/mc-mods/flashier-flashlights/files/8453760> |
+| Client Dynamic Light | <https://www.curseforge.com/minecraft/mc-mods/client-dynamic-light/files/8627850> |
+| Player Microchip (Tracker) | <https://www.curseforge.com/minecraft/mc-mods/player-microchip/files/7782898> |
 
-4. **Edit Instance → Settings → Memory** ตั้งค่าสูงสุดเป็น 8 GB
-5. **Launch**
+> สี่ตัวนั้นไม่ใช่ของเสริม และไม่ได้พัง — ผู้เขียนปิดการแจกจ่ายผ่าน API ของบุคคลที่สาม ซึ่งเป็นสิทธิ์
+> ของเขา ส่วน build แบบมีทุกอย่างในตัวในทางเลือก A รวมมันมาด้วย โดยดึงจากหน้าดาวน์โหลดสาธารณะ
+> ของ CurseForge เอง **เก็บไฟล์นั้นไว้ในกลุ่มของคุณ** การเผยแพร่สู่สาธารณะเป็นคนละเรื่องกับ
+> การส่งให้เพื่อน
 
-> mod สี่ตัวข้างบนไม่ใช่ของเสริม และไม่ได้พัง — ผู้เขียนปิดการแจกจ่ายผ่าน API ซึ่งเป็นสิทธิ์ของเขา
-> เครื่องมือใดก็ตามที่ไม่ใช่ CurseForge App จำเป็นต้องให้คุณกดลิงก์เอง
-
-## ทางเลือก C — สำหรับพัฒนา ตามการเปลี่ยนแปลงของ repo
+## ทางเลือก D — สำหรับพัฒนา ตามการเปลี่ยนแปลงของ repo
 
 source of truth ของ pack คือ `pack.toml` ใน repository นี้ จัดการด้วย
 [packwiz](https://github.com/packwiz/packwiz)

@@ -15,6 +15,7 @@ measurements and live in `docs/balance.md`.
 |---|-------|------|--------|
 | [0001](0001-ci-gate-scoped-to-modpack-reality.md) | CI gate scoped to what a modpack repo can actually check | Infra | Accepted |
 | [0002](0002-operate-without-a-server-side-ci-tier.md) | Operate without a server-side CI tier | Infra | Accepted |
+| [0003](0003-self-contained-single-file-distribution.md) | Self-contained single-file distribution | Infra | Accepted |
 
 ## Conventions
 

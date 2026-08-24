@@ -33,3 +33,7 @@ node_modules/
 .DS_Store
 Thumbs.db
 *.log
+
+# Build cache for the self-contained instance artifact (ADR 0003)
+build/.jar-cache/
+build/.instance/
