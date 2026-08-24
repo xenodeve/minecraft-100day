@@ -170,7 +170,40 @@ the jar, and a `mods.toml` entry looks identical whether the dependency is bundl
 
 ---
 
-## What this sweep constrains
+## Boot test — 2026-08-25, Forge dedicated server
+
+The first real test of the mod set. Forge 47.4.23 dedicated server, Temurin 17.0.20.1, 6 GB heap,
+80 pack mods materialised by `packwiz-installer` (77 jars after client-only mods were filtered out
+by `-s server`).
+
+**Result: one mod prevented the whole server from starting. The other 76 loaded.**
+
+| Mod | Verdict | Evidence |
+|---|---|---|
+| `cbc_firepower_components` `0.2.0` | ❌ **REMOVED from the pack** | `Mod cbc_firepower_components requires createbigcannons 5.8.0 or above, and below 5.9.0 · Currently, createbigcannons is 5.11.4` |
+| the other 76 | ✅ loaded | no other `-- MOD` section in the crash report |
+
+**Why it was removed rather than worked around.** `cbc-firepower-components` has three versions on
+Modrinth and `0.2.0` is the newest; none supports CBC ≥ 5.9. Keeping it means pinning CBC to
+`5.8.2` — a January 2025 build from the Create 0.5.1 era. Its `mods.toml` declares
+`create [0.5.1.j,)`, an open range that *would* let Forge load it against Create 6.0.8, which makes
+this the dangerous option rather than the safe one: it loads and then breaks at runtime against an
+API that changed across a major version.
+
+The design documents list this mod as CORE (compact cannon mounts, autocannon mounts, ammo feeds,
+magazine loading). **It is not dropped on merit — it is dropped because it does not support the
+Create version the rest of the CORE stack forces.** Re-add it when a version supporting CBC 5.11
+exists; that is one `packwiz mr add` away.
+
+### The gap in the sweep method that let this through
+
+The version sweep read the `create` range of every addon and stopped there. It did not read
+**second-order** ranges — an addon's range against *another addon*. `cbc-firepower-components`
+depends on `createbigcannons`, not on `create`, so nothing in the sweep looked at it.
+
+**Rule for the next sweep: read every `mandatory=true` dependency range in the jar, not only the
+one pointing at Create.** The sweep answers "will Forge accept these versions together"; only a
+boot answers "does it start".
 
 **A pure-Modrinth `.mrpack` is impossible.** Seventeen mods have no 1.20.1 Forge build on
 Modrinth, and four of them — `flywheel`, `ponder`, `ritchiesprojectilelib`, `esl` — are hard

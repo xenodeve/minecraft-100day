@@ -51,11 +51,6 @@ hash = "a613f5d2df911fea606968bbdb56eebfd05ac02ada846cf0d2e56e72345d9338"
 metafile = true
 
 [[files]]
-file = "mods/cbc-firepower-components.pw.toml"
-hash = "6db99140ceaaf24d81966cd97d2cd31203a13239ac7045d64c50fc9512d7351a"
-metafile = true
-
-[[files]]
 file = "mods/client-dynamic-light.pw.toml"
 hash = "237b0859d871b5f843ed689971ee1487a80c86db58aa656901b99d9c0d3a5f91"
 metafile = true
