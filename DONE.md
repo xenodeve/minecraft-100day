@@ -6,6 +6,56 @@
 
 ---
 
+## The pack exists and boots (2026-08-25, `/t4-afk` unattended run, branches `chore/9-*`, `feat/11-*`, `feat/13-*`)
+
+**Goal:** turn five design documents into a modpack a user can import into Minecraft.
+
+**Toolchain installed:** Temurin 17.0.20.1, Prism Launcher 11.0.3, Go 1.26.7, and packwiz built
+from source (`~/go/bin/packwiz.exe`) — packwiz publishes no releases, only CI artifacts, so source
+was the trustworthy route.
+
+**Shipped:**
+- **#9** — `docs/compatibility-matrix.md`. Every mod in five design documents swept against the
+  Modrinth API; Create's dependency ranges read from `META-INF/mods.toml` inside the jars.
+  **Create pinned to `6.0.8` — forced, not chosen**: the CORE addons intersect at `[6.0.8,6.1.0)`
+  and 6.0.8 is the newest 1.20.1 build.
+- **#11** — the pack. `pack.toml`, `index.toml`, `.packwizignore`, 83 mods pinned to exact
+  versions and hashes, `INSTALL.md`.
+- **#13** — the Performance Spec §2 stack: Embeddium, ModernFix, FerriteCore, Entity Culling,
+  ImmediatelyFast, ServerCore, FastSuite, Clumps, Chunky. 93 metafiles total.
+
+**Validation — run, not reasoned:**
+- Forge 47.4.23 dedicated server, Temurin 17, 6 GB heap. First boot: **failed**, one mod.
+  `cbc_firepower_components requires createbigcannons [5.8.0,5.9.0); currently 5.11.4`. Removed —
+  no version of it supports CBC ≥ 5.9.
+- Second boot, 76 jars: `Done (27.452s)!` — registries built, world generated, server live.
+- Third boot with the performance stack, 83 jars: green.
+- `node scripts/validate/verify.mjs` → passed; the TOML linter handled 85+ real packwiz metafiles.
+
+**Two of my own claims corrected mid-run, both load-bearing:**
+1. The matrix said `flywheel` and `ponder` were CurseForge-only dependencies to source by hand.
+   **They are bundled inside Create via Forge JarJar.** Acting on the wrong version put *Ponder for
+   KubeJS* — a different mod — into the pack. Removed before commit. Rule recorded: check
+   `META-INF/jarjar/` before hunting a Forge dependency.
+2. The sweep read every addon's range against `create` and stopped there, so it never saw that
+   `cbc_firepower_components` constrains `createbigcannons`. Only the boot caught it.
+
+**Findings that constrain distribution, recorded rather than smoothed:**
+- Four mods have third-party downloads disabled by their authors — TakKit, Flashier Flashlights,
+  Client Dynamic Light, Player Microchip. The CurseForge App handles them; every other route
+  requires the user to click a link. `INSTALL.md` names all four with URLs.
+- CameraCraft has no 1.20.1 Forge build anywhere; the CCTV layer needs another answer.
+- `TaCZ: Accelerated` is Core in Performance Spec §2 and CORE CANDIDATE in §19. Not added.
+
+**Not done, and not claimed:** the **client** has never been launched — that needs the developer's
+Microsoft account. No balance, no KubeJS, no configs. The pack runs; it does not yet play the way
+the design documents describe.
+
+**Artifact:** `build/Industrial-Civilization-Survival-0.1.0-alpha.zip` — CurseForge format,
+importable by CurseForge App, Prism, ATLauncher. Not committed (`.gitignore`).
+
+---
+
 ## Distribution & Updates spec folded in (2026-08-25, branch `chore/7-fold-distribution-spec`)
 
 **Goal:** a fourth design document arrived, and unlike the first three it constrains **this

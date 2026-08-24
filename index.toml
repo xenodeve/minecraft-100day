@@ -51,6 +51,11 @@ hash = "a613f5d2df911fea606968bbdb56eebfd05ac02ada846cf0d2e56e72345d9338"
 metafile = true
 
 [[files]]
+file = "mods/chunky.pw.toml"
+hash = "0e17f9758f6f67ef87aa6f8d5afc47901521a05904cd8470ef65063b48e69d73"
+metafile = true
+
+[[files]]
 file = "mods/client-dynamic-light.pw.toml"
 hash = "237b0859d871b5f843ed689971ee1487a80c86db58aa656901b99d9c0d3a5f91"
 metafile = true
@@ -58,6 +63,11 @@ metafile = true
 [[files]]
 file = "mods/clothingcraft.pw.toml"
 hash = "876b1d3316748666d4933c02c09ea9a87b9faca7f1e3a1fbc717c8e4d57f4e0f"
+metafile = true
+
+[[files]]
+file = "mods/clumps.pw.toml"
+hash = "903352ffbd84d4b95fed905893f4715d9c3f88ec9fff6fb06f6e359e0b839dc3"
 metafile = true
 
 [[files]]
@@ -126,13 +136,33 @@ hash = "08d12a69200642b29a2c8aff6b337f661c8756c2624d23db4b969b0610195823"
 metafile = true
 
 [[files]]
+file = "mods/embeddium.pw.toml"
+hash = "5ec0c37f3f4ad07a40c10376668bca80334ddb7ad2bab06eb4de8f7aac339c8e"
+metafile = true
+
+[[files]]
 file = "mods/enhanced-ai.pw.toml"
 hash = "a7f9970f68f2520ecc16794420e83c66ef2e8fb1b5113ffed1303cdaa8b48ade"
 metafile = true
 
 [[files]]
+file = "mods/entityculling.pw.toml"
+hash = "fbad2488da791994cbb4a0541e2dd22c536dbe6ca8f7edfdd9af12120e283fd2"
+metafile = true
+
+[[files]]
 file = "mods/farmers-delight.pw.toml"
 hash = "a21b5d4f95cf3c7cbf704bb0b42138ec9271663a5a2c0ed7b9601e4bf179604e"
+metafile = true
+
+[[files]]
+file = "mods/fastsuite.pw.toml"
+hash = "ecac0e58853b90c2208ec25738b43f212d92c89f7742b61aca817b681deca352"
+metafile = true
+
+[[files]]
+file = "mods/ferrite-core.pw.toml"
+hash = "902bac905b93271f02bd0951a22bac06a3da24f5c237fcaeb469e14a7679e508"
 metafile = true
 
 [[files]]
@@ -183,6 +213,11 @@ metafile = true
 [[files]]
 file = "mods/iceandfire-ce.pw.toml"
 hash = "4d5aefab5b2b6d16b0e54fb85efc9c96f7cc9bb2c7d97286a9b9ecad9f539f02"
+metafile = true
+
+[[files]]
+file = "mods/immediatelyfast.pw.toml"
+hash = "835bd8b05a05ce6c0981ddc37c49e4c476aa0414cc2a5321fd9f8994193b6feb"
 metafile = true
 
 [[files]]
@@ -256,6 +291,11 @@ hash = "7853c06a90fb36d5518566ab5ae1f77bdba37eb0ffffc6c73b26d402db64c31f"
 metafile = true
 
 [[files]]
+file = "mods/modernfix.pw.toml"
+hash = "a53d3c53ddfdfb26bb6cecf0428ec4ade0daa8b4f49932acbc55d965817b0c6d"
+metafile = true
+
+[[files]]
 file = "mods/mouse-tweaks.pw.toml"
 hash = "679fa8f3b49b9ed3fbcb29d6ccdb99bce465faa01f9cec000464ac8d4fbe134f"
 metafile = true
@@ -273,6 +313,11 @@ metafile = true
 [[files]]
 file = "mods/not-enough-animations.pw.toml"
 hash = "1c3d52224f1f174fbcf2c308a70e3c34a736694b626992891404db32cbd69c7e"
+metafile = true
+
+[[files]]
+file = "mods/placebo.pw.toml"
+hash = "969078b157cd783f7c38ac33407abc4f532c244c973d52810d559f02be06db90"
 metafile = true
 
 [[files]]
@@ -318,6 +363,11 @@ metafile = true
 [[files]]
 file = "mods/serene-seasons.pw.toml"
 hash = "23ef0c67ed600fb75d47161cdbe43b860837afe9d1f3012c44f3e7eb13bdd1e5"
+metafile = true
+
+[[files]]
+file = "mods/servercore.pw.toml"
+hash = "874a064efc37398f5818a38666ea31263bd65ed0478b519b819f7a361bd0893e"
 metafile = true
 
 [[files]]
