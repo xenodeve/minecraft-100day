@@ -1,0 +1,13 @@
+name = "Grillo's Clothes"
+filename = "clothes_mod-1.4.10-1.20.1.jar"
+side = "both"
+
+[download]
+url = "https://cdn.modrinth.com/data/vtTKW0yE/versions/qjzucFRz/clothes_mod-1.4.10-1.20.1.jar"
+hash-format = "sha512"
+hash = "63ee3f4193a48593121335a7cc38a9c96fa0a3585ff1071153667e9cc1e56e9e1f06eeaef243d31ee83abb68fc62aa51e2fd47f6c49224330db8ac9772d91f97"
+
+[update]
+[update.modrinth]
+mod-id = "vtTKW0yE"
+version = "qjzucFRz"

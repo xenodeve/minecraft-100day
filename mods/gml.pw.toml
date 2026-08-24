@@ -1,0 +1,13 @@
+name = "GroovyModLoader (GML)"
+filename = "gml-4.0.11-all.jar"
+side = "both"
+
+[download]
+hash-format = "sha1"
+hash = "1b8899ea5a9fd45f2adf8bbb25651a0a95dc6020"
+mode = "metadata:curseforge"
+
+[update]
+[update.curseforge]
+file-id = 6434243
+project-id = 661517
