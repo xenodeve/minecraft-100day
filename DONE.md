@@ -6,6 +6,44 @@
 
 ---
 
+## One self-contained file — import and play (2026-08-25, branch `feat/16-single-file-artifact`)
+
+**Goal:** the pack exported as one file, but importing it was not one step — the manifest carried
+38 CurseForge references and four mods sent the user to click links by hand.
+
+**Shipped (#16):**
+- `scripts/build/build-instance.mjs` — reads every metafile, downloads each jar, **hash-verifies
+  it**, assembles a Prism Launcher instance and zips it. Refuses to emit on any mismatch.
+  This is Distribution Spec §14's `scripts/build/`, first entry.
+- **ADR 0003** — self-contained over the spec's reference profile, with the developer's stated
+  reason (patches authored here; no intent to track upstream updates) and the honest cost
+  (388 MB per release, every patch reships all of it).
+- `INSTALL.md` restructured: the self-contained file is Option A, one step, offline.
+
+**Validation:**
+- `all 93 jars verified — 93 downloaded, 0 from cache`
+- `archive verified — 93 jars under .minecraft/mods/, no backslash entries`
+- Independent check: extracted the finished artifact, SHA-256 over all 93 jars against the
+  verified cache — **93/93 byte-identical**.
+
+**Two defects caught before they shipped:**
+1. `Compress-Archive` writes ZIP entry names with **backslashes**, which the spec forbids. Prism
+   would have read `.minecraft\mods\create.jar` as one flat filename — 93 oddly-named files and no
+   mods directory, looking like a Prism bug. Found by a structural check counting **0** jars under
+   `*/mods/`.
+2. `build/` in `.gitignore` matched `scripts/build/` — an unanchored directory pattern matches at
+   any depth — so the build script **was never committed**. `git add -A` reported success and the
+   file was simply absent. All six directory patterns anchored.
+
+**Composition, stated so the "~60 mods" claim is checkable:** 93 metafiles = **66 mods named in
+the five design documents** + 27 libraries and dependencies packwiz resolved automatically.
+
+**Not claimed:** the artifact has **not** been imported into Prism. Prism has never been run, so it
+has no data directory, and driving its GUI unattended was out of scope. Verified instead: the
+archive matches Prism's documented instance format, and this jar set booted a Forge server green.
+
+---
+
 ## The pack exists and boots (2026-08-25, `/t4-afk` unattended run, branches `chore/9-*`, `feat/11-*`, `feat/13-*`)
 
 **Goal:** turn five design documents into a modpack a user can import into Minecraft.
