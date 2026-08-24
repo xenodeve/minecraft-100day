@@ -1,0 +1,36 @@
+# What is NOT part of the pack.
+#
+# Distribution Spec §4 defines the pack as config/, defaultconfigs/, kubejs/,
+# resourcepacks/, datapacks/, ftbquests/ and the manifest — the files that carry
+# gameplay. Everything else in this repository is the operating layer: how we
+# build the pack, not the pack itself.
+#
+# Without this file `packwiz refresh` indexes the whole repo, and a friend
+# installing the pack downloads CLAUDE.md, the ADRs and the git hooks.
+
+# --- the agent operating layer -----------------------------------------------
+.claude/
+.githooks/
+.github/
+scripts/
+Obsidian-minecraft-100day/
+
+# --- documentation -----------------------------------------------------------
+docs/
+*.md
+
+# --- repo metadata -----------------------------------------------------------
+.gitignore
+.gitattributes
+.packwizignore
+
+# --- local build / runtime output --------------------------------------------
+build/
+dist/
+run/
+instance/
+logs/
+crash-reports/
+saves/
+*.mrpack
+*.zip
