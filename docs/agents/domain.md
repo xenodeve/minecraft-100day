@@ -60,6 +60,21 @@ Every mod in the master list carries exactly one status. These are the words use
 | **Outpost** | A remote holding connected by rail or road, reachable only by travelling. Nothing in this pack teleports. | "waypoint", "base 2" |
 | **Grid** | The city electrical hierarchy: Power Plant → HV → Substation → MV → Transformer → LV (§13). Immersive Engineering owns the grid; it does not own manufacturing. | "power network", "RF system" |
 
+## Wildlife & ecology
+
+From `docs/Addon Spec — Natural Wildlife & Ecology.md`. The layer exists so that monsters read as
+*abnormal*; a world of only zombies and dragons makes monsters ordinary.
+
+| Term | Definition | Aliases to avoid |
+|------|-----------|-----------------|
+| **Natural world** / **Anomalous world** | The contrast the wildlife layer exists to create. Deer, birds, fish and livestock are the baseline against which Born in Chaos and Ice & Fire read as wrong. Wildlife is atmosphere, never a threat tier. | "passive mobs" (that is a spawn category, not this) |
+| **Spawn Budget** | The single shared CPU budget that passive wildlife, MineColonies NPCs, hostile mobs, Horde entities, projectiles, Create contraptions and VS2 physics all draw from. Wildlife is the cheapest layer to cut, so it is the first one cut. | "entity limit", "mob cap" (the vanilla cap is one input to this, not the same thing) |
+| **Entity Density Priority** | The fixed order in which density is reduced under performance pressure: ambient decorative → small critters → duplicate species → common passive animals. Create, MineColonies and hostile encounter design are reduced **last**, and only deliberately. | "performance tuning" |
+| **Duplicate Species Audit** | The comparison pass over species that two mods both provide. Output is `docs/wildlife-roster.md` with a KEEP / REDUCE decision per row. Behaviour is compared before anything is cut — a shared name is not evidence of overlap. | "removing duplicates" |
+| **Wildlife Roster** | `docs/wildlife-roster.md`. Columns: Species/Role · Source Mod · Biome · Spawn Weight · Gameplay Role · Overlap · Decision. Like the compatibility matrix, it records what was **observed in a registry dump**, not what a mod page claims. | "animal list" |
+| **Survival tax** | An anti-pattern, never a feature. Thirst, disease, parasites, hunger overhauls and butchering minigames are out of scope — wildlife raises immersion, not micromanagement (§53). | "realism", "hardcore survival" |
+| **W-phase** | The wildlife addon's own phase list, W0–W9, separate from the main §24 phases and gated behind them. Cite as *Wildlife Spec W3*, never as a bare number. | "phase 3" (ambiguous with §24) |
+
 ## Process
 
 | Term | Definition | Aliases to avoid |
@@ -129,6 +144,21 @@ PR description, comment ใน config, identifier ของ KubeJS และใ�
 | **Frontier** | ดินแดนที่พ้นรัศมีปลอดภัยของนิคม ความอันตรายขึ้นกับระยะทางที่เดินทางและจำนวนวันที่รอดมา ไม่ใช่กฎตามปฏิทิน | "พื้นที่ endgame" |
 | **Outpost** | ที่มั่นห่างไกลที่เชื่อมด้วยรางหรือถนน ไปถึงได้ด้วยการเดินทางเท่านั้น ไม่มีอะไรใน pack นี้ที่ teleport ได้ | "waypoint", "ฐานสอง" |
 | **Grid** | ลำดับชั้นไฟฟ้าของเมือง: Power Plant → HV → Substation → MV → Transformer → LV (§13) Immersive Engineering เป็นเจ้าของ Grid แต่ไม่ได้เป็นเจ้าของการผลิต | "power network", "ระบบ RF" |
+
+## สัตว์ป่าและระบบนิเวศ
+
+มาจาก `docs/Addon Spec — Natural Wildlife & Ecology.md` ชั้นนี้มีอยู่เพื่อให้สัตว์ประหลาดอ่านออกว่า
+*ผิดธรรมชาติ* โลกที่มีแต่ zombie กับมังกรจะทำให้สัตว์ประหลาดกลายเป็นเรื่องปกติ
+
+| คำ | ความหมาย | ห้ามใช้ |
+|------|-----------|-----------------|
+| **Natural world** / **Anomalous world** | ความต่างที่ชั้นสัตว์ป่ามีอยู่เพื่อสร้างขึ้น กวาง นก ปลา และปศุสัตว์คือเส้นฐานที่ทำให้ Born in Chaos และ Ice & Fire อ่านออกว่าผิดปกติ สัตว์ป่าคือบรรยากาศ ไม่เคยเป็น threat tier | "passive mob" (นั่นคือ spawn category ไม่ใช่สิ่งนี้) |
+| **Spawn Budget** | งบ CPU ก้อนเดียวที่สัตว์ป่า, NPC ของ MineColonies, mob ศัตรู, entity ของ Horde, กระสุน, contraption ของ Create และ physics ของ VS2 แย่งกันใช้ สัตว์ป่าเป็นชั้นที่ตัดถูกที่สุด จึงเป็นชั้นแรกที่ถูกตัด | "entity limit", "mob cap" (cap ของ vanilla เป็นแค่หนึ่งใน input ไม่ใช่สิ่งเดียวกัน) |
+| **Entity Density Priority** | ลำดับตายตัวของการลดความหนาแน่นเมื่อ performance ตึง: ambient ประดับ → critter เล็ก → สปีชีส์ซ้ำ → สัตว์ passive ทั่วไป ส่วน Create, MineColonies และการออกแบบการปะทะกับศัตรูถูกลด**เป็นลำดับสุดท้าย** และต้องตั้งใจเท่านั้น | "การจูน performance" |
+| **Duplicate Species Audit** | รอบการเปรียบเทียบสปีชีส์ที่ mod สองตัวมีเหมือนกัน ผลลัพธ์คือ `docs/wildlife-roster.md` ที่มีคำตัดสิน KEEP / REDUCE รายแถว ต้องเทียบพฤติกรรมก่อนตัดอะไรทิ้ง — ชื่อที่ซ้ำกันไม่ใช่หลักฐานว่าทับซ้อนกัน | "ลบตัวซ้ำ" |
+| **Wildlife Roster** | `docs/wildlife-roster.md` คอลัมน์: Species/Role · Source Mod · Biome · Spawn Weight · Gameplay Role · Overlap · Decision เหมือน compatibility matrix มันบันทึกสิ่งที่**สังเกตได้จาก registry dump** ไม่ใช่สิ่งที่หน้าเว็บของ mod อ้าง | "ลิสต์สัตว์" |
+| **Survival tax** | เป็น anti-pattern ไม่เคยเป็น feature ความกระหายน้ำ โรค ปรสิต การรื้อระบบความหิว และมินิเกมชำแหละ อยู่นอกขอบเขต — สัตว์ป่าเพิ่มความสมจริง ไม่ใช่เพิ่มงานจุกจิก (§53) | "ความสมจริง", "hardcore survival" |
+| **W-phase** | phase list ของ addon สัตว์ป่าเอง คือ W0–W9 แยกจาก phase §24 ของ pack หลักและถูก gate ไว้ข้างหลัง อ้างอิงเป็น *Wildlife Spec W3* ห้ามอ้างเป็นตัวเลขเปล่า | "phase 3" (กำกวมกับ §24) |
 
 ## กระบวนการ
 

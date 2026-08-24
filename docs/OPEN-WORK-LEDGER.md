@@ -10,8 +10,10 @@
 **Legend:** ✅ done, pending merge · 🟢 buildable now · 🟡 gated (needs merge / resource /
 decision) · 🔴 **UNTRACKED** (MD-only, no GitHub issue — highest miss-risk)
 
-**Current state, stated plainly:** the repo has its operating layer and its two design
-documents. It has **no pack** — no `pack.toml`, no mods, no config, no KubeJS.
+**Current state, stated plainly:** the repo has its operating layer and its three design
+documents. It has **no pack** — no `pack.toml`, no mods, no config, no KubeJS. The mod list now
+stands at the main pack plus 7 QoL mods (Track 3) plus 3 wildlife mods (Track 4), and none of
+them has been version-checked against a Create major yet.
 
 ---
 
@@ -19,7 +21,7 @@ documents. It has **no pack** — no `pack.toml`, no mods, no config, no KubeJS.
 
 | Item | Status | Gate | Next action |
 |---|---|---|---|
-| `docs/agents/issue-tracker.md` + `docs/agents/triage-labels.md` | 🔴 | `/setup-matt-pocock-skills` is user-invocation-only — an agent cannot write these | Developer runs `/setup-matt-pocock-skills` in this repo, then the T4 delta (Component / Type / Severity groups) is appended |
+| `docs/agents/issue-tracker.md` + `docs/agents/triage-labels.md` + `reading-domain-docs.md` | ✅ | — | Developer ran `/setup-matt-pocock-skills`; output landed with the T4 delta appended (**#3**). Consumer rules went to `reading-domain-docs.md` so the glossary at `domain.md` survived |
 | Triage labels created on the GitHub repo | ✅ | — | 23 created, 2 already existed, 0 failed. `bug` renamed to `Bug` to match the vocabulary |
 | `git config core.hooksPath .githooks` on this clone | 🔴 | developer action, per-clone by design | Run it once; verify with `git config --get core.hooksPath` |
 | `T4 main gate` ruleset — PR-only, no force-push, no deletion | ✅ | — | Active. Direct pushes to `main` are blocked |
@@ -54,25 +56,46 @@ main pack. Not yet folded into the §24 phase list — where each lands is itsel
 |---|---|---|---|
 | JEI + Jade + Jade Addons + Crafting Tweaks + Mouse Tweaks + Polymorph | 🔴 | main pack must boot first | Decide which §24 phase each belongs to; they are QoL, so they follow the systems they describe |
 | Player Microchip re-themed as the tactical tracker | 🔴 | needs the Curios + radio layers to exist | Addon Spec §17–29; the re-theme is a resource-pack + KubeJS job, not a fork |
-| Hide disabled content from JEI | 🔴 | needs KubeJS + a decided mod list | Addon Spec §6 — must stay in sync with every mod removal |
+| Hide disabled content from JEI | 🔴 | needs KubeJS + a decided mod list | Crafting Spec §6 — must stay in sync with every mod removal |
+
+## Track 4 — Addon Spec (Natural Wildlife & Ecology)
+
+Source: `docs/Addon Spec — Natural Wildlife & Ecology.md`. Three CORE mods and a phase list of
+its own, W0–W9, gated behind the main pack. Folded into the operating layer under **#4**; the
+implementation work below is not started.
+
+| Item | Status | Gate | Next action |
+|---|---|---|---|
+| Naturalist + Critters and Companions + Ecologics | 🔴 | main pack must boot first | Wildlife Spec W0 — install, then dump the entity registry before touching a single spawn value |
+| `docs/wildlife-roster.md` + duplicate species audit | 🔴 | W0 registry dump | Wildlife Spec W2/W4 — compare **behaviour**, not names, before any KEEP / REDUCE call |
+| Spawn baseline + density tuning | 🔴 | must follow a profiling run, never precede it | Wildlife Spec W3/W6/W7 — *"Do not randomly reduce every value. Tune based on measured population."* |
+| Threat-layer coexistence (Born in Chaos, Ice & Fire, The Hordes) | 🔴 | needs the threat layer to exist | Wildlife Spec W5 — a Horde must not permanently wipe local ecology |
+| Serene Seasons interaction | 🔴 | out of scope for Alpha unless the mods already provide it | Wildlife Spec §52 — test, do not assume integration |
+
+**Standing constraint from this spec, applies outside Track 4:** under performance pressure the
+reduction order is ambient → small critters → duplicate species → common passives, and Create /
+MineColonies / hostile encounter design are cut **last**. Any future tuning session inherits this.
 
 ---
 
 ## Management Plan — phased execution order
 
 **Phase 0 — Unblock the tooling.** Resolve the GitHub Actions billing lock (**#1**), install
-`packwiz` and a Java 17 JDK, run `git config core.hooksPath .githooks`, and run
-`/setup-matt-pocock-skills`. Five small actions, and most of Track 0 plus two rows in Track 1
-depend on them. Only #1 needs money; the rest are minutes.
+`packwiz` and a Java 17 JDK, and run `git config core.hooksPath .githooks`. Three actions; only
+#1 needs money, the rest are minutes. `/setup-matt-pocock-skills` is done.
 
 **Phase 1 — Tracking hygiene.** File a GitHub issue for every remaining 🔴 row above, so the
 ledger stops being the only record. The triage label vocabulary is already installed.
 
 **Phase 2 — Resolve the Create version.** This is the multiplier. Every mod pin, every KubeJS
 recipe, and the entire Season 2 branch are downstream of it, and it is answerable today with
-research alone — no game launch required.
+research alone — no game launch required. **Scope it to all three documents at once:** the
+Crafting and Wildlife specs add 10 more mods, and sweeping them separately means doing the same
+CurseForge / Modrinth pass three times and reconciling three partial answers.
 
-**Phase 3 onward — the §24 phase list**, one phase per epic, one PRD per phase.
+**Phase 3 onward — the §24 phase list**, one phase per epic, one PRD per phase. The addon specs'
+own phases (Crafting Spec, and Wildlife Spec W0–W9) slot in behind the main-pack phase they
+depend on; deciding where each lands is itself open work in Tracks 3 and 4.
 
 **Gating summary:** Phase 2 is the multiplier and it is *not* blocked by Phase 0 — the version
 sweep needs only network access. Phase 0 and Phase 2 can run in parallel; everything after

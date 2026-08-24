@@ -6,6 +6,40 @@
 
 ---
 
+## docs/agents layer completed + third design doc folded in (2026-08-25, `/setup-matt-pocock-skills`, branch `chore/3-land-agents-docs-layer`)
+
+**Goal:** close the one hole the bootstrap could not fill itself, and stop the operating layer
+from being silently out of date the moment a new design document lands.
+
+**Shipped (#3 — the pocock hand-off):**
+- `docs/agents/issue-tracker.md` — GitHub conventions, the `gh` full path (it is not on PATH),
+  the bilingual-body rule, the merge gate's real state, and `/wayfinder` operations.
+- `docs/agents/triage-labels.md` — the five canonical roles (identity mapping) plus this repo's
+  Component / Type / Severity / Lifecycle groups, and what each Component owns.
+- `docs/agents/reading-domain-docs.md` — pocock's consumer rules, at a path that does not
+  destroy the glossary. The collision is upstream as `xeno-skills#334`.
+- `CLAUDE.md` — an `## Agent skills` block pointing at all three.
+
+**Shipped (#4 — Natural Wildlife & Ecology):**
+- `docs/agents/domain.md` — seven new terms: Natural/Anomalous world, Spawn Budget, Entity
+  Density Priority, Duplicate Species Audit, Wildlife Roster, Survival tax, W-phase. Both
+  language halves.
+- `CLAUDE.md` — the two addon specs now have a citation convention (*Crafting Spec §N* /
+  *Wildlife Spec W3*) because three documents with independent `§N` numbering were about to
+  make every reference ambiguous.
+- `docs/OPEN-WORK-LEDGER.md` — Track 4 (W0–W9), Track 0 reconciled, and Phase 2 rescoped to
+  sweep all three documents in one pass rather than three.
+
+**Validation:** `node scripts/validate/verify.mjs` → passed. Not verified: nothing here can be —
+no mod was installed and no world was launched. Every claim in these files is about the repo, not
+about the pack.
+
+**Report:** none warranted — no bug fixed, no architectural decision reversed. ADR 0001 stands.
+
+**Next:** unchanged — ledger Phase 0 and Phase 2.
+
+---
+
 ## T4 operating layer bootstrapped (2026-08-25, `/t4-project-bootstrap`, branch `main`)
 
 **Goal:** turn a directory holding one design document into an agent-primary repo — one where a
