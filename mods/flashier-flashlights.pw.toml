@@ -1,0 +1,13 @@
+name = "Flashier Flashlights"
+filename = "Flashier Flashlights 1.2.0.jar"
+side = "both"
+
+[download]
+hash-format = "sha1"
+hash = "d85e7e8f89e674eb029a1ba2f113a99a8430530b"
+mode = "metadata:curseforge"
+
+[update]
+[update.curseforge]
+file-id = 8453760
+project-id = 1604184

@@ -1,0 +1,13 @@
+name = "CAPS_Awim - TACTICAL_GEAR"
+filename = "caps_awim_tactical_gear_rework-3.0.0408.26_en-forge-1.20.1.jar"
+side = "both"
+
+[download]
+hash-format = "sha1"
+hash = "1db4a4cc054d540c05d929c163d7d4ba58819888"
+mode = "metadata:curseforge"
+
+[update]
+[update.curseforge]
+file-id = 8571178
+project-id = 1398854

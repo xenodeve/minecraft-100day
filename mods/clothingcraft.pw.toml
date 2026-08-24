@@ -1,0 +1,13 @@
+name = "ClothingCraft"
+filename = "clothingcraft-1.0.0.jar"
+side = "both"
+
+[download]
+url = "https://cdn.modrinth.com/data/9QeKihMe/versions/trwxYpZk/clothingcraft-1.0.0.jar"
+hash-format = "sha512"
+hash = "8054c0a9419cae7a7693d6262ab8791b20b15c365b2e86c83d82b8b24698ecc961bf0c35b67a08a4f5b44e5466f4c11235d2fb830cb0c019896999d26d36c92a"
+
+[update]
+[update.modrinth]
+mod-id = "9QeKihMe"
+version = "trwxYpZk"
