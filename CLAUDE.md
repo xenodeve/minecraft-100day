@@ -26,7 +26,7 @@ design rules, and each numbers its own sections — **cite them by name, never a
 |---|---|---|
 | `docs/Addon Spec — Crafting Assistance + Tactical Tracker.md` | JEI, Jade, Jade Addons, Crafting Tweaks, Mouse Tweaks, Polymorph, and a re-themed Player Microchip tracker | *Crafting Spec §N* |
 | `docs/Addon Spec — Natural Wildlife & Ecology.md` | Naturalist, Critters and Companions, Ecologics — the ordinary-animal layer that makes monsters read as abnormal. Carries its own phase list, W0–W9 | *Wildlife Spec §N* / *Wildlife Spec W3* |
-| `docs/ADDON-MODPACK-DISTRIBUTION-AND-UPDATES.md` | **Release engineering, not content.** Source of truth, what counts as the pack, versioning, the release gate, branching, changelog, friend installation and updates | *Distribution Spec §N* |
+| `docs/Addon Modpack — Distribution & Updates.md` | **Release engineering, not content.** Source of truth, what counts as the pack, versioning, the release gate, branching, changelog, friend installation and updates | *Distribution Spec §N* |
 
 The Distribution Spec is the one that constrains **this repository's own process**, not the game.
 Its §22 branching model and §16 release gate govern how work ships; see `docs/agents/workflow.md`.
@@ -162,7 +162,7 @@ docs/
   Industrial Civilization Survival — ….md    the design document (source of truth for intent)
   Addon Spec — Crafting Assistance ….md      JEI / Jade / tactical tracker
   Addon Spec — Natural Wildlife ….md         Naturalist / Critters / Ecologics, phases W0–W9
-  ADDON-MODPACK-DISTRIBUTION-AND-UPDATES.md  release engineering — governs THIS repo's process
+  Addon Modpack — Distribution & Updates.md  release engineering — governs THIS repo's process
   OPEN-WORK-LEDGER.md         open work, tracked and untracked — read at session start
   agents/
     domain.md                 domain glossary — WHAT THE WORDS MEAN here

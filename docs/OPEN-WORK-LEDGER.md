@@ -85,7 +85,7 @@ MineColonies / hostile encounter design are cut **last**. Any future tuning sess
 
 ## Track 5 — Distribution & release engineering
 
-Source: `docs/ADDON-MODPACK-DISTRIBUTION-AND-UPDATES.md`. Unlike Tracks 3 and 4 this one adds no
+Source: `docs/Addon Modpack — Distribution & Updates.md`. Unlike Tracks 3 and 4 this one adds no
 mods — it governs how the pack ships, and parts of it constrain this repository's own process.
 Folded into the operating layer under **#7**.
 
