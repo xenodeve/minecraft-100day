@@ -2,11 +2,11 @@ hash-format = "sha256"
 
 [[files]]
 file = "config/carryon-common.toml"
-hash = "2d6325c0faf202f663ecd24fba288893bc9894950be9ab7459e40b406bdde19d"
+hash = "9549d1d5bbf54277b92b4f8e68e61f8736b327bb0cb15d0a68c51615a98f79fc"
 
 [[files]]
 file = "config/improvedmobs/common.toml"
-hash = "bd28d94f50a98de35da0e606349680a3f8a8f1402d25758024d9dbc7924964d4"
+hash = "a8364ac6a95a957c0a83fa0b7a4f1782cff594969e1e709339f6c55478ff6fb6"
 
 [[files]]
 file = "kubejs/data/enhancedai/tags/blocks/miner_blacklist.json"
