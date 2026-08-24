@@ -1,0 +1,13 @@
+name = "TaCZ Additions"
+filename = "taczadditions-1.20.1-1.3.0.jar"
+side = "both"
+
+[download]
+url = "https://cdn.modrinth.com/data/WNpBjL0h/versions/Kg1T5z1f/taczadditions-1.20.1-1.3.0.jar"
+hash-format = "sha512"
+hash = "0b50fe73a0f7acc2045992850c114acca0dc53bf0d6e16f6887cb2b1dd4861084e0d659c874ce8cb79706fee23889db27f1a83e1f71752688b6524a500fc2235"
+
+[update]
+[update.modrinth]
+mod-id = "WNpBjL0h"
+version = "Kg1T5z1f"

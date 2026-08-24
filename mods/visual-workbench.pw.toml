@@ -1,0 +1,13 @@
+name = "Visual Workbench"
+filename = "VisualWorkbench-v8.0.1-1.20.1-Forge.jar"
+side = "both"
+
+[download]
+url = "https://cdn.modrinth.com/data/kfqD1JRw/versions/qaWEHDC3/VisualWorkbench-v8.0.1-1.20.1-Forge.jar"
+hash-format = "sha512"
+hash = "f6167cf80d9163d1beae3dce898949a0b08afe9da099b030d95144a9a8de69021f7d1eaf0a93ce10ef12f5117d18d3fe124ff35b2ae76328da1c307ca96016c8"
+
+[update]
+[update.modrinth]
+mod-id = "kfqD1JRw"
+version = "qaWEHDC3"

@@ -1,0 +1,13 @@
+name = "[TACZ] Durability"
+filename = "gundb-2.1.0-all.jar"
+side = "both"
+
+[download]
+url = "https://cdn.modrinth.com/data/eYsYyxH0/versions/NcAEPATk/gundb-2.1.0-all.jar"
+hash-format = "sha512"
+hash = "8d47ad1643df203ddb4a7db95cd799a9bf400de2edb7e69911a7c9080123cd3a625f71044dab7d8f4540fa29d58e2a1ef85d9fff97e8496394769a65a18d6375"
+
+[update]
+[update.modrinth]
+mod-id = "eYsYyxH0"
+version = "NcAEPATk"

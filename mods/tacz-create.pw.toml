@@ -1,0 +1,13 @@
+name = "Create: Timeless and Classics Zero [TaCZ]"
+filename = "tacz_c-1.0.2-forge-1.20.1.jar"
+side = "both"
+
+[download]
+hash-format = "sha1"
+hash = "be39bcf3edc04eec2c98112324a2ee990a62fdee"
+mode = "metadata:curseforge"
+
+[update]
+[update.curseforge]
+file-id = 7327274
+project-id = 1109760
