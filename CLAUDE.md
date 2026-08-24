@@ -19,10 +19,18 @@ The design document is the source of truth for intent:
 **`docs/Industrial Civilization Survival — Claude Code Handoff & Implementation Plan.md`**
 (read it before any pack work; unqualified `§N` references throughout this repo are to it).
 
-A second, standalone spec layers on top of it:
-**`docs/Addon Spec — Crafting Assistance + Tactical Tracker.md`** — adds JEI, Jade, Jade Addons,
-Crafting Tweaks, Mouse Tweaks, Polymorph and a re-themed Player Microchip tracker. It shares the
-same platform constraints and the same design rules; cite it as *Addon Spec §N*.
+Two standalone addon specs layer on top of it. Both share the same platform constraints and the
+same design rules, and both have their own section numbering — **cite them by name, never as a
+bare `§N`**:
+
+| Document | Adds | Cite as |
+|---|---|---|
+| `docs/Addon Spec — Crafting Assistance + Tactical Tracker.md` | JEI, Jade, Jade Addons, Crafting Tweaks, Mouse Tweaks, Polymorph, and a re-themed Player Microchip tracker | *Crafting Spec §N* |
+| `docs/Addon Spec — Natural Wildlife & Ecology.md` | Naturalist, Critters and Companions, Ecologics — the ordinary-animal layer that makes monsters read as abnormal. Carries its own phase list, W0–W9 | *Wildlife Spec §N* / *Wildlife Spec W3* |
+
+Untamed Wilds and Alex's Mobs are **rejected** by the Wildlife Spec (§2, §54) — high overlap,
+unnecessary entity diversity, and Alex's Mobs carries fantasy creatures that collide with the
+threat layer.
 
 **Engineering north-star.** Every change is judged by §35: *does this create another meaningful
 problem for the player to solve through engineering, logistics, preparation or teamwork?* A
@@ -148,12 +156,15 @@ DONE.md                       ship log — newest on top
 
 docs/
   Industrial Civilization Survival — ….md    the design document (source of truth for intent)
+  Addon Spec — Crafting Assistance ….md      JEI / Jade / tactical tracker
+  Addon Spec — Natural Wildlife ….md         Naturalist / Critters / Ecologics, phases W0–W9
   OPEN-WORK-LEDGER.md         open work, tracked and untracked — read at session start
   agents/
-    domain.md                 domain glossary — what the words mean here
+    domain.md                 domain glossary — WHAT THE WORDS MEAN here
+    reading-domain-docs.md    WHICH FILES to read before exploring, and when
     workflow.md               how to plan and implement here
-    issue-tracker.md          ⚠ NOT YET WRITTEN — see the ledger, Track 0
-    triage-labels.md          ⚠ NOT YET WRITTEN — see the ledger, Track 0
+    issue-tracker.md          GitHub conventions, gh path, bilingual body rule
+    triage-labels.md          the 25 labels that exist and what each one means
   adr/
     README.md                 ADR index + conventions
     0001-…                    CI gate scoped to what a modpack repo can check
@@ -177,11 +188,16 @@ The intended shape is in §7 of the design document.
 
 ## What is mechanically enforced
 
-| Layer | Binds | Blocks |
-|---|---|---|
-| `.claude/hooks/t4-gate` (`PreToolUse`) | Claude only | `gh pr create` with no issue · dangerous git · `gh pr merge` when `verify` fails |
-| `.githooks/pre-push` | every agent + human on this clone | push with no issue ref · large dirty tree · committed artifacts · missing gate ledger |
-| `.github/workflows/t4-verify.yml` | everyone, including a human merging on the web | a red `lint`, `test`, or `guards` check |
+| Layer | Binds | Blocks | State |
+|---|---|---|---|
+| `.claude/hooks/t4-gate` (`PreToolUse`) | Claude only | `gh pr create` with no issue · dangerous git · `gh pr merge` when `verify` fails | ✅ active |
+| `.githooks/pre-push` | every agent + human on this clone | push with no issue ref · large dirty tree · committed artifacts · missing gate ledger | ⚠️ installed, **not enabled** |
+| `T4 main gate` ruleset | everyone | direct push to `main` · force-push · branch deletion · merge with unresolved threads | ✅ active |
+| `.github/workflows/t4-verify.yml` | everyone, including a human merging on the web | a red `lint`, `test`, or `guards` check | ❌ **cannot run** — see #1 |
+
+**Actions is billing-locked on this account (#1)**, so no check can report and none is required
+by the ruleset. Do not add `required_status_checks` or set `"requireGreenCI": true` until a run
+goes green — either would deadlock every PR on a check that never reports.
 
 **The pre-push guards are opt-in per clone and not yet enabled.** Run once:
 
@@ -231,3 +247,26 @@ none, say so in one line. Full procedure in the `t4-agent-memory` skill.
 **Reconcile before you stop.** Session-local todos go back to the ledger and to their issues.
 New work discovered mid-session gets a ledger row and, if non-trivial, an issue — otherwise it
 vanishes into MD, which is the failure the ledger exists to prevent.
+
+---
+
+## Agent skills
+
+### Issue tracker
+
+GitHub Issues on `xenodeve/minecraft-100day`, via the `gh` CLI — installed but **not on PATH**
+(`"/c/Program Files/GitHub CLI/gh.exe"`). Issue, PRD and PR bodies are bilingual: English plus a
+full Thai mirror. See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+The five canonical roles with their names unchanged, plus this repo's Component / Type /
+Severity / Lifecycle groups — 25 labels, all present on the tracker. Every issue takes at least
+one triage-state label and exactly one Component. See `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+Single-context. Two files, deliberately not one: the **glossary** is `docs/agents/domain.md`
+(*what the words mean*), and the **consumer rules** are `docs/agents/reading-domain-docs.md`
+(*which files to read before exploring*). The upstream skill wants both at `domain.md`; they were
+split because the glossary was there first. See `docs/agents/reading-domain-docs.md`.

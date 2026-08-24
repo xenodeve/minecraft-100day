@@ -6,6 +6,40 @@
 
 ---
 
+## docs/agents layer completed + third design doc folded in (2026-08-25, `/setup-matt-pocock-skills`, branch `chore/3-land-agents-docs-layer`)
+
+**Goal:** close the one hole the bootstrap could not fill itself, and stop the operating layer
+from being silently out of date the moment a new design document lands.
+
+**Shipped (#3 — the pocock hand-off):**
+- `docs/agents/issue-tracker.md` — GitHub conventions, the `gh` full path (it is not on PATH),
+  the bilingual-body rule, the merge gate's real state, and `/wayfinder` operations.
+- `docs/agents/triage-labels.md` — the five canonical roles (identity mapping) plus this repo's
+  Component / Type / Severity / Lifecycle groups, and what each Component owns.
+- `docs/agents/reading-domain-docs.md` — pocock's consumer rules, at a path that does not
+  destroy the glossary. The collision is upstream as `xeno-skills#334`.
+- `CLAUDE.md` — an `## Agent skills` block pointing at all three.
+
+**Shipped (#4 — Natural Wildlife & Ecology):**
+- `docs/agents/domain.md` — seven new terms: Natural/Anomalous world, Spawn Budget, Entity
+  Density Priority, Duplicate Species Audit, Wildlife Roster, Survival tax, W-phase. Both
+  language halves.
+- `CLAUDE.md` — the two addon specs now have a citation convention (*Crafting Spec §N* /
+  *Wildlife Spec W3*) because three documents with independent `§N` numbering were about to
+  make every reference ambiguous.
+- `docs/OPEN-WORK-LEDGER.md` — Track 4 (W0–W9), Track 0 reconciled, and Phase 2 rescoped to
+  sweep all three documents in one pass rather than three.
+
+**Validation:** `node scripts/validate/verify.mjs` → passed. Not verified: nothing here can be —
+no mod was installed and no world was launched. Every claim in these files is about the repo, not
+about the pack.
+
+**Report:** none warranted — no bug fixed, no architectural decision reversed. ADR 0001 stands.
+
+**Next:** unchanged — ledger Phase 0 and Phase 2.
+
+---
+
 ## T4 operating layer bootstrapped (2026-08-25, `/t4-project-bootstrap`, branch `main`)
 
 **Goal:** turn a directory holding one design document into an agent-primary repo — one where a
@@ -40,8 +74,19 @@ means. Left absent rather than written wrong. Tracked in the ledger, Track 0.
 
 **Report:** `docs/adr/0001-ci-gate-scoped-to-modpack-reality.md`.
 
-**Next:** ledger Phase 0 (install packwiz + Java 17, enable `core.hooksPath`, run
-`/setup-matt-pocock-skills`) and Phase 2 (resolve the Create major version) — they do not block
-each other.
+**Remote state:** `xenodeve/minecraft-100day` (public). 23 triage labels created, 2 already
+existed (`wontfix`, and GitHub's default `bug`, renamed to `Bug`), 0 failed. Ruleset
+`T4 main gate` active — PR-only, no force-push, no deletion, unresolved threads block merge.
+Secret scanning and push protection enabled; Dependabot alerts and security PRs enabled.
+`secret_scanning_validity_checks` and `secret_scanning_non_provider_patterns` were **not**
+enabled — the API accepts the PATCH, returns 200, and leaves both `disabled`.
+
+**Blocked:** GitHub Actions is billing-locked on the account, so `T4 verify` cannot run and the
+three checks are not required by the ruleset. Filed as #1 with the reasoning for omitting them
+rather than adding checks that would deadlock every PR.
+
+**Next:** ledger Phase 0 — resolve #1, install packwiz + Java 17, enable `core.hooksPath`, run
+`/setup-matt-pocock-skills` — and Phase 2 (resolve the Create major version), which is not
+blocked by any of them.
 
 ---
