@@ -75,6 +75,22 @@ From `docs/Addon Spec — Natural Wildlife & Ecology.md`. The layer exists so th
 | **Survival tax** | An anti-pattern, never a feature. Thirst, disease, parasites, hunger overhauls and butchering minigames are out of scope — wildlife raises immersion, not micromanagement (§53). | "realism", "hardcore survival" |
 | **W-phase** | The wildlife addon's own phase list, W0–W9, separate from the main §24 phases and gated behind them. Cite as *Wildlife Spec W3*, never as a bare number. | "phase 3" (ambiguous with §24) |
 
+## Distribution & release
+
+From `docs/ADDON-MODPACK-DISTRIBUTION-AND-UPDATES.md`. This vocabulary is about shipping the pack,
+and it is the only part of the design set that constrains this repository's own process.
+
+| Term | Definition | Aliases to avoid |
+|------|-----------|-----------------|
+| **Source of truth** | Git + packwiz. The pack is the *manifest plus the custom layer*, never a folder of jars. | "the mods folder", "the instance" |
+| **Pack-owned files** | `config/`, `defaultconfigs/`, `kubejs/`, `resourcepacks/`, `datapacks/`, `ftbquests/`, plus `pack.toml` / `index.toml`. These carry the gameplay. Shipping mods without them gives a friend the right jars and the wrong game (Distribution Spec §5). | "the pack files" (ambiguous with a built artifact) |
+| **Config ownership** | Every config file is either **PACK CONTROLLED** (spawn balance, Horde settings, recipes, Carry On blacklist, weapon durability — the pack decides) or **USER PREFERENCE** (HUD position, volume, keybinds — the player decides). An update overwrites the first kind and must not touch the second. | "default config" |
+| **Side classification** | Each mod is **COMMON**, **SERVER**, or **CLIENT**, recorded in packwiz side metadata. Must be read off the mod's actual requirement, never guessed (Distribution Spec §11). | "client mod" as a loose adjective |
+| **Server pack** | A separate distribution excluding client-only mods, whose version must equal the client pack's. A mismatch is either rejected or made loudly obvious. | "the server files" |
+| **Release gate** | The 12 in-game tests that must pass before publishing (Distribution Spec §16). *"Game launches once"* is explicitly not a release gate. None of it can be automated — it is the human protocol, the sibling of §26–27. | "smoke test", "QA" |
+| **Config drift** | A local edit to a PACK CONTROLLED file, diverging one install from the pack. The named symptom is "friend A works, friend B behaves differently" (Distribution Spec §38). | "local config" |
+| **Dev build** | An unreleased build from `develop` or a feature branch. Never handed to a friend as if it were a release; releases carry a tag. | "latest", "the current version" |
+
 ## Process
 
 | Term | Definition | Aliases to avoid |
@@ -159,6 +175,22 @@ PR description, comment ใน config, identifier ของ KubeJS และใ�
 | **Wildlife Roster** | `docs/wildlife-roster.md` คอลัมน์: Species/Role · Source Mod · Biome · Spawn Weight · Gameplay Role · Overlap · Decision เหมือน compatibility matrix มันบันทึกสิ่งที่**สังเกตได้จาก registry dump** ไม่ใช่สิ่งที่หน้าเว็บของ mod อ้าง | "ลิสต์สัตว์" |
 | **Survival tax** | เป็น anti-pattern ไม่เคยเป็น feature ความกระหายน้ำ โรค ปรสิต การรื้อระบบความหิว และมินิเกมชำแหละ อยู่นอกขอบเขต — สัตว์ป่าเพิ่มความสมจริง ไม่ใช่เพิ่มงานจุกจิก (§53) | "ความสมจริง", "hardcore survival" |
 | **W-phase** | phase list ของ addon สัตว์ป่าเอง คือ W0–W9 แยกจาก phase §24 ของ pack หลักและถูก gate ไว้ข้างหลัง อ้างอิงเป็น *Wildlife Spec W3* ห้ามอ้างเป็นตัวเลขเปล่า | "phase 3" (กำกวมกับ §24) |
+
+## การแจกจ่ายและการปล่อยเวอร์ชัน
+
+มาจาก `docs/ADDON-MODPACK-DISTRIBUTION-AND-UPDATES.md` คำศัพท์ชุดนี้ว่าด้วยการส่ง pack ออกไป และ
+เป็นส่วนเดียวในชุดเอกสารออกแบบที่บังคับกระบวนการของ repository นี้เอง
+
+| คำ | ความหมาย | ห้ามใช้ |
+|------|-----------|-----------------|
+| **Source of truth** | Git + packwiz ตัว pack คือ *manifest บวกชั้น custom* ไม่ใช่โฟลเดอร์ที่มี jar | "โฟลเดอร์ mods", "instance" |
+| **Pack-owned files** | `config/`, `defaultconfigs/`, `kubejs/`, `resourcepacks/`, `datapacks/`, `ftbquests/` บวก `pack.toml` / `index.toml` ไฟล์เหล่านี้คือตัว gameplay การส่ง mod ไปโดยไม่มีมันคือการให้เพื่อนได้ jar ที่ถูกแต่ได้เกมที่ผิด (Distribution Spec §5) | "ไฟล์ของ pack" (กำกวมกับ artifact ที่ build แล้ว) |
+| **Config ownership** | ไฟล์ config ทุกไฟล์เป็นอย่างใดอย่างหนึ่ง: **PACK CONTROLLED** (spawn balance, ค่า Horde, recipe, blacklist ของ Carry On, ความทนของอาวุธ — pack เป็นคนตัดสิน) หรือ **USER PREFERENCE** (ตำแหน่ง HUD, ระดับเสียง, ปุ่ม — ผู้เล่นเป็นคนตัดสิน) การอัปเดตทับแบบแรกได้ และห้ามแตะแบบหลัง | "config เริ่มต้น" |
+| **Side classification** | mod แต่ละตัวเป็น **COMMON**, **SERVER** หรือ **CLIENT** บันทึกไว้ใน side metadata ของ packwiz ต้องอ่านจากความต้องการจริงของ mod ห้ามเดา (Distribution Spec §11) | "client mod" แบบใช้เป็นคำขยายลอย ๆ |
+| **Server pack** | distribution แยกที่ตัด mod ฝั่ง client ออก และเวอร์ชันต้องเท่ากับ client pack ถ้าไม่ตรงต้องถูกปฏิเสธหรือทำให้เห็นชัดเจน | "ไฟล์เซิร์ฟเวอร์" |
+| **Release gate** | เทสต์ในเกม 12 ข้อที่ต้องผ่านก่อน publish (Distribution Spec §16) *"เกมเปิดได้ครั้งหนึ่ง"* ไม่ถือเป็น release gate โดยระบุชัด ไม่มีข้อไหนอัตโนมัติได้ — มันคือโปรโตคอลของคน พี่น้องกับ §26–27 | "smoke test", "QA" |
+| **Config drift** | การแก้ไฟล์ PACK CONTROLLED เฉพาะเครื่อง ทำให้ install หนึ่งเบี่ยงจาก pack อาการที่ระบุไว้คือ "เพื่อน A เล่นได้ เพื่อน B พฤติกรรมไม่เหมือนกัน" (Distribution Spec §38) | "config ในเครื่อง" |
+| **Dev build** | build ที่ยังไม่ปล่อย จาก `develop` หรือ feature branch ห้ามส่งให้เพื่อนราวกับว่าเป็น release ตัว release มี tag กำกับ | "ตัวล่าสุด", "เวอร์ชันปัจจุบัน" |
 
 ## กระบวนการ
 

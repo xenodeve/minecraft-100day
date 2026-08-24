@@ -19,14 +19,17 @@ The design document is the source of truth for intent:
 **`docs/Industrial Civilization Survival — Claude Code Handoff & Implementation Plan.md`**
 (read it before any pack work; unqualified `§N` references throughout this repo are to it).
 
-Two standalone addon specs layer on top of it. Both share the same platform constraints and the
-same design rules, and both have their own section numbering — **cite them by name, never as a
-bare `§N`**:
+Three further specs layer on top of it. All share the same platform constraints and the same
+design rules, and each numbers its own sections — **cite them by name, never as a bare `§N`**:
 
-| Document | Adds | Cite as |
+| Document | What it governs | Cite as |
 |---|---|---|
 | `docs/Addon Spec — Crafting Assistance + Tactical Tracker.md` | JEI, Jade, Jade Addons, Crafting Tweaks, Mouse Tweaks, Polymorph, and a re-themed Player Microchip tracker | *Crafting Spec §N* |
 | `docs/Addon Spec — Natural Wildlife & Ecology.md` | Naturalist, Critters and Companions, Ecologics — the ordinary-animal layer that makes monsters read as abnormal. Carries its own phase list, W0–W9 | *Wildlife Spec §N* / *Wildlife Spec W3* |
+| `docs/ADDON-MODPACK-DISTRIBUTION-AND-UPDATES.md` | **Release engineering, not content.** Source of truth, what counts as the pack, versioning, the release gate, branching, changelog, friend installation and updates | *Distribution Spec §N* |
+
+The Distribution Spec is the one that constrains **this repository's own process**, not the game.
+Its §22 branching model and §16 release gate govern how work ships; see `docs/agents/workflow.md`.
 
 Untamed Wilds and Alex's Mobs are **rejected** by the Wildlife Spec (§2, §54) — high overlap,
 unnecessary entity diversity, and Alex's Mobs carries fantasy creatures that collide with the
@@ -151,6 +154,7 @@ ledger.
 
 ```
 CLAUDE.md                     this file
+CHANGELOG.md                  one entry per released version — a version without one is not a release
 DONE.md                       ship log — newest on top
 .gitignore                    mod jars are NEVER committed (see the file for why)
 
@@ -158,16 +162,18 @@ docs/
   Industrial Civilization Survival — ….md    the design document (source of truth for intent)
   Addon Spec — Crafting Assistance ….md      JEI / Jade / tactical tracker
   Addon Spec — Natural Wildlife ….md         Naturalist / Critters / Ecologics, phases W0–W9
+  ADDON-MODPACK-DISTRIBUTION-AND-UPDATES.md  release engineering — governs THIS repo's process
   OPEN-WORK-LEDGER.md         open work, tracked and untracked — read at session start
   agents/
     domain.md                 domain glossary — WHAT THE WORDS MEAN here
     reading-domain-docs.md    WHICH FILES to read before exploring, and when
-    workflow.md               how to plan and implement here
+    workflow.md               how to plan and implement here, branching, release tags
     issue-tracker.md          GitHub conventions, gh path, bilingual body rule
     triage-labels.md          the 25 labels that exist and what each one means
   adr/
     README.md                 ADR index + conventions
     0001-…                    CI gate scoped to what a modpack repo can check
+    0002-…                    operate without a server-side CI tier
 
 Obsidian-minecraft-100day/    team memory vault; Home.md is the index
 
