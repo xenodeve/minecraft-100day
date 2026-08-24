@@ -32,12 +32,12 @@ them**, never all at once.
 | **Attract to Sound** | `HEAVY CUSTOM` | The noise ladder: `suppressed pistol < pistol < rifle < shotgun < HMG < cannon`. Gunfire attracts **existing** mobs — it must not spawn them. Watch MSPT under automatic fire; coalesce events if profiling demands it | Main §3.3, §11 |
 | **IceAndFire CE** | `HEAVY WORLDGEN CUSTOMIZATION` | Spawn-safe radius **~2000–2500 blocks**; roost and den separation far above default. Tune IceAndFire's own worldgen — **not** In Control | Main §3.4, §10 |
 | **The Hordes** | `HEAVY CUSTOM WAVES` | Tier I–IV composition, and the shape `Calm → Tension → Crisis → Recovery`. Dragons are never Horde mobs. Build Tier I and II first | Main §3.4, §12, §24 Phase 6 |
-| **Enhanced AI** | `HEAVY CONFIG` | Which materials breach easily (wood, dirt, cobble) and which must actually hold (fortified stone, industrial defences) | Main §3.4 |
-| **Improved Mobs** | `HEAVY NERF FROM DEFAULT` | HP curve: **Day 1 ~20 → Day 100 ~28–32 → Day 200 ~35–40 → cap ~40–50**. Scaling must have a ceiling | Main §3.4 |
+| **Enhanced AI** | `HEAVY CONFIG` | ✅ **DONE (#21)** — it is a **tag**, not a config: `kubejs/data/enhancedai/tags/blocks/miner_blacklist.json`. Wood/dirt/cobble deliberately absent so they stay breachable | Main §3.4 |
+| **Improved Mobs** | `HEAVY NERF FROM DEFAULT` | ✅ **DONE (#21)** — `Health Increase Multiplier = 2.75`, `Max Health Increase = 2.5` in `config/improvedmobs/common.toml`, derivation recorded in the file | Main §3.4 |
 | **In Control!** | `HEAVY CUSTOM` | Spawn density, day-based threat tier, biome rules, distance rules, enemy restrictions | Main §3.4 |
 | **SecurityCraft** | `HEAVY CUSTOM` | Disable or limit anything that makes a base unbreachable — reinforced blocks, sentries, mines | Main §3.10, §14 |
 | **Immersive Engineering** | `HEAVY CUSTOM SCOPE` | It owns **electrical infrastructure**, not manufacturing. Disable or gate IE machinery that bypasses Create | Main §3.11 |
-| **Carry On** | `HEAVY BLACKLIST` | Blacklist Create machinery, MineColonies blocks, large storage, industrial machines — anything that bypasses logistics | Main §3.9 |
+| **Carry On** | `HEAVY BLACKLIST` | ✅ **DONE (#21)** — most of it ships by default; appended `railways:*`, the three Create addons, `structurize:*`, `domum_ornamentum:*`, `sophisticatedbackpacks:*`, `sophisticatedcore:*` | Main §3.9 |
 
 ## Custom — scoped, smaller
 
