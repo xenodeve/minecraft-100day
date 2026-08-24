@@ -10,6 +10,7 @@
 ## project — ongoing goals / constraints not derivable from the code
 - [[create-version-is-the-pin]] — the Create major version decides the whole mod stack; nothing is pinnable before it
 - [[rejected-mods-are-a-boundary-not-a-backlog]] — §6 of the handoff doc is a design boundary; re-adding needs an ADR
+- [[ci-tier-is-absent-by-decision]] — the disabled workflow is deliberate; the three obvious "fixes" all make it worse
 
 ## reference — pointers to external resources (URLs, dashboards, tickets)
 - [[dev-machine-tooling]] — what is and is not installed on this machine, and the exact `gh` path
