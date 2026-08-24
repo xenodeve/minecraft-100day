@@ -38,15 +38,27 @@ new reason recorded as an ADR — every addon above would have to be downgraded 
 
 ## Undocumented required dependencies
 
-Found in the jars, absent from the design documents. All are `mandatory=true`; the pack does not
-load without them. All four are **CurseForge-only**.
+Found in the jars, absent from the design documents. All are `mandatory=true`.
 
-| Dependency | Required by | Range | Note |
+> **Corrected 2026-08-25, same day as written.** The first version of this section said all four
+> were CurseForge-only and had to be sourced by hand. Two of them **must not be added at all**,
+> and a third is on Modrinth. The correction is load-bearing: acting on the original would have
+> installed Flywheel and Ponder twice — once standalone, once from inside Create — which produces
+> no warning, only a broken pack.
+
+| Dependency | Required by | Range | How it is actually satisfied |
 |---|---|---|---|
-| `flywheel` | Create | `[1.0.0,2.0)` | The Modrinth project `flywheel` is *Flywheel (Legacy)* with no 1.20.1 Forge build — not this |
-| `ponder` | Create | `[0.8,)` | The Modrinth project `ponder` is *Ponder for KubeJS* — a different mod, do not substitute |
-| `ritchiesprojectilelib` | Create Big Cannons | `[2.1.1,)` | |
-| `esl` | Create: New Age | `[1.1.3]` | An exact pin, not a range — Season 2 only |
+| `flywheel` | Create | `[1.0.0,2.0)` | **Bundled inside Create via Forge JarJar** — `META-INF/jarjar/flywheel-forge-1.20.1-1.0.5.jar`. **Do not add separately.** |
+| `ponder` | Create | `[0.8,)` | **Bundled inside Create via Forge JarJar** — `META-INF/jarjar/Ponder-Forge-1.20.1-1.0.91.jar`. **Do not add separately.** The projects named `ponder` on *both* Modrinth and CurseForge are *Ponder for KubeJS*, a different mod — adding either is the exact trap this row exists to prevent, and it was walked into once already. |
+| `ritchiesprojectilelib` | Create Big Cannons | `[2.1.1,)` | On Modrinth as `rpl`; packwiz resolved it automatically when CBC was added |
+| `esl` | Create: New Age | `[1.1.3]` | Unverified — Season 2 only, not in the alpha pack |
+
+Create `6.0.8` bundles `Registrate MC1.20-1.3.3` and `mixinextras-forge 0.4.1` the same way. The
+authoritative list is `META-INF/jarjar/metadata.json` inside the Create jar.
+
+**The general rule this establishes:** before hunting for a missing Forge dependency, look in
+`META-INF/jarjar/` of the mod that declares it. JarJar satisfies a declared dependency from inside
+the jar, and a `mods.toml` entry looks identical whether the dependency is bundled or external.
 
 ---
 
