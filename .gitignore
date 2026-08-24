@@ -7,19 +7,19 @@
 *.mrpack
 
 # A local test instance (world saves, logs, crash reports, the resolved mods dir)
-run/
-instance/
+/run/
+/instance/
 .minecraft/
-saves/
-logs/
-crash-reports/
+/saves/
+/logs/
+/crash-reports/
 world/
 world_nether/
 world_the_end/
 
 # packwiz export output
-build/
-dist/
+/build/
+/dist/
 *.packwiz.zip
 
 # --- Profiling ---------------------------------------------------------------
@@ -35,5 +35,5 @@ Thumbs.db
 *.log
 
 # Build cache for the self-contained instance artifact (ADR 0003)
-build/.jar-cache/
-build/.instance/
+/build/.jar-cache/
+/build/.instance/
