@@ -94,7 +94,8 @@ Folded into the operating layer under **#7**.
 | Item | Status | Gate | Next action |
 |---|---|---|---|
 | Create `develop`, with its own ruleset | 🟡 | deliberately deferred — nothing to integrate and nobody running `main` | Create it in the same change that cuts the first `v0.x.0-alpha` tag. Distribution Spec §22; reasoning in `docs/agents/workflow.md` |
-| `scripts/build/` — `build-client`, `build-server`, `validate-pack`, `generate-checksums` | 🔴 | needs `pack.toml` | Distribution Spec §14. One deterministic release command, not four remembered ones |
+| `scripts/build/build-instance.mjs` — the self-contained client artifact | ✅ | — | 93 jars, each hash-verified; Prism instance zip, one-step offline import (**#16**, ADR 0003) |
+| `scripts/build/` — `build-server`, `generate-checksums` | 🔴 | server pack needs side classification first | Distribution Spec §14. `build-instance` is the first of the set |
 | Grow `verify.mjs` into `validate-pack` | 🔴 | each check is gated on its own prerequisite | Distribution Spec §15 — the seven-item checklist is mapped against what exists in the script's own header |
 | COMMON / SERVER / CLIENT side classification | 🔴 | needs the mod list | Distribution Spec §11 — **read each mod's actual requirement, never guess** |
 | Server pack, version-locked to the client pack | 🔴 | needs a built client pack | Distribution Spec §12 |
