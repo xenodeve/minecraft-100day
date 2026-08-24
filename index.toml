@@ -1,6 +1,18 @@
 hash-format = "sha256"
 
 [[files]]
+file = "config/carryon-common.toml"
+hash = "9549d1d5bbf54277b92b4f8e68e61f8736b327bb0cb15d0a68c51615a98f79fc"
+
+[[files]]
+file = "config/improvedmobs/common.toml"
+hash = "a8364ac6a95a957c0a83fa0b7a4f1782cff594969e1e709339f6c55478ff6fb6"
+
+[[files]]
+file = "kubejs/data/enhancedai/tags/blocks/miner_blacklist.json"
+hash = "6993c08462884c38a5c8ff7a39b2b287f0e2e1fa521239b479ac4badb031b7cf"
+
+[[files]]
 file = "mods/ambientsounds.pw.toml"
 hash = "fa96526cc55c9fbac742aea245930f1a2db2e68b50765f1bdbaf85477e1631bf"
 metafile = true

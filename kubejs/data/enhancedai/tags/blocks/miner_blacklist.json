@@ -1,0 +1,26 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:obsidian",
+    "minecraft:crying_obsidian",
+    "minecraft:reinforced_deepslate",
+    "minecraft:ancient_debris",
+    "minecraft:netherite_block",
+    "minecraft:bedrock",
+
+    { "id": "#forge:storage_blocks/steel", "required": false },
+    { "id": "#forge:storage_blocks/netherite", "required": false },
+
+    { "id": "immersiveengineering:concrete", "required": false },
+    { "id": "immersiveengineering:concrete_tile", "required": false },
+    { "id": "immersiveengineering:concrete_leaded", "required": false },
+    { "id": "immersiveengineering:concrete_sheet", "required": false },
+    { "id": "immersiveengineering:concrete_quarter", "required": false },
+    { "id": "immersiveengineering:concrete_three_quarter", "required": false },
+    { "id": "immersiveengineering:steel_scaffolding_standard", "required": false },
+    { "id": "immersiveengineering:steel_scaffolding_grate_top", "required": false },
+    { "id": "immersiveengineering:steel_scaffolding_wooden_top", "required": false },
+    { "id": "immersiveengineering:sheetmetal_steel", "required": false },
+    { "id": "immersiveengineering:sheetmetal_iron", "required": false }
+  ]
+}
