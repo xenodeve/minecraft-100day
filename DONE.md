@@ -6,6 +6,38 @@
 
 ---
 
+## Distribution & Updates spec folded in (2026-08-25, branch `chore/7-fold-distribution-spec`)
+
+**Goal:** a fourth design document arrived, and unlike the first three it constrains **this
+repository's process** rather than the game. Reconcile it against infrastructure that already
+exists in a different shape.
+
+**Shipped (#7):**
+- `docs/agents/domain.md` — eight distribution terms in both language halves: Source of truth,
+  Pack-owned files, Config ownership (PACK CONTROLLED / USER PREFERENCE), Side classification,
+  Server pack, Release gate, Config drift, Dev build.
+- `docs/agents/workflow.md` — the §22 branching model, the branch-naming rule the issue-ref guard
+  actually enforces, the Season 2 quarantine branch, release tags, and the §16 release gate.
+- `CHANGELOG.md` — created, with the section shape and the rule that a version without an entry
+  is not a release.
+- `scripts/validate/verify.mjs` — header now maps the §15 validation checklist against what is
+  implemented and what each missing check is blocked on. Three of ten done; the rest need a
+  resolved pack, not effort.
+- `CLAUDE.md`, `docs/agents/reading-domain-docs.md`, `docs/OPEN-WORK-LEDGER.md` (Track 5).
+
+**Judgement call, flagged rather than buried:** the spec's `develop` branch was **not** created.
+Its purpose is to keep unfinished integration away from a `main` people are running, and nobody is
+running anything. It is deferred to the change that cuts the first `v0.x.0-alpha` tag, with the
+reasoning written into `docs/agents/workflow.md` and a 🟡 row in Track 5. Stated on #7 so it can be
+overruled in one comment.
+
+**Validation:** `node scripts/validate/verify.mjs` → passed. Nothing here is verifiable in game;
+no mod exists.
+
+**Next:** unchanged — install `packwiz` and Java 17, then the Create version sweep.
+
+---
+
 ## Switched to the two-tier enforcement mode (2026-08-25, `/t4-project-bootstrap` follow-up, branch `chore/1-operate-without-ci`)
 
 **Goal:** the billing lock on GitHub Actions cannot be resolved, so stop treating the missing CI

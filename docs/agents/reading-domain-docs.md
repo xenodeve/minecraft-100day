@@ -25,6 +25,7 @@ How the engineering skills should consume this repo's domain documentation when 
   - `docs/Industrial Civilization Survival — Claude Code Handoff & Implementation Plan.md`
   - `docs/Addon Spec — Crafting Assistance + Tactical Tracker.md`
   - `docs/Addon Spec — Natural Wildlife & Ecology.md`
+  - `docs/ADDON-MODPACK-DISTRIBUTION-AND-UPDATES.md` — governs this repo's own release process
 
 If any of these do not exist, **proceed silently**. Do not flag their absence; do not suggest
 creating them upfront. They are created lazily, when a term or a decision actually resolves.
@@ -103,6 +104,7 @@ skill ด้านวิศวกรรมควรอ่านเอกสา�
   - `docs/Industrial Civilization Survival — Claude Code Handoff & Implementation Plan.md`
   - `docs/Addon Spec — Crafting Assistance + Tactical Tracker.md`
   - `docs/Addon Spec — Natural Wildlife & Ecology.md`
+  - `docs/ADDON-MODPACK-DISTRIBUTION-AND-UPDATES.md` — governs this repo's own release process
 
 ถ้าไฟล์ใดไม่มี ให้ **ทำต่อไปเงียบ ๆ** อย่าไปทักว่ามันหายไป อย่าเสนอให้สร้างล่วงหน้า มันถูกสร้าง
 แบบ lazy เมื่อคำศัพท์หรือการตัดสินใจได้ข้อสรุปจริง ๆ

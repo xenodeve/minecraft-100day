@@ -16,6 +16,41 @@ When planning or implementing a change, follow this order:
 
 Hard ordering: **PRD → issues → PR**. Never open a PR without a referenced issue.
 
+## Branching and releases
+
+The target model is Distribution Spec §22:
+
+```
+main       stable / playable — what a friend has installed
+develop    integration
+feature/*  experimental changes
+```
+
+**`develop` does not exist yet, deliberately.** Its purpose is to keep unfinished integration away
+from a `main` that people are running, and nobody is running anything: there is no pack, no
+release, and one person on the repo. It is created — with its own ruleset — in the same change
+that cuts the first `v0.x.0-alpha` tag, which is the moment `main` starts meaning something to
+someone else. Tracked in the ledger.
+
+**Until then**, work branches off `main` and returns by PR. Name the branch so
+`.githooks/check-issue-ref` can see the issue number in the slug position:
+
+```
+chore/7-fold-distribution-spec        ✓  number right after the type prefix
+chore/fold-spec-7                     ✗  not in the slug position
+```
+
+**The Season 2 high-risk stack** — Valkyrien Skies, Clockwork, Warium, advanced TFMG integration —
+stays on its own branch (`feature/season2-aviation`) until it boots clean. It is never merged to
+`main` on the strength of "it worked once".
+
+**Release tags** are `v0.1.0-alpha`, `v0.4.0-beta`, `v1.0.0`. A tag must match the distributed
+artifact exactly, and every version gets a `CHANGELOG.md` entry. A build from `develop` or a
+feature branch is a **dev build** and is never handed to a friend as if it were a release.
+
+**Before publishing anything**, the release gate is Distribution Spec §16 — twelve in-game tests.
+*"The game launches once"* is explicitly not a release gate. None of it can be automated.
+
 ## What "test-first" means in a modpack repo
 
 This repo has no unit-test runner, so `/tdd` maps onto the pack's own evidence loop — the
@@ -88,6 +123,40 @@ Agent วางแผนและลงมือทำงานใน repo น�
 6. **`/tdd`** — เขียน test ก่อน แล้วค่อยทำให้ test ผ่าน
 
 ลำดับที่ห้ามสลับ: **PRD → issues → PR** ห้ามเปิด PR โดยไม่มี issue อ้างอิงเด็ดขาด
+
+## Branch และการปล่อยเวอร์ชัน
+
+โมเดลเป้าหมายคือ Distribution Spec §22:
+
+```
+main       stable / playable — สิ่งที่เพื่อนติดตั้งไว้
+develop    integration
+feature/*  การเปลี่ยนแปลงเชิงทดลอง
+```
+
+**`develop` ยังไม่มี โดยตั้งใจ** วัตถุประสงค์ของมันคือกันงาน integration ที่ยังไม่เสร็จออกจาก `main`
+ที่คนกำลังเล่นอยู่ และตอนนี้ไม่มีใครเล่นอะไรเลย: ไม่มี pack ไม่มี release และมีคนเดียวใน repo
+มันจะถูกสร้าง — พร้อม ruleset ของตัวเอง — ใน change เดียวกับที่ตัด tag `v0.x.0-alpha` แรก ซึ่งเป็น
+จังหวะที่ `main` เริ่มมีความหมายกับคนอื่น บันทึกไว้ใน ledger
+
+**จนกว่าจะถึงตอนนั้น** งานแตก branch จาก `main` แล้วกลับมาด้วย PR ตั้งชื่อ branch ให้
+`.githooks/check-issue-ref` เห็นเลข issue ในตำแหน่ง slug:
+
+```
+chore/7-fold-distribution-spec        ✓  เลขอยู่ถัดจาก type prefix ทันที
+chore/fold-spec-7                     ✗  ไม่ได้อยู่ในตำแหน่ง slug
+```
+
+**stack ความเสี่ยงสูงของ Season 2** — Valkyrien Skies, Clockwork, Warium, การ integrate TFMG
+ขั้นสูง — อยู่บน branch ของตัวเอง (`feature/season2-aviation`) จนกว่าจะ boot ผ่านสะอาด ห้าม merge
+เข้า `main` ด้วยเหตุผลว่า "มันเคยทำงานได้ครั้งหนึ่ง"
+
+**Release tag** ใช้รูป `v0.1.0-alpha`, `v0.4.0-beta`, `v1.0.0` tag ต้องตรงกับ artifact ที่แจกจ่าย
+เป๊ะ ๆ และทุกเวอร์ชันต้องมีรายการใน `CHANGELOG.md` ส่วน build จาก `develop` หรือ feature branch
+คือ **dev build** ห้ามส่งให้เพื่อนราวกับว่าเป็น release
+
+**ก่อน publish อะไรก็ตาม** release gate คือ Distribution Spec §16 — เทสต์ในเกม 12 ข้อ
+*"เกมเปิดได้ครั้งหนึ่ง"* ไม่ถือเป็น release gate โดยระบุชัด และไม่มีข้อไหนอัตโนมัติได้
 
 ## "test-first" ใน repo แบบ modpack แปลว่าอะไร
 

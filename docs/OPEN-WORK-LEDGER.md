@@ -11,10 +11,11 @@
 🔴 **UNTRACKED** (MD-only, no GitHub issue — highest miss-risk) · ⛔ decided won't-do (kept
 visible so it is not re-proposed as if it were open)
 
-**Current state, stated plainly:** the repo has its operating layer and its three design
-documents. It has **no pack** — no `pack.toml`, no mods, no config, no KubeJS. The mod list now
-stands at the main pack plus 7 QoL mods (Track 3) plus 3 wildlife mods (Track 4), and none of
-them has been version-checked against a Create major yet.
+**Current state, stated plainly:** the repo has its operating layer and its four design documents.
+It has **no pack** — no `pack.toml`, no mods, no config, no KubeJS. The mod list now stands at the
+main pack plus 7 QoL mods (Track 3) plus 3 wildlife mods (Track 4), and none of them has been
+version-checked against a Create major yet. Track 5 is the release machinery, which has nothing to
+release.
 
 ---
 
@@ -80,6 +81,29 @@ implementation work below is not started.
 **Standing constraint from this spec, applies outside Track 4:** under performance pressure the
 reduction order is ambient → small critters → duplicate species → common passives, and Create /
 MineColonies / hostile encounter design are cut **last**. Any future tuning session inherits this.
+
+## Track 5 — Distribution & release engineering
+
+Source: `docs/ADDON-MODPACK-DISTRIBUTION-AND-UPDATES.md`. Unlike Tracks 3 and 4 this one adds no
+mods — it governs how the pack ships, and parts of it constrain this repository's own process.
+Folded into the operating layer under **#7**.
+
+| Item | Status | Gate | Next action |
+|---|---|---|---|
+| Create `develop`, with its own ruleset | 🟡 | deliberately deferred — nothing to integrate and nobody running `main` | Create it in the same change that cuts the first `v0.x.0-alpha` tag. Distribution Spec §22; reasoning in `docs/agents/workflow.md` |
+| `scripts/build/` — `build-client`, `build-server`, `validate-pack`, `generate-checksums` | 🔴 | needs `pack.toml` | Distribution Spec §14. One deterministic release command, not four remembered ones |
+| Grow `verify.mjs` into `validate-pack` | 🔴 | each check is gated on its own prerequisite | Distribution Spec §15 — the seven-item checklist is mapped against what exists in the script's own header |
+| COMMON / SERVER / CLIENT side classification | 🔴 | needs the mod list | Distribution Spec §11 — **read each mod's actual requirement, never guess** |
+| Server pack, version-locked to the client pack | 🔴 | needs a built client pack | Distribution Spec §12 |
+| Config ownership map — PACK CONTROLLED vs USER PREFERENCE | 🔴 | needs `config/` to exist | Distribution Spec §30. Decides what an update may overwrite; getting it wrong destroys a player's keybinds |
+| `scripts/validate/config-drift` | 🔴 | needs the ownership map above | Distribution Spec §38 — the tool for "friend A works, friend B doesn't" |
+| Release gate — the 12 in-game tests | 🔴 | needs a launchable pack | Distribution Spec §16. **Not automatable.** Human protocol, sibling of §26–27 |
+| Checksums (`SHA256SUMS.txt`) + release tags + CurseForge / Modrinth publishing | 🔴 | needs a release | Distribution Spec §23, §33, §34, §39 |
+
+**Standing constraint from this spec, applies outside Track 5:** the pack is Git + packwiz — the
+manifest **plus** `config/`, `kubejs/`, `datapacks/`, `resourcepacks/`, `ftbquests/`. Zipping
+`mods/` and sending it gives someone the right jars and the wrong game (§5). `CHANGELOG.md` exists
+and every released version gets an entry.
 
 ---
 

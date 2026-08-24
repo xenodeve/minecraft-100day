@@ -16,6 +16,28 @@
 //   node scripts/validate/verify.mjs            # both
 //   node scripts/validate/verify.mjs lint
 //   node scripts/validate/verify.mjs test
+//
+// ---------------------------------------------------------------------------
+// This is the seed of `validate-pack` (Distribution Spec §14). Its §15 lists the
+// minimum a build must validate; three of those are implemented here and the
+// rest are blocked on a resolved pack, not on effort:
+//
+//   pack metadata valid          — needs pack.toml
+//   missing mods = 0             — needs packwiz index
+//   duplicate mods = 0           — needs packwiz index
+//   missing dependencies = 0     — needs packwiz index
+//   unexpected client/server     — needs packwiz side metadata
+//   KubeJS startup errors = 0    — needs a launched instance; not automatable here
+//   broken config references = 0 — needs the mod set to exist
+//   JSON / TOML syntax           — DONE (lint)
+//   unfilled placeholders        — DONE (lint), local addition
+//   KubeJS parses                — DONE (test)
+//
+// Add each check in the change that makes it possible, not before: a check that
+// cannot fail is a check nobody trusts. What this script does NOT and cannot do
+// is tell you the pack runs — that is the release gate (Distribution Spec §16),
+// twelve in-game tests, none of them automatable.
+// ---------------------------------------------------------------------------
 
 import { readFileSync, readdirSync, statSync, existsSync } from 'node:fs'
 import { execFileSync } from 'node:child_process'
