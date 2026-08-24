@@ -50,7 +50,8 @@ tier — is now a decided operating mode rather than a pending task, which is wh
 | Phase 0 — packwiz init, `pack.toml`, `index.toml`, `.packwizignore` | ✅ | — | MC 1.20.1 / Forge 47.4.23. **#11** |
 | Phase 1 — the Create stack | ✅ | — | Create pinned `6.0.8`; `cbc_firepower_components` removed — it cannot load with CBC 5.11 (**#11**) |
 | Mod set resolved and pinned | ✅ | — | 93 metafiles incl. the §2 performance stack (**#13**). Server boot green |
-| **Phase 2 — combat baseline, `docs/combat-baseline.md` TTK matrix** | 🟢 | **buildable now** | §24 Phase 2. Needs a launched *client* — the developer's account. This is where balance work actually starts |
+| **Phase 2 — combat baseline, `docs/combat-baseline.md` TTK matrix** | 🟡 | needs a launched *client* — the developer's account | §24 Phase 2. This is where balance work actually starts |
+| **All 22 mods tagged for custom work** | 🟡 | **every one is gated on the same thing** — §31 rule 11 forbids assuming config keys, and a mod's config does not exist until the game has run once | `docs/customization-map.md` (**#19**) — the consolidated list, its concrete targets, and the §24 order to do them in |
 | Phases 3–13 | 🔴 | strictly sequential, after Phase 2 | see §24 |
 | Client boot test (§26 full protocol) | 🟡 | needs the developer's Microsoft account | Import per `INSTALL.md`, launch, create a world, reload, read `latest.log` |
 | Re-add `cbc_firepower_components` | 🟡 | needs an upstream release supporting CBC ≥ 5.9 | Watch the project; one `packwiz mr add` when it exists |
