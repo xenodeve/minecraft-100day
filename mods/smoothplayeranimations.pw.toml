@@ -1,0 +1,13 @@
+name = "SmoothPlayerAnimations"
+filename = "SmoothPlayerAnimations_Forge_1.20.1_1.0.3.jar"
+side = "client"
+
+[download]
+url = "https://cdn.modrinth.com/data/ZdlGpqTS/versions/e82AQF18/SmoothPlayerAnimations_Forge_1.20.1_1.0.3.jar"
+hash-format = "sha512"
+hash = "99faa7e7bd1447098b60776f1aa287d39c9507b7822eefc050363636c10efe9ee8c8b71798f71f528415a9cb5e9d534268f818f978e6eb92f83f658b8d8ef8b9"
+
+[update]
+[update.modrinth]
+mod-id = "ZdlGpqTS"
+version = "e82AQF18"

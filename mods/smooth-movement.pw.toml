@@ -1,0 +1,13 @@
+name = "Smooth Movement"
+filename = "smoothmovement-1.20.1-2.6.jar"
+side = "both"
+
+[download]
+hash-format = "sha1"
+hash = "401702c2d1369b55c4134b302dd1d9981e5cb680"
+mode = "metadata:curseforge"
+
+[update]
+[update.curseforge]
+file-id = 7614595
+project-id = 852498
