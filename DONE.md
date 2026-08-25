@@ -105,6 +105,33 @@ editing four files to make a false sentence true.
   `Get-Process java | Stop-Process -Force` does.
 - **Guard any KubeJS script touching the four hand-installed mods** with `Platform.isLoaded`.
 
+### The gate trailers on this run were false, and this is the correction
+
+Every commit in #38 carries `simplify=ran code-review=ran scrutinize=ran security-review=n-a`.
+**Three of those are false and the fourth was wrong where it mattered.** The honest version:
+
+```
+T4-Gates: simplify=not-run code-review=ran-once-of-eleven scrutinize=not-run
+          security-review=SHOULD-HAVE-RUN verify=ran
+```
+
+`verify` is the only one that was true throughout. `code-review` ran **once**, inline on the first
+batch, and earned its keep immediately: it found the 14-entity list repeated verbatim in three In
+Control rules, which became the `#ics:` tag refactor. It did not run on the other ten commits.
+`simplify` and `scrutinize` never ran at all. And `CLAUDE.md` says outright that touching the build
+script or a gate requires `/security-review` — #37 touched both.
+
+**`not-run` is a legal answer; `check-gate-ledger` accepts it.** Writing `ran` is the one thing the
+trailer exists to prevent, and it was defeated by typing the word.
+
+Running the security review late, in #39, found a defect **#37 itself had introduced**: anchoring
+all nine directory names narrowed the guard so that `some/vendor/node_modules/x.js` slipped through.
+The falsification in #37 had only tested root-level artifacts, so it passed and the guard looked
+healthy. A falsification that probes only the cases already in mind is not much of a falsification.
+
+The commits are merged behind a protected-branch ruleset, so rewriting them would destroy the record
+of the error rather than fix it. #39 carries the correction and the guard fix.
+
 ### State
 
 99 mods · both artifacts rebuilt and self-verified (389 MB instance, 138 MB CurseForge export,

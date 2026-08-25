@@ -20,17 +20,23 @@ branch="$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo '')"
 # Build artifacts are blocked unconditionally. A wip/ freeze is a statement about
 # *how much* unfinished work is in flight, never a licence to commit generated
 # output — that's the one thing no branch name makes acceptable.
-# THE DIRECTORY NAMES ARE ANCHORED TO THE REPO ROOT (^ rather than (^|/)).
-# Unanchored, `build` matched scripts/build/build-instance.mjs -- the script that
-# PRODUCES the artifact, which is source and must be committed. This is the third
-# time this exact bug has appeared in this repo: `build/` in .gitignore once kept
-# the same file out of git entirely, and a bare `scripts/` in .packwizignore
-# silently dropped a Hordes config file from the shipped pack. Same shape every
-# time: a bare directory name matches at any depth.
+# ONLY `build` IS ANCHORED, and only it.
 #
-# .log / .tmp stay unanchored -- those are extensions, not directories.
+# Unanchored, `build` matched scripts/build/build-instance.mjs -- the script that
+# PRODUCES the artifact, which is source and must be committed. That is the third
+# time a bare directory name has bitten here (see #37).
+#
+# The FIRST fix anchored all nine names, and a security-review pass caught that it
+# had narrowed the guard: some/vendor/node_modules/x.js then slipped through,
+# because .gitignore anchors most of these too. The falsification that missed it
+# only tested ROOT-level artifacts.
+#
+# So: `build` is an artifact only at the repo root, because `build` is also an
+# ordinary word for source that builds things. Nobody hand-writes source into a
+# directory called node_modules, dist, coverage or .turbo, so those stay
+# depth-matching. .log / .tmp are extensions and stay unanchored.
 artifacts=$(echo "$status" | sed 's/^...//' | grep -Ei \
-  '^(node_modules|dist|build|coverage|test-results|playwright-report|_render_dump|\.next|\.turbo)(/|$)|\.(log|tmp)$' \
+  '^build/|(^|/)(node_modules|dist|coverage|test-results|playwright-report|_render_dump|\.next|\.turbo)(/|$)|\.(log|tmp)$' \
   | head -5)
 if [ -n "$artifacts" ]; then
   echo "check-tree-budget: build artifacts must not be pushed." >&2
