@@ -6,6 +6,51 @@
 
 ---
 
+## Customization begins + the animation layer (2026-08-25, branches `feat/21-*`, `feat/23-*`)
+
+**Goal:** stop describing the customization and start doing it.
+
+**The unblock, and a correction to my own claim.** I had recorded that every customization row was
+blocked on a client launch generating configs. That was wrong: the **Forge dedicated server boot
+already generated 88 config files**, which is exactly what §31 rule 11 asks for. The developer
+pushed back — *"ทำสิ ยังไม่เสร็จ"* — and the pushback was correct.
+
+**Shipped (#21) — first customization batch:**
+- **Improved Mobs HP curve.** `Health Increase Multiplier 1.0 → 2.75`, `Max Health Increase
+  5.0 → 2.5`. Derived from the real formula in the file, against the §3.4 targets: day 100 → 28.8,
+  day 200 → 37.6, ceiling 50. The default ceiling allowed **100 HP** — twice the documented cap.
+- **Enhanced AI breach materials.** Filed as `HEAVY CONFIG`; it is a **block tag**, so it is a
+  datapack. Lives in `kubejs/data/` because Minecraft does not load a root `datapacks/` folder —
+  vanilla reads `<world>/datapacks/`, which is per-world, so a new world would never get the rule.
+- **Carry On blacklist.** Most of it ships by default; appended this pack's own bypass surface with
+  mod ids read from `META-INF/mods.toml` — Steam 'n' Rails is `railways`, unguessable from a filename.
+
+**Shipped (#23) — the sixth design document.** It had **zero references anywhere in the operating
+layer**. Added its §2 Core stack: Better Animations Collection, SmoothPlayerAnimations, Smooth
+Movement (Not Enough Animations was already present). **99 metafiles.**
+
+**Two findings worth more than the mods:**
+1. **A slug miss is indistinguishable from an absent mod.** `smooth-player-animations` reported
+   CurseForge-only; the real slug is `smoothplayeranimations`. Every earlier `CURSEFORGE-ONLY`
+   verdict from a slug guess is now suspect.
+2. **Fresh Animations is a resource pack, not a mod** — which is why no Forge build exists for it.
+
+**A hash bug caught:** Forge writes configs CRLF, `.gitattributes` stores LF, so packwiz hashed
+bytes that differ from the committed blob. Invisible until someone clones and packwiz calls a
+correct config corrupt.
+
+**Validation:** server boots green at each step — `Done (14.012s)` after batch 1, `Done (25.183s)`
+after the animation stack. Both artifacts rebuilt at 99 mods and the self-contained one **verified
+to carry the customised configs** (`Health Increase Multiplier = 2.75` read back out of the zip).
+
+**Process slip, recorded:** #23's branch was cut and committed before the issue existed. The number
+happened to match; that was luck, not process.
+
+**Not verified:** no in-game behaviour. Boots prove files parse and load, not that a day-100 zombie
+has 28.8 HP or that a mob fails to mine obsidian.
+
+---
+
 ## One self-contained file — import and play (2026-08-25, branch `feat/16-single-file-artifact`)
 
 **Goal:** the pack exported as one file, but importing it was not one step — the manifest carried
