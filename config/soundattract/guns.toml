@@ -1,0 +1,109 @@
+
+#Sound Attract Mod - Guns Configuration
+[guns]
+
+	#Tacz Integration Configuration
+	[guns.tacz]
+		#[DEPRECATED as of 6.3.3] Moved to soundattract/server-rules.toml (SERVER config).
+		#The value here is no longer read at runtime; kept only so existing config files do not error.
+		enableTaczIntegration = true
+		#Range: 1.0 ~ 128.0
+		taczReloadRange = 9.0
+		#Range: 0.0 ~ 10.0
+		taczReloadWeight = 1.0
+		# PACK CONTROLLED — fallback for a gun that is not in the table below.
+		# Rifle-equivalent, so an unlisted gun is loud but not artillery.
+		#Range: 1.0 ~ 256.0
+		taczShootRange = 88.0
+		#Range: 0.0 ~ 10.0
+		taczShootWeight = 8.8
+		# PACK CONTROLLED — Industrial Civilization Survival, Main §3.3 and §11.
+		#
+		# THE UNIT IS BLOCKS, NOT DECIBELS. TaczIntegration.calculateShootRangeWeight compiles to
+		#   range  = Math.max(0.0, thisValue - muzzleReduction)
+		#   weight = range / 10.0
+		# and [safety] maxClientSoundRange in server-rules.toml describes the same quantity as
+		# "the final resolved range (blocks)". The stock values (155-180) are therefore 155-180
+		# BLOCK attraction radii, which is past the server's simulation distance and leaves every
+		# gun in the game sounding identical.
+		#
+		# The ladder Main §3.3 asks for is
+		#     suppressed pistol < pistol < rifle < shotgun < HMG < cannon
+		# and it is built here on CALIBRE, read from each gun's own *_data.json "ammo" field —
+		# not on taste. Two guns firing the same cartridge get the same number; a belt-fed
+		# machine gun gets +16 over its cartridge for sustained fire.
+		#
+		#   .22 WMR            28      5.56x45 / 5.8x42     80      12 gauge          112
+		#   9mm pistol         40      7.62x39              88      .338 Lapua        120
+		#   .45 ACP pistol     44      .45-70              100      .308 belt-fed     120
+		#   9mm / 5.7 SMG      52      .308 / .30-06        104     .50 BMG           144
+		#   .45 ACP SMG        56      7.92x57 Mauser       104     minigun           160
+		#   .357 Magnum        60      5.56 belt-fed         96     40mm / RPG        176
+		#   .50 AE             68      7.62x39 belt-fed     104
+		#   .500 Magnum        76
+		#
+		# THESE ARE PROVISIONAL. §11 says "อย่า hardcode radius ก่อน benchmark gameplay" — the
+		# ORDERING is a design requirement and is settled; the absolute values are anchored to
+		# Minecraft's 128-block simulation baseline and stay provisional until the §24 Phase 4
+		# benchmark measures them in a real firefight.
+		#Tacz gun shoot decibels. Format: 'modid:item;decibels'
+		taczGunShootDecibels = ["tacz:taurus943;28.0", "tacz:glock_17;40.0", "tacz:m9a4;40.0", "tacz:cz75;40.0", "tacz:b93r;40.0", "tacz:m1911;44.0", "tacz:p320;44.0", "tacz:hk_mk23;44.0", "tacz:uzi;52.0", "tacz:hk_mp5a5;52.0", "tacz:p90;52.0", "tacz:ump45;56.0", "tacz:vector45;56.0", "tacz:rhino357;60.0", "tacz:deagle_golden;60.0", "tacz:deagle;68.0", "tacz:timeless50;68.0", "tacz:taurus500;76.0", "tacz:m16a1;80.0", "tacz:m16a4;80.0", "tacz:m4a1;80.0", "tacz:hk416d;80.0", "tacz:aug;80.0", "tacz:g36k;80.0", "tacz:scar_l;80.0", "tacz:spr15hb;80.0", "tacz:qbz_95;80.0", "tacz:qbz_191;80.0", "tacz:ak47;88.0", "tacz:type_81;88.0", "tacz:sks_tactical;88.0", "tacz:m249;96.0", "tacz:springfield1873;100.0", "tacz:hk_g3;104.0", "tacz:fn_fal;104.0", "tacz:scar_h;104.0", "tacz:mk14;104.0", "tacz:m700;104.0", "tacz:lonetrail;104.0", "tacz:kar98;104.0", "tacz:rpk;104.0", "tacz:db_short;112.0", "tacz:db_long;112.0", "tacz:m870;112.0", "tacz:m1014;112.0", "tacz:spas_12;112.0", "tacz:aa12;112.0", "tacz:ai_awp;120.0", "tacz:fn_evolys;120.0", "tacz:m95;144.0", "tacz:m107;144.0", "tacz:minigun;160.0", "tacz:m320;176.0", "tacz:rpg7;176.0"]
+		# PACK CONTROLLED — subtracted from the range above, in blocks.
+		#
+		# Every silencer is 32, which is what makes the first rung of the §3.3 ladder real:
+		# a suppressed 9mm pistol drops to 8 blocks — quieter than a sprinting player, who is 16 —
+		# while a suppressed .308 is still 72 and will not save you.
+		#
+		# The stock list MISSED FIVE ATTACHMENTS the default gun pack actually ships:
+		# muzzle_silencer_sg, muzzle_silencer_wraith, muzzle_brake_mastiff_sg,
+		# muzzle_brake_timeless50 and muzzle_choke_sg. They fell through to
+		# taczAttachmentReductionDefault = 20.0, so a shotgun CHOKE was quieting the gun by 20
+		# blocks and two real silencers were getting less suppression than the ones in the list.
+		# All five are named here.
+		#
+		# Brakes and compensators are negative on purpose: they redirect gas sideways, which is
+		# louder to everyone who is not holding the gun.
+		#Tacz attachment sound reduction. Positive values decrease range (silence), negative values increase range. Format: 'modid:item;reduction'
+		taczAttachmentReductions = ["tacz:muzzle_silencer_mirage;32.0", "tacz:muzzle_silencer_vulture;32.0", "tacz:muzzle_silencer_knight_qd;32.0", "tacz:muzzle_silencer_ursus;32.0", "tacz:muzzle_silencer_ptilopsis;32.0", "tacz:muzzle_silencer_phantom_s1;32.0", "tacz:muzzle_silencer_sg;32.0", "tacz:muzzle_silencer_wraith;32.0", "tacz:deagle_golden_long_barrel;12.0", "tacz:muzzle_choke_sg;0.0", "tacz:muzzle_compensator_trident;-4.0", "tacz:muzzle_brake_cthulhu;-8.0", "tacz:muzzle_brake_pioneer;-8.0", "tacz:muzzle_brake_cyclone_d2;-8.0", "tacz:muzzle_brake_mastiff_sg;-8.0", "tacz:muzzle_brake_timeless50;-8.0", "tacz:muzzle_brake_trex;-8.0"]
+		# PACK CONTROLLED — 0.0, not the stock 20.0. An attachment nobody has classified should be
+		# NEUTRAL. At 20.0 a future TaCZ gun pack silently makes every gun it ships 20 blocks
+		# quieter, which is a balance change arriving through a mod update.
+		#Range: -300.0 ~ 300.0
+		taczAttachmentReductionDefault = 0.0
+		#Base visual detection range when gunshot occurs.
+		#Range: 16.0 ~ 512.0
+		gunshotBaseDetectionRange = 128.0
+		#Duration of increased detection from gunshot (ticks).
+		#Range: 1 ~ 200
+		gunshotDetectionDurationTicks = 60
+		# PACK CONTROLLED — muzzle flash is a SEPARATE channel from sound and is what makes a
+		# suppressor worth carrying at night (§3.8 lighting / night operations). Same five
+		# attachments added as above.
+		#Tacz attachment VISUAL FLASH reduction. Positive values decrease detection distance, negative values increase it. Format: 'modid:item;reduction'
+		taczMuzzleFlashReductions = ["tacz:muzzle_silencer_mirage;100.0", "tacz:muzzle_silencer_vulture;100.0", "tacz:muzzle_silencer_knight_qd;100.0", "tacz:muzzle_silencer_ursus;100.0", "tacz:muzzle_silencer_ptilopsis;100.0", "tacz:muzzle_silencer_phantom_s1;100.0", "tacz:muzzle_silencer_sg;100.0", "tacz:muzzle_silencer_wraith;100.0", "tacz:muzzle_choke_sg;0.0", "tacz:deagle_golden_long_barrel;0.0", "tacz:muzzle_compensator_trident;-5.0", "tacz:muzzle_brake_cthulhu;-10.0", "tacz:muzzle_brake_pioneer;-10.0", "tacz:muzzle_brake_cyclone_d2;-10.0", "tacz:muzzle_brake_mastiff_sg;-10.0", "tacz:muzzle_brake_timeless50;-10.0", "tacz:muzzle_brake_trex;-15.0"]
+		#Range: -300.0 ~ 300.0
+		taczAttachmentFlashReductionDefault = 0.0
+
+	#Point Blank Integration Configuration
+	[guns.pointblank]
+		# NOT PACK CONTROLLED — Point Blank is not in this pack. This whole block is inert and is
+		# left exactly as the mod generated it, so that a future update can rewrite it freely.
+		#[DEPRECATED as of 6.3.3] Moved to soundattract/server-rules.toml (SERVER config).
+		#The value here is no longer read at runtime; kept only so existing config files do not error.
+		enablePointBlankIntegration = true
+		#Range: 1.0 ~ 128.0
+		pointBlankReloadRange = 9.0
+		#Range: 0.0 ~ 10.0
+		pointBlankReloadWeight = 1.0
+		#Range: 1.0 ~ 256.0
+		pointBlankShootRange = 140.0
+		#Range: 0.0 ~ 10.0
+		pointBlankShootWeight = 10.0
+		#Point Blank gun shoot ranges. Format: 'modid:item;range'
+		pointBlankGunShootRanges = []
+		#Point Blank attachment sound reduction. Positive values decrease range (silence), negative values increase range. Format: 'modid:item;reduction'
+		pointBlankAttachmentSoundReductions = []
+		#Range: -300.0 ~ 300.0
+		pointBlankAttachmentReductionDefault = 20.0
+		#Point Blank attachment VISUAL FLASH reduction. Positive values decrease detection distance, negative values increase it. Format: 'modid:item;reduction'
+		pointBlankMuzzleFlashReductions = []
