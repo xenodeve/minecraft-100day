@@ -1,0 +1,7 @@
+{
+  "item.player_tracking_chip.tracking_chip": "Tactical Position Beacon",
+  "item.player_tracking_chip.player_tracker": "Personnel Tracking Device",
+  "item.player_tracking_chip.scalpel": "Beacon Programmer",
+  "gui.player_tracking_chip.tracker_gui.trackerFrequency": "Frequency",
+  "gui.player_tracking_chip.tracker_gui.button_set_frequency": "Set Frequency"
+}
