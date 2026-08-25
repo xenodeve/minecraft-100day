@@ -156,3 +156,167 @@ Rows are reference weapons with their burst damage in brackets; columns are targ
 
 Generated from the installed `tacz_default_gun` pack. Regenerate after any TaCZ update — these
 are the mod's numbers, and they move when it does.
+
+---
+
+# The mob side
+
+Born in Chaos registers its attributes **in code**, not in a config or a datapack — so there is
+nothing to read and nothing to edit. The values below were disassembled out of the jar: each
+entity's `createAttributes()` compiles to a literal chain of
+`Builder.add(Attributes.f_22276_, 25.0d)`, so the attribute and its value sit adjacent in the
+bytecode and can be paired unambiguously. **84 entities carry attributes; 44 of them spawn
+naturally.**
+
+`Rounds` is AK-47 rounds at 9 damage, point-blank, ignoring armour.
+
+**Elite tier** — as gated in `config/incontrol/spawn.json`
+
+| Entity | HP | Damage | Armour | Rounds |
+|---|---|---|---|---|
+| `Krampus` | 250.0 | 14.0 | 10.0 | 28 |
+| `SirPumpkinhead` | 160.0 | 6.0 | 9.0 | 18 |
+| `Missioner` | 150.0 | 9.0 | 10.0 | 17 |
+| `Lifestealer` | 100.0 | 7.0 | 16.0 | 12 |
+| `DireHoundLeader` | 100.0 | 10.0 | 0.5 | 12 |
+| `GluttonFish` | 90.0 | 12.0 | 3.0 | 10 |
+| `NightmareStalker` | 70.0 | 7.0 | 4.0 | 8 |
+| `SupremeBonescaller` | 65.0 | 5.0 | 5.0 | 8 |
+| `SearedSpirit` | 50.0 | 10.0 | 3.0 | 6 |
+| `SkeletonThrasher` | 50.0 | 8.0 | 10.0 | 6 |
+| `FallenChaosKnight` | 40.0 | 5.0 | 20.0 | 5 |
+| `KrampusHenchman` | 30.0 | 4.0 | 5.0 | 4 |
+| `PhantomCreeper` | 20.0 | 3.0 | — | 3 |
+| `SpiritofChaos` | 15.0 | 3.0 | — | 2 |
+
+**Mid tier** — as gated in `config/incontrol/spawn.json`
+
+| Entity | HP | Damage | Armour | Rounds |
+|---|---|---|---|---|
+| `MotherSpider` | 90.0 | 6.0 | — | 10 |
+| `PumpkinBruiser` | 90.0 | 9.0 | 6.0 | 10 |
+| `ZombieBruiser` | 60.0 | 6.0 | 2.0 | 7 |
+| `Swarmer` | 40.0 | 4.0 | 4.0 | 5 |
+| `SenorPumpkin` | 35.0 | 5.0 | 2.0 | 4 |
+| `DarkVortex` | 35.0 | 4.0 | — | 4 |
+| `ZombieClown` | 35.0 | 3.0 | 4.0 | 4 |
+| `DoorKnight` | 30.0 | 6.0 | 7.0 | 4 |
+| `MrsPumpkin` | 30.0 | 3.0 | — | 4 |
+| `Bonescaller` | 25.0 | 3.0 | — | 3 |
+| `SkeletonDemoman` | 25.0 | 3.0 | 2.0 | 3 |
+| `ThornshellCrab` | 25.0 | 4.0 | 14.0 | 3 |
+| `SiameseSkeletons` | 20.0 | 3.0 | 2.0 | 3 |
+
+**Common tier** — as gated in `config/incontrol/spawn.json`
+
+| Entity | HP | Damage | Armour | Rounds |
+|---|---|---|---|---|
+| `BarrelZombie` | 30.0 | 3.0 | 6.0 | 4 |
+| `DecayingZombie` | 25.0 | 4.0 | 0.5 | 3 |
+| `ZombieFisherman` | 25.0 | 4.0 | 4.0 | 3 |
+| `ZombieLumberjack` | 25.0 | 9.0 | 4.0 | 3 |
+| `RestlessSpirit` | 24.0 | 2.0 | — | 3 |
+| `BoneImp` | 20.0 | 3.0 | 3.5 | 3 |
+| `DecrepitSkeleton` | 15.0 | 3.0 | — | 2 |
+| `BabySkeleton` | 10.0 | 2.0 | — | 2 |
+
+**Swarm tier** — as gated in `config/incontrol/spawn.json`
+
+| Entity | HP | Damage | Armour | Rounds |
+|---|---|---|---|---|
+| `BloodyGadfly` | 20.0 | 3.0 | 0.5 | 3 |
+| `DreadHound` | 17.0 | 5.0 | 0.5 | 2 |
+| `Firelight` | 15.0 | 2.0 | — | 2 |
+| `SpiritGuideAssistant` | 15.0 | 2.0 | 3.0 | 2 |
+| `CorpseFish` | 12.0 | 2.0 | — | 2 |
+| `MrPumpkin` | 12.0 | 3.0 | — | 2 |
+| `BabySpider` | 10.0 | 2.0 | — | 2 |
+| `CorpseFly` | 10.0 | 2.0 | — | 2 |
+
+## The finding, and why it is NOT fixed by raising HP
+
+Set against Rule 3's bands, Born in Chaos sits roughly **one band low**:
+
+| Rule 3 band | Implied HP | Where Born in Chaos actually is |
+|---|---|---|
+| Vanilla, 2–4 rounds | 18–36 | its **common** tier (15–30 HP) |
+| Common modded, 8–20 | 72–180 | its **mid** tier reaches only 20–90 |
+| Elite, 20–50 | 180–450 | its **elite** tier is 20–250, mostly under 100 |
+
+The obvious correction is a global health multiplier. **Rule 3 forbids exactly that**, in the
+paragraph immediately after the bands:
+
+> Difficulty ต้องมาจาก: Armor · AI · Abilities · Mobility · Numbers · Noise consequence ·
+> Territory · Logistics cost
+> ไม่ใช่แค่ HP × 20
+
+And the levers it names are already loaded:
+
+- **Armour** is doing real work that the HP column hides. `FallenChaosKnight` has **20 armour**
+  at 40 HP; `ThornshellCrab` has 14 at 25 HP; `LordPumpkinhead` has 20. Against a TaCZ round
+  with `armor_ignore: 0.25` those are far tougher than their health suggests.
+- **Numbers** — 44 species spawn naturally, capped at 16 per player only because
+  `config/incontrol/spawn.json` caps them.
+- **Day scaling** — Improved Mobs multiplies health by `1 + difficulty × 0.016 × 2.75`, ceiling
+  2.5× (#21). A 25 HP `decaying_zombie` is 36 by day 100 and 47 by day 200.
+- **Noise consequence** — #28's ladder decides how many of them arrive.
+
+So the tiers stay as the mod shipped them, and the ladder is enforced by **when** each tier
+appears (#27) rather than by inflating what it has. That decision is the reason this table
+exists: without it, the next session looks at the same numbers and reaches for a multiplier.
+
+## Ice & Fire — a hierarchy inversion, and this one IS fixed
+
+§9 states the threat hierarchy outright:
+
+```text
+Vanilla Hostiles -> Common Born in Chaos -> Elite Born in Chaos
+                 -> Large Monsters -> Ice & Fire Creatures -> Dragon
+```
+
+As shipped, it did not hold. `iceandfire:troll` had **50 HP** and `iceandfire:amphithere` 50,
+while `born_in_chaos_v1:krampus` — two rungs below them — had **250**. A troll was a fifth of an
+elite it is supposed to outrank.
+
+Unlike Born in Chaos, Ice & Fire exposes these in `config/iceandfire/iaf-common.json`, so the
+ordering is restored where the mod intends it to be edited:
+
+| Entity | Was | Now | Rounds | Reads as |
+|---|---|---|---|---|
+| `cockatrice` | 40 | **200** | 23 | Elite |
+| `troll` | 50 | **260** | 29 | Elite |
+| `amphithere` | 50 | **260** | 29 | Elite |
+| `gorgon` | 100 | **300** | 34 | Elite |
+| `cyclops` | 150 | **400** | 45 | Elite |
+| `hydra` | 250 | **700** | 78 | Large |
+| `dragon` | 500 | **1600** | 178 | Dragon |
+
+The dragon is the one that matters. At 500 HP it died to **56** AK rounds — squarely in Rule 3's
+*Large monster* band, one rung below where §9 puts it. At 1600 it takes **178**, which is what
+*"hundreds of rifle rounds, or heavy weapons preferred"* asks for and what makes Create Big
+Cannons the sane answer rather than a novelty.
+
+**`seaSerpent` and `deathworm` are deliberately untouched.** Their config keys are `baseHealth`
+and a low `maxHealth` that the mod multiplies by a size roll at spawn. Editing a number whose
+multiplier is unknown is how a 20 HP worm becomes a 2000 HP one, so those wait for a client.
+
+## §10's spawn-safe radius, which was off by more than half
+
+§10 sets a target and says the real value has to be measured:
+
+> Spawn-safe region: ~2000–2500 blocks · Dragon territories: rare · Roost separation: large
+
+`worldgen.dangerousDistanceLimit` shipped at **1000.0** — under half the floor. It is now
+**2250.0**, the midpoint of the stated range, and the six dragon cave/roost generation chances
+drop from `0.5` to `0.2`, with cyclops and hydra lairs to `0.3`.
+
+§10 also says *"ค่าจริงต้อง generate worlds หลาย seed แล้ววัด"* — the real value needs several
+seeds and a tape measure. 2250 is the document's own midpoint, not a measurement.
+
+## What the mob side still does not establish
+
+- **Vanilla and modded mobs outside these two mods.** The Hordes, Naturalist, Critters and
+  Ecologics all add entities that are not in this table.
+- **Effective HP.** Armour, `armor_ignore`, distance falloff and Improved Mobs' day multiplier
+  all sit between the HP column and the rounds column.
+- **Whether any of it is fun.** Still §24 Phase 2, still needs a client.

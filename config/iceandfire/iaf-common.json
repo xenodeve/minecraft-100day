@@ -1,0 +1,160 @@
+{
+  "dragon": {
+    "maxHealth": 1600.0,
+    "eggBornTime": 7200,
+    "villagersFear": true,
+    "animalsFear": true,
+    "generate.skeletons": true,
+    "generate.skeletonChance": 0.0033333333333333335,
+    "generate.denGoldAmount": 0.25,
+    "generate.oreRatio": 0.022222222222222223,
+    "griefing": true,
+    "tamedGriefing": true,
+    "flapNoiseDistance": 4,
+    "fluteDistance": 8,
+    "attackDamage": 17,
+    "attackDamageFire": 2.0,
+    "attackDamageIce": 2.5,
+    "attackDamageLightning": 3.5,
+    "maxFlight": 256,
+    "goldSearchLength": 30,
+    "canHealFromBiting": false,
+    "canDespawn": true,
+    "sleep": true,
+    "digWhenStuck": true,
+    "breakBlockCooldown": 5,
+    "targetSearchLength": 128,
+    "wanderFromHomeDistance": 40,
+    "hungerTickRate": 3000,
+    "blockBreakingDropChance": 0.1,
+    "explosiveBreath": false,
+    "chunkLoadSummonCrystal": true,
+    "dragonFlightSpeedMod": 1.0,
+    "maxTamedDragonAge": 128,
+    "maxBreathTimeMul": 2.0,
+    "loot.skull": true,
+    "loot.heart": true,
+    "loot.blood": true
+  },
+  "hippogryphs": {
+    "spawn": true,
+    "spawnWeight": 2,
+    "fightSpeedMod": 1.0
+  },
+  "pixie": {
+    "size": 5,
+    "stealItems": false
+  },
+  "cyclops": {
+    "spawnWanderingChance": 0.0011111111111111111,
+    "sheepSearchLength": 17,
+    "maxHealth": 400.0,
+    "attackDamage": 15.0,
+    "biteDamage": 40.0,
+    "griefing": true
+  },
+  "siren": {
+    "maxHealth": 50.0,
+    "maxSingTime": 12000,
+    "timeBetweenSongs": 2000
+  },
+  "gorgon": {
+    "maxHealth": 300.0
+  },
+  "deathworm": {
+    "spawnChance": 0.03333333333333333,
+    "targetSearchLength": 48,
+    "maxHealth": 10.0,
+    "attackDamage": 3.0,
+    "attackMonsters": true
+  },
+  "cockatrice": {
+    "spawn": true,
+    "spawnWeight": 4,
+    "chickenSearchLength": 32,
+    "eggChance": 0.03333333333333333,
+    "maxHealth": 200.0,
+    "chickensLayRottenEggs": true
+  },
+  "bird": {
+    "spawnChance": 0.0125,
+    "targetSearchLength": 48,
+    "featherDropChance": 0.04,
+    "featherAttackDamage": 1.0,
+    "flockLength": 40,
+    "flightHeight": 80,
+    "attackAnimals": false
+  },
+  "troll": {
+    "spawn": true,
+    "spawnWeight": 60,
+    "dropWeapon": true,
+    "maxHealth": 260.0,
+    "attackDamage": 10.0
+  },
+  "amphithere": {
+    "spawn": true,
+    "spawnWeight": 50,
+    "villagerSearchLength": 48.0,
+    "tameTime": 400,
+    "flightSpeed": 1.75,
+    "maxHealth": 260.0,
+    "attackDamage": 7.0
+  },
+  "seaSerpent": {
+    "spawnChance": 0.004,
+    "griefing": true,
+    "baseHealth": 20.0,
+    "attackDamage": 4.0
+  },
+  "lich": {
+    "spawn": true,
+    "spawnWeight": 4,
+    "spawnChance": 0.03333333333333333
+  },
+  "hydra": {
+    "maxHealth": 700.0
+  },
+  "hippocampus": {
+    "spawnChance": 0.025,
+    "swimSpeedMod": 1.0
+  },
+  "ghost": {
+    "maxHealth": 30.0,
+    "attackDamage": 3.0,
+    "fromPlayerDeaths": true
+  },
+  "armors": {
+    "dragonFireAbility": true,
+    "dragonIceAbility": true,
+    "dragonLightningAbility": true,
+    "dragonSteelBaseDamage": 25.0,
+    "dragonSteelBaseArmor": 12,
+    "dragonSteelBaseArmorToughness": 6.0,
+    "dragonSteelBaseDurability": 8000,
+    "dragonSteelBaseDurabilityEquipment": 8000,
+    "dragonLightningSearchRange": 10.0,
+    "dragonLightningDamageReduction": 0.5,
+    "dragonLightningMaxSearchCount": 10
+  },
+  "worldgen": {
+    "dangerousDistanceLimit": 2250.0,
+    "generateFireDragonCaveChance": 0.2,
+    "generateFireDragonRoostChance": 0.2,
+    "generateIceDragonCaveChance": 0.2,
+    "generateIceDragonRoostChance": 0.2,
+    "generateLightningDragonCaveChance": 0.2,
+    "generateLightningDragonRoostChance": 0.2,
+    "generateCyclopsCaveChance": 0.3,
+    "generateGorgonTempleChance": 0.5,
+    "generateGraveYardChance": 0.5,
+    "generateHydraCaveChance": 0.3,
+    "generateMausoleumChance": 0.5,
+    "generatePixieVillageChance": 0.5,
+    "generateSirenIslandChance": 0.5
+  },
+  "misc": {
+    "enableDragonSeeker": true,
+    "dreadQueenMaxHealth": 750.0
+  }
+}
