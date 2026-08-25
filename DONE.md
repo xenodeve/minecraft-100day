@@ -6,6 +6,118 @@
 
 ---
 
+## The customization run — 20 of 22 rows, ten issues, thirteen boots (2026-08-25, `feat/27-incontrol-spawn-director`)
+
+**Goal:** finish the pack. Not "make progress on" — finish, or say precisely why a row cannot be
+finished.
+
+**Result: 20 rows implemented, 3 declined with reasons, 2 parked against named blockers.**
+`docs/customization-map.md` stopped being a plan and became a status report.
+
+### The three findings that changed what the work was
+
+**1. `taczGunShootDecibels` is not decibels — it is blocks (#28).**
+`TaczIntegration.calculateShootRangeWeight` is two lines: `range = max(0, value - reduction)` and
+`weight = range / 10`. So the stock table gave every gun a 155–180 **block** attraction radius —
+pistol 157, rifle 159, shotgun 165, HMG 165. A 5 % spread across the whole arsenal is not the
+§3.3 ladder, and most of it was wasted anyway: a server simulates 10 chunks, so 180 and 160 behave
+identically. **Read as decibels, the natural fix is to spread them 120–190 — which changes nothing
+and looks like a balance pass.**
+
+**2. §8's ammunition chain already existed (#31).**
+The obvious reading of §8 is "build a Create ammunition line in KubeJS". TaCZ: Creatified — already
+CORE in this pack — ships **96 recipes** that are §8's brass-sheet-to-cartridge chain almost line
+for line. Building it would have produced a second chain competing with a better one. §31 rule 11
+paid for itself in one afternoon.
+
+**3. 173 TaCZ gunsmith recipes are visible to the vanilla recipe manager (#30).**
+Found with a throwaway KubeJS probe. It meant the gun ladder did not need an 84 MB gun pack
+committed to git and a debug flag flipped — `ServerEvents.recipes` owns them outright.
+
+### What shipped
+
+| # | Batch | Core of it |
+|---|---|---|
+| **#27** | In Control spawn director | Density ceiling, three-tier ladder derived from Born in Chaos' *own* spawn weights, day windows that fade rather than switch (Rule 6) |
+| **#28** | Attract to Sound ladder | Built on **calibre**, read from each gun's `*_data.json`. Five muzzle attachments the stock config never classified |
+| **#29** | Hordes Tier I & II | Growth curve fitted to §23's own MSPT test ladder; 12-day interval ±3 so preparation cannot be a calendar entry |
+| **#30** | TaCZ + durability | 54 guns re-tiered onto the Create ladder; `JamThreshold` makes jamming a consequence of neglect rather than a tax |
+| **#31** | Ammunition economy | One transformation rule, not 24 tables: hand-loading yields a sixth for half again the materials |
+| **#32** | Base breachability | SecurityCraft scarcity, backpack stack cap, bleedout timings; **IE declined with reasons** |
+| **#33** | Threat hierarchy | §9's ordering restored — a troll had 50 HP against a krampus' 250. Dragon 500 → 1600 |
+| **#34** | JEI sync guard | The hide list is empty *because nothing was removed*, and a ship-gate check now enforces that |
+| **#35** | Wildlife + tracker | 55-entity roster, two duplicates resolved by §6's own role allocation, tracker re-themed |
+| **#36** | Quest campaign | Twelve chapters, 48 quests, objective-shaped |
+
+### Two decisions to decline, written down so they stay decided
+
+**Immersive Engineering (#32).** §3.11 says *"ปิด/เลื่อน IE machinery ที่ bypass Create หากจำเป็น"* — and the
+*หากจำเป็น* does not hold. No per-machine flag exists; a recipe gate hits the shared engineering
+components and takes §13's city grid with it; and the excavator is not Rule 5's "box that makes ore
+appear" — core-sample survey, 4096 FE/t, finite 38400 per chunk. Survey, power, deplete, relocate
+**is** a supply chain.
+
+**Born in Chaos stats (#33).** 84 entities read out of the bytecode showed the mod sitting a band
+low against Rule 3. The obvious correction is a health multiplier and **Rule 3 forbids exactly
+that**, one paragraph later: difficulty comes from armour, AI, numbers, noise — *"ไม่ใช่แค่ HP × 20"*.
+`FallenChaosKnight` has **20 armour at 40 HP**, which the HP column hides completely. The table went
+into `docs/combat-baseline.md` precisely so the next session does not reach for the multiplier.
+
+### The boot that was worth more than the twelve green ones
+
+Boot 11 produced three ERROR lines and `3 failed recipes` — the tracker script referenced Player
+Microchip, which is one of the four mods CurseForge blocks from its API and which the test pack
+therefore drops. **That is not a test artifact. It is what a friend who skips the manual install
+would see**, and it is the fail-open shape this repo keeps meeting: nothing breaks, the server boots
+green, the log looks broken, and the player cannot tell an optional mod from a corrupt pack. Fixed
+with `Platform.isLoaded`.
+
+The same discipline settled the quest campaign. A clean boot logging nothing is weak evidence, so
+one chapter was **deliberately broken** — and FTB Quests answered with both halves of what was
+needed: it reports a broken chapter (`Unexpected end of file!`) *and* it logs counts
+(`11 chapters, 44 quests` broken, `12 chapters, 48 quests` restored). The 12/48 is a measurement,
+not an inference.
+
+### Two silent-drop bugs caught in the artifacts, both the same shape
+
+**`.packwizignore`'s bare `scripts/` matched `config/hordes/.../horde_data/scripts/`** and was
+excluding The Hordes' only script — the one that swaps to the drowned spawn table in oceans.
+Combined with `data_version: -1` (which stops the mod regenerating), a player would have received a
+Hordes config with its script missing and nothing would have said so. **This is the second time this
+bug has happened here**: `build/` in `.gitignore` once matched `scripts/build/`. All thirteen
+directory patterns are now anchored with a leading `/`.
+
+**`build-instance.mjs` does not honour `.packwizignore`**, so four maintainer READMEs that each open
+with *"Not shipped to players"* were being shipped. The script now strips `.md`; the alternative was
+editing four files to make a false sentence true.
+
+### Traps recorded for the next session
+
+- **Forge deletes custom comments in TOML configs.** Values survive, reasoning does not — verified
+  by diffing `config/improvedmobs/common.toml` against the server's copy after a boot. Comments in a
+  `.toml` are repo-side annotation only, which is why `config/incontrol/`, `config/soundattract/`
+  and `config/hordes/` each have a README instead.
+- **Two paths in §7's repo layout are wrong**, and both fail silently: `datapacks/` at the pack root
+  is never read (vanilla reads `<world>/datapacks/`), and `ftbquests/` at the pack root is never read
+  (`ServerQuestFile.load()` resolves `config/ftbquests/quests/`).
+- **A stale server holds the world lock.** The boot fails with a `DirectoryLock` `IOException` that
+  points at world storage and reads exactly like a corrupt save. `pkill -f` does not match it;
+  `Get-Process java | Stop-Process -Force` does.
+- **Guard any KubeJS script touching the four hand-installed mods** with `Platform.isLoaded`.
+
+### State
+
+99 mods · both artifacts rebuilt and self-verified (389 MB instance, 138 MB CurseForge export,
+14 quest files in each, **0 markdown**) · `verify` green with a new fifth check · 13 boots, 12 green,
+the one failure fixed and re-proven.
+
+**Nothing is verified in game.** Everything above was proven on a dedicated server: configs parse,
+recipes register, quests load, tags resolve. A server cannot prove a number is *right*, and
+`docs/OPEN-WORK-LEDGER.md` now says so in one paragraph — everything left is downstream of one act,
+launching a client.
+
+---
+
 ## Customization begins + the animation layer (2026-08-25, branches `feat/21-*`, `feat/23-*`)
 
 **Goal:** stop describing the customization and start doing it.

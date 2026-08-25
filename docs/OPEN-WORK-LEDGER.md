@@ -11,11 +11,18 @@
 🔴 **UNTRACKED** (MD-only, no GitHub issue — highest miss-risk) · ⛔ decided won't-do (kept
 visible so it is not re-proposed as if it were open)
 
-**Current state, stated plainly:** the repo has its operating layer and its four design documents.
-It has **no pack** — no `pack.toml`, no mods, no config, no KubeJS. The mod list now stands at the
-main pack plus 7 QoL mods (Track 3) plus 3 wildlife mods (Track 4), and none of them has been
-version-checked against a Create major yet. Track 5 is the release machinery, which has nothing to
-release.
+**Current state, stated plainly:** the pack is **built and customized**. 99 mods pinned with
+exact versions and hashes, `config/` · `defaultconfigs/` · `kubejs/` · `config/ftbquests/` all
+written, and **20 of the 22 customization rows implemented** with 3 declined-with-reasons and 2
+parked against named blockers (`docs/customization-map.md`). Every change was proven on a
+dedicated-server boot.
+
+**What is left is one thing wearing several hats: nobody has launched a client.** The TTK matrix
+(§24 Phase 2), MSPT under automatic fire (Phase 4), horde MSPT at 50/100/150/200 (§23), wildlife
+population (W3/W6/W7), the Brimm-vs-TakKit comparison (§15), the JEI active-recipe check (Crafting
+Spec §5) and the twelve-test release gate (Distribution Spec §16) are all **measurements**, and a
+dedicated server cannot produce any of them. Everything in the pack is a design target derived from
+the documents until a client says otherwise.
 
 ---
 
@@ -50,9 +57,12 @@ tier — is now a decided operating mode rather than a pending task, which is wh
 | Phase 0 — packwiz init, `pack.toml`, `index.toml`, `.packwizignore` | ✅ | — | MC 1.20.1 / Forge 47.4.23. **#11** |
 | Phase 1 — the Create stack | ✅ | — | Create pinned `6.0.8`; `cbc_firepower_components` removed — it cannot load with CBC 5.11 (**#11**) |
 | Mod set resolved and pinned | ✅ | — | 93 metafiles incl. the §2 performance stack (**#13**). Server boot green |
-| **Phase 2 — combat baseline, `docs/combat-baseline.md` TTK matrix** | 🟡 | needs a launched *client* — the developer's account | §24 Phase 2. This is where balance work actually starts |
-| **All 22 mods tagged for custom work** | 🟡 | **every one is gated on the same thing** — §31 rule 11 forbids assuming config keys, and a mod's config does not exist until the game has run once | `docs/customization-map.md` (**#19**) — the consolidated list, its concrete targets, and the §24 order to do them in |
-| Phases 3–13 | 🔴 | strictly sequential, after Phase 2 | see §24 |
+| **Phase 2 — combat baseline, `docs/combat-baseline.md` TTK matrix** | 🟡 | the **gun side is done**; the mob side needs a client | `docs/combat-baseline.md` exists with all 54 guns and 84 Born in Chaos entities read from bytecode. What is missing is *measured* mob HP, and `DamageBaseMultiplier` stays 1.0 until it exists (**#30**, **#33**) |
+| **All 22 mods tagged for custom work** | ✅ | — | **20 implemented, 3 declined with reasons, 2 parked with named blockers.** `docs/customization-map.md` is now a status report rather than a plan (**#21**, **#27**–**#36**) |
+| Phases 3–12 | ✅ | — | Threat director **#27** · Sound **#28** · Consumption economy **#31** · Horde **#29** · Civilization **#33** · Dragon frontier **#33** · Tactical gear **#30** · City infrastructure **#32** · Quest campaign **#36** |
+| Phase 13 — Season 2 prototype | 🔴 | out of scope until Season 1 is played | §24 Phase 13. Create: New Age, VS2, Clockwork, TFMG, Warium |
+| **Brimm Armors balance** | 🟡 | **needs a client** — §15 wants a comparison against TakKit and Brimm registers its stats in code | Read both armour sets off JEI tooltips, then write `config/brimm/overrides/*.xml` (root tag `config`; keys `defense` · `durability` · `toughness` · `knockback-resistance` · `rarity`). The format ships no example and fails open (**#32**) |
+| **Player Microchip textures** | 🟡 | needs an artist | §20 wants the beacon to look like it clips to a plate carrier. Names and recipes are done (**#35**); the three 16×16 PNGs are not |
 | Client boot test (§26 full protocol) | 🟡 | needs the developer's Microsoft account | Import per `INSTALL.md`, launch, create a world, reload, read `latest.log` |
 | Re-add `cbc_firepower_components` | 🟡 | needs an upstream release supporting CBC ≥ 5.9 | Watch the project; one `packwiz mr add` when it exists |
 | Re-evaluate `TaCZ: Accelerated` | 🟡 | needs a benchmark baseline | Performance Spec §2 calls it Core, §19 calls it CORE CANDIDATE. Resolve the contradiction with a measurement, not a reading |
@@ -64,9 +74,10 @@ main pack. Not yet folded into the §24 phase list — where each lands is itsel
 
 | Item | Status | Gate | Next action |
 |---|---|---|---|
-| JEI + Jade + Jade Addons + Crafting Tweaks + Mouse Tweaks + Polymorph | 🔴 | main pack must boot first | Decide which §24 phase each belongs to; they are QoL, so they follow the systems they describe |
-| Player Microchip re-themed as the tactical tracker | 🔴 | needs the Curios + radio layers to exist | Addon Spec §17–29; the re-theme is a resource-pack + KubeJS job, not a fork |
-| Hide disabled content from JEI | 🔴 | needs KubeJS + a decided mod list | Crafting Spec §6 — must stay in sync with every mod removal |
+| JEI + Jade + Jade Addons + Crafting Tweaks + Mouse Tweaks + Polymorph | ✅ | — | All installed and booting. They are QoL and need no per-phase placement |
+| Player Microchip re-themed as the tactical tracker | ✅ names + recipes · 🟡 art | textures need an artist | **#35** — renamed via an always-on `kubejs/assets/` override, recipes on §25's Industrial Electronics chain |
+| Hide disabled content from JEI | ✅ | — | **#34** — the list is empty *because nothing was removed*, and `verify.mjs` now fails the ship gate if a recipe is removed without being re-added or hidden |
+| Crafting Spec §5 — confirm JEI shows the ACTIVE pack recipe | 🟡 | **needs a client** | Open JEI, look up `tacz:ak47`, confirm the cost is `create:precision_mechanism` and not the stale 38 iron |
 
 ## Track 4 — Addon Spec (Natural Wildlife & Ecology)
 
@@ -76,10 +87,10 @@ implementation work below is not started.
 
 | Item | Status | Gate | Next action |
 |---|---|---|---|
-| Naturalist + Critters and Companions + Ecologics | 🔴 | main pack must boot first | Wildlife Spec W0 — install, then dump the entity registry before touching a single spawn value |
-| `docs/wildlife-roster.md` + duplicate species audit | 🔴 | W0 registry dump | Wildlife Spec W2/W4 — compare **behaviour**, not names, before any KEEP / REDUCE call |
-| Spawn baseline + density tuning | 🔴 | must follow a profiling run, never precede it | Wildlife Spec W3/W6/W7 — *"Do not randomly reduce every value. Tune based on measured population."* |
-| Threat-layer coexistence (Born in Chaos, Ice & Fire, The Hordes) | 🔴 | needs the threat layer to exist | Wildlife Spec W5 — a Horde must not permanently wipe local ecology |
+| Naturalist + Critters and Companions + Ecologics | ✅ | — | Installed, booting, registry dumped (**#35**) |
+| `docs/wildlife-roster.md` + duplicate species audit | ✅ | — | **#35** — 55 entities, §21's five categories, two exact duplicates resolved at source by §6's own role allocation |
+| Spawn baseline + density tuning | 🟡 | **needs a profiling run** — W3 forbids reducing without one | The roster records every weight so the measurement has a sheet to fill in. `ladybug` 52 and `sea_bunny` 96 are the first candidates under §18's order |
+| Threat-layer coexistence (Born in Chaos, Ice & Fire, The Hordes) | 🟡 | needs a played world | Wildlife Spec W5 — a Horde must not permanently wipe local ecology. Nothing in config expresses this; it is an observation |
 | Serene Seasons interaction | 🔴 | out of scope for Alpha unless the mods already provide it | Wildlife Spec §52 — test, do not assume integration |
 
 **Standing constraint from this spec, applies outside Track 4:** under performance pressure the
@@ -112,27 +123,36 @@ and every released version gets an entry.
 
 ---
 
-## Management Plan — phased execution order
+## Management Plan — what is left
 
-**Phase 0 — Unblock the tooling.** Install `packwiz` and a Java 17 JDK. That is the whole of it
-now: `/setup-matt-pocock-skills` is done, the guards are enabled, and the CI tier is settled as a
-decision rather than a blocker (ADR 0002). Without `java` no boot test can run, and §26 makes the
-boot test the unit of progress — so these two installs gate all of Track 2.
+Phases 0–2 of the old plan are closed: the tooling is installed, every remaining item is tracked
+as a GitHub issue, and the Create version resolved to `6.0.8` (forced by addon ranges, not chosen).
+The §24 phase list ran to Phase 12.
 
-**Phase 1 — Tracking hygiene.** File a GitHub issue for every remaining 🔴 row above, so the
-ledger stops being the only record. The triage label vocabulary is already installed.
+**Everything that remains is downstream of one act: launching a client.** That is not a
+scheduling opinion, it is what the design documents say — §24 Phase 2's TTK matrix, §23's MSPT
+ladder, W3's *"tune based on measured population"*, §16's twelve in-game tests. A dedicated server
+proves a config parses; it cannot prove a number is right.
 
-**Phase 2 — Resolve the Create version.** This is the multiplier. Every mod pin, every KubeJS
-recipe, and the entire Season 2 branch are downstream of it, and it is answerable today with
-research alone — no game launch required. **Scope it to all three documents at once:** the
-Crafting and Wildlife specs add 10 more mods, and sweeping them separately means doing the same
-CurseForge / Modrinth pass three times and reconciling three partial answers.
+**The order to do it in, once a client exists:**
 
-**Phase 3 onward — the §24 phase list**, one phase per epic, one PRD per phase. The addon specs'
-own phases (Crafting Spec, and Wildlife Spec W0–W9) slot in behind the main-pack phase they
-depend on; deciding where each lands is itself open work in Tracks 3 and 4.
+1. **Boot protocol §26–27** — launch, create a world, reload, read `latest.log`. Everything else
+   assumes this passed.
+2. **Crafting Spec §5** — open JEI, look up `tacz:ak47`, confirm it shows `create:precision_mechanism`
+   and not the stale 38 iron. Two minutes, and it validates every recipe change in #30, #31 and #32
+   at once.
+3. **§24 Phase 2** — the TTK matrix. `docs/combat-baseline.md` already carries the gun side and the
+   HP each Rule 3 band implies; fill in the measured column. Where a mob falls outside its band the
+   fix is *that mob's* config, never `DamageBaseMultiplier`.
+4. **§24 Phase 4 + §23** — MSPT under automatic fire, then at 50 / 100 / 150 / 200 horde mobs.
+   These decide the noise radii (#28) and `hordeSpawnMax` (#29), both of which are currently
+   design targets anchored to Minecraft's simulation distance rather than to a measurement.
+5. **Wildlife W3/W6/W7** — count a population before touching a single spawn weight.
+   `docs/wildlife-roster.md` is the sheet; `ladybug` at 52 and `sea_bunny` at 96 are where §18's
+   reduction order starts.
+6. **§15 Brimm** — read both armour sets off JEI tooltips, then write the XML overrides.
+7. **Distribution Spec §16** — the twelve-test release gate, and then a `v0.x.0-alpha` tag, which
+   is also when `develop` gets created (§22, deferred deliberately in #7).
 
-**Gating summary:** Phase 2 is the multiplier and it is *not* blocked by Phase 0 — the version
-sweep needs only network access. Phase 0 and Phase 2 can run in parallel; everything after
-Phase 2 is strictly sequential, because §26 forbids adding a second mod batch before the first
-is confirmed working.
+**One thing needs no client and is worth doing whenever:** the three Player Microchip textures
+(§20). That is an art task, not an engineering one.

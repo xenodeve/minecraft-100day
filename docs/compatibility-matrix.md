@@ -308,3 +308,82 @@ Green. No errors from any animation-stack mod.
 mixing rules in Animation Spec §4–14 are entirely client-side and entirely subjective. This batch
 is the one where a green boot proves least — the spec's own §12 coverage matrix and §39 benchmark
 scene are the real checks, and both need a client.
+
+### Boots 5–13 — the customization batches (2026-08-25)
+
+Nine further boots, one per batch, on the same rig. Every one used a **fresh world** from Boot 8
+onward so that `defaultconfigs/` was genuinely exercised.
+
+| Boot | Batch | Result | What it actually proved |
+|---|---|---|---|
+| 5 | In Control · Attract to Sound · Hordes (#27–#29) | `Done (11.980s)` | Hordes logged **all 23 spawn entries with the exact weights and day windows written** — positive evidence, not merely an absence of errors |
+| 6 | Threat-tier tags moved to `kubejs/data/ics/` | `Done (11.649s)` | No unresolved `ics:` tag; In Control accepts `#tag` in `mob` |
+| 7 | KubeJS recipe probe | `Done (11.852s)` | **173 TaCZ gunsmith recipes are visible to the vanilla recipe manager** — the finding that made #30 and #31 possible without shipping an 84 MB gun pack |
+| 8 | TaCZ + ammunition (#30, #31) | `Done (11.852s)` | `Added 78 recipes, removed 77, 0 failed` |
+| 9 | Base security + backpacks (#32) | `Done (22.286s)` | **`defaultconfigs/` verified end to end** — a deleted world regenerated `serverconfig/` carrying `stack_upgrades|1` |
+| 10 | Threat hierarchy + colonies (#33) | `Done (11.198s)` | MineColonies values reached a fresh world's `serverconfig/` |
+| 11 | Tracker re-theme (#35), **first attempt** | `Done (10.742s)` but **3 failed recipes** | See below — the most useful failure of the session |
+| 12 | Tracker guarded | `Done (10.789s)` | `0 failed recipes` |
+| 13 | Quest campaign (#36) | `Done (10.139s)` | `Loaded 1 chapter groups, 12 chapters, 48 quests` |
+
+### What Boot 11 caught, and why it matters more than the green ones
+
+The tracker script referenced `player_tracking_chip` items. That mod is one of the **four blocked
+from the CurseForge API**, so the test pack drops it — and the boot produced:
+
+```
+[ERROR] tactical_tracker.js#55: Failed to create recipe for type 'kubejs:shaped':
+        ItemStack 'result' can't be empty!
+… Added 80 recipes, removed 79 recipes, with 3 failed recipes
+```
+
+**That is not a test artifact. It is exactly what a friend who skips the manual install would
+see** — and it is the worst shape of failure this repo keeps meeting: nothing breaks, the server
+boots green, the log looks broken, and the player cannot tell an optional mod from a corrupt pack.
+
+Fixed with `Platform.isLoaded('player_tracking_chip')`. The lesson generalises: **any KubeJS script
+touching one of the four hand-installed mods must be guarded.**
+
+### Two rig traps worth writing down
+
+**A stale server holds the world lock.** A boot that follows a timed-out shell fails with
+
+```
+java.io.IOException: The process cannot access the file because another process has locked a
+portion of the file … at net.minecraft.world.level.storage.DirectoryLock
+```
+
+The stack trace points at world storage and reads exactly like a corrupt save. It is not.
+`pkill -f` does **not** match the process; `Get-Process java | Stop-Process -Force` does.
+
+**Forge deletes custom comments in TOML configs.** Every `# PACK CONTROLLED` comment written into a
+`.toml` is stripped on first load — the *values* survive, the *reasoning* does not. Verified by
+comparing `config/improvedmobs/common.toml` in the repo against the server's copy after a boot:
+`2.75` is there, the comment is gone.
+
+So comments in a Forge TOML are **repo-side annotation only**. They never reach a player, and the
+file on a player's disk differs from the repo copy from the first launch onward — which matters for
+Distribution Spec §38's config-drift tooling. Player-facing reasoning belongs in a README, which is
+why `config/incontrol/`, `config/soundattract/` and `config/hordes/` each have one.
+
+### Two paths in §7's repo layout are wrong
+
+§7's directory sketch is a statement of intent and two of its entries do not match how the mods
+actually load. Both fail **silently** — the files are simply never read.
+
+| §7 says | Actually | Evidence |
+|---|---|---|
+| `datapacks/` at the pack root | `kubejs/data/` | Vanilla reads `<world>/datapacks/` only — per-world, so it would not apply to a world made later |
+| `ftbquests/` at the pack root | `config/ftbquests/quests/` | `ServerQuestFile.load()` → `Platform.getConfigFolder().resolve("ftbquests/quests")`, confirmed by the absolute path in the boot log |
+
+### A benign upstream error present in every boot
+
+```
+[ERROR] [net.minecraft.tags.TagLoader]: Couldn't load tag iceandfire:immune_to_gorgon_stone
+        as it is missing following references: #c:bosses
+```
+
+Ice & Fire references a Fabric-convention tag (`#c:bosses`) that no Forge mod in this pack
+provides. It appears in **every** boot including the very first, is not caused by any change here,
+and affects only gorgon stone immunity for entities that would have been in that tag. Recorded so
+nobody spends an afternoon on it.

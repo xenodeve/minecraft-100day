@@ -20,8 +20,17 @@ branch="$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo '')"
 # Build artifacts are blocked unconditionally. A wip/ freeze is a statement about
 # *how much* unfinished work is in flight, never a licence to commit generated
 # output — that's the one thing no branch name makes acceptable.
+# THE DIRECTORY NAMES ARE ANCHORED TO THE REPO ROOT (^ rather than (^|/)).
+# Unanchored, `build` matched scripts/build/build-instance.mjs -- the script that
+# PRODUCES the artifact, which is source and must be committed. This is the third
+# time this exact bug has appeared in this repo: `build/` in .gitignore once kept
+# the same file out of git entirely, and a bare `scripts/` in .packwizignore
+# silently dropped a Hordes config file from the shipped pack. Same shape every
+# time: a bare directory name matches at any depth.
+#
+# .log / .tmp stay unanchored -- those are extensions, not directories.
 artifacts=$(echo "$status" | sed 's/^...//' | grep -Ei \
-  '(^|/)(node_modules|dist|build|coverage|test-results|playwright-report|_render_dump|\.next|\.turbo)(/|$)|\.(log|tmp)$' \
+  '^(node_modules|dist|build|coverage|test-results|playwright-report|_render_dump|\.next|\.turbo)(/|$)|\.(log|tmp)$' \
   | head -5)
 if [ -n "$artifacts" ]; then
   echo "check-tree-budget: build artifacts must not be pushed." >&2

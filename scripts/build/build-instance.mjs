@@ -15,7 +15,7 @@
 // is fatal — a silently corrupt jar in a 130 MB artifact is exactly the kind
 // of failure nobody finds until a friend cannot launch.
 
-import { readFileSync, readdirSync, writeFileSync, mkdirSync, existsSync, statSync } from 'node:fs'
+import { readFileSync, readdirSync, writeFileSync, mkdirSync, existsSync, statSync, rmSync } from 'node:fs'
 import { createHash } from 'node:crypto'
 import { execFileSync } from 'node:child_process'
 import { join } from 'node:path'
@@ -128,6 +128,13 @@ for (const m of metas) execFileSync('cp', [join(CACHE, m.filename), join(MODS, m
 
 // Anything the pack owns beyond mods — config, kubejs, datapacks — ships too.
 // Distribution Spec §4: those files are the gameplay; mods alone are not the pack.
+//
+// `.md` is stripped afterwards, because this copy does NOT go through
+// `.packwizignore`. The maintainer READMEs under config/incontrol/,
+// config/soundattract/, config/hordes/ and kubejs/ each open by saying they are
+// not shipped to players — which was true of the packwiz path and false of this
+// one. Two distribution paths that disagree about what the pack contains is the
+// exact drift Distribution Spec §38 exists to catch.
 for (const dir of ['config', 'defaultconfigs', 'kubejs', 'datapacks', 'resourcepacks', 'ftbquests']) {
   const src = join(ROOT, dir)
   if (existsSync(src) && statSync(src).isDirectory()) {
@@ -135,6 +142,17 @@ for (const dir of ['config', 'defaultconfigs', 'kubejs', 'datapacks', 'resourcep
     console.log(`bundled ${dir}/`)
   }
 }
+
+let stripped = 0
+const stripMarkdown = (dir) => {
+  for (const name of readdirSync(dir)) {
+    const full = join(dir, name)
+    if (statSync(full).isDirectory()) stripMarkdown(full)
+    else if (name.toLowerCase().endsWith('.md')) { rmSync(full); stripped++ }
+  }
+}
+stripMarkdown(join(STAGE, '.minecraft'))
+console.log(`stripped ${stripped} maintainer .md file(s) — they are repo documentation, not pack content`)
 
 writeFileSync(join(STAGE, 'mmc-pack.json'), JSON.stringify({
   components: [

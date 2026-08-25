@@ -5,12 +5,232 @@ file = "config/carryon-common.toml"
 hash = "9549d1d5bbf54277b92b4f8e68e61f8736b327bb0cb15d0a68c51615a98f79fc"
 
 [[files]]
+file = "config/ftbquests/quests/chapter_groups.snbt"
+hash = "e57d8311aec9f524911ed1313cabf138bb7fa5a2d3ba985a00a2a267ff35ef78"
+
+[[files]]
+file = "config/ftbquests/quests/chapters/arms_industry.snbt"
+hash = "daf940ea1f1c6df6f5bd06d14db59d91bd0e0386abf521e892d045c9cb0bd00e"
+
+[[files]]
+file = "config/ftbquests/quests/chapters/firearms.snbt"
+hash = "1ccc00f7d61649a056cfa3190fa18d1bf57d6d84756c23b459b76635a7f957c0"
+
+[[files]]
+file = "config/ftbquests/quests/chapters/fortification.snbt"
+hash = "a0b89f5c84d0b8450c6ad2fa5afb25313af69897632aa3c1aceb8728c0b88603"
+
+[[files]]
+file = "config/ftbquests/quests/chapters/industrial_civilization.snbt"
+hash = "5fe42ccc8bccee37335040ea8d7772984fc535e811dccde31125e780c0bdfaac"
+
+[[files]]
+file = "config/ftbquests/quests/chapters/industrial_revolution.snbt"
+hash = "746c1ee9cf6ed6b28c579bf3ea65b84f94f90cf925ef2c48bea8bb13617d4716"
+
+[[files]]
+file = "config/ftbquests/quests/chapters/railway_age.snbt"
+hash = "0f9564a5ad4d51c86d9550a41a963df71a9d4eafed8950c58a21d6ce9fa82b8a"
+
+[[files]]
+file = "config/ftbquests/quests/chapters/the_frontier.snbt"
+hash = "ad5bc843a35bf822a09fdcc8d58a7226304e6da55c1e0f4e264009869e99e733"
+
+[[files]]
+file = "config/ftbquests/quests/chapters/the_long_night.snbt"
+hash = "9f495f934deceef97ba5fa1cb13270c308e0b80e1158e2750cfb70ace320d0c6"
+
+[[files]]
+file = "config/ftbquests/quests/chapters/the_mechanical_age.snbt"
+hash = "808f5a0ab5f8a1b8cbd36ac21a5b878550ca6b813b6f34771df7e579a3a709af"
+
+[[files]]
+file = "config/ftbquests/quests/chapters/the_settlement.snbt"
+hash = "64759f663f773e190e284a6e3d9ff1c35e7756314ebaba0a9d45de8421073bb9"
+
+[[files]]
+file = "config/ftbquests/quests/chapters/the_survivor.snbt"
+hash = "4491d5cbedadb76eeb77139e67f35bf8efb4679e190698c68275228e03745389"
+
+[[files]]
+file = "config/ftbquests/quests/chapters/wings_of_fire.snbt"
+hash = "0114a186886bd3b3e37595f776d37308ce63cf9cd7b6390f872eba75b832a337"
+
+[[files]]
+file = "config/ftbquests/quests/data.snbt"
+hash = "ef97bf4aac973a02e2ac049bb6d00fdd58b53daaf52ba5e1ec8ae6accceceeb8"
+
+[[files]]
+file = "config/hordes-common.toml"
+hash = "b4ed64668c93a10ac2f5758713b16b169503d4b9b16b10bafdaaca19871448d0"
+
+[[files]]
+file = "config/hordes/data/hordes/horde_data/scripts/default.json"
+hash = "6d868f97dd5e9f5094033cb67888f30fa0651f75da8139f8f9df00d597b67c07"
+
+[[files]]
+file = "config/hordes/data/hordes/horde_data/tables/default.json"
+hash = "da09dfb6dcc62aa6a8734c55dc27a54215d0f110af6381438960f35a0b302b29"
+
+[[files]]
+file = "config/hordes/data/hordes/horde_data/tables/drowned.json"
+hash = "c1b7b8a9162bdcdf01238844090d28d205bca4dc48ada51972fb10bd81da9255"
+
+[[files]]
+file = "config/hordes/data/hordes/horde_data/tables/illagers.json"
+hash = "10fc04c86f7d6906e581c6c7e029af1bdd9e5584c3cf62c996c53efdd17a2c53"
+
+[[files]]
+file = "config/hordes/data/hordes/horde_data/tables/mixed_mobs.json"
+hash = "a28583267b88ca6cfccc6858835da847b334b7e6c4879898115f078baa35a129"
+
+[[files]]
+file = "config/hordes/data/hordes/horde_data/tables/skeletons.json"
+hash = "74b68d60c6144aff5a099585107479d1db494f8ee9046157b5f536069fbd5ff2"
+
+[[files]]
+file = "config/hordes/data/hordes/infection/immunity_items.json"
+hash = "a6df65cf17a3a14dae7132076cb3bea414bcc3b5479ec467087688c8da330b63"
+
+[[files]]
+file = "config/hordes/data/hordes/infection/infection_conversions.json"
+hash = "bcef569f2bb2b70c5bef0ff821951fc5be1020053b2e8ade9b5b552221a88adb"
+
+[[files]]
+file = "config/hordes/data/hordes/infection/infection_entities.json"
+hash = "d03134ef7ab8065e080116710ac6db552e1c3e93daa5358b2cf2453370cad1cd"
+
+[[files]]
+file = "config/hordes/data/hordes/infection/wearables_protection.json"
+hash = "08641020159ea9076eddc421120b6049dc4e3e491561c0ba1ed94d5fb4809aff"
+
+[[files]]
+file = "config/hordes/data/hordes/tags/items/infection_cures.json"
+hash = "874de03788aedcad18f814c44d2ee8414e366727bfe884adc87f4d09f6ee0e50"
+
+[[files]]
+file = "config/hordes/data/hordes/tags/worldgen/biome/husk_player_spawn_biomes.json"
+hash = "8c303ee7d3a2e3bd91dd32d6260026650d545da38131d64a3704fc3b78880d80"
+
+[[files]]
+file = "config/hordes/hordes-info.json"
+hash = "83c6994a10e8e8e5877cab2f8648bc38980f9f132c1f75120bd97c17822ecb58"
+
+[[files]]
+file = "config/hordes/pack.mcmeta"
+hash = "e9273b84a8f7ee88f5b92f737e9e3b3b3394447372a52eaeff92255ad4f94a11"
+
+[[files]]
+file = "config/iceandfire/iaf-common.json"
+hash = "c922606233ee35e14bb508b6b58c17b35a20e39ece89076795528a859c775946"
+
+[[files]]
 file = "config/improvedmobs/common.toml"
 hash = "a8364ac6a95a957c0a83fa0b7a4f1782cff594969e1e709339f6c55478ff6fb6"
 
 [[files]]
+file = "config/incontrol/spawn.json"
+hash = "852e9a7e1ebc2267c5787e6c52d6c3ccc0c555d63a2ab0ae10c704d11eded7de"
+
+[[files]]
+file = "config/naturalist.json"
+hash = "883bfe335f556de97469fabd44cff787011ee9ff59136061e7134b39ffcc2942"
+
+[[files]]
+file = "config/playerrevive.json"
+hash = "78a4fb4d638d607154e62cf3fed0c47b6d35d092bfe6e15e01309f4ef9f05be6"
+
+[[files]]
+file = "config/soundattract/guns.toml"
+hash = "8a7a6ae2a76312697b827aa33e13306f8f427b3928bb8033ed28b430aacbdbbf"
+
+[[files]]
+file = "config/soundattract/raid.toml"
+hash = "0fc36e3bbcb94ac21cab5fb76be8559e13f04ac470a707ed8c078e220f9cf23b"
+
+[[files]]
+file = "defaultconfigs/minecolonies-server.toml"
+hash = "3a233b76cc9cfed54ab3e46afb1dd29f5ac0922a386f3390ce109127f3103340"
+
+[[files]]
+file = "defaultconfigs/sophisticatedbackpacks-server.toml"
+hash = "1198882ed043aaf63ad220ddaac40644a352e458d3828629125f34b72ba9ab42"
+
+[[files]]
+file = "kubejs/assets/player_tracking_chip/lang/en_us.json"
+hash = "c355dfda4c51704b96f04ad3ef0de1520e5df38bb1d8d30a831dade74f0c82bf"
+
+[[files]]
+file = "kubejs/client_scripts/jei_hide.js"
+hash = "ec313c55baa033661df3c04044981823ccb2635f049b22f357fbe551928374aa"
+
+[[files]]
 file = "kubejs/data/enhancedai/tags/blocks/miner_blacklist.json"
 hash = "6993c08462884c38a5c8ff7a39b2b287f0e2e1fa521239b479ac4badb031b7cf"
+
+[[files]]
+file = "kubejs/data/gundb/gundb/mg.json"
+hash = "bc74a711b4ef2101b95a7ac40e3efb75ee09658960d2ff3447415ee31f0e9e44"
+
+[[files]]
+file = "kubejs/data/gundb/gundb/pistol.json"
+hash = "18999c58390e0452375473e39ac18a9d4966af34b8724fb885e0694306858a58"
+
+[[files]]
+file = "kubejs/data/gundb/gundb/rifle.json"
+hash = "20219acc21dedbcc39f644849079468c386f8531dfcd290c8f37161ac631c2ba"
+
+[[files]]
+file = "kubejs/data/gundb/gundb/rpg.json"
+hash = "654e8c2e0bb29fd69b36289f4b31e3d5db87eedc364fa75e8aea3b9a486c1d2a"
+
+[[files]]
+file = "kubejs/data/gundb/gundb/shotgun.json"
+hash = "efaf79f5a7702fdca04b06e4cc4f68f13b1bc2ffb214f0b5e458ee368d50a97a"
+
+[[files]]
+file = "kubejs/data/gundb/gundb/smg.json"
+hash = "4fcc8a3e1ac5bc6308a50d5367a0b3b026fc11accd52b643993434dfb88c2bdb"
+
+[[files]]
+file = "kubejs/data/gundb/gundb/sniper.json"
+hash = "db3a1298dbfb846c001032231f2f525e73ec5797bd7e8886de18153e68d1f93d"
+
+[[files]]
+file = "kubejs/data/ics/tags/entity_types/bic_elite.json"
+hash = "5f4cf7d3df39e6ee6c3db5fd13bf5eb2a190958fa990e8a66e1620ef024bcfaa"
+
+[[files]]
+file = "kubejs/data/ics/tags/entity_types/bic_mid.json"
+hash = "9384dd580b5d7ec5a7d3ad5b219eb2182aa2320a0e67cba597d98f80ab9a43f7"
+
+[[files]]
+file = "kubejs/data/ics/tags/entity_types/bic_swarm.json"
+hash = "21bf1ad286d07b2382e3d76241ff2fdcf997f7a706059af8bce30286d727bf38"
+
+[[files]]
+file = "kubejs/data/ics/tags/entity_types/iaf_apex.json"
+hash = "48bf983a7fc5f50cb56be5586fe8a598991196b9bb10d2b5fa8a3cc911bb0227"
+
+[[files]]
+file = "kubejs/data/ics/tags/entity_types/iaf_apex_ground.json"
+hash = "3deec8e160e488fe17afb8e7033cdb7286b233138fb32ac544b2a7ec090977c0"
+
+[[files]]
+file = "kubejs/server_scripts/ammunition/ammo_economy.js"
+hash = "846bc6c028820a0506432dabb6dae414600da5a0206050cbea3c7b9f1283d362"
+
+[[files]]
+file = "kubejs/server_scripts/guns/gun_progression.js"
+hash = "9e911443dd47477f8ab9b03c745f0426708f03d2ffad5078ba46ba428fd05112"
+
+[[files]]
+file = "kubejs/server_scripts/progression/base_security.js"
+hash = "045d2d44a42dc1e507aa3c8a71c1e3f8ae39a46bbb751eb48e2df8b59aebdd67"
+
+[[files]]
+file = "kubejs/server_scripts/progression/tactical_tracker.js"
+hash = "66050bc85f685b8ce1b389454dfacc5ec7803b948fd8c5a57cbeabe7a5e8e1b5"
 
 [[files]]
 file = "mods/ambientsounds.pw.toml"
