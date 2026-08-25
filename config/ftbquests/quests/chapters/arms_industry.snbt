@@ -1,0 +1,62 @@
+{
+	id: "0000000000000008"
+	group: ""
+	icon: "create:mechanical_press"
+	order_index: 7
+	filename: "arms_industry"
+	title: "VIII — Arms Industry"
+	subtitle: ["Ten thousand rounds is a building, not a chest"]
+	quests: [
+		{
+			id: "0000000000000801"
+			x: 0.0d
+			y: 0.0d
+			title: "A Thousand Rounds"
+			description: [
+				"Hand-loading cannot reach this. That is deliberate."
+			]
+			tasks: [
+				{ id: "0000000000080101", type: "item", item: "tacz:ammo", count: 1000L }
+			]
+		}
+		{
+			id: "0000000000000802"
+			x: 2.0d
+			y: 0.0d
+			title: "Automate the Casings"
+			description: [
+				"Brass sheet in, cases out, nobody standing there."
+			]
+			dependencies: ["0000000000000801"]
+			tasks: [
+				{ id: "0000000000080201", type: "item", item: "tacz_c:thin_brass_sheet", count: 256L }
+			]
+		}
+		{
+			id: "0000000000000803"
+			x: 4.0d
+			y: 0.0d
+			title: "Primers and Propellant"
+			description: [
+				"The two things you always run out of first."
+			]
+			dependencies: ["0000000000000802"]
+			tasks: [
+				{ id: "0000000000080301", type: "item", item: "tacz_c:primer", count: 128L }
+			]
+		}
+		{
+			id: "0000000000000804"
+			x: 6.0d
+			y: 0.0d
+			title: "Arm the Colony"
+			description: [
+				"Guards with ammunition are a garrison. Without it they are casualties."
+			]
+			dependencies: ["0000000000000803"]
+			tasks: [
+				{ id: "0000000000080401", type: "checkmark", title: "Arm the Colony" }
+			]
+		}
+	]
+}

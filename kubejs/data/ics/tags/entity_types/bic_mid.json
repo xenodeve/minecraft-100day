@@ -1,0 +1,18 @@
+{
+	"replace": false,
+	"values": [
+		{ "id": "born_in_chaos_v1:bonescaller", "required": false },
+		{ "id": "born_in_chaos_v1:door_knight", "required": false },
+		{ "id": "born_in_chaos_v1:mother_spider", "required": false },
+		{ "id": "born_in_chaos_v1:zombie_bruiser", "required": false },
+		{ "id": "born_in_chaos_v1:pumpkin_bruiser", "required": false },
+		{ "id": "born_in_chaos_v1:senor_pumpkin", "required": false },
+		{ "id": "born_in_chaos_v1:mrs_pumpkin", "required": false },
+		{ "id": "born_in_chaos_v1:siamese_skeletons", "required": false },
+		{ "id": "born_in_chaos_v1:skeleton_demoman", "required": false },
+		{ "id": "born_in_chaos_v1:dark_vortex", "required": false },
+		{ "id": "born_in_chaos_v1:thornshell_crab", "required": false },
+		{ "id": "born_in_chaos_v1:swarmer", "required": false },
+		{ "id": "born_in_chaos_v1:zombie_clown", "required": false }
+	]
+}

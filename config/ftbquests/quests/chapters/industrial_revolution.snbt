@@ -1,0 +1,63 @@
+{
+	id: "0000000000000005"
+	group: ""
+	icon: "create:brass_ingot"
+	order_index: 4
+	filename: "industrial_revolution"
+	title: "V — Industrial Revolution"
+	subtitle: ["Brass is when the factory stops being a hobby"]
+	quests: [
+		{
+			id: "0000000000000501"
+			x: 0.0d
+			y: 0.0d
+			title: "Brass at Scale"
+			description: [
+				"Sixty-four sheets. Not smelted one at a time."
+			]
+			tasks: [
+				{ id: "0000000000050101", type: "item", item: "create:brass_sheet", count: 64L }
+			]
+		}
+		{
+			id: "0000000000000502"
+			x: 2.0d
+			y: 0.0d
+			title: "Ammunition Plant"
+			description: [
+				"Cases, not cartridges. The difference is the whole chapter."
+			]
+			dependencies: ["0000000000000501"]
+			tasks: [
+				{ id: "0000000000050201", type: "item", item: "tacz_c:case_9mm", count: 64L }
+			]
+		}
+		{
+			id: "0000000000000503"
+			x: 4.0d
+			y: 0.0d
+			title: "Electricity"
+			description: [
+				"Immersive Engineering owns the grid. Create owns the factory."
+				"Do not let either do the other's job."
+			]
+			dependencies: ["0000000000000502"]
+			tasks: [
+				{ id: "0000000000050301", type: "item", item: "immersiveengineering:component_electronic", count: 4L }
+			]
+		}
+		{
+			id: "0000000000000504"
+			x: 6.0d
+			y: 0.0d
+			title: "Steel"
+			description: [
+				"Steel is the material the second half of this pack is made of."
+			]
+			dependencies: ["0000000000000503"]
+			tasks: [
+				{ id: "0000000000050401", type: "item", item: "immersiveengineering:plate_steel", count: 16L }
+			]
+		}
+	]
+}

@@ -1,0 +1,69 @@
+
+#Sound Attract Mod - Raid & Group Behavior Configuration
+[raid]
+
+	[raid.group_roles]
+		#Enable the leader/edge/follower role system for mob groups.
+		#ON: Mobs are assigned roles: leaders attract to sounds, edge mobs scout and relay info, followers follow the leader.
+		#     Edge mobs suppress their own detection to relay data back to the leader instead of attacking directly.
+		#     During raids, only edge mobs can trigger scent-based raids and edge detection actions apply.
+		#OFF: All edge and leader mobs chase sounds using AttractionGoal. Any mob can trigger scent raids.
+		edgeMobSmartBehavior = false
+		#Number of edge mobs per sector around the leader.
+		#Range: 1 ~ 64
+		edgeMobsPerSector = 1
+
+	[raid.movement]
+		#Speed multiplier when mobs sprint to rally to their leader during raid countdown.
+		#Range: 1.0 ~ 5.0
+		sprintMultiplier = 1.1
+		#Distance at which an edge mob considers itself 'arrived' back at the leader.
+		#Range: 0.5 ~ 16.0
+		leaderReturnArrivalDistance = 2.0
+		#Distance followers spread out from the sound target after arriving.
+		#Range: 0.0 ~ 256.0
+		followLeaderSpreadOutDistance = 24.0
+
+	[raid.sound_trigger]
+		#Allow sounds detected by mobs to trigger raids (rally group and advance).
+		enableSoundRaid = true
+
+	[raid.scent_trigger]
+		#Allow scent trails to trigger raids when a mob reaches the trail end.
+		enableScentRaid = false
+
+	[raid.countdown]
+		#Ticks between raid scheduling and raid advance (countdown / rally phase).
+		#Range: 20 ~ 72000
+		raidCountdownTicks = 100
+
+	[raid.optimization]
+		#During raid advance, only the leader scans for new sounds. Followers skip sound scanning entirely.
+		raidLeaderOnlySoundScan = true
+		#During raid advance, non-edge followers skip full detection and inherit target from edge mob or leader.
+		raidFollowerInheritTarget = true
+		#Action when an edge mob detects a player during raid advance. 'redirect' = update raid target, 'share' = only set target for nearby mobs.
+		raidEdgeDetectionAction = "redirect"
+
+	[raid.reinforcements]
+		# PACK CONTROLLED — Industrial Civilization Survival, Main §3.3.
+		# The design rule is one sentence: gunfire attracts EXISTING mobs.
+		#   "Gunfire should generally attract existing mobs"
+		#   "ไม่ควร magically spawn mobs ทุกครั้งที่ยิง"
+		# This single flag is the one setting in the pack that would break it, so it is pinned
+		# here rather than left on the mod default. It happens to already BE the mod default —
+		# pinning it means a future update cannot change that quietly.
+		#Enable reinforcement spawning during raid countdown phase.
+		enableRaidReinforcements = false
+		#Per-entity-type reinforcement caps. Format: "modid:entity,maxCount". Example: ["minecraft:zombie,50", "minecraft:skeleton,20"]
+		raidReinforcementCaps = ["minecraft:zombie,50", "minecraft:skeleton,20"]
+		#Maximum total reinforcement mobs per raid.
+		#Range: 0 ~ 500
+		raidMaxTotalMobs = 80
+		#Multiplier applied to per-type caps based on difficulty. E.g. Easy=0.5, Normal=1.0, Hard=1.5.
+		#Range: 0.0 ~ 10.0
+		raidReinforcementDifficultyMultiplier = 1.0
+		#Ticks between reinforcement spawn attempts during a raid.
+		#Range: 1 ~ 1200
+		raidReinforcementInterval = 1
+

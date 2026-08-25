@@ -8,15 +8,29 @@
 # Without this file `packwiz refresh` indexes the whole repo, and a friend
 # installing the pack downloads CLAUDE.md, the ADRs and the git hooks.
 
+# ANCHOR EVERY DIRECTORY PATTERN WITH A LEADING SLASH.
+#
+# packwiz uses gitignore semantics, so a bare `scripts/` matches a directory of
+# that name AT ANY DEPTH. It was silently excluding
+#     config/hordes/data/hordes/horde_data/scripts/default.json
+# which is the only script The Hordes has -- the one that swaps to the drowned
+# spawn table in ocean biomes. Combined with data_version: -1 (which stops the
+# mod regenerating its folder) the shipped pack would have carried a Hordes
+# config with its script missing, and nothing would have said so.
+#
+# This is the second time this exact bug has happened here: `build/` in
+# .gitignore once matched scripts/build/ and kept the build script out of git.
+# Same shape, different file. Anchor them.
+
 # --- the agent operating layer -----------------------------------------------
-.claude/
-.githooks/
-.github/
-scripts/
-Obsidian-minecraft-100day/
+/.claude/
+/.githooks/
+/.github/
+/scripts/
+/Obsidian-minecraft-100day/
 
 # --- documentation -----------------------------------------------------------
-docs/
+/docs/
 *.md
 
 # --- repo metadata -----------------------------------------------------------
@@ -25,12 +39,12 @@ docs/
 .packwizignore
 
 # --- local build / runtime output --------------------------------------------
-build/
-dist/
-run/
-instance/
-logs/
-crash-reports/
-saves/
+/build/
+/dist/
+/run/
+/instance/
+/logs/
+/crash-reports/
+/saves/
 *.mrpack
 *.zip

@@ -1,0 +1,64 @@
+{
+	id: "0000000000000009"
+	group: ""
+	icon: "minecraft:blaze_powder"
+	order_index: 8
+	filename: "wings_of_fire"
+	title: "IX — Wings of Fire"
+	subtitle: ["Establish Air Superiority"]
+	quests: [
+		{
+			id: "0000000000000901"
+			x: 0.0d
+			y: 0.0d
+			title: "Find a Roost"
+			description: [
+				"Dragons live at least 2,250 blocks from where you started."
+				"That distance is the reason the railway exists."
+			]
+			tasks: [
+				{ id: "0000000000090101", type: "checkmark", title: "Find a Roost" }
+			]
+		}
+		{
+			id: "0000000000000902"
+			x: 2.0d
+			y: 0.0d
+			title: "Heavy Weapons"
+			description: [
+				"An adult dragon takes about 178 rifle rounds."
+				"Bring a cannon."
+			]
+			dependencies: ["0000000000000901"]
+			tasks: [
+				{ id: "0000000000090201", type: "checkmark", title: "Heavy Weapons" }
+			]
+		}
+		{
+			id: "0000000000000903"
+			x: 4.0d
+			y: 0.0d
+			title: "Kill a Dragon"
+			description: [
+				"Once. Properly. With a plan."
+			]
+			dependencies: ["0000000000000902"]
+			tasks: [
+				{ id: "0000000000090301", type: "checkmark", title: "Kill a Dragon" }
+			]
+		}
+		{
+			id: "0000000000000904"
+			x: 6.0d
+			y: 0.0d
+			title: "Establish Air Superiority"
+			description: [
+				"The frontier is passable now. That is what winning looks like."
+			]
+			dependencies: ["0000000000000903"]
+			tasks: [
+				{ id: "0000000000090401", type: "checkmark", title: "Establish Air Superiority" }
+			]
+		}
+	]
+}

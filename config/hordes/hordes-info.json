@@ -1,0 +1,20 @@
+{
+	"comments": [
+		"PACK CONTROLLED - Industrial Civilization Survival.",
+		"data_version is -1 on purpose: DataGenerator returns early on a negative value and never",
+		"regenerates this folder, so a Hordes update cannot overwrite the tuned spawn tables.",
+		"Consequence: this whole folder is now OURS. A new file the mod starts shipping will NOT",
+		"appear here on its own - check the jar config_defaults/ after every Hordes update.",
+		"used for determining if the config folder is up to date",
+		"deleting this will regenerate your config folder",
+		"for modpack authors: setting the value to -1 will prevent the config folder regenerating when updating the mod",
+		"(keep an eye on base changes, in case they are needed for your pack when updating)"
+	],
+	"minecraft_version": "1.20.1",
+	"mod_version": "1.6.3f",
+	"data_version": -1,
+	"changes": [
+		"removed wolf armour from wearables_protection file, as it doesn't exist in 1.20.1",
+		"added a different message if another player's horde is preventing you from sleeping"
+	]
+}

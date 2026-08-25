@@ -1,0 +1,16 @@
+{
+	"replace": false,
+	"values": [
+		{ "id": "iceandfire:cyclops", "required": false },
+		{ "id": "iceandfire:hydra", "required": false },
+		{ "id": "iceandfire:dread_lich", "required": false },
+		{ "id": "iceandfire:dread_queen", "required": false },
+		{ "id": "iceandfire:gorgon", "required": false },
+		{ "id": "iceandfire:troll", "required": false },
+		{ "id": "iceandfire:deathworm", "required": false },
+		{ "id": "iceandfire:sea_serpent", "required": false },
+		{ "id": "iceandfire:amphithere", "required": false },
+		{ "id": "iceandfire:stymphalian_bird", "required": false },
+		{ "id": "iceandfire:cockatrice", "required": false }
+	]
+}

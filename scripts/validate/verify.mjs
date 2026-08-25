@@ -31,6 +31,7 @@
 //   broken config references = 0 — needs the mod set to exist
 //   JSON / TOML syntax           — DONE (lint)
 //   unfilled placeholders        — DONE (lint), local addition
+//   JEI orphaned recipes        — DONE (lint), Crafting Spec §6
 //   KubeJS parses                — DONE (test)
 //
 // Add each check in the change that makes it possible, not before: a check that
@@ -138,6 +139,47 @@ function lintPlaceholders() {
   return targets.length
 }
 
+// ----------------------------------------------- lint: JEI orphaned recipes
+// Crafting Spec §6 forbids one exact piece of UX:
+//     JEI shows item -> player clicks recipe -> no valid recipe
+// and the customization map records the standing obligation as "must stay in
+// sync with every mod removal". Staying in sync is not something a person
+// remembers three sessions later, so it is checked here.
+//
+// The rule: a recipe id removed in kubejs/server_scripts/ must be either
+// re-added in the same file, or named in kubejs/client_scripts/jei_hide.js.
+//
+// Only LITERAL ids are checked. A removal built from a variable
+// (`event.remove({ id: id })` inside a loop) cannot be resolved statically, so
+// those files are checked structurally instead: a file that removes recipes
+// must also add some.
+function lintJeiOrphans() {
+  const scripts = files.filter(f => f.startsWith('kubejs/server_scripts/') && f.endsWith('.js'))
+  const hidePath = 'kubejs/client_scripts/jei_hide.js'
+  const hideList = existsSync(join(ROOT, hidePath)) ? readFileSync(join(ROOT, hidePath), 'utf8') : ''
+
+  const ADDS = /event\.(custom|shaped|shapeless|smelting|blasting|smoking|campfireCooking|stonecutting|recipes)\s*\(/
+
+  for (const f of scripts) {
+    const src = readFileSync(join(ROOT, f), 'utf8')
+    if (!/event\.remove\s*\(/.test(src)) continue
+
+    if (!ADDS.test(src)) {
+      fail(f, 'removes recipes but adds none — every item it orphans will show in JEI with no recipe (Crafting Spec §6). Re-add them, or hide the items in ' + hidePath)
+    }
+
+    // Literal ids: `event.remove({ id: 'namespace:path' })`
+    const literals = [...src.matchAll(/event\.remove\s*\(\s*\{[^}]*id\s*:\s*['"]([^'"]+)['"]/g)].map(m => m[1])
+    for (const id of new Set(literals)) {
+      const reAdded = src.includes(`.id('${id}')`) || src.includes(`.id("${id}")`)
+      if (!reAdded && !hideList.includes(id)) {
+        fail(f, `removes recipe '${id}' and never re-adds it, and it is not named in ${hidePath} — JEI will show the item with no recipe (Crafting Spec §6)`)
+      }
+    }
+  }
+  return scripts.length
+}
+
 // ------------------------------------------------------- test: KubeJS syntax
 function testKubejs() {
   const targets = files.filter(f => f.startsWith('kubejs/') && f.endsWith('.js'))
@@ -160,6 +202,7 @@ if (phase === 'all' || phase === 'lint') {
   counts['JSON files'] = lintJson()
   counts['TOML files'] = lintToml()
   counts['files scanned for placeholders'] = lintPlaceholders()
+  counts['KubeJS scripts scanned for orphaned recipes'] = lintJeiOrphans()
 }
 if (phase === 'all' || phase === 'test') {
   counts['KubeJS scripts'] = testKubejs()
