@@ -1,0 +1,64 @@
+{
+	id: "0000000000000002"
+	group: ""
+	icon: "minecraft:oak_door"
+	order_index: 1
+	filename: "the_settlement"
+	title: "II — The Settlement"
+	subtitle: ["One shelter is a hole. Several is a town"]
+	quests: [
+		{
+			id: "0000000000000201"
+			x: 0.0d
+			y: 0.0d
+			title: "Break Ground"
+			description: [
+				"Place a Town Hall and hire someone who is not you."
+			]
+			tasks: [
+				{ id: "0000000000020101", type: "checkmark", title: "Break Ground" }
+			]
+		}
+		{
+			id: "0000000000000202"
+			x: 2.0d
+			y: 0.0d
+			title: "Secure a Food Supply"
+			description: [
+				"A settlement that forages is a settlement that starves in winter."
+			]
+			dependencies: ["0000000000000201"]
+			tasks: [
+				{ id: "0000000000020201", type: "item", item: "minecraft:wheat", count: 64L }
+			]
+		}
+		{
+			id: "0000000000000203"
+			x: 4.0d
+			y: 0.0d
+			title: "The First Alloy"
+			description: [
+				"Andesite Alloy is where the hobby ends."
+				"Everything industrial in this pack starts here."
+			]
+			dependencies: ["0000000000000202"]
+			tasks: [
+				{ id: "0000000000020301", type: "item", item: "create:andesite_alloy", count: 16L }
+			]
+		}
+		{
+			id: "0000000000000204"
+			x: 6.0d
+			y: 0.0d
+			title: "Someone Else to Watch the Wall"
+			description: [
+				"Guards patrol, hold chokepoints and give early warning."
+				"They are not riflemen. Do not use them as riflemen."
+			]
+			dependencies: ["0000000000000203"]
+			tasks: [
+				{ id: "0000000000020401", type: "checkmark", title: "Someone Else to Watch the Wall" }
+			]
+		}
+	]
+}

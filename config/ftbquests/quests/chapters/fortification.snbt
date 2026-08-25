@@ -1,0 +1,63 @@
+{
+	id: "000000000000000A"
+	group: ""
+	icon: "minecraft:iron_bars"
+	order_index: 9
+	filename: "fortification"
+	title: "X — Fortification"
+	subtitle: ["A base that cannot be breached is not a base"]
+	quests: [
+		{
+			id: "0000000000000A01"
+			x: 0.0d
+			y: 0.0d
+			title: "Industrial Reinforcement"
+			description: [
+				"Reinforced blocks are a factory product in this pack, not a day-15 one."
+			]
+			tasks: [
+				{ id: "00000000000A0101", type: "item", item: "securitycraft:universal_block_reinforcer_lvl1", count: 1L }
+			]
+		}
+		{
+			id: "0000000000000A02"
+			x: 2.0d
+			y: 0.0d
+			title: "Layered Detection"
+			description: [
+				"Camera, alarm, lockdown, floodlight, response."
+				"In that order, or the last one arrives too late."
+			]
+			dependencies: ["0000000000000A01"]
+			tasks: [
+				{ id: "00000000000A0201", type: "item", item: "securitycraft:laser_block", count: 4L }
+			]
+		}
+		{
+			id: "0000000000000A03"
+			x: 4.0d
+			y: 0.0d
+			title: "Defence in Depth"
+			description: [
+				"Nothing here makes you invulnerable, and nothing here is meant to."
+			]
+			dependencies: ["0000000000000A02"]
+			tasks: [
+				{ id: "00000000000A0301", type: "checkmark", title: "Defence in Depth" }
+			]
+		}
+		{
+			id: "0000000000000A04"
+			x: 6.0d
+			y: 0.0d
+			title: "Hold Without You"
+			description: [
+				"Leave for a full day. Come back to a base that is still standing."
+			]
+			dependencies: ["0000000000000A03"]
+			tasks: [
+				{ id: "00000000000A0401", type: "checkmark", title: "Hold Without You" }
+			]
+		}
+	]
+}

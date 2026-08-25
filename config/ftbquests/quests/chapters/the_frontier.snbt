@@ -1,0 +1,62 @@
+{
+	id: "000000000000000B"
+	group: ""
+	icon: "minecraft:map"
+	order_index: 10
+	filename: "the_frontier"
+	title: "XI — The Frontier"
+	subtitle: ["The map is bigger than the wall"]
+	quests: [
+		{
+			id: "0000000000000B01"
+			x: 0.0d
+			y: 0.0d
+			title: "Oil"
+			description: [
+				"Scanner, pumpjack, refinery. Heavy industry starts around day 100."
+			]
+			tasks: [
+				{ id: "00000000000B0101", type: "checkmark", title: "Oil" }
+			]
+		}
+		{
+			id: "0000000000000B02"
+			x: 2.0d
+			y: 0.0d
+			title: "A Second Settlement"
+			description: [
+				"Far enough that it has to defend itself."
+			]
+			dependencies: ["0000000000000B01"]
+			tasks: [
+				{ id: "00000000000B0201", type: "checkmark", title: "A Second Settlement" }
+			]
+		}
+		{
+			id: "0000000000000B03"
+			x: 4.0d
+			y: 0.0d
+			title: "Personnel Tracking"
+			description: [
+				"A beacon on a plate carrier, not a chip under the skin."
+			]
+			dependencies: ["0000000000000B02"]
+			tasks: [
+				{ id: "00000000000B0301", type: "checkmark", title: "Personnel Tracking" }
+			]
+		}
+		{
+			id: "0000000000000B04"
+			x: 6.0d
+			y: 0.0d
+			title: "Rail to the Edge"
+			description: [
+				"If the frontier is not connected, it is not yours."
+			]
+			dependencies: ["0000000000000B03"]
+			tasks: [
+				{ id: "00000000000B0401", type: "checkmark", title: "Rail to the Edge" }
+			]
+		}
+	]
+}

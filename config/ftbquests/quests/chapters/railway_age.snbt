@@ -1,0 +1,63 @@
+{
+	id: "0000000000000006"
+	group: ""
+	icon: "minecraft:rail"
+	order_index: 5
+	filename: "railway_age"
+	title: "VI — Railway Age"
+	subtitle: ["Build a Freight Corridor"]
+	quests: [
+		{
+			id: "0000000000000601"
+			x: 0.0d
+			y: 0.0d
+			title: "Build a Freight Corridor"
+			description: [
+				"Two settlements, one line, freight moving without a player on it."
+			]
+			tasks: [
+				{ id: "0000000000060101", type: "checkmark", title: "Build a Freight Corridor" }
+			]
+		}
+		{
+			id: "0000000000000602"
+			x: 2.0d
+			y: 0.0d
+			title: "Rails Are Cheaper Than Backpacks"
+			description: [
+				"A backpack is personal logistics. A train is industrial."
+				"The pack is balanced so the second one wins."
+			]
+			dependencies: ["0000000000000601"]
+			tasks: [
+				{ id: "0000000000060201", type: "item", item: "minecraft:rail", count: 128L }
+			]
+		}
+		{
+			id: "0000000000000603"
+			x: 4.0d
+			y: 0.0d
+			title: "A Warehouse Worth Defending"
+			description: [
+				"Central storage is a target. That is the point."
+			]
+			dependencies: ["0000000000000602"]
+			tasks: [
+				{ id: "0000000000060301", type: "checkmark", title: "A Warehouse Worth Defending" }
+			]
+		}
+		{
+			id: "0000000000000604"
+			x: 6.0d
+			y: 0.0d
+			title: "Create a Remote Mining Settlement"
+			description: [
+				"Somewhere you cannot walk home from before dark."
+			]
+			dependencies: ["0000000000000603"]
+			tasks: [
+				{ id: "0000000000060401", type: "checkmark", title: "Create a Remote Mining Settlement" }
+			]
+		}
+	]
+}

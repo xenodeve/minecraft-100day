@@ -1,0 +1,66 @@
+{
+	id: "0000000000000003"
+	group: ""
+	icon: "minecraft:gunpowder"
+	order_index: 2
+	filename: "firearms"
+	title: "III — Firearms"
+	subtitle: ["Guns are tools. Tools need a workshop"]
+	quests: [
+		{
+			id: "0000000000000301"
+			x: 0.0d
+			y: 0.0d
+			title: "Establish a Gunsmith's Bench"
+			description: [
+				"Every firearm in this pack is built at one."
+				"There is no field-improvised assault rifle."
+			]
+			tasks: [
+				{ id: "0000000000030101", type: "checkmark", title: "Establish a Gunsmith's Bench" }
+			]
+		}
+		{
+			id: "0000000000000302"
+			x: 2.0d
+			y: 0.0d
+			title: "Hand-Loaded and Expensive"
+			description: [
+				"Thirty-two rounds, loaded by hand."
+				"Feel the price. That price is the reason the factory exists."
+			]
+			dependencies: ["0000000000000301"]
+			tasks: [
+				{ id: "0000000000030201", type: "item", item: "tacz:ammo", count: 32L }
+			]
+		}
+		{
+			id: "0000000000000303"
+			x: 4.0d
+			y: 0.0d
+			title: "Know What You Are Carrying"
+			description: [
+				"Calibre decides how far the sound travels."
+				"A shotgun is heard at 112 blocks. A suppressed pistol at 8."
+			]
+			dependencies: ["0000000000000302"]
+			tasks: [
+				{ id: "0000000000030301", type: "checkmark", title: "Know What You Are Carrying" }
+			]
+		}
+		{
+			id: "0000000000000304"
+			x: 6.0d
+			y: 0.0d
+			title: "Sound Discipline"
+			description: [
+				"Fit a suppressor and fire once at night."
+				"Then fire once without it, and count what arrives."
+			]
+			dependencies: ["0000000000000303"]
+			tasks: [
+				{ id: "0000000000030401", type: "checkmark", title: "Sound Discipline" }
+			]
+		}
+	]
+}

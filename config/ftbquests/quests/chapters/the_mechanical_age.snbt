@@ -1,0 +1,63 @@
+{
+	id: "0000000000000004"
+	group: ""
+	icon: "create:cogwheel"
+	order_index: 3
+	filename: "the_mechanical_age"
+	title: "IV — The Mechanical Age"
+	subtitle: ["Rotation is the first infrastructure"]
+	quests: [
+		{
+			id: "0000000000000401"
+			x: 0.0d
+			y: 0.0d
+			title: "Power Without Hands"
+			description: [
+				"Sixty-four alloy is not a milestone. It is a foundation."
+			]
+			tasks: [
+				{ id: "0000000000040101", type: "item", item: "create:andesite_alloy", count: 64L }
+			]
+		}
+		{
+			id: "0000000000000402"
+			x: 2.0d
+			y: 0.0d
+			title: "Sheet Metal"
+			description: [
+				"Pressing is the first process that scales."
+			]
+			dependencies: ["0000000000000401"]
+			tasks: [
+				{ id: "0000000000040201", type: "item", item: "create:iron_sheet", count: 32L }
+			]
+		}
+		{
+			id: "0000000000000403"
+			x: 4.0d
+			y: 0.0d
+			title: "Establish Industrial Production"
+			description: [
+				"A Precision Mechanism cannot be made by hand."
+				"Holding one proves a line exists."
+			]
+			dependencies: ["0000000000000402"]
+			tasks: [
+				{ id: "0000000000040301", type: "item", item: "create:precision_mechanism", count: 1L }
+			]
+		}
+		{
+			id: "0000000000000404"
+			x: 6.0d
+			y: 0.0d
+			title: "A Line That Runs Without You"
+			description: [
+				"Threshold switch, shutdown logic, no belt turning on nothing."
+			]
+			dependencies: ["0000000000000403"]
+			tasks: [
+				{ id: "0000000000040401", type: "checkmark", title: "A Line That Runs Without You" }
+			]
+		}
+	]
+}

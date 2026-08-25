@@ -1,0 +1,66 @@
+{
+	id: "0000000000000001"
+	group: ""
+	icon: "minecraft:torch"
+	order_index: 0
+	filename: "the_survivor"
+	title: "I — The Survivor"
+	subtitle: ["Stay alive long enough to have a plan"]
+	quests: [
+		{
+			id: "0000000000000101"
+			x: 0.0d
+			y: 0.0d
+			title: "Survive the First Night"
+			description: [
+				"Undead do not burn at dawn in this world."
+				"Daylight is not a reset. It is a shift change."
+			]
+			tasks: [
+				{ id: "0000000000010101", type: "checkmark", title: "Survive the First Night" }
+			]
+		}
+		{
+			id: "0000000000000102"
+			x: 2.0d
+			y: 0.0d
+			title: "Tools Before Weapons"
+			description: [
+				"A gun you cannot feed is an expensive club."
+				"Iron first."
+			]
+			dependencies: ["0000000000000101"]
+			tasks: [
+				{ id: "0000000000010201", type: "item", item: "minecraft:iron_pickaxe", count: 1L }
+			]
+		}
+		{
+			id: "0000000000000103"
+			x: 4.0d
+			y: 0.0d
+			title: "A Roof and a Door"
+			description: [
+				"Wood, dirt and cobblestone are breachable ON PURPOSE."
+				"They buy time. They do not buy safety."
+			]
+			dependencies: ["0000000000000102"]
+			tasks: [
+				{ id: "0000000000010301", type: "checkmark", title: "A Roof and a Door" }
+			]
+		}
+		{
+			id: "0000000000000104"
+			x: 6.0d
+			y: 0.0d
+			title: "First Firearm"
+			description: [
+				"A revolver or a break-action, built by you."
+				"Not looted. Built."
+			]
+			dependencies: ["0000000000000103"]
+			tasks: [
+				{ id: "0000000000010401", type: "checkmark", title: "First Firearm" }
+			]
+		}
+	]
+}

@@ -1,0 +1,65 @@
+{
+	id: "0000000000000007"
+	group: ""
+	icon: "minecraft:shield"
+	order_index: 6
+	filename: "the_long_night"
+	title: "VII — The Long Night"
+	subtitle: ["Survive a Major Siege"]
+	quests: [
+		{
+			id: "0000000000000701"
+			x: 0.0d
+			y: 0.0d
+			title: "Survive a Major Siege"
+			description: [
+				"A Horde arrives roughly every twelve days, give or take three."
+				"You do not get to know which one."
+			]
+			tasks: [
+				{ id: "0000000000070101", type: "checkmark", title: "Survive a Major Siege" }
+			]
+		}
+		{
+			id: "0000000000000702"
+			x: 2.0d
+			y: 0.0d
+			title: "The Wall Held"
+			description: [
+				"No breach. Not one."
+			]
+			dependencies: ["0000000000000701"]
+			tasks: [
+				{ id: "0000000000070201", type: "checkmark", title: "The Wall Held" }
+			]
+		}
+		{
+			id: "0000000000000703"
+			x: 4.0d
+			y: 0.0d
+			title: "Nobody Bled Out"
+			description: [
+				"Two minutes of bleedout. Ten seconds to revive."
+				"Both numbers exist so that going back for someone is a decision."
+			]
+			dependencies: ["0000000000000702"]
+			tasks: [
+				{ id: "0000000000070301", type: "checkmark", title: "Nobody Bled Out" }
+			]
+		}
+		{
+			id: "0000000000000704"
+			x: 6.0d
+			y: 0.0d
+			title: "Count the Cost"
+			description: [
+				"Rounds spent, walls lost, hours of production missed."
+				"If it cost nothing, the difficulty is wrong."
+			]
+			dependencies: ["0000000000000703"]
+			tasks: [
+				{ id: "0000000000070401", type: "checkmark", title: "Count the Cost" }
+			]
+		}
+	]
+}

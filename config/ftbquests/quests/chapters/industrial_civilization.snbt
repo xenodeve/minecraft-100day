@@ -1,0 +1,64 @@
+{
+	id: "000000000000000C"
+	group: ""
+	icon: "minecraft:beacon"
+	order_index: 11
+	filename: "industrial_civilization"
+	title: "XII — Industrial Civilization"
+	subtitle: ["Civilization can survive the world"]
+	quests: [
+		{
+			id: "0000000000000C01"
+			x: 0.0d
+			y: 0.0d
+			title: "Day 100"
+			description: [
+				"The milestone the whole pack is named after."
+				"It is not the end. It is the point where the world stops deciding."
+			]
+			tasks: [
+				{ id: "00000000000C0101", type: "checkmark", title: "Day 100" }
+			]
+		}
+		{
+			id: "0000000000000C02"
+			x: 2.0d
+			y: 0.0d
+			title: "Power, Food, Ammunition, Defence"
+			description: [
+				"All four, running, without you standing over them."
+			]
+			dependencies: ["0000000000000C01"]
+			tasks: [
+				{ id: "00000000000C0201", type: "checkmark", title: "Power, Food, Ammunition, Defence" }
+			]
+		}
+		{
+			id: "0000000000000C03"
+			x: 4.0d
+			y: 0.0d
+			title: "Rebuild After a Loss"
+			description: [
+				"Lose something that matters. Rebuild it."
+				"A civilisation that cannot absorb a loss is a base with good lighting."
+			]
+			dependencies: ["0000000000000C02"]
+			tasks: [
+				{ id: "00000000000C0301", type: "checkmark", title: "Rebuild After a Loss" }
+			]
+		}
+		{
+			id: "0000000000000C04"
+			x: 6.0d
+			y: 0.0d
+			title: "Industrial Civilization"
+			description: [
+				"An ordinary human built this. That was always the whole idea."
+			]
+			dependencies: ["0000000000000C03"]
+			tasks: [
+				{ id: "00000000000C0401", type: "checkmark", title: "Industrial Civilization" }
+			]
+		}
+	]
+}
