@@ -1,0 +1,13 @@
+{
+	"replace": false,
+	"values": [
+		{ "id": "born_in_chaos_v1:baby_spider", "required": false },
+		{ "id": "born_in_chaos_v1:dread_hound", "required": false },
+		{ "id": "born_in_chaos_v1:corpse_fish", "required": false },
+		{ "id": "born_in_chaos_v1:corpse_fly", "required": false },
+		{ "id": "born_in_chaos_v1:bloody_gadfly", "required": false },
+		{ "id": "born_in_chaos_v1:firelight", "required": false },
+		{ "id": "born_in_chaos_v1:mr_pumpkin", "required": false },
+		{ "id": "born_in_chaos_v1:spirit_guide_assistant", "required": false }
+	]
+}

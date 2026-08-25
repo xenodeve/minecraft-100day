@@ -1,0 +1,58 @@
+[
+  {
+    "hostile": true,
+    "mincount": { "amount": 60, "hostile": true, "perplayer": true },
+    "result": "deny"
+  },
+  {
+    "mod": [ "born_in_chaos_v1" ],
+    "mincount": { "amount": 16, "mod": "born_in_chaos_v1", "perplayer": true },
+    "result": "deny"
+  },
+  {
+    "mob": [ "#ics:bic_elite" ],
+    "maxdaycount": 20,
+    "result": "deny"
+  },
+  {
+    "mob": [ "#ics:bic_elite" ],
+    "mindaycount": 20,
+    "maxdaycount": 45,
+    "random": 0.8,
+    "result": "deny"
+  },
+  {
+    "mob": [ "#ics:bic_elite" ],
+    "mindaycount": 45,
+    "maxdaycount": 70,
+    "random": 0.45,
+    "result": "deny"
+  },
+  {
+    "mob": [ "#ics:bic_mid" ],
+    "maxdaycount": 6,
+    "result": "deny"
+  },
+  {
+    "mob": [ "#ics:bic_mid" ],
+    "mindaycount": 6,
+    "maxdaycount": 20,
+    "random": 0.55,
+    "result": "deny"
+  },
+  {
+    "mob": [ "#ics:bic_swarm" ],
+    "random": 0.4,
+    "result": "deny"
+  },
+  {
+    "mob": [ "#ics:iaf_apex" ],
+    "maxspawndist": 250000.0,
+    "result": "deny"
+  },
+  {
+    "mob": [ "#ics:iaf_apex_ground" ],
+    "maxdaycount": 25,
+    "result": "deny"
+  }
+]
