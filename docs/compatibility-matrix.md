@@ -113,7 +113,7 @@ the jar, and a `mods.toml` entry looks identical whether the dependency is bundl
 | IceAndFire Community Edition | `1.2.7` | MR | COMMON | CORE | |
 | The Hordes | `1.20.1-1.6.3g` | MR | COMMON | CORE | |
 | Enhanced AI | `3.3.7.3` | MR | COMMON | CORE | |
-| Improved Mobs | `1.20.1-1.13.7-forge` | MR | SERVER | CORE-LITE | |
+| Improved Mobs | `1.20.1-1.13.7-forge` | MR | COMMON | CORE-LITE | corrected from SERVER — the jar ships `textures/gui/difficulty_bar.png`, so a client without it loses that HUD. See `docs/side-classification.md` |
 | In Control! | `1.20-9.4.7` | MR | SERVER | CORE | |
 
 ## Civilization / progression
@@ -152,7 +152,7 @@ the jar, and a `mods.toml` entry looks identical whether the dependency is bundl
 | Visual Workbench | `v8.0.1-1.20.1-Forge` | MR | COMMON | CORE | |
 | Corpse | `forge-1.20.1-1.0.23` | MR | COMMON | CORE | |
 | Carry On | `2.1.2.7` | MR | COMMON | CORE | |
-| Client Dynamic Light | — | CF | — | CORE CLIENT | |
+| Client Dynamic Light | — | CF | CLIENT | CORE CLIENT | `clientSideOnly = true` — Forge skips it on a dedicated server |
 
 ## Crafting assistance (Crafting Spec)
 
