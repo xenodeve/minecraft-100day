@@ -205,6 +205,26 @@ before adding it.
 **§3 Experimental mods are all absent by design** — AI Improvements, Let Me Despawn, Alternate
 Current, Canary, TaCZ Optimization, Smooth Boot Reloaded. Each needs its own benchmark branch.
 
+## Animation & movement stack (Animation Spec §2)
+
+| Mod | Version | Source | Side | Status | Tested |
+|---|---|---|---|---|---|
+| Not Enough Animations | `1.12.4` | MR | CLIENT | CORE | already in the pack |
+| Better Animations Collection | `v8.0.1-1.20.1-Forge` | MR | CLIENT | CORE | |
+| SmoothPlayerAnimations | `1.0.3` | MR | CLIENT | CORE | pulls `playerAnimator`, `Cloth Config` |
+| Smooth Movement | `1.20.1-2.6` | CF | COMMON | CORE | pulls `cupboard` |
+| **AMF: Better Movement** | — | — | — | **REJECTED** | Animation Spec §3 — excessive inertia, motion-sickness risk. *"Do not re-propose without explicit developer direction."* |
+| EMF / ETF / Fresh Animations | — | — | — | **NOT ADDED** | §2 *Optional Selective Layer*, not Core |
+
+**The slug in the sweep was wrong, and the sweep said so.** An early pass recorded
+`smooth-player-animations` as CurseForge-only. The real Modrinth slug is **`smoothplayeranimations`**
+— no hyphens — and it is on Modrinth. A slug miss reads exactly like an absent mod; only searching
+by *title* rather than guessing the slug found it.
+
+**Fresh Animations is a resource pack, not a mod.** That is why it has no 1.20.1 Forge build and
+why it can never be added with `packwiz mr add` as a mod. The spec groups it with EMF and ETF under
+*Optional Selective Layer* without making the distinction; it belongs in `resourcepacks/`.
+
 ## Boot test — 2026-08-25, Forge dedicated server
 
 The first real test of the mod set. Forge 47.4.23 dedicated server, Temurin 17.0.20.1, 6 GB heap,
@@ -271,3 +291,20 @@ That is an observation, not a benchmark. It is one cold start on one machine wit
 and startup time is not the metric the Performance Spec cares about — §33–39 define the real ones
 (MSPT, TPS, entity tick time, client FPS) across four scenarios. Do not quote 22.295s as evidence
 the pack performs well; quote it only as evidence the stack loads and does not regress startup.
+
+### Boot 4 — with the animation & movement stack (2026-08-25)
+
+87 jars after client-only filtering. The three client-only animation mods are **not** exercised by
+this test; what it does prove is that `smooth-movement`, `cupboard`, `playeranimator` and
+`cloth-config` load on the common side without conflict.
+
+```
+[07:04:24] Done (25.183s)! For help, type "help"
+```
+
+Green. No errors from any animation-stack mod.
+
+**What a server boot cannot tell you here.** Animation ownership, first-person camera feel and the
+mixing rules in Animation Spec §4–14 are entirely client-side and entirely subjective. This batch
+is the one where a green boot proves least — the spec's own §12 coverage matrix and §39 benchmark
+scene are the real checks, and both need a client.

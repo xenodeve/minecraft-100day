@@ -19,7 +19,7 @@ The design document is the source of truth for intent:
 **`docs/Industrial Civilization Survival — Claude Code Handoff & Implementation Plan.md`**
 (read it before any pack work; unqualified `§N` references throughout this repo are to it).
 
-Three further specs layer on top of it. All share the same platform constraints and the same
+Five further specs layer on top of it. All share the same platform constraints and the same
 design rules, and each numbers its own sections — **cite them by name, never as a bare `§N`**:
 
 | Document | What it governs | Cite as |
@@ -27,6 +27,8 @@ design rules, and each numbers its own sections — **cite them by name, never a
 | `docs/Addon Spec — Crafting Assistance + Tactical Tracker.md` | JEI, Jade, Jade Addons, Crafting Tweaks, Mouse Tweaks, Polymorph, and a re-themed Player Microchip tracker | *Crafting Spec §N* |
 | `docs/Addon Spec — Natural Wildlife & Ecology.md` | Naturalist, Critters and Companions, Ecologics — the ordinary-animal layer that makes monsters read as abnormal. Carries its own phase list, W0–W9 | *Wildlife Spec §N* / *Wildlife Spec W3* |
 | `docs/Addon Modpack — Distribution & Updates.md` | **Release engineering, not content.** Source of truth, what counts as the pack, versioning, the release gate, branching, changelog, friend installation and updates | *Distribution Spec §N* |
+| `docs/Addon Performance — Optimization & Profiling.md` | The performance stack and the benchmark method. §2 is the approved Core stack; §3 Experimental stays out until each mod has its own benchmark branch | *Performance Spec §N* |
+| `docs/Addon Spec — Animation & Movement Layer.md` | Animation ownership, movement feel, first-person camera, and per-mod compatibility. §3 rejects **AMF: Better Movement** outright — do not re-propose without explicit direction | *Animation Spec §N* |
 
 The Distribution Spec is the one that constrains **this repository's own process**, not the game.
 Its §22 branching model and §16 release gate govern how work ships; see `docs/agents/workflow.md`.

@@ -38,6 +38,11 @@ hash = "12c4913f51659fc1c0978004f411d9d9b878f589367e4fbe17ca5da60acbbce8"
 metafile = true
 
 [[files]]
+file = "mods/better-animations-collection.pw.toml"
+hash = "2f1f1c29d99ea10b67348fc529474f128d5b51d0591f124e3363d760e400f53a"
+metafile = true
+
+[[files]]
 file = "mods/blockui.pw.toml"
 hash = "2195b22648787aac875b1ea60c51cca57c1c0a4db4241ec52cd3ea2abfeaebf4"
 metafile = true
@@ -70,6 +75,11 @@ metafile = true
 [[files]]
 file = "mods/client-dynamic-light.pw.toml"
 hash = "237b0859d871b5f843ed689971ee1487a80c86db58aa656901b99d9c0d3a5f91"
+metafile = true
+
+[[files]]
+file = "mods/cloth-config.pw.toml"
+hash = "e3dd03e7fec88831974857e2cdded54dd5c5bdcaa3f6d6248c2800e82db4dd41"
 metafile = true
 
 [[files]]
@@ -125,6 +135,11 @@ metafile = true
 [[files]]
 file = "mods/critters-and-companions.pw.toml"
 hash = "10cf81efb7efc162edb060c26a48ffd997eab3d482929b1a84ea62c9be3f36ce"
+metafile = true
+
+[[files]]
+file = "mods/cupboard.pw.toml"
+hash = "b6753307b3f6a24d0545c4a3383de9be1da85bde4ee749f645c3bd6bb6188f31"
 metafile = true
 
 [[files]]
@@ -338,6 +353,11 @@ hash = "b4018b39ba9f5536c10090297bb19e212bbf6f32a6dcfd29745ee3253896c91e"
 metafile = true
 
 [[files]]
+file = "mods/playeranimator.pw.toml"
+hash = "765987a78e5d8c782d0da2de99998b43b5907d6c41347d3804045ad109e4a586"
+metafile = true
+
+[[files]]
 file = "mods/playerrevive.pw.toml"
 hash = "0e4e32a1b974218110ad20c2545e57e748979dbc7b0e4981d474a6386b898c05"
 metafile = true
@@ -390,6 +410,16 @@ metafile = true
 [[files]]
 file = "mods/simple-voice-radio.pw.toml"
 hash = "656e95162a6b80203fb0608ec02494f5448915b206705e80958d5dc7698a6ac9"
+metafile = true
+
+[[files]]
+file = "mods/smooth-movement.pw.toml"
+hash = "6524f2c8618b33b13fee693cefbe7c34d3e69f760670dd653296f4714ded9e5c"
+metafile = true
+
+[[files]]
+file = "mods/smoothplayeranimations.pw.toml"
+hash = "4f8f7d24808a744eb325214c6656f2a493146d59a63a1fce23c3abe867e52459"
 metafile = true
 
 [[files]]
