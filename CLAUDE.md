@@ -139,10 +139,10 @@ node scripts/validate/verify.mjs          # both phases — this is the local sh
 node scripts/validate/verify.mjs lint     # syntax · placeholders · JEI orphans · the packwiz manifest
 node scripts/validate/verify.mjs test     # node --check over every kubejs/**/*.js
 
-node scripts/build/build-instance.mjs     # the self-contained client instance (389 MB, 99 mods)
-node scripts/build/build-server.mjs       # the server pack (332 MB, 89 mods — Distribution Spec §12)
+node scripts/build/build-instance.mjs     # the self-contained client instance (405 MB, 107 mods)
+node scripts/build/build-server.mjs       # the server pack (341 MB, 91 mods — Distribution Spec §12)
 node scripts/build/generate-checksums.mjs # build/SHA256SUMS.txt, and refuses a stale artifact
-node scripts/build/generate-modlist.mjs   # docs/MODLIST.md — 99 mods, source URLs resolved from ids
+node scripts/build/generate-modlist.mjs   # docs/MODLIST.md — 107 mods, source URLs resolved from ids
 
 node scripts/validate/config-drift.mjs <install>   # "friend A works, friend B doesn't" (§38)
 

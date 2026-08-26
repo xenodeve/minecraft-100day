@@ -93,7 +93,7 @@ hundred lines name the mod. `crash-reports/` has the same information formatted 
 
 This is `0.1.0-alpha`.
 
-- ✅ **99 mods** at exact, verified versions; Create pinned to `6.0.8`. **`MODLIST.md`, at the top
+- ✅ **107 mods** at exact, verified versions; Create pinned to `6.0.8`. **`MODLIST.md`, at the top
   of this download, lists every one of them with a link to where it came from.**
 - ✅ **The balance work is done.** Guns are gated behind four tiers of factory output, ammunition is
   an industrial product, hordes arrive roughly every twelve days and grow, monsters fade in over
@@ -106,7 +106,7 @@ This is `0.1.0-alpha`.
 - ❌ **One known problem, unfixed:** Improved Mobs cannot read the defence values of Brimm Armors,
   so no Brimm armour will ever be worn by a mob.
 
-- ⚠️ **Do not post this publicly yet.** The pack bundles all 99 mods, and at least three authors
+- ⚠️ **Do not post this publicly yet.** The pack bundles all 107 mods, and at least three authors
   permit modpack inclusion only on condition that their jar is **not** rehosted. Whether this pack
   may be distributed at all is **unestablished** — not permitted, not prohibited, just unchecked
   until now. `docs/distribution-licenses.md` has the detail and names the decisions it needs.
@@ -210,7 +210,7 @@ java -jar packwiz-installer-bootstrap.jar http://localhost:8080/pack.toml
 
 นี่คือ `0.1.0-alpha`
 
-- ✅ **99 mod** ที่เวอร์ชันเป๊ะและตรวจสอบแล้ว Create pin ที่ `6.0.8`
+- ✅ **107 mod** ที่เวอร์ชันเป๊ะและตรวจสอบแล้ว Create pin ที่ `6.0.8`
   **`MODLIST.md` ที่อยู่บนสุดของไฟล์ที่โหลดมา ลงชื่อทุกตัวพร้อมลิงก์ไปยังที่มาของมัน**
 - ✅ **งาน balance ทำเสร็จแล้ว** ปืนถูกกั้นด้วยสี่ขั้นของกำลังการผลิต กระสุนเป็นของที่ต้องผลิต
   ในโรงงาน horde มาทุก ๆ สิบสองวันโดยประมาณและใหญ่ขึ้นเรื่อย ๆ สัตว์ประหลาดโผล่มาทีละนิด
@@ -221,7 +221,7 @@ java -jar packwiz-installer-bootstrap.jar http://localhost:8080/pack.toml
   และตัวเลขอาจผิดในแบบที่มีแต่การเล่นเท่านั้นที่จะเผย
 - ❌ **ปัญหาที่รู้แล้วหนึ่งข้อ ยังไม่ได้แก้:** Improved Mobs อ่านค่าป้องกันของ Brimm Armors ไม่ได้
   ดังนั้นจะไม่มีมอบตัวไหนสวมเกราะ Brimm เลย
-- ⚠️ **ยังอย่าเพิ่งโพสต์สาธารณะ** pack รวมมอดทั้ง 99 ตัวไว้ข้างใน
+- ⚠️ **ยังอย่าเพิ่งโพสต์สาธารณะ** pack รวมมอดทั้ง 107 ตัวไว้ข้างใน
   และมีผู้เขียนอย่างน้อยสามคนที่อนุญาตให้ใส่ modpack ได้โดยมีเงื่อนไขว่าต้อง**ไม่** rehost ตัว jar ของเขา
   เรื่องที่ว่า pack นี้แจกจ่ายได้หรือไม่นั้น **ยังไม่ได้ถูกกำหนด** — ไม่ใช่อนุญาต ไม่ใช่ห้าม
   แค่ยังไม่มีใครตรวจจนถึงตอนนี้ `docs/distribution-licenses.md` มีรายละเอียดและระบุการตัดสินใจที่ต้องใช้
