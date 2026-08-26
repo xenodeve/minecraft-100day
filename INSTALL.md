@@ -91,16 +91,22 @@ hundred lines name the mod. `crash-reports/` has the same information formatted 
 
 ## What is in the pack, and what is not
 
-This is `0.1.0-alpha`. It is **the mod set, resolved and pinned** — and nothing else yet.
+This is `0.1.0-alpha`.
 
-- ✅ 93 mods at exact, verified versions; Create pinned to `6.0.8`
-- ❌ **No balance work.** Gun damage, mob health, spawn rates and ammunition costs are all at their
-  mod defaults. The design intent — ammunition as an industrial resource, monsters that are
-  dangerous through AI rather than health — is **not implemented yet**.
-- ❌ No KubeJS recipes, no quests, no custom configs.
+- ✅ **99 mods** at exact, verified versions; Create pinned to `6.0.8`. **`MODLIST.md`, at the top
+  of this download, lists every one of them with a link to where it came from.**
+- ✅ **The balance work is done.** Guns are gated behind four tiers of factory output, ammunition is
+  an industrial product, hordes arrive roughly every twelve days and grow, monsters fade in over
+  time rather than all at once, and undead do not burn at dawn.
+- ✅ **A twelve-chapter quest campaign**, 48 quests, written around objectives rather than a
+  crafting checklist.
+- ⚠️ **None of it has been verified in a running game.** Every check so far has been a dedicated
+  server boot: configs parse, recipes register, quests load. That is not the same as playing it, and
+  numbers may be wrong in ways only play reveals.
+- ❌ **One known problem, unfixed:** Improved Mobs cannot read the defence values of Brimm Armors,
+  so no Brimm armour will ever be worn by a mob.
 
-So it will run, and it will not yet play the way the design documents describe. See
-`docs/OPEN-WORK-LEDGER.md` for what is next.
+See `docs/OPEN-WORK-LEDGER.md` for what is next, and `CHANGELOG.md` for what changed.
 <!-- lang:end -->
 
 <!-- lang:th -->
@@ -196,13 +202,19 @@ java -jar packwiz-installer-bootstrap.jar http://localhost:8080/pack.toml
 
 ## ใน pack มีอะไร และยังไม่มีอะไร
 
-นี่คือ `0.1.0-alpha` มันคือ **ชุด mod ที่ resolve และ pin เรียบร้อยแล้ว** — และยังไม่มีอย่างอื่น
+นี่คือ `0.1.0-alpha`
 
-- ✅ 93 mod ที่เวอร์ชันเป๊ะและตรวจสอบแล้ว Create pin ที่ `6.0.8`
-- ❌ **ยังไม่มีงาน balance เลย** ดาเมจปืน เลือดม็อบ อัตรา spawn และต้นทุนกระสุน ยังเป็นค่า default
-  ของแต่ละ mod ทั้งหมด เจตนาการออกแบบ — กระสุนเป็นทรัพยากรอุตสาหกรรม, สัตว์ประหลาดอันตราย
-  เพราะ AI ไม่ใช่เพราะเลือดเยอะ — **ยังไม่ได้ถูกทำ**
-- ❌ ยังไม่มี KubeJS recipe ไม่มี quest ไม่มี config ที่ปรับเอง
+- ✅ **99 mod** ที่เวอร์ชันเป๊ะและตรวจสอบแล้ว Create pin ที่ `6.0.8`
+  **`MODLIST.md` ที่อยู่บนสุดของไฟล์ที่โหลดมา ลงชื่อทุกตัวพร้อมลิงก์ไปยังที่มาของมัน**
+- ✅ **งาน balance ทำเสร็จแล้ว** ปืนถูกกั้นด้วยสี่ขั้นของกำลังการผลิต กระสุนเป็นของที่ต้องผลิต
+  ในโรงงาน horde มาทุก ๆ สิบสองวันโดยประมาณและใหญ่ขึ้นเรื่อย ๆ สัตว์ประหลาดโผล่มาทีละนิด
+  แทนที่จะมาพร้อมกัน และผีดิบไม่ไหม้ตอนเช้า
+- ✅ **แคมเปญ quest สิบสองบท** 48 quest เขียนรอบเป้าหมาย ไม่ใช่ checklist การคราฟต์
+- ⚠️ **ยังไม่มีอะไรถูกตรวจสอบในเกมจริง** การตรวจทุกอย่างที่ผ่านมาเป็นการ boot
+  บน dedicated server: config parse ได้ recipe ลงทะเบียนได้ quest โหลดได้ นั่นไม่เท่ากับการเล่นจริง
+  และตัวเลขอาจผิดในแบบที่มีแต่การเล่นเท่านั้นที่จะเผย
+- ❌ **ปัญหาที่รู้แล้วหนึ่งข้อ ยังไม่ได้แก้:** Improved Mobs อ่านค่าป้องกันของ Brimm Armors ไม่ได้
+  ดังนั้นจะไม่มีมอบตัวไหนสวมเกราะ Brimm เลย
 
 ดังนั้นมันรันได้ แต่ยังไม่ได้เล่นแบบที่เอกสารออกแบบบรรยายไว้ ดูสิ่งที่จะทำต่อได้ที่
 `docs/OPEN-WORK-LEDGER.md`

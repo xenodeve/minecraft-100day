@@ -15,7 +15,7 @@
 // is fatal — a silently corrupt jar in a 130 MB artifact is exactly the kind
 // of failure nobody finds until a friend cannot launch.
 
-import { readdirSync, writeFileSync, mkdirSync, existsSync, statSync, rmSync } from 'node:fs'
+import { readdirSync, writeFileSync, mkdirSync, existsSync, statSync, rmSync, copyFileSync } from 'node:fs'
 import { execFileSync } from 'node:child_process'
 import { join } from 'node:path'
 import { readPack, readMetas, fetchAndVerify, versionStamp } from './lib/pack.mjs'
@@ -74,6 +74,20 @@ const stripMarkdown = (dir) => {
 }
 stripMarkdown(join(STAGE, '.minecraft'))
 console.log(`stripped ${stripped} maintainer .md file(s) — they are repo documentation, not pack content`)
+
+
+// The mod roster ships *after* the strip, deliberately. The strip exists to keep
+// maintainer READMEs out of a player's install; `docs/MODLIST.md` is the
+// opposite — it is the one document written for the person who downloaded this.
+// Anyone reading it is holding the artifact, so it goes where they will see it.
+const roster = join(ROOT, 'docs', 'MODLIST.md')
+if (existsSync(roster)) {
+  copyFileSync(roster, join(STAGE, 'MODLIST.md'))
+  console.log('bundled docs/MODLIST.md — the roster a downloader reads')
+} else {
+  console.error('docs/MODLIST.md is missing — run: node scripts/build/generate-modlist.mjs')
+  process.exit(1)
+}
 
 writeFileSync(join(STAGE, 'mmc-pack.json'), JSON.stringify({
   components: [

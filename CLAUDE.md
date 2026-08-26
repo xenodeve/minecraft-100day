@@ -141,6 +141,7 @@ node scripts/validate/verify.mjs test     # node --check over every kubejs/**/*.
 node scripts/build/build-instance.mjs     # the self-contained client instance (389 MB, 99 mods)
 node scripts/build/build-server.mjs       # the server pack (332 MB, 89 mods — Distribution Spec §12)
 node scripts/build/generate-checksums.mjs # build/SHA256SUMS.txt, and refuses a stale artifact
+node scripts/build/generate-modlist.mjs   # docs/MODLIST.md — 99 mods, source URLs resolved from ids
 
 node scripts/validate/config-drift.mjs <install>   # "friend A works, friend B doesn't" (§38)
 
@@ -177,6 +178,8 @@ docs/
   Addon Spec — Natural Wildlife ….md         Naturalist / Critters / Ecologics, phases W0–W9
   Addon Modpack — Distribution & Updates.md  release engineering — governs THIS repo's process
   OPEN-WORK-LEDGER.md         open work, tracked and untracked — read at session start
+  MODLIST.md                  GENERATED — the roster a downloader reads. Ships inside both
+                              artifacts. `verify` refuses one that disagrees with mods/
   customization-map.md        WHAT STILL HAS TO BE BUILT — the 22 mods the design docs
                               tag for custom work, with their concrete targets
   compatibility-matrix.md     what has been OBSERVED — versions, sources, boot results
