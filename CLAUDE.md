@@ -19,7 +19,7 @@ The design document is the source of truth for intent:
 **`docs/Industrial Civilization Survival — Claude Code Handoff & Implementation Plan.md`**
 (read it before any pack work; unqualified `§N` references throughout this repo are to it).
 
-Five further specs layer on top of it. All share the same platform constraints and the same
+Six further specs layer on top of it. All share the same platform constraints and the same
 design rules, and each numbers its own sections — **cite them by name, never as a bare `§N`**:
 
 | Document | What it governs | Cite as |
@@ -29,6 +29,7 @@ design rules, and each numbers its own sections — **cite them by name, never a
 | `docs/Addon Modpack — Distribution & Updates.md` | **Release engineering, not content.** Source of truth, what counts as the pack, versioning, the release gate, branching, changelog, friend installation and updates | *Distribution Spec §N* |
 | `docs/Addon Performance — Optimization & Profiling.md` | The performance stack and the benchmark method. §2 is the approved Core stack; §3 Experimental stays out until each mod has its own benchmark branch | *Performance Spec §N* |
 | `docs/Addon Spec — Animation & Movement Layer.md` | Animation ownership, movement feel, first-person camera, and per-mod compatibility. §3 rejects **AMF: Better Movement** outright — do not re-propose without explicit direction | *Animation Spec §N* |
+| `docs/Addon Spec —  Khaojee Enchanted Visuals Integration.md` | The Vanilla+ visual layer adapted from a reference modpack — grass, biome blending, particles, weather, connected textures, world-block animation. Carries its own phase list, V0–V10. §22 forbids a **required** shader | *Visuals Spec §N* |
 
 The Distribution Spec is the one that constrains **this repository's own process**, not the game.
 Its §22 branching model and §16 release gate govern how work ships; see `docs/agents/workflow.md`.
@@ -177,9 +178,12 @@ docs/
   Addon Spec — Crafting Assistance ….md      JEI / Jade / tactical tracker
   Addon Spec — Natural Wildlife ….md         Naturalist / Critters / Ecologics, phases W0–W9
   Addon Modpack — Distribution & Updates.md  release engineering — governs THIS repo's process
+  Addon Spec —  Khaojee Enchanted ….md      the Vanilla+ visual layer, phases V0–V10
   OPEN-WORK-LEDGER.md         open work, tracked and untracked — read at session start
   MODLIST.md                  GENERATED — the roster a downloader reads. Ships inside both
                               artifacts. `verify` refuses one that disagrees with mods/
+  khaojee-visual-reference.md the Visuals Spec §36 source-tracking table — V0 audit results,
+                              every version and licence measured, not recalled
   customization-map.md        WHAT STILL HAS TO BE BUILT — the 22 mods the design docs
                               tag for custom work, with their concrete targets
   compatibility-matrix.md     what has been OBSERVED — versions, sources, boot results

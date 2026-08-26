@@ -27,17 +27,18 @@ population (W3/W6/W7), the Brimm-vs-TakKit comparison (§15), the JEI active-rec
 Spec §5) and the twelve-test release gate (Distribution Spec §16) are all **measurements**, and a
 dedicated server cannot produce any of them.
 
-**Three rows need no client, and none of the three is actionable today** — which is a different
-statement from *"everything left needs a client"*, and the difference is the point. Search the table
-for 🟡 and check it:
+**Four rows need no client, and one of them is actionable right now.** That is a different
+statement from *"everything left needs a client"*, and the difference is the point:
 
 | Row | What it actually waits on |
 |---|---|
+| **Redistribution licences (#53)** | **nothing — hand-reading 40 CurseForge project pages** |
 | The three Player Microchip textures (**#35**) | an **artist** |
 | Re-add `cbc_firepower_components` | an **upstream release** supporting CBC ≥ 5.9 |
 | Re-evaluate `TaCZ: Accelerated` | a **benchmark baseline** — which does need a client to profile with |
 
-A fourth, the **Season 2 viability sweep**, needed neither and is now done — ADR 0004 (#44).
+Two more needed neither and are now done: the **Season 2 viability sweep** (ADR 0004, #44) and the
+**Visuals V0 reference audit** (#52).
 
 **Why this is spelled out rather than summarised.** An earlier version of this paragraph claimed
 *everything* left was downstream of a client launch. That was false when it was written: seven Track
@@ -85,6 +86,15 @@ tier — is now a decided operating mode rather than a pending task, which is wh
 | **Phase 2 — combat baseline, `docs/combat-baseline.md` TTK matrix** | 🟡 | the **gun side is done**; the mob side needs a client | `docs/combat-baseline.md` exists with all 54 guns and 84 Born in Chaos entities read from bytecode. What is missing is *measured* mob HP, and `DamageBaseMultiplier` stays 1.0 until it exists (**#30**, **#33**) |
 | **All 22 mods tagged for custom work** | ✅ | — | **20 implemented, 3 declined with reasons, 2 parked with named blockers.** `docs/customization-map.md` is now a status report rather than a plan (**#21**, **#27**–**#36**) |
 | Phases 3–12 | ✅ | — | Threat director **#27** · Sound **#28** · Consumption economy **#31** · Horde **#29** · Civilization **#33** · Dragon frontier **#33** · Tactical gear **#30** · City infrastructure **#32** · Quest campaign **#36** |
+| **Visuals V0** — reference audit | ✅ | — | **#52**. `docs/khaojee-visual-reference.md` — 24 projects swept by title, versions and licences read from the Modrinth API. Six of the seven adoption-set mods have real Forge 1.20.1 builds |
+| **Visuals V1** — safe visual baseline | 🔴 | **needs a client** | Visuals Spec §37. Grassier Grass · Better Biome Blend · Soft Imprints · Subtle Effects (needs **Fzzy Config**) · Fancy World Animations. §38's done-criteria are all measurements: FPS, 1% lows, combat readability |
+| **Visuals V2** — weather | 🔴 | needs V1 and a client | Visuals Spec §9. Particle Rain, stress-tested against §32's rule that rain must never make ADS or NVG unreadable |
+| **Visuals V3** — connected textures | 🔴 | needs a client | Visuals Spec §12. Fusion is Forge-native, so §41's no-Fabric-bridge rule costs nothing. Test dense industrial builds |
+| **Visuals V4** — selective Fresh Animations | 🔴 | needs `docs/animation-coverage.md`, which needs a client | Visuals Spec §11 via the Animation Spec. EMF + ETF are Forge mods; **Fresh Animations is a resource pack**. Player Extension stays OFF |
+| **Visuals V5–V8** — decorative and worldgen prototypes | 🔴 | needs a client, and §33 wants worldgen settled before persistent play | BOP and Regions Unexplored both need **TerraBlender** (absent). §15 requires multiple seeds. Particle Interactions has **no 1.20.1 build** and should move to §44 |
+| **Visuals V9–V10** — multiplayer benchmark, visual profiles | 🔴 | needs 3–4 players | Visuals Spec §34. Standard / Enhanced / Cinematic Optional |
+| `docs/animation-coverage.md` | 🔴 | needs a client | Visuals Spec §11 and the Animation Spec both cite it and it does not exist. Decides which vanilla entities Fresh Animations may own |
+| **Redistribution licences** — `docs/distribution-licenses.md` | 🔴 **UNTRACKED risk, now tracked** | needs hand-reading 40 CurseForge project pages | **#53**. The pack ships 99 jars self-contained and has never checked whether it may. 21 of 59 Modrinth mods are All-Rights-Reserved or custom; 40 CurseForge licences are not machine-readable; **four mods opted out of API distribution and the build fetches them by direct URL anyway** |
 | Phase 13 — Season 2 prototype | 🔴 | out of scope until Season 1 is played | §24 Phase 13. Create: New Age, VS2, Clockwork, TFMG, Warium |
 | **Brimm Armors balance** | 🟡 | **needs a client** — §15 wants a comparison against TakKit and Brimm registers its stats in code | Read both armour sets off JEI tooltips, then write `config/brimm/overrides/*.xml` (root tag `config`; keys `defense` · `durability` · `toughness` · `knockback-resistance` · `rarity`). The format ships no example and fails open (**#32**) |
 | **Player Microchip textures** | 🟡 | needs an artist | §20 wants the beacon to look like it clips to a plate carrier. Names and recipes are done (**#35**); the three 16×16 PNGs are not |
