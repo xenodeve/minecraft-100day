@@ -5,8 +5,8 @@
 *Visuals Spec §35* asks for it before shipping; ADR 0003 made the pack self-contained, which means
 it has been redistributing 99 jars since the first build (107 as of Visuals V2).
 
-**What it is not.** A legal opinion, and not a clean bill of health. **42 of 107 have not been read
-yet.** A licence that could not be determined is recorded as unread, never assumed.
+**What it is not.** A legal opinion, and not a clean bill of health. **All 107 have now been read. 38 of them say nothing about
+redistribution, which is not the same as permitting it.** A licence that could not be determined is recorded as unread, never assumed.
 
 - **Swept:** 2026-08-27 · issue #53
 - **Method:** Modrinth `/v2/project/{slug}` for licence id, name and body text; CurseForge project
@@ -103,12 +103,26 @@ recorded here from the prose itself.
 |---|---|---|
 | **Subtle Effects** | ✅ *"Use this mod in modpacks with credit and one or more links to any of the project pages"* · ❌ *"Reupload/publish this mod to any website without explicit permission"* | **modpack use permitted**, and `docs/MODLIST.md` already supplies the credit and the link. The reupload clause is the same rehosting question as Serene Seasons and Entity Culling |
 | **Immersive Posts** | *"Do not redistribute this mod unless as part of a pack!"* | **permitted for packs**, explicitly. The classifier read this as a prohibition — it is the opposite |
+| **Macaw's Lights and Lamps** | *"Q: Can I use your mods in my modpack? A: **Yes, just credit us and with a reference to the modrinth page**"* | **permitted**, on the same credit-and-link condition `docs/MODLIST.md` already meets |
 
-## What the CurseForge half of this audit could not read
+## Read, and silent — the ordinary case
 
-Descriptions on 16 CurseForge project pages did not yield any modpack-permission prose to the
-scraper. That is a **limit of the method, not a finding about the mods** — CurseForge renders
-descriptions in a form this extraction did not reach. Those rows stay unread and need a browser.
+The first CurseForge pass reported *"no relevant prose found"* for 16 pages. **That was a bug, not a
+finding.** A CurseForge project page carries roughly **49 separate `description` fields** — nav
+blurbs, related-mod cards, the category tree — and the extraction matched whichever came first. Fixed
+to concatenate all of them plus the licence body.
+
+Re-read, **19 of 20 CurseForge pages parse fine and simply say nothing about redistribution**, as do
+**19 of 22** Modrinth ones. One page — `[TaCZ] Timeless and Classics Zero Guns` — carries no
+description field at all.
+
+**Silence is the normal case and it is not consent.** For these mods the operative permission is the
+licence alone, which for most of them is *All Rights Reserved*. They need a direct ask, or a decision
+to rely on something other than a written grant.
+
+**One false positive is retracted here.** *SmoothPlayerAnimations* was flagged as permitting
+modpacks on a bullet reading `- Large Modpacks`. In context that sits under a **Performance**
+heading and describes what the mod is suitable for, not what you may do with it. It is silent.
 
 ## Permissively licensed — 59 mods
 
@@ -179,11 +193,12 @@ been modified.
 | Soft Imprints | [Modrinth](https://modrinth.com/mod/snow-imprints) | MIT | Modrinth API |
 | Particle Rain | [Modrinth](https://modrinth.com/mod/particle-rain) | MIT | Modrinth API |
 
-## Not read yet — 42 mods
+## Read, and silent — 38 mods · unreadable — 1
 
-These carry a custom or All-Rights-Reserved licence, or a licence whose body says nothing about
-modpacks. **Nothing is claimed about them.** Each needs its project page read by a person; the
-answer is usually in prose, not in a field.
+**Every page below has now been read.** They carry a custom or All-Rights-Reserved licence and say
+nothing about modpacks — which is the ordinary case, and which is **not** permission. Three mods that
+were in this list have moved up to *Read and permitted*. `[TaCZ] Timeless and Classics Zero Guns` is
+the one page with no description field at all.
 
 | Mod | Source | Licence | Read from |
 |---|---|---|---|
@@ -207,12 +222,10 @@ answer is usually in prose, not in a field.
 | GlitchCore | [Modrinth](https://modrinth.com/mod/glitchcore) | All Rights Reserved | Modrinth API |
 | Grillo's Clothes | [Modrinth](https://modrinth.com/mod/grillos-clothes) | All Rights Reserved | Modrinth API |
 | Immersive Engineering | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/immersive-engineering) | Custom License | project page |
-| Immersive Posts | [Modrinth](https://modrinth.com/mod/immersiveposts) | Custom | Modrinth API |
 | Improved Mobs | [Modrinth](https://modrinth.com/mod/improved-mobs) | All Rights Reserved | Modrinth API |
 | InsaneLib | [Modrinth](https://modrinth.com/mod/insanelib) | All Rights Reserved | Modrinth API |
 | Jade Addons (Neo/Forge) | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/jade-addons) | All Rights Reserved | project page |
 | Jade 🔍 | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/jade) | Custom License | project page |
-| Macaw's Lights and Lamps | [Modrinth](https://modrinth.com/mod/macaws-lights-and-lamps) | All Rights Reserved | Modrinth API |
 | MineColonies | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/minecolonies) | Custom License | project page |
 | MrCrayfish's Furniture Mod: Refurbished | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/refurbished-furniture) | Custom License | project page |
 | Naturalist | [Modrinth](https://modrinth.com/mod/naturalist) | Custom | Modrinth API |
@@ -228,7 +241,6 @@ answer is usually in prose, not in a field.
 | TownTalk | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/towntalk) | All Rights Reserved | project page |
 | Fzzy Config | [Modrinth](https://modrinth.com/mod/fzzy-config) | TDL M | Modrinth API |
 | Grassier Grass | [Modrinth](https://modrinth.com/mod/grassier-grass) | All Rights Reserved | Modrinth API |
-| Subtle Effects | [Modrinth](https://modrinth.com/mod/subtle-effects) | All Rights Reserved | Modrinth API |
 
 ## Decisions this needs, which are not the agent's to make
 
@@ -261,7 +273,7 @@ proposes but has not installed. `docs/khaojee-visual-reference.md` records their
 *Visuals Spec §35* ขอไว้ให้ทำก่อนส่งมอบ ส่วน ADR 0003 ทำให้ pack เป็นแบบมีทุกอย่างในตัว
 ซึ่งแปลว่ามันแจกจ่าย jar 99 ตัวซ้ำมาตั้งแต่ build แรก (107 ตัวนับตั้งแต่ Visuals V2)
 
-**ไม่ใช่อะไร** ไม่ใช่ความเห็นทางกฎหมาย และไม่ใช่ใบรับรองว่าทุกอย่างสะอาด **42 จาก 107 ยังไม่ได้อ่าน**
+**ไม่ใช่อะไร** ไม่ใช่ความเห็นทางกฎหมาย และไม่ใช่ใบรับรองว่าทุกอย่างสะอาด **ทั้ง 107 ตัวถูกอ่านแล้ว 38 ตัวไม่ได้พูดถึงการแจกจ่ายซ้ำเลย ซึ่งไม่เท่ากับการอนุญาต**
 สัญญาอนุญาตที่หาไม่ได้ถูกบันทึกว่ายังไม่ได้อ่าน ไม่ใช่สมมติเอา
 
 - **กวาดเมื่อ:** 2026-08-27 · issue #53
@@ -357,12 +369,26 @@ player-microchip      1488872   IN MANIFEST
 |---|---|---|
 | **Subtle Effects** | ✅ *"ใช้มอดนี้ใน modpack ได้โดยให้เครดิตและใส่ลิงก์ไปยังหน้าโปรเจกต์อย่างน้อยหนึ่งลิงก์"* · ❌ *"ห้ามอัปโหลดซ้ำ/เผยแพร่มอดนี้ไปยังเว็บไซต์ใด ๆ โดยไม่ได้รับอนุญาตชัดแจ้ง"* | **อนุญาตให้ใช้ใน modpack** และ `docs/MODLIST.md` ให้เครดิตกับลิงก์ไว้แล้ว ส่วนข้อห้ามอัปโหลดซ้ำคือคำถามเรื่อง rehost เดียวกับ Serene Seasons และ Entity Culling |
 | **Immersive Posts** | *"อย่าแจกจ่ายมอดนี้ซ้ำ เว้นแต่เป็นส่วนหนึ่งของ pack!"* | **อนุญาตสำหรับ pack** อย่างชัดเจน ตัวจัดประเภทอ่านมันเป็นข้อห้าม — ซึ่งตรงข้ามกัน |
+| **Macaw's Lights and Lamps** | *"ถาม: ใช้มอดของคุณใน modpack ได้ไหม ตอบ: **ได้ แค่ให้เครดิตเราและอ้างอิงหน้า modrinth**"* | **อนุญาต** ด้วยเงื่อนไขเครดิต-และ-ลิงก์เดียวกับที่ `docs/MODLIST.md` ทำอยู่แล้ว |
 
-## สิ่งที่ฝั่ง CurseForge ของ audit นี้อ่านไม่ได้
+## อ่านแล้ว และเงียบ — กรณีปกติ
 
-คำอธิบายบนหน้าโปรเจกต์ CurseForge 16 หน้าไม่ได้ให้ข้อความเรื่องสิทธิ์ modpack กับตัวดึงข้อมูลเลย
-นั่นเป็น**ข้อจำกัดของวิธี ไม่ใช่สิ่งที่พบเกี่ยวกับมอด** — CurseForge แสดงคำอธิบายในรูปแบบที่การดึงนี้เข้าไม่ถึง
-แถวเหล่านั้นยังเป็นยังไม่ได้อ่าน และต้องใช้เบราว์เซอร์
+การกวาด CurseForge รอบแรกรายงานว่า *"ไม่พบข้อความที่เกี่ยวข้อง"* สำหรับ 16 หน้า
+**นั่นเป็นบั๊ก ไม่ใช่สิ่งที่พบ** หน้าโปรเจกต์ CurseForge หนึ่งหน้ามีฟิลด์ `description`
+แยกกันราว **49 ฟิลด์** — ข้อความนำทาง การ์ดมอดที่เกี่ยวข้อง ต้นไม้หมวดหมู่ — และการดึงข้อมูล
+ไปจับเอาอันที่มาก่อน แก้ให้รวมทุกฟิลด์เข้าด้วยกันบวกกับเนื้อความสัญญาอนุญาตแล้ว
+
+พออ่านใหม่ **หน้า CurseForge 19 จาก 20 หน้า parse ได้ปกติและไม่ได้พูดถึงการแจกจ่ายซ้ำเลย**
+เช่นเดียวกับของ Modrinth **19 จาก 22** หน้าหนึ่ง — `[TaCZ] Timeless and Classics Zero Guns` —
+ไม่มีฟิลด์คำอธิบายเลย
+
+**ความเงียบคือกรณีปกติ และมันไม่ใช่การยินยอม** สำหรับมอดเหล่านี้ สิทธิ์ที่มีผลคือตัวสัญญาอนุญาตอย่างเดียว
+ซึ่งส่วนใหญ่คือ *All Rights Reserved* พวกมันต้องการการไปถามโดยตรง
+หรือการตัดสินใจที่จะอาศัยอย่างอื่นที่ไม่ใช่การให้สิทธิ์เป็นลายลักษณ์อักษร
+
+**มีผลบวกปลอมหนึ่งรายการที่ถอนคืนตรงนี้** *SmoothPlayerAnimations* ถูกตีว่าอนุญาต modpack
+จากบูลเล็ตที่เขียนว่า `- Large Modpacks` เมื่อดูบริบทแล้วมันอยู่ใต้หัวข้อ **Performance**
+และอธิบายว่ามอดเหมาะกับอะไร ไม่ใช่ว่าคุณทำอะไรกับมันได้ มันเงียบ
 
 ## สัญญาอนุญาตแบบเปิด — 59 มอด
 
@@ -432,10 +458,12 @@ player-microchip      1488872   IN MANIFEST
 | Soft Imprints | [Modrinth](https://modrinth.com/mod/snow-imprints) | MIT | Modrinth API |
 | Particle Rain | [Modrinth](https://modrinth.com/mod/particle-rain) | MIT | Modrinth API |
 
-## ยังไม่ได้อ่าน — 42 มอด
+## อ่านแล้วและเงียบ — 38 มอด · อ่านไม่ได้ — 1
 
-พวกนี้มีสัญญาอนุญาตแบบ custom หรือ All Rights Reserved หรือมีเนื้อความที่ไม่ได้พูดถึง modpack เลย
-**ไม่มีการอ้างอะไรเกี่ยวกับพวกมัน** แต่ละตัวต้องให้คนไปอ่านหน้าโปรเจกต์ คำตอบมักอยู่ในข้อความ ไม่ใช่ในฟิลด์
+**ทุกหน้าด้านล่างถูกอ่านแล้ว** พวกมันมีสัญญาอนุญาตแบบ custom หรือ All Rights Reserved
+และไม่ได้พูดถึง modpack เลย — ซึ่งเป็นกรณีปกติ และ**ไม่ใช่**การอนุญาต มอดสามตัวที่เคยอยู่ในรายการนี้
+ย้ายขึ้นไปอยู่ *อ่านแล้วและอนุญาต* แล้ว ส่วน `[TaCZ] Timeless and Classics Zero Guns`
+เป็นหน้าเดียวที่ไม่มีฟิลด์คำอธิบายเลย
 
 | Mod | Source | Licence | Read from |
 |---|---|---|---|
@@ -459,12 +487,10 @@ player-microchip      1488872   IN MANIFEST
 | GlitchCore | [Modrinth](https://modrinth.com/mod/glitchcore) | All Rights Reserved | Modrinth API |
 | Grillo's Clothes | [Modrinth](https://modrinth.com/mod/grillos-clothes) | All Rights Reserved | Modrinth API |
 | Immersive Engineering | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/immersive-engineering) | Custom License | project page |
-| Immersive Posts | [Modrinth](https://modrinth.com/mod/immersiveposts) | Custom | Modrinth API |
 | Improved Mobs | [Modrinth](https://modrinth.com/mod/improved-mobs) | All Rights Reserved | Modrinth API |
 | InsaneLib | [Modrinth](https://modrinth.com/mod/insanelib) | All Rights Reserved | Modrinth API |
 | Jade Addons (Neo/Forge) | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/jade-addons) | All Rights Reserved | project page |
 | Jade 🔍 | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/jade) | Custom License | project page |
-| Macaw's Lights and Lamps | [Modrinth](https://modrinth.com/mod/macaws-lights-and-lamps) | All Rights Reserved | Modrinth API |
 | MineColonies | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/minecolonies) | Custom License | project page |
 | MrCrayfish's Furniture Mod: Refurbished | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/refurbished-furniture) | Custom License | project page |
 | Naturalist | [Modrinth](https://modrinth.com/mod/naturalist) | Custom | Modrinth API |
@@ -480,7 +506,6 @@ player-microchip      1488872   IN MANIFEST
 | TownTalk | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/towntalk) | All Rights Reserved | project page |
 | Fzzy Config | [Modrinth](https://modrinth.com/mod/fzzy-config) | TDL M | Modrinth API |
 | Grassier Grass | [Modrinth](https://modrinth.com/mod/grassier-grass) | All Rights Reserved | Modrinth API |
-| Subtle Effects | [Modrinth](https://modrinth.com/mod/subtle-effects) | All Rights Reserved | Modrinth API |
 
 ## การตัดสินใจที่ต้องใช้ และไม่ใช่หน้าที่ของ agent
 
