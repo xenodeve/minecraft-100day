@@ -15,10 +15,10 @@
 // is fatal — a silently corrupt jar in a 130 MB artifact is exactly the kind
 // of failure nobody finds until a friend cannot launch.
 
-import { readFileSync, readdirSync, writeFileSync, mkdirSync, existsSync, statSync, rmSync } from 'node:fs'
-import { createHash } from 'node:crypto'
+import { readdirSync, writeFileSync, mkdirSync, existsSync, statSync, rmSync } from 'node:fs'
 import { execFileSync } from 'node:child_process'
 import { join } from 'node:path'
+import { readPack, readMetas, fetchAndVerify, versionStamp } from './lib/pack.mjs'
 
 const ROOT = process.cwd()
 const CACHE = join(ROOT, 'build', '.jar-cache')
@@ -26,99 +26,20 @@ const STAGE = join(ROOT, 'build', '.instance')
 const outArg = process.argv.indexOf('--out')
 
 // ------------------------------------------------------------ pack metadata
-const pack = readFileSync(join(ROOT, 'pack.toml'), 'utf8')
-const packField = (k) => (pack.match(new RegExp(`^${k}\\s*=\\s*"([^"]*)"`, 'm')) || [])[1]
-const NAME = packField('name') ?? 'modpack'
-const VERSION = packField('version') ?? '0.0.0'
-const MC = (pack.match(/^minecraft\s*=\s*"([^"]*)"/m) || [])[1]
-const FORGE = (pack.match(/^forge\s*=\s*"([^"]*)"/m) || [])[1]
-if (!MC || !FORGE) { console.error('pack.toml: could not read the minecraft/forge versions'); process.exit(1) }
+const { name: NAME, version: VERSION, mc: MC, forge: FORGE } = readPack(ROOT)
 
 const OUT = outArg > -1
   ? process.argv[outArg + 1]
   : join('build', `${NAME.replace(/[^A-Za-z0-9]+/g, '-')}-${VERSION}-instance.zip`)
 
 // ------------------------------------------------------------ read metafiles
-/** packwiz metafiles are small and flat; a full TOML parser is not worth a dependency here. */
-function parseMeta(text) {
-  const get = (k) => (text.match(new RegExp(`^\\s*${k}\\s*=\\s*"([^"]*)"`, 'm')) || [])[1]
-  const num = (k) => (text.match(new RegExp(`^\\s*${k}\\s*=\\s*(\\d+)`, 'm')) || [])[1]
-  return {
-    name: get('name'),
-    filename: get('filename'),
-    side: get('side') ?? 'both',
-    url: get('url'),
-    hashFormat: get('hash-format'),
-    hash: get('hash'),
-    mode: get('mode'),
-    projectId: num('project-id'),
-    fileId: num('file-id'),
-  }
-}
-
-const metas = readdirSync(join(ROOT, 'mods'))
-  .filter(f => f.endsWith('.pw.toml'))
-  .map(f => parseMeta(readFileSync(join(ROOT, 'mods', f), 'utf8')))
+const metas = readMetas(ROOT)
 
 console.log(`${NAME} ${VERSION} — Minecraft ${MC}, Forge ${FORGE}`)
 console.log(`${metas.length} mods to assemble\n`)
 
 // ------------------------------------------------------------ fetch + verify
-const digest = (buf, fmt) => createHash(fmt === 'sha1' ? 'sha1' : fmt === 'sha512' ? 'sha512' : 'sha256')
-  .update(buf).digest('hex')
-
-/** CurseForge-sourced metafiles carry no URL. This is the endpoint the website's
- *  own Download button uses — not the API those four mods opted out of. */
-const cfUrl = (m) => `https://www.curseforge.com/api/v1/mods/${m.projectId}/files/${m.fileId}/download`
-
-mkdirSync(CACHE, { recursive: true })
-const problems = []
-let fetched = 0, cached = 0
-
-for (const [i, m] of metas.entries()) {
-  const dest = join(CACHE, m.filename)
-  const label = `(${String(i + 1).padStart(2)}/${metas.length}) ${m.name}`
-
-  let buf
-  if (existsSync(dest)) {
-    buf = readFileSync(dest)
-    cached++
-  } else {
-    const url = m.url ?? cfUrl(m)
-    if (!m.url && (!m.projectId || !m.fileId)) {
-      problems.push(`${m.name}: no download url and no curseforge ids`); continue
-    }
-    try {
-      const r = await fetch(url, { headers: { 'User-Agent': 'minecraft-100day-bot' }, redirect: 'follow' })
-      if (!r.ok) { problems.push(`${m.name}: HTTP ${r.status} from ${url}`); console.log(`${label} — HTTP ${r.status}`); continue }
-      buf = Buffer.from(await r.arrayBuffer())
-      writeFileSync(dest, buf)
-      fetched++
-    } catch (e) {
-      problems.push(`${m.name}: ${e.message}`); console.log(`${label} — ${e.message}`); continue
-    }
-  }
-
-  if (m.hash) {
-    const got = digest(buf, m.hashFormat)
-    if (got !== m.hash) {
-      problems.push(`${m.name}: ${m.hashFormat} mismatch\n      expected ${m.hash}\n      got      ${got}`)
-      console.log(`${label} — HASH MISMATCH`)
-      continue
-    }
-  } else {
-    problems.push(`${m.name}: metafile records no hash — cannot verify`)
-  }
-  console.log(`${label} — ok (${(buf.length / 1048576).toFixed(1)} MB)`)
-}
-
-if (problems.length) {
-  console.error(`\n${problems.length} problem(s):\n`)
-  for (const p of problems) console.error(`  ✗ ${p}`)
-  console.error('\nRefusing to build an artifact that is missing or corrupt.')
-  process.exit(1)
-}
-console.log(`\nall ${metas.length} jars verified — ${fetched} downloaded, ${cached} from cache`)
+await fetchAndVerify(metas, CACHE)
 
 // ------------------------------------------------------------ stage instance
 execFileSync('rm', ['-rf', STAGE])
@@ -172,6 +93,12 @@ writeFileSync(join(STAGE, 'instance.cfg'),
     `notes=${NAME} ${VERSION} — self-contained. Every mod is inside this file; nothing is downloaded on import.`,
     '',
   ].join('\n'))
+
+// Distribution Spec §12 wants the client and server packs to carry the same
+// version, and §40 wants a mismatch to be obvious. A file both artifacts carry
+// turns that check into a `cat`.
+writeFileSync(join(STAGE, '.minecraft', 'pack-version.txt'), versionStamp(
+  { name: NAME, version: VERSION, mc: MC, forge: FORGE }, 'client'))
 
 // ------------------------------------------------------------ zip
 //

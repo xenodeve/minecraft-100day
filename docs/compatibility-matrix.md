@@ -387,3 +387,66 @@ Ice & Fire references a Fabric-convention tag (`#c:bosses`) that no Forge mod in
 provides. It appears in **every** boot including the very first, is not caused by any change here,
 and affects only gorgon stone immunity for entities that would have been in that tag. Recorded so
 nobody spends an afternoon on it.
+
+### Boot 14 — the server pack, on a fresh Forge install (2026-08-25)
+
+The first boot of `build-server.mjs` output: `libraries/` + Forge run scripts, then the server pack
+unzipped over it. 89 jars — 99 minus the 10 client-only.
+
+```
+Done (12.934s)
+Added 83 recipes, removed 82 recipes, modified 0 recipes, with 0 failed recipes
+Loaded 1 chapter groups, 12 chapters, 48 quests, 0 reward tables
+```
+
+**This boot exercised four mods that had never been in a boot test.** `takkit`,
+`flashier-flashlights`, `client-dynamic-light` and `player-microchip` are excluded from the CurseForge
+API, so `packtest` drops them — but `build-server` fetches them through the same direct download URL
+the website's own button uses, so the server pack has them.
+
+Two consequences, both new information:
+
+**The tracker recipes are verified.** `[ICS] tactical tracker re-themed and re-costed` ran for the
+first time — 83 recipes added rather than 80 — with **`0 failed recipes`**. That closes the
+"unverified" flagged in #35: `create:brass_casing`, `create:electron_tube`,
+`immersiveengineering:circuit_board` and `immersiveengineering:component_electronic` all resolve.
+
+**A real mod interaction, non-fatal, that changes what the Brimm row means.**
+
+```
+[improvedmobs/ERROR]: Error calculating default weights for item ratnik.
+  If you really want this item you are free to manually add this to the pool.
+java.lang.IllegalStateException: Unexpected armor type (HELMET) for this material
+  at blackoutInteractive.ema_08_.items.SimpleArmorMaterial.m_7366_(SimpleArmorMaterial.java:59)
+  at io.github.flemmli97.improvedmobs.config.EquipmentList.getDefaultWeight(EquipmentList.java:254)
+```
+
+**45 times.** Improved Mobs walks the item registry to build its equipment pool, calls Brimm's
+`SimpleArmorMaterial.getDefenseForType(HELMET)`, and Brimm throws. Improved Mobs catches it, logs,
+and skips the item — the message says so itself.
+
+So **no Brimm armour will ever be equipped on a mob by Improved Mobs.** Nothing crashes and the
+server is green, which is precisely why this needed a boot to find. It also narrows the parked Brimm
+row (#32): whatever balance that armour eventually gets, mobs will not be wearing it unless the
+entries are added to `config/improvedmobs/equipment.json` by hand, which the error message
+recommends.
+
+**One benign first-run error.** `com.iafenvoy.jupiter` logs a `FileNotFoundException` for
+`config/jupiter.json` on a server that has never run, then continues and creates it. A friend will
+see it on their first boot; it means nothing.
+
+### Rig traps, now three deep
+
+Two more boots this session were lost to the rig rather than the pack, both from a **previous
+server still running**:
+
+| Symptom | Real cause |
+|---|---|
+| `DirectoryLock` `IOException` — "another process has locked a portion of the file" | stale server holds `session.lock` |
+| `FAILED TO BIND TO PORT! Address already in use` on 25565 | stale server holds the port |
+
+The first reads like a corrupt save and the second like a firewall problem. Neither is.
+`pkill -f` does **not** match these processes; `Get-Process java | Stop-Process -Force` does.
+
+**Stop every java process before a boot, and give a second server its own port** — `servertest`
+uses `25577`.
