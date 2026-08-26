@@ -11,7 +11,7 @@
 🔴 **UNTRACKED** (MD-only, no GitHub issue — highest miss-risk) · ⛔ decided won't-do (kept
 visible so it is not re-proposed as if it were open)
 
-**Current state, stated plainly:** the pack is **built and customized**. 99 mods pinned with
+**Current state, stated plainly:** the pack is **built and customized**. 107 mods pinned with
 exact versions and hashes, `config/` · `defaultconfigs/` · `kubejs/` · `config/ftbquests/` all
 written, and **20 of the 22 customization rows implemented** with 3 declined-with-reasons and 2
 parked against named blockers (`docs/customization-map.md`). Every change was proven on a
@@ -145,7 +145,7 @@ Folded into the operating layer under **#7**.
 | `scripts/build/` — `build-server`, `generate-checksums` | ✅ | — | **#42**. Both written, plus `lib/pack.mjs` extracted so the two builds cannot disagree about a hash check. `build-instance` went 222 → 149 lines |
 | Grow `verify.mjs` into `validate-pack` | ✅ 7 of 10 · 🟡 3 | the rest need a launched game or a dependency graph packwiz does not record | **#41**. Added pack metadata (incl. a stale `[index]` hash), missing mods, duplicate mods, unexpected client/server. Still open: missing dependencies, KubeJS startup errors, broken config references |
 | COMMON / SERVER / CLIENT side classification | ✅ | — | **#41**. `docs/side-classification.md` — 87 `both` · 10 `client` · 2 `server`, each one-sided call graded by evidence. Three errors found: two by cross-referencing the metafiles against the matrix (one wrong in each), one by a `clientSideOnly` sweep |
-| Server pack, version-locked to the client pack | ✅ | — | **#42**. 89 mods, 332 MB, `pack-version.txt` in both artifacts. Booted green from a **fresh** Forge install — and that boot verified the tracker recipes and found the Brimm × Improved Mobs interaction |
+| Server pack, version-locked to the client pack | ✅ | — | **#42**. 89 mods / 332 MB **as shipped then** — 91 / 341 MB today after Visuals V1. `pack-version.txt` in both artifacts. Booted green from a **fresh** Forge install — and that boot verified the tracker recipes and found the Brimm × Improved Mobs interaction |
 | Config ownership map — PACK CONTROLLED vs USER PREFERENCE | ✅ | — | **#43**. `docs/config-ownership.md`. The rule is structural, not a list: the pack owns exactly the 39 files it ships, because those are the only ones in the index for packwiz to write |
 | `scripts/validate/config-drift` | ✅ | — | **#43**. Compares **values**, not hashes — measured: 4 of 4 TOML configs drift at byte level after one boot and 2 of 2 JSON do not, so a hash check would be wrong on every install |
 | Release gate — the 12 in-game tests | 🔴 | needs a launchable pack | Distribution Spec §16. **Not automatable.** Human protocol, sibling of §26–27 |

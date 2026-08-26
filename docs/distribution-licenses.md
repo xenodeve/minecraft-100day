@@ -3,7 +3,7 @@
 
 **What this is.** One row per mod the pack ships, its licence, and where that licence was read.
 *Visuals Spec §35* asks for it before shipping; ADR 0003 made the pack self-contained, which means
-it has been redistributing 99 jars since the first build (107 as of Visuals V2).
+it has been redistributing every jar it ships since the first build — **107** of them today.
 
 **What it is not.** A legal opinion, and not a clean bill of health. **All 107 have now been read. 38 of them say nothing about
 redistribution, which is not the same as permitting it.** A licence that could not be determined is recorded as unread, never assumed.
@@ -38,11 +38,11 @@ their licences.** Swapping mods will not fix it; only changing how the pack is d
 
 | Artifact | How mods reach the player | Rehosts a jar? |
 |---|---|---|
-| `…-instance.zip` (389 MB) | all 99 jars inside the zip | **yes, 99** |
-| `…-server.zip` (332 MB) | all 89 jars inside the zip | **yes, 89** |
-| `…-alpha.zip` (CurseForge, 132 MB) | **40** referenced by project/file id · **57** bundled in `overrides/mods/` | **yes, 57** |
+| `…-instance.zip` (405 MB) | all 107 jars inside the zip | **yes, 107** |
+| `…-server.zip` (341 MB) | all 91 jars inside the zip | **yes, 91** |
+| `…-alpha.zip` (CurseForge, 148 MB) | **40** referenced by project/file id · **65** bundled in `overrides/mods/` | **yes, 65** |
 
-The CurseForge-format export is closest to compliant, and still bundles 57 jars — packwiz puts
+The CurseForge-format export is closest to compliant, and still bundles 65 jars — packwiz puts
 Modrinth-sourced mods in `overrides/` because a CurseForge manifest cannot reference them.
 
 ## Four authors switched off third-party distribution
@@ -271,7 +271,7 @@ proposes but has not installed. `docs/khaojee-visual-reference.md` records their
 
 **นี่คืออะไร** หนึ่งแถวต่อหนึ่งมอดที่ pack ส่งไป สัญญาอนุญาตของมัน และอ่านมาจากไหน
 *Visuals Spec §35* ขอไว้ให้ทำก่อนส่งมอบ ส่วน ADR 0003 ทำให้ pack เป็นแบบมีทุกอย่างในตัว
-ซึ่งแปลว่ามันแจกจ่าย jar 99 ตัวซ้ำมาตั้งแต่ build แรก (107 ตัวนับตั้งแต่ Visuals V2)
+ซึ่งแปลว่ามันแจกจ่าย jar ทุกตัวที่มันส่งซ้ำมาตั้งแต่ build แรก — วันนี้คือ **107** ตัว
 
 **ไม่ใช่อะไร** ไม่ใช่ความเห็นทางกฎหมาย และไม่ใช่ใบรับรองว่าทุกอย่างสะอาด **ทั้ง 107 ตัวถูกอ่านแล้ว 38 ตัวไม่ได้พูดถึงการแจกจ่ายซ้ำเลย ซึ่งไม่เท่ากับการอนุญาต**
 สัญญาอนุญาตที่หาไม่ได้ถูกบันทึกว่ายังไม่ได้อ่าน ไม่ใช่สมมติเอา
@@ -306,11 +306,11 @@ proposes but has not installed. `docs/khaojee-visual-reference.md` records their
 
 | Artifact | มอดไปถึงผู้เล่นยังไง | rehost jar ไหม |
 |---|---|---|
-| `…-instance.zip` (389 MB) | jar ทั้ง 99 ตัวอยู่ใน zip | **ใช่ 99 ตัว** |
-| `…-server.zip` (332 MB) | jar ทั้ง 89 ตัวอยู่ใน zip | **ใช่ 89 ตัว** |
-| `…-alpha.zip` (CurseForge, 132 MB) | **40** อ้างด้วย project/file id · **57** ใส่ไว้ใน `overrides/mods/` | **ใช่ 57 ตัว** |
+| `…-instance.zip` (405 MB) | jar ทั้ง 107 ตัวอยู่ใน zip | **ใช่ 107 ตัว** |
+| `…-server.zip` (341 MB) | jar ทั้ง 91 ตัวอยู่ใน zip | **ใช่ 91 ตัว** |
+| `…-alpha.zip` (CurseForge, 148 MB) | **40** อ้างด้วย project/file id · **65** ใส่ไว้ใน `overrides/mods/` | **ใช่ 65 ตัว** |
 
-ตัว export รูปแบบ CurseForge ใกล้เคียงกับที่ถูกต้องที่สุด และก็ยังใส่ jar มา 57 ตัว —
+ตัว export รูปแบบ CurseForge ใกล้เคียงกับที่ถูกต้องที่สุด และก็ยังใส่ jar มา 65 ตัว —
 packwiz เอามอดที่มาจาก Modrinth ไปไว้ใน `overrides/` เพราะ manifest ของ CurseForge อ้างถึงมันไม่ได้
 
 ## ผู้เขียนสี่คนปิดการแจกจ่ายผ่านบุคคลที่สาม

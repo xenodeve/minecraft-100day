@@ -1,4 +1,5 @@
 <!-- roster-digest: 3cdd2d4a02b4b18d47b99b6fe6a6e5de2bcea5ace0b5591e33b999f95369b766 -->
+<!-- mod-count: 107 -->
 <!-- GENERATED FILE — do not edit by hand.
      Run: node scripts/build/generate-modlist.mjs
      `verify` refuses a roster that disagrees with mods/. -->
@@ -23,7 +24,8 @@ file is the complete one.
 ## Reading the table
 
 **The File column is the exact jar filename**, not a tidied-up version number. That is deliberate:
-99 mods use 99 filename conventions, and parsing a version out of them would mean guessing. The
+107 mods use 107 filename conventions, and parsing a version out of them would mean
+guessing. The
 filename is what is actually on your disk, so it is also what you can match against your `mods/`
 folder when something goes wrong.
 
@@ -38,8 +40,8 @@ mods are not installed on a server and are not missing when they are absent.
 
 ## อ่านตารางยังไง
 
-**คอลัมน์ File คือชื่อไฟล์ jar จริง ๆ** ไม่ใช่เลขเวอร์ชันที่จัดให้สวย ตั้งใจให้เป็นแบบนั้น เพราะมอด 99 ตัว
-ใช้รูปแบบการตั้งชื่อไฟล์ 99 แบบ การพยายามแกะเวอร์ชันออกมาคือการเดา ชื่อไฟล์คือสิ่งที่อยู่บนเครื่องคุณจริง ๆ
+**คอลัมน์ File คือชื่อไฟล์ jar จริง ๆ** ไม่ใช่เลขเวอร์ชันที่จัดให้สวย ตั้งใจให้เป็นแบบนั้น เพราะมอด 107 ตัว
+ใช้รูปแบบการตั้งชื่อไฟล์ 107 แบบ การพยายามแกะเวอร์ชันออกมาคือการเดา ชื่อไฟล์คือสิ่งที่อยู่บนเครื่องคุณจริง ๆ
 ดังนั้นมันจึงเป็นสิ่งที่คุณเอาไปเทียบกับโฟลเดอร์ `mods/` ได้ตอนมีอะไรผิดพลาด
 
 **ลิงก์ต้นทาง resolve มา ไม่ได้เดา** packwiz บันทึก project *id* ไว้ ไม่เคยบันทึก slug

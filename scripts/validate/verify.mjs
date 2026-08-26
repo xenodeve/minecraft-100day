@@ -313,6 +313,20 @@ function lintModlist() {
     return 0
   }
 
+  // The digest covers the metafiles, deliberately not the prose — it must never
+  // need the network. That left the generated *narrative* unguarded, and it
+  // drifted: the file listed 107 rows under a paragraph that said 99, because
+  // the generator had the number as a literal. This checks the one number the
+  // prose states about itself.
+  const count = doc.match(/<!--\s*mod-count:\s*(\d+)\s*-->/)
+  if (!count) {
+    fail(listPath, `no \`<!-- mod-count: N -->\` marker — the roster's own prose cannot be checked against mods/.
+  Run: node scripts/build/generate-modlist.mjs`)
+  } else if (Number(count[1]) !== metafiles.length) {
+    fail(listPath, `says it covers ${count[1]} mods, but mods/ has ${metafiles.length}.
+  Run: node scripts/build/generate-modlist.mjs`)
+  }
+
   const actual = rosterDigest(metafiles.map(f => ({
     file: f, meta: parseMeta(readFileSync(join(ROOT, f), 'utf8')),
   })))

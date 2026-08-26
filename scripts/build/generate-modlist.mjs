@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 // Generates `docs/MODLIST.md` — the roster a downloader reads to find out what
-// they just installed, and the only place this repo credits the 99 authors whose
+// they just installed, and the only place this repo credits the authors whose
 // work the pack ships.
 //
 // Generated rather than written by hand, for the same reason `SHA256SUMS.txt` is:
-// a hand-maintained list of 99 rows is wrong the first time a version bumps, and
+// a hand-maintained list of a hundred-odd rows is wrong the first time a version bumps, and
 // nothing would catch it. `verify.mjs` refuses a roster that disagrees with
 // `mods/`.
 //
@@ -212,6 +212,7 @@ const digest = rosterDigest(
     .map(f => ({ file: `mods/${f}`, meta: parseMeta(readFileSync(join(ROOT, 'mods', f), 'utf8')) })))
 
 const doc = `<!-- roster-digest: ${digest} -->
+<!-- mod-count: ${metas.length} -->
 <!-- GENERATED FILE — do not edit by hand.
      Run: node scripts/build/generate-modlist.mjs
      \`verify\` refuses a roster that disagrees with mods/. -->
@@ -236,7 +237,8 @@ file is the complete one.
 ## Reading the table
 
 **The File column is the exact jar filename**, not a tidied-up version number. That is deliberate:
-99 mods use 99 filename conventions, and parsing a version out of them would mean guessing. The
+${metas.length} mods use ${metas.length} filename conventions, and parsing a version out of them would mean
+guessing. The
 filename is what is actually on your disk, so it is also what you can match against your \`mods/\`
 folder when something goes wrong.
 
@@ -251,8 +253,8 @@ mods are not installed on a server and are not missing when they are absent.
 
 ## อ่านตารางยังไง
 
-**คอลัมน์ File คือชื่อไฟล์ jar จริง ๆ** ไม่ใช่เลขเวอร์ชันที่จัดให้สวย ตั้งใจให้เป็นแบบนั้น เพราะมอด 99 ตัว
-ใช้รูปแบบการตั้งชื่อไฟล์ 99 แบบ การพยายามแกะเวอร์ชันออกมาคือการเดา ชื่อไฟล์คือสิ่งที่อยู่บนเครื่องคุณจริง ๆ
+**คอลัมน์ File คือชื่อไฟล์ jar จริง ๆ** ไม่ใช่เลขเวอร์ชันที่จัดให้สวย ตั้งใจให้เป็นแบบนั้น เพราะมอด ${metas.length} ตัว
+ใช้รูปแบบการตั้งชื่อไฟล์ ${metas.length} แบบ การพยายามแกะเวอร์ชันออกมาคือการเดา ชื่อไฟล์คือสิ่งที่อยู่บนเครื่องคุณจริง ๆ
 ดังนั้นมันจึงเป็นสิ่งที่คุณเอาไปเทียบกับโฟลเดอร์ \`mods/\` ได้ตอนมีอะไรผิดพลาด
 
 **ลิงก์ต้นทาง resolve มา ไม่ได้เดา** packwiz บันทึก project *id* ไว้ ไม่เคยบันทึก slug

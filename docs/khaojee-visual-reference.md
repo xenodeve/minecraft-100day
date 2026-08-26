@@ -111,7 +111,8 @@ combat readability under Horde-in-rain, NVG usability. This repo has never launc
 
 **Whether we may ship them.** Three of the seven adoption-set mods are All Rights Reserved. That is
 the ordinary default on both hosts and many such authors permit modpack inclusion — but nobody has
-read the terms, for these or for the 99 mods already in the pack. Issue **#53**.
+read the terms, for these or for the mods already in the pack. Issue **#53**, which has since
+read all 107.
 
 **The worldgen question.** §33 says worldgen must be settled before persistent play begins, and
 §15 requires multiple seeds. That is V6–V8 and it is a decision, not a lookup.
@@ -229,7 +230,7 @@ spec เลื่อนพวกนี้ออกไปด้วยเหตุ
 
 **ว่าเราแจกจ่ายมันได้หรือเปล่า** สามจากเจ็ดในชุด adoption เป็น All Rights Reserved
 นั่นคือค่าเริ่มต้นปกติของทั้งสองเจ้า และผู้เขียนจำนวนมากก็อนุญาตให้ใส่ modpack —
-แต่ยังไม่มีใครไปอ่านเงื่อนไข ทั้งของพวกนี้และของมอด 99 ตัวที่อยู่ใน pack แล้ว issue **#53**
+แต่ยังไม่มีใครไปอ่านเงื่อนไข ทั้งของพวกนี้และของมอดที่อยู่ใน pack แล้ว issue **#53** ซึ่งตอนนี้อ่านครบทั้ง 107 ตัวแล้ว
 
 **คำถามเรื่อง worldgen** §33 บอกว่า worldgen ต้องนิ่งก่อนเริ่มเล่นโลกถาวร และ §15 ต้องการหลาย seed
 นั่นคือ V6–V8 และมันเป็นการตัดสินใจ ไม่ใช่การเปิดดู

@@ -6,6 +6,128 @@
 
 ---
 
+## The roster, the licence question, and the sixth spec (2026-08-27, #50 – #64)
+
+**Goal:** tell a downloader what they are installing, then find out whether we are allowed to ship
+it, then execute the Visuals Spec that arrived mid-session.
+
+Nine PRs. The through-line is that **each answer produced a sharper question than the one asked.**
+
+### `docs/MODLIST.md` — and the rule that URLs are resolved, never composed
+
+99 mods by dozens of authors shipped uncredited anywhere a player would look. The roster is
+**generated** from `mods/*.pw.toml` through the existing `lib/pack.mjs`, and ships at the root of
+both the instance and the server zip — *after* the `.md` strip, because the strip keeps maintainer
+READMEs out of an install and this file is the opposite of that.
+
+**Slugs are measured, not guessed.** packwiz records project *ids*; a guessed slug has pointed at the
+wrong project twice here (`smoothplayeranimations`, and `create-industry` which is a modpack). The
+generator follows the id and records where it lands. It caught the trap again in a quieter form:
+**Soft Imprints lives at `snow-imprints`.**
+
+Three things the resolver learned by measurement, each of which had to happen before it was believed:
+
+| Symptom | Cause |
+|---|---|
+| a 78-second job ran past **10 minutes** | `fetch` has no default timeout; one stalled socket parks a worker |
+| 4 retries × 40 mods resolved **nothing**, slowly | backoff is right for a *transient* block, wrong for a sustained one |
+| a re-run **downgraded 12 rows** that already had links | regeneration was not monotonic |
+
+First pass 36/99, second 87/99, third **99/99** — because each run now keeps what the last one
+learned.
+
+### The licence audit asked the wrong question first
+
+It started as *"how many mods are All Rights Reserved."* That was wrong. The authors who write about
+modpacks mostly **permit** them, with a condition:
+
+> *Serene Seasons* — "as long as you **do not rehost the mod** and only use builds uploaded directly
+> by us"
+
+> *Entity Culling* — "**Do not redistribute the JAR files anywhere else!**"
+
+Both permit a **hosted** modpack, where the platform fetches from the author's upload. ADR 0003 chose
+**self-contained** delivery. **The conflict is with the distribution model, not the mod list** —
+swapping mods cannot fix it, and no artifact avoids it: even the CurseForge export bundles 65 jars in
+`overrides/` because a CurseForge manifest cannot reference Modrinth-sourced mods.
+
+**Automated classification was tried and abandoned.** It read *"Do not redistribute this mod **unless
+as part of a pack**!"* as a prohibition, and a bare FAQ heading as permission. Only the extracted
+evidence survives, quoted, for a person to judge.
+
+### Two things I wrote into committed documents that were wrong
+
+Both are the kind an adversarial reader catches, and `code-review` did not run all session because it
+mandates sub-agents this session could not spawn.
+
+**One.** I wrote that disabling CurseForge API distribution *"is how an author says 'not in someone
+else's pack'"* and called it the clearest statement of intent in the audit. **Too strong.** All four
+such mods appear in this pack's own CurseForge manifest by project and file id — the flag separates
+*third-party launchers* from *CurseForge itself*. Retracted in #61, which changed the sharpest case
+the audit had put in front of the developer.
+
+**Two.** I wrote that 16 CurseForge pages *"yielded no permission prose — CurseForge renders
+descriptions in a form this extraction did not reach."* That was **my regex**: a project page carries
+~49 separate `description` fields and the extraction matched the first. Fixed in #63; 19 of 20 then
+parsed fine. *"The tool couldn't reach it"* is a more comfortable finding than *"my extraction was
+wrong"*, and it went in unchecked.
+
+**All 107 pages are now read**: 3 explicit grants, 38 silent, 1 with no description field. Two of the
+three grants ask for **credit and a link** — which `MODLIST.md` has supplied since #50 without anyone
+having planned it as a compliance measure. **Silence is the ordinary case and it is not consent.**
+
+### The sixth spec, and where it turned out to be wrong about itself
+
+`Addon Spec — Khaojee Enchanted Visuals Integration.md` arrived registered nowhere and naming three
+documents that did not exist. **V0** swept 24 projects by title:
+
+- **Three entries it treats as mods are resource packs** — Fresh Animations, 3D World Decorations,
+  Lushier Forests. That is *why* Fresh Animations needs EMF + ETF.
+- **Particle Interactions has no 1.20.1 build on any loader.** It cannot be prototyped.
+- **Musgo has no Modrinth match**, and CurseForge has no search API without a key — recorded as
+  *unresolved*, not absent, and no slug was guessed.
+- **§44's six rejections are correct**, and now measured rather than argued: all are Fabric-only or
+  have no 1.20.1 file.
+
+**V1** added five visual mods, and packwiz got one side wrong: Modrinth says Subtle Effects is
+`server: optional`, so packwiz wrote `both`; the jar declares `side = "CLIENT"` with zero `data/`.
+**`optional` is neither** — §11 says inspect, and the jar answers what the field cannot. **Kotlin for
+Forge** arrived as a transitive dependency one level deeper than V0 looked.
+
+**V2** added Particle Rain. **V3 was not attempted**, and the reason is in the spec: Fusion is a
+*library* that changes nothing without a connected-texture resource pack, and §12 never names one.
+Adding it would put an All-Rights-Reserved library into a pack with an unresolved redistribution basis
+for **no visual change at all**. Ledger row reads *"needs a decision, not a client."*
+
+### What the boots proved, and what they cannot
+
+Two green boots (`Done (15.037s)`, `Done (12.803s)`, 83 recipes, 0 failed, all 50 ERROR lines
+pre-existing). **Every visual mod is `side = "client"`, so the only test this repo owns is
+structurally blind to the entire layer.** The boots prove the layer was correctly kept *off* the
+server. Nothing more.
+
+### A third rig trap
+
+`run.sh` points at `unix_args.txt`, whose classpath uses `:` separators. On Windows the JVM dies with
+an `InvalidPathException` that names no mod and no pack content. Use `win_args.txt`. A Forge server
+install ships **both** arg files and only `run.sh`.
+
+### Gates, stated honestly
+
+`code-review` and `scrutinize` **did not run on any of the nine PRs** — both mandate parallel
+sub-agents and this session's system prompt forbade spawning any. `/simplify` was run **inline** once
+(#51) and found two real defects, which is evidence the single-context form works and that not
+running it eight more times had a cost — the two retracted claims above are that cost, measured.
+
+### State
+
+**107 mods** · three artifacts (405 / 341 / 148 MB), `sha256sum -c` clean · `verify` covers 165
+indexed files, the roster's contents **and its stated count**, and a recorded licence for every mod
+· 17 boots · **one** ledger row left that needs neither a client nor a decision, and it needs an
+artist.
+
+---
+
 ## Release engineering — the seven rows I had wrongly written off (2026-08-25, `feat/41-side-classification-validate-pack`)
 
 **Goal:** answer "what is left in the MD before final" honestly, then do it.

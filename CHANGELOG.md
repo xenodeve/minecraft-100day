@@ -42,10 +42,10 @@ no entry, no tag, and is never handed to a friend as if it were a release.
   previously showed nothing; doors, chests, levers and lanterns that animate when you use them; and
   weather you can feel — rain and snow as real particles, wind, and ripples where rain hits water.
   **None of it is verified** — see the note at the end.
-- **`MODLIST.md`** and a licence record for every mod in it. The pack ships 99 mods by dozens of
+- **`MODLIST.md`** and a licence record for every mod in it. The pack ships 107 mods by dozens of
   authors; `docs/distribution-licenses.md` says what each one's licence is and where that was read.
 - **A mod list you can actually read.** `MODLIST.md` sits at the top of both the client and the
-  server download: all 99 mods, the exact jar filename of each, whether it runs on the client, the
+  server download: all 107 mods, the exact jar filename of each, whether it runs on the client, the
   server or both, and a link to the page it came from. Every mod in this pack is somebody else's
   work and this is where they are credited.
 
