@@ -29,8 +29,8 @@ down, which is the part that stops a guess from looking identical to an inspecti
 
 | Side | Count |
 |---|---|
-| `both` | 87 |
-| `client` | 10 |
+| `both` | 89 |
+| `client` | 15 |
 | `server` | 2 |
 
 ## The decisive shared fact
@@ -78,6 +78,7 @@ from a server without consequence.
 | Better Animations Collection | `better-animations-collection` | `displayTest = "IGNORE_ALL_VERSION"` |
 | SmoothPlayerAnimations | `smoothplayeranimations` | `displayTest = "IGNORE_ALL_VERSION"` |
 | Sound Physics Remastered | `sound-physics-remastered` | `displayTest = "IGNORE_ALL_VERSION"` |
+| Subtle Effects | `subtle-effects` | `displayTest = "IGNORE_ALL_VERSION"` **and** `side = "CLIENT"` in its own `mods.toml`, with **zero** `data/` entries |
 
 **`sound-physics-remastered` was marked `both` and was wrong.** The compatibility matrix had it as
 `CLIENT` since the original sweep; the metafile disagreed and the metafile is what
@@ -114,6 +115,34 @@ The mirror of Tier 3: zero `assets/`, so the mod cannot render anything a client
 | ServerCore | `servercore` | **0** | 0 | server tick optimisation |
 
 ---
+
+## The Visuals V1 layer (#56) — declared client, and checked anyway
+
+*Visuals Spec §37* V1 added five client mods and two libraries. Modrinth's `client_side` /
+`server_side` fields are what `packwiz mr add` derives `side` from, and for one of them that
+derivation was **wrong for this pack**.
+
+| Mod | Slug | Modrinth says | Jar says | Ours |
+|---|---|---|---|---|
+| Grassier Grass | `grassier-grass` | server `unsupported` | — | `client` |
+| Better Biome Blend | `better-biome-blend` | server `unsupported` | — | `client` |
+| Soft Imprints | `snow-imprints` | server `unsupported` | — | `client` |
+| Fancy World Animations | `fwa` | server `unsupported` | — | `client` |
+| **Subtle Effects** | `subtle-effects` | server **`optional`** → packwiz wrote `both` | `displayTest = "IGNORE_ALL_VERSION"`, `side = "CLIENT"`, **zero** `data/` | **`client`** |
+| Fzzy Config | `fzzy-config` | server `required` | **`side = "BOTH"`** declared three times | `both` |
+| Kotlin for Forge | `kotlin-for-forge` | server `required` | 0 `assets/`, language provider for Fzzy Config | `both` |
+
+**`optional` is not `client`, and it is not `both` either** — it means the author will not stop you
+either way. §11 says *"inspect exact mod requirement before classify — Do not guess"*, and the jar
+answers what the API field cannot: Subtle Effects declares itself CLIENT and ships no datapack.
+
+**The two libraries stay `both` on their authors' own declaration**, even though their only dependent
+in this pack is now client-side. A library marked `client` that a future server mod needs is a server
+that will not start; the failure is asymmetric, so the declaration wins.
+
+**Kotlin for Forge was not in the plan.** It arrived as a transitive dependency of Fzzy Config, one
+level deeper than the V0 sweep looked — the same second-order-dependency lesson
+`cbc_firepower_components` taught, in a new place.
 
 ## What was checked and rejected
 
@@ -196,8 +225,8 @@ gate ตรวจไม่ได้ว่าเหตุผล*ดี*หรื�
 
 | ฝั่ง | จำนวน |
 |---|---|
-| `both` | 87 |
-| `client` | 10 |
+| `both` | 89 |
+| `client` | 15 |
 | `server` | 2 |
 
 ## ข้อเท็จจริงร่วมที่ชี้ขาด

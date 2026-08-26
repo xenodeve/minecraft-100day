@@ -450,3 +450,24 @@ The first reads like a corrupt save and the second like a firewall problem. Neit
 
 **Stop every java process before a boot, and give a second server its own port** — `servertest`
 uses `25577`.
+
+**A third rig trap, and it reads exactly like a corrupt Forge install.** `run.sh` is the *Unix*
+launcher and it points at `unix_args.txt`, which builds the classpath with `:` separators. Run it on
+Windows and the JVM dies before Forge starts:
+
+```
+Error occurred during initialization of boot layer
+java.nio.file.InvalidPathException: Illegal char <:> at index 70:
+  libraries/cpw/mods/bootstraplauncher/1.1.2/bootstraplauncher-1.1.2.jar:libraries/...
+```
+
+There is no mod in that message and no pack content — it is a path-separator mismatch. Use
+`win_args.txt`:
+
+```powershell
+& "$env:JAVA_HOMEin\java.exe" `@user_jvm_args.txt `
+  `@libraries/net/minecraftforge/forge/1.20.1-47.4.23/win_args.txt nogui
+```
+
+A Forge server install ships **both** arg files and only `run.sh`, so nothing on disk hints that
+`run.sh` is the wrong one here.

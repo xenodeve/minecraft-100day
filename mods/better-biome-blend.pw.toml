@@ -1,0 +1,13 @@
+name = "Better Biome Blend"
+filename = "betterbiomeblend-forge-1.20.1-1.4.0.jar"
+side = "client"
+
+[download]
+url = "https://cdn.modrinth.com/data/Rs6c7WyL/versions/RJ8MBd25/betterbiomeblend-forge-1.20.1-1.4.0.jar"
+hash-format = "sha512"
+hash = "b81a2cc2ffab67a1b4e381158c138e489d8230d9b74ff2c006617010a23f761b7115cefbd7aa81ded1e3ecbaae80fd82e363c40426e311658bef618476684872"
+
+[update]
+[update.modrinth]
+mod-id = "Rs6c7WyL"
+version = "RJ8MBd25"

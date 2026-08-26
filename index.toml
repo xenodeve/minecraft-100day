@@ -263,6 +263,11 @@ hash = "2f1f1c29d99ea10b67348fc529474f128d5b51d0591f124e3363d760e400f53a"
 metafile = true
 
 [[files]]
+file = "mods/better-biome-blend.pw.toml"
+hash = "52dd6d53a9d2327902621aa86b4c6a1e5382b966a5f9abdda248e7a49b29a002"
+metafile = true
+
+[[files]]
 file = "mods/blockui.pw.toml"
 hash = "2195b22648787aac875b1ea60c51cca57c1c0a4db4241ec52cd3ea2abfeaebf4"
 metafile = true
@@ -438,6 +443,16 @@ hash = "efda76423b21f9bfab4ad8d0411f0b06a199ab7e3e12ca16dc0586c1828b8f07"
 metafile = true
 
 [[files]]
+file = "mods/fwa.pw.toml"
+hash = "f4c2535e8b6e5bed303a9062aadddf9c71372431acbc17017f1214b62aa98288"
+metafile = true
+
+[[files]]
+file = "mods/fzzy-config.pw.toml"
+hash = "77db38b9f476e5a488532b9fc1c35586e3e1a382bdd901cdc4736c7c36680ff7"
+metafile = true
+
+[[files]]
 file = "mods/geckolib.pw.toml"
 hash = "898fd2704dd260ae8f3dc20b4416439751f0a9e76367c4f0bbdac886b6987802"
 metafile = true
@@ -450,6 +465,11 @@ metafile = true
 [[files]]
 file = "mods/gml.pw.toml"
 hash = "961fafdef363b7306dcf437d0a2d4a025a8b17bae688130a88de6dce5b0db099"
+metafile = true
+
+[[files]]
+file = "mods/grassier-grass.pw.toml"
+hash = "49d1c82ada7b962cc53c06b3f80be9159956287ac3f4029e5c441e0867f90798"
 metafile = true
 
 [[files]]
@@ -515,6 +535,11 @@ metafile = true
 [[files]]
 file = "mods/jupiter.pw.toml"
 hash = "4c8cf40be3dc27a873a88ab75f231bddc8cf52e13d2c6be3ef2b44486aa9c059"
+metafile = true
+
+[[files]]
+file = "mods/kotlin-for-forge.pw.toml"
+hash = "70a4ecd9d0c04ad20aeb976c1ee28933ce48a0a1f43df42deafaeb2ad7235297"
 metafile = true
 
 [[files]]
@@ -643,6 +668,11 @@ hash = "4f8f7d24808a744eb325214c6656f2a493146d59a63a1fce23c3abe867e52459"
 metafile = true
 
 [[files]]
+file = "mods/snow-imprints.pw.toml"
+hash = "caaa2020959dfb232b96fa09d6ab2af6ab9d1301beebfe83c5efc26f9957387e"
+metafile = true
+
+[[files]]
 file = "mods/sophisticated-backpacks.pw.toml"
 hash = "67f25c4e667e3aa0264bf738ad10a342db234ac1396f8397baa5d64c35d83481"
 metafile = true
@@ -665,6 +695,11 @@ metafile = true
 [[files]]
 file = "mods/structurize.pw.toml"
 hash = "5661b05e4b3c0a9225dbfb0820e6473b0aebbad3a0efd4fb7aa44f7ff827bd59"
+metafile = true
+
+[[files]]
+file = "mods/subtle-effects.pw.toml"
+hash = "66af7d6b6192e70c15496a3e02a3c5871f8ac2b7344eb5958acf8ea077afc3f5"
 metafile = true
 
 [[files]]

@@ -20,7 +20,7 @@ no entry, no tag, and is never handed to a friend as if it were a release.
 
 ### Added
 
-- **99 mods**, pinned to exact versions with hashes. Create is `6.0.8` — forced by the addon
+- **106 mods**, pinned to exact versions with hashes. Create is `6.0.8` — forced by the addon
   version ranges, not chosen.
 - **A twelve-chapter quest campaign**, 48 quests. Objectives rather than a crafting checklist:
   *Establish Industrial Production*, *Build a Freight Corridor*, *Survive a Major Siege*.
@@ -37,6 +37,10 @@ no entry, no tag, and is never handed to a friend as if it were a release.
   version. It carries the four mods CurseForge's API will not serve, so a host does not have to
   hunt them down by hand.
 - **`SHA256SUMS.txt`** next to the downloads, so you can check that what you got is what was built.
+- **A visual layer.** Denser, more natural grass; smooth colour transitions between biomes instead
+  of hard seams; footprints in snow and sand; sparks, smoke and impact particles where the game
+  previously showed nothing; and doors, chests, levers and lanterns that animate when you use them.
+  **None of it is verified** — see the note at the end.
 - **`MODLIST.md`** and a licence record for every mod in it. The pack ships 99 mods by dozens of
   authors; `docs/distribution-licenses.md` says what each one's licence is and where that was read.
 - **A mod list you can actually read.** `MODLIST.md` sits at the top of both the client and the
@@ -78,6 +82,11 @@ no entry, no tag, and is never handed to a friend as if it were a release.
 - **The tactical beacon's recipes are confirmed to register.** They shipped unverified because the
   only test server available excluded the mod itself; the server pack includes it, and all four
   recipes resolve.
+
+_**The visual layer is the one part nothing has checked.** All five visual mods are client-side, and
+this repo's only test is a dedicated-server boot — which is structurally blind to them. The server
+boots green with them in the pack (`Done (15.037s)`, 83 recipes, 0 failed, no new error class), and
+that says only that they were correctly kept off the server._
 
 _Still not released. Everything above is verified on a dedicated-server boot — configs parse,
 recipes register, quests load — and **none of it is verified in game**. One known interaction is
