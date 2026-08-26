@@ -1,0 +1,13 @@
+name = "Grassier Grass"
+filename = "grassiergrass-forge-1.4.5+mc1.20.1.jar"
+side = "client"
+
+[download]
+url = "https://cdn.modrinth.com/data/3jCB9cn2/versions/dVUjKcfu/grassiergrass-forge-1.4.5%2Bmc1.20.1.jar"
+hash-format = "sha512"
+hash = "847ef56e0c7fcc240a921db45ea886b80e52f26b6ee534f4e02a38cae9eb64c588782fd4fa603f5690857aa5ec183cd466a9192a6320bb6c1c25c69130821626"
+
+[update]
+[update.modrinth]
+mod-id = "3jCB9cn2"
+version = "dVUjKcfu"

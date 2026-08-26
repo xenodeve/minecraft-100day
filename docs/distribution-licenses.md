@@ -3,9 +3,9 @@
 
 **What this is.** One row per mod the pack ships, its licence, and where that licence was read.
 *Visuals Spec §35* asks for it before shipping; ADR 0003 made the pack self-contained, which means
-it has been redistributing 99 jars since the first build.
+it has been redistributing 99 jars since the first build (106 as of Visuals V1).
 
-**What it is not.** A legal opinion, and not a clean bill of health. **39 of 99 have not been read
+**What it is not.** A legal opinion, and not a clean bill of health. **42 of 106 have not been read
 yet.** A licence that could not be determined is recorded as unread, never assumed.
 
 - **Swept:** 2026-08-27 · issue #53
@@ -75,7 +75,7 @@ nothing to stand on.
 
 Both **permit hosted modpacks** and both **forbid rehosting the jar**. Quoted above.
 
-## Permissively licensed — 54 mods
+## Permissively licensed — 58 mods
 
 Redistribution is granted by the licence text itself. GPL/LGPL/MPL additionally require that the
 licence and source remain available; shipping the jars unmodified with `docs/MODLIST.md` linking
@@ -138,8 +138,12 @@ been modified.
 | Uranus | [Modrinth](https://modrinth.com/mod/uranus) | GNU Lesser General Public License v3.0 or later | Modrinth API |
 | Visual Workbench | [Modrinth](https://modrinth.com/mod/visual-workbench) | Mozilla Public License 2.0 | Modrinth API |
 | YetAnotherConfigLib (YACL) | [Modrinth](https://modrinth.com/mod/yacl) | GNU Lesser General Public License v3.0 or later | Modrinth API |
+| Better Biome Blend | [Modrinth](https://modrinth.com/mod/better-biome-blend) | Unlicense | Modrinth API |
+| Fancy World Animations | [Modrinth](https://modrinth.com/mod/fwa) | MIT | Modrinth API |
+| Kotlin for Forge | [Modrinth](https://modrinth.com/mod/kotlin-for-forge) | LGPL 2.1 only | Modrinth API |
+| Soft Imprints | [Modrinth](https://modrinth.com/mod/snow-imprints) | MIT | Modrinth API |
 
-## Not read yet — 39 mods
+## Not read yet — 42 mods
 
 These carry a custom or All-Rights-Reserved licence, or a licence whose body says nothing about
 modpacks. **Nothing is claimed about them.** Each needs its project page read by a person; the
@@ -186,6 +190,9 @@ answer is usually in prose, not in a field.
 | TaCZ Additions | [Modrinth](https://modrinth.com/mod/tacz-additions) | All Rights Reserved | Modrinth API |
 | TenshiLib | [Modrinth](https://modrinth.com/mod/tenshilib) | All Rights Reserved | Modrinth API |
 | TownTalk | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/towntalk) | All Rights Reserved | project page |
+| Fzzy Config | [Modrinth](https://modrinth.com/mod/fzzy-config) | TDL M | Modrinth API |
+| Grassier Grass | [Modrinth](https://modrinth.com/mod/grassier-grass) | All Rights Reserved | Modrinth API |
+| Subtle Effects | [Modrinth](https://modrinth.com/mod/subtle-effects) | All Rights Reserved | Modrinth API |
 
 ## Decisions this needs, which are not the agent's to make
 
@@ -216,9 +223,9 @@ proposes but has not installed. `docs/khaojee-visual-reference.md` records their
 
 **นี่คืออะไร** หนึ่งแถวต่อหนึ่งมอดที่ pack ส่งไป สัญญาอนุญาตของมัน และอ่านมาจากไหน
 *Visuals Spec §35* ขอไว้ให้ทำก่อนส่งมอบ ส่วน ADR 0003 ทำให้ pack เป็นแบบมีทุกอย่างในตัว
-ซึ่งแปลว่ามันแจกจ่าย jar 99 ตัวซ้ำมาตั้งแต่ build แรก
+ซึ่งแปลว่ามันแจกจ่าย jar 99 ตัวซ้ำมาตั้งแต่ build แรก (106 ตัวนับตั้งแต่ Visuals V1)
 
-**ไม่ใช่อะไร** ไม่ใช่ความเห็นทางกฎหมาย และไม่ใช่ใบรับรองว่าทุกอย่างสะอาด **39 จาก 99 ยังไม่ได้อ่าน**
+**ไม่ใช่อะไร** ไม่ใช่ความเห็นทางกฎหมาย และไม่ใช่ใบรับรองว่าทุกอย่างสะอาด **42 จาก 106 ยังไม่ได้อ่าน**
 สัญญาอนุญาตที่หาไม่ได้ถูกบันทึกว่ายังไม่ได้อ่าน ไม่ใช่สมมติเอา
 
 - **กวาดเมื่อ:** 2026-08-27 · issue #53
@@ -288,7 +295,7 @@ packwiz เอามอดที่มาจาก Modrinth ไปไว้ใ�
 
 ทั้งคู่**อนุญาต modpack แบบโฮสต์** และทั้งคู่**ห้าม rehost ตัว jar** อ้างข้อความไว้ข้างบนแล้ว
 
-## สัญญาอนุญาตแบบเปิด — 54 มอด
+## สัญญาอนุญาตแบบเปิด — 58 มอด
 
 สิทธิ์แจกจ่ายซ้ำมาจากตัวข้อความสัญญาอนุญาตเอง GPL/LGPL/MPL ต้องการเพิ่มว่าสัญญาอนุญาตและซอร์ส
 ต้องยังเข้าถึงได้ การส่ง jar ไปโดยไม่ดัดแปลงพร้อม `docs/MODLIST.md` ที่ลิงก์ทุกโปรเจกต์
@@ -350,8 +357,12 @@ packwiz เอามอดที่มาจาก Modrinth ไปไว้ใ�
 | Uranus | [Modrinth](https://modrinth.com/mod/uranus) | GNU Lesser General Public License v3.0 or later | Modrinth API |
 | Visual Workbench | [Modrinth](https://modrinth.com/mod/visual-workbench) | Mozilla Public License 2.0 | Modrinth API |
 | YetAnotherConfigLib (YACL) | [Modrinth](https://modrinth.com/mod/yacl) | GNU Lesser General Public License v3.0 or later | Modrinth API |
+| Better Biome Blend | [Modrinth](https://modrinth.com/mod/better-biome-blend) | Unlicense | Modrinth API |
+| Fancy World Animations | [Modrinth](https://modrinth.com/mod/fwa) | MIT | Modrinth API |
+| Kotlin for Forge | [Modrinth](https://modrinth.com/mod/kotlin-for-forge) | LGPL 2.1 only | Modrinth API |
+| Soft Imprints | [Modrinth](https://modrinth.com/mod/snow-imprints) | MIT | Modrinth API |
 
-## ยังไม่ได้อ่าน — 39 มอด
+## ยังไม่ได้อ่าน — 42 มอด
 
 พวกนี้มีสัญญาอนุญาตแบบ custom หรือ All Rights Reserved หรือมีเนื้อความที่ไม่ได้พูดถึง modpack เลย
 **ไม่มีการอ้างอะไรเกี่ยวกับพวกมัน** แต่ละตัวต้องให้คนไปอ่านหน้าโปรเจกต์ คำตอบมักอยู่ในข้อความ ไม่ใช่ในฟิลด์
@@ -397,6 +408,9 @@ packwiz เอามอดที่มาจาก Modrinth ไปไว้ใ�
 | TaCZ Additions | [Modrinth](https://modrinth.com/mod/tacz-additions) | All Rights Reserved | Modrinth API |
 | TenshiLib | [Modrinth](https://modrinth.com/mod/tenshilib) | All Rights Reserved | Modrinth API |
 | TownTalk | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/towntalk) | All Rights Reserved | project page |
+| Fzzy Config | [Modrinth](https://modrinth.com/mod/fzzy-config) | TDL M | Modrinth API |
+| Grassier Grass | [Modrinth](https://modrinth.com/mod/grassier-grass) | All Rights Reserved | Modrinth API |
+| Subtle Effects | [Modrinth](https://modrinth.com/mod/subtle-effects) | All Rights Reserved | Modrinth API |
 
 ## การตัดสินใจที่ต้องใช้ และไม่ใช่หน้าที่ของ agent
 
