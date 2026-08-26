@@ -182,6 +182,8 @@ docs/
   OPEN-WORK-LEDGER.md         open work, tracked and untracked — read at session start
   MODLIST.md                  GENERATED — the roster a downloader reads. Ships inside both
                               artifacts. `verify` refuses one that disagrees with mods/
+  distribution-licenses.md    what the pack may redistribute — and the finding that the
+                              conflict is with SELF-CONTAINED delivery, not the mod list
   khaojee-visual-reference.md the Visuals Spec §36 source-tracking table — V0 audit results,
                               every version and licence measured, not recalled
   customization-map.md        WHAT STILL HAS TO BE BUILT — the 22 mods the design docs

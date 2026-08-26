@@ -322,6 +322,37 @@ function lintModlist() {
   return metafiles.length
 }
 
+// ------------------------------------------ lint: every shipped mod has a licence
+// ADR 0003 made this pack self-contained, so every build redistributes every
+// jar. `docs/distribution-licenses.md` is the record of what we are allowed to
+// redistribute, and a mod added without a row in it is a mod nobody checked.
+//
+// This checks COVERAGE, not permission. Whether the pack may ship a given mod
+// is a decision the audit (#53) put in front of a person, and a gate cannot
+// make it. What a gate can do is refuse to let the question go unasked.
+function lintLicenceCoverage() {
+  const metafiles = files.filter(f => f.startsWith('mods/') && f.endsWith('.pw.toml'))
+  if (!metafiles.length) return 0
+
+  const docPath = 'docs/distribution-licenses.md'
+  if (!existsSync(join(ROOT, docPath))) {
+    fail(docPath, `${metafiles.length} mods are redistributed by every build and nothing records whether that is permitted (Visuals Spec §35).`)
+    return 0
+  }
+
+  const doc = readFileSync(join(ROOT, docPath), 'utf8')
+  for (const f of metafiles) {
+    const name = parseMeta(readFileSync(join(ROOT, f), 'utf8')).name
+    if (!name) continue
+    // The doc escapes pipes in mod names, exactly as the roster does.
+    if (!doc.includes(name.replace(/\|/g, '\\|'))) {
+      fail(f, `\`${name}\` is shipped but has no row in ${docPath} — its redistribution licence has never been read.
+  Add it, or record it as unread; do not assume.`)
+    }
+  }
+  return metafiles.length
+}
+
 // ------------------------------------------------------- test: KubeJS syntax
 function testKubejs() {
   const targets = files.filter(f => f.startsWith('kubejs/') && f.endsWith('.js'))
@@ -347,6 +378,7 @@ if (phase === 'all' || phase === 'lint') {
   counts['KubeJS scripts scanned for orphaned recipes'] = lintJeiOrphans()
   counts['files in the packwiz index'] = lintPackManifest()
   counts['mods in the shipped roster'] = lintModlist()
+  counts['mods with a recorded licence'] = lintLicenceCoverage()
 }
 if (phase === 'all' || phase === 'test') {
   counts['KubeJS scripts'] = testKubejs()
