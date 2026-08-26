@@ -6,6 +6,129 @@
 
 ---
 
+## Release engineering — the seven rows I had wrongly written off (2026-08-25, `feat/41-side-classification-validate-pack`)
+
+**Goal:** answer "what is left in the MD before final" honestly, then do it.
+
+**The answer began with a correction.** I had reported that *"everything left is downstream of
+launching a client."* That was **wrong**. Track 5 — Distribution & release engineering — held seven
+rows whose gates were *"needs the mod list"*, *"needs `config/` to exist"* and *"needs a built client
+pack"*. All three had become true during the customization run, and **I had not touched Track 5 at
+all**.
+
+### What shipped
+
+| # | Distribution Spec | Deliverable |
+|---|---|---|
+| **#41** | §11 · §15 | side classification by inspection, four more `validate-pack` checks |
+| **#42** | §12 · §14 · §23 · §39 | `build-server`, `generate-checksums`, `lib/pack.mjs` |
+| **#43** | §30 · §38 | config ownership map, value-based drift detection |
+| **#44** | — | the Season 2 sweep, as ADR 0004 |
+
+### Three side-classification errors, found three different ways
+
+**Cross-referencing the two records this repo already keeps** — the packwiz metafiles against
+`docs/compatibility-matrix.md` — found two disagreements, **one error in each direction**:
+
+- `sound-physics-remastered` was `both`, the matrix said `CLIENT`. The **metafile** was wrong: the
+  mod declares `displayTest = "IGNORE_ALL_VERSION"` and registers nothing.
+- `improved-mobs` was `both`, the matrix said `SERVER`. The **matrix** was wrong: the jar ships
+  `textures/gui/difficulty_bar.png`, so a client without it loses a HUD element.
+
+**That is the argument for keeping both records rather than generating one from the other.** A
+derived copy cannot disagree with its source, and the disagreement is where the errors were.
+
+**A `clientSideOnly` sweep** across all 99 jars found the third. `META-INF/mods.toml` supports
+`clientSideOnly = true` and **Forge itself** skips such a mod on a dedicated server.
+`client-dynamic-light` declares it and was marked `both` — not a judgement call, a contradiction of
+the author's own declaration. The matrix knew too: its Side column said `—` while its Status column
+already said `CORE CLIENT`.
+
+`packwiz-installer` then confirmed the fix in its own words: **`Deleted Sound Physics Remastered
+(wrong side)`**, 87 → 86 jars.
+
+### The server pack found what nothing else could
+
+`build-server` fetches the four **CurseForge-API-blocked** mods through the same direct URL the
+website's download button uses — so the server pack contains `takkit`, `flashier-flashlights`,
+`client-dynamic-light` and `player-microchip`, which the test rig has always dropped.
+
+Booted over a **fresh** Forge install: `Done (12.934s)`, **83** recipes added rather than 80,
+`0 failed recipes`.
+
+**The tracker recipes are verified.** #35 shipped them with an explicit "unverified" because the
+only server that could test them was the one excluding the mod. `create:brass_casing`,
+`create:electron_tube`, `immersiveengineering:circuit_board` and `component_electronic` all resolve.
+
+**And a real interaction, 45 times over:**
+
+```
+[improvedmobs/ERROR]: Error calculating default weights for item ratnik.
+java.lang.IllegalStateException: Unexpected armor type (HELMET) for this material
+  at blackoutInteractive...SimpleArmorMaterial.m_7366_
+```
+
+Improved Mobs walks the item registry, asks Brimm for a helmet's defence value, Brimm throws,
+Improved Mobs catches it and skips the item. **No Brimm armour will ever be worn by a mob.** Nothing
+crashes and the server is green — which is why this needed a boot to find, and why a green boot is
+not the same as a correct pack. It narrows the parked Brimm row (#32) before that row is even picked
+up.
+
+### The measurement that designed the drift tool
+
+The obvious §38 tool diffs each config against its index hash. **That tool would be wrong on every
+install.** On a server booted exactly once:
+
+```
+config/improvedmobs/common.toml   a8364ac6a95a -> 4a45e508e6e6   drifted
+config/carryon-common.toml        9549d1d5bbf5 -> 0cf664da7703   drifted
+config/hordes-common.toml         b4ed64668c93 -> 1bcf977ee291   drifted
+config/soundattract/guns.toml     8a7a6ae2a763 -> f0ff2c2bff25   drifted
+config/naturalist.json            883bfe335f55 -> 883bfe335f55   same
+config/incontrol/spawn.json       852e9a7e1ebc -> 852e9a7e1ebc   same
+```
+
+**4 of 4 TOML drifted; 2 of 2 JSON did not** — Forge rewrites `.toml` against each mod's
+`ForgeConfigSpec` and never touches `.json`. In every case the **values were identical**.
+
+A hash check would flag 100 % of the files it most needs to watch, on a healthy install. So
+`config-drift.mjs` compares **parsed key/value pairs**, and reports clean on the booted server while
+catching a changed TOML value, a changed JSON value, a missing file, and a quest chapter edited down
+to `line 14`.
+
+### §30 turned out to be structural, not a list
+
+**The pack owns exactly the files it ships**, because those are the only ones in the index for
+packwiz to write. Keybinds, audio, HUD and render settings are safe for that reason rather than
+because anyone remembered them. The map is 39 files plus a statement about everything else.
+
+### A slug guess, made and caught
+
+Sweeping Season 2, the design document's TFMG URL is a **CurseForge** slug — and on Modrinth
+`create-industry` is **a modpack**. Its jar has no `META-INF/mods.toml` at all, which is what exposed
+it. The real slug is `create-tfmg`, found by searching the **title**. Same trap the matrix already
+records for `smoothplayeranimations`; without the second check, a modpack's dependency graph would
+have been written down as TFMG's.
+
+The sweep's answer: **the Create pin closes no Season 2 doors.** All six mods admit `6.0.8`, and
+TFMG's `[6.0.6, 6.1.0)` is the same window Season 1 forces. The CBC family even flips — the Season 1
+addon was removed for capping CBC below 5.11, and the Season 2 one *requires* 5.11 or newer.
+
+### Gates, stated honestly
+
+`simplify=ran` on the two commits where a refactor actually happened (`build-instance` 222 → 149
+lines onto a shared library) and `security-review=ran` on the two that touched build scripts or
+guards. `code-review` and `scrutinize` **did not run** and the trailers say so — which is the
+correction #39 was filed for, applied rather than described.
+
+### State
+
+99 mods · **three** artifacts, all checksummed and `sha256sum -c` clean · `verify` covers **7 of
+§15's 10** checks · 15 boots · **one** ledger row left that needs neither a client nor a release,
+and it needs an artist.
+
+---
+
 ## The customization run — 20 of 22 rows, ten issues, thirteen boots (2026-08-25, `feat/27-incontrol-spawn-director`)
 
 **Goal:** finish the pack. Not "make progress on" — finish, or say precisely why a row cannot be

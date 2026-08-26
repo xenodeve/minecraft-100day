@@ -22,11 +22,11 @@
 // minimum a build must validate; three of those are implemented here and the
 // rest are blocked on a resolved pack, not on effort:
 //
-//   pack metadata valid          — needs pack.toml
-//   missing mods = 0             — needs packwiz index
-//   duplicate mods = 0           — needs packwiz index
-//   missing dependencies = 0     — needs packwiz index
-//   unexpected client/server     — needs packwiz side metadata
+//   pack metadata valid          — DONE (lint), incl. a stale [index] hash
+//   missing mods = 0             — DONE (lint), and every indexed file's hash
+//   duplicate mods = 0           — DONE (lint)
+//   missing dependencies = 0     — needs a dependency graph packwiz does not record
+//   unexpected client/server     — DONE (lint), Distribution Spec §11
 //   KubeJS startup errors = 0    — needs a launched instance; not automatable here
 //   broken config references = 0 — needs the mod set to exist
 //   JSON / TOML syntax           — DONE (lint)
@@ -42,6 +42,7 @@
 
 import { readFileSync, readdirSync, statSync, existsSync } from 'node:fs'
 import { execFileSync } from 'node:child_process'
+import { createHash } from 'node:crypto'
 import { join, relative, sep } from 'node:path'
 
 const ROOT = process.cwd()
@@ -180,6 +181,110 @@ function lintJeiOrphans() {
   return scripts.length
 }
 
+// ------------------------------------------------- lint: the packwiz manifest
+// Distribution Spec §15 lists ten things a build must validate. Four of them
+// became possible only once a resolved pack existed, and they are these.
+//
+// All four read only files in the repo. Deliberately: `mods/` holds metafiles,
+// not jars (.gitignore forbids committing jars), so a check that needed a jar
+// could not run in a fresh clone or in CI. A gate that only works on one machine
+// is not a gate.
+function lintPackManifest() {
+  const packPath = join(ROOT, 'pack.toml')
+  const indexPath = join(ROOT, 'index.toml')
+  if (!existsSync(packPath)) return 0
+  const pack = readFileSync(packPath, 'utf8')
+
+  // -- pack metadata valid ---------------------------------------------------
+  for (const key of ['name', 'version', 'pack-format']) {
+    if (!new RegExp(`^${key}\\s*=`, 'm').test(pack)) {
+      fail('pack.toml', `missing required key '${key}' (Distribution Spec §15: pack metadata valid)`)
+    }
+  }
+
+  // The index hash is the one piece of pack.toml that goes stale silently. A
+  // mismatch means someone edited a pack file and did not run `packwiz refresh`,
+  // and the symptom lands on a FRIEND: packwiz-installer refuses the index and
+  // the install stops. It has already happened here once, when Forge rewrote a
+  // config with CRLF and git stored it LF.
+  if (existsSync(indexPath)) {
+    const declared = pack.match(/^\s*hash\s*=\s*"([0-9a-f]+)"/m)
+    const actual = createHash('sha256').update(readFileSync(indexPath)).digest('hex')
+    if (declared && declared[1] !== actual) {
+      fail('pack.toml', `[index] hash is stale — declared ${declared[1].slice(0, 12)}…, index.toml is ${actual.slice(0, 12)}…\n  Run: packwiz refresh`)
+    }
+  }
+
+  // -- missing files = 0 -----------------------------------------------------
+  // Every file the index promises must exist, and its hash must still match.
+  // This is the .packwizignore class of bug caught from the other side: a file
+  // the index names but the tree does not have.
+  let indexed = 0
+  if (existsSync(indexPath)) {
+    const idx = readFileSync(indexPath, 'utf8')
+    const entries = [...idx.matchAll(/\[\[files\]\]\s*\nfile\s*=\s*"([^"]+)"\s*\nhash\s*=\s*"([0-9a-f]+)"/g)]
+    indexed = entries.length
+    for (const [, rel, hash] of entries) {
+      const abs = join(ROOT, rel)
+      if (!existsSync(abs)) {
+        fail('index.toml', `names a file that does not exist: ${rel} (Distribution Spec §15: missing mods = 0)`)
+        continue
+      }
+      if (rel.startsWith('mods/')) continue   // metafile hashes are checked by packwiz itself
+      const actual = createHash('sha256').update(readFileSync(abs)).digest('hex')
+      if (actual !== hash) {
+        fail(rel, `content no longer matches the hash in index.toml — run \`packwiz refresh\``)
+      }
+    }
+  }
+
+  // -- duplicate mods = 0 ----------------------------------------------------
+  // Two metafiles pointing at the same project means the same mod is installed
+  // twice under different filenames, which Forge reports as a duplicate mod id
+  // and refuses to load.
+  const seen = new Map()
+  for (const f of files.filter(x => x.startsWith('mods/') && x.endsWith('.pw.toml'))) {
+    const src = readFileSync(join(ROOT, f), 'utf8')
+    const url = src.match(/^\s*url\s*=\s*"([^"]+)"/m)
+    const proj = src.match(/^\s*(?:mod-id|project-id)\s*=\s*(\S+)/m)
+    const key = url ? `url:${url[1]}` : (proj ? `proj:${proj[1]}` : null)
+    if (!key) continue
+    if (seen.has(key)) {
+      fail(f, `duplicate of ${seen.get(key)} — both resolve to ${key} (Distribution Spec §15: duplicate mods = 0)`)
+    } else {
+      seen.set(key, f)
+    }
+  }
+
+  // -- unexpected client/server = 0 -----------------------------------------
+  // Distribution Spec §11 ends with "Do not guess." So a one-sided mod must
+  // carry a written reason: `docs/side-classification.md` names it and says why.
+  // A mod marked `client` that the server actually needs is not a size problem,
+  // it is a server that will not start; the reason is what makes the claim
+  // reviewable by someone who was not there.
+  const sidePath = 'docs/side-classification.md'
+  const sideDoc = existsSync(join(ROOT, sidePath)) ? readFileSync(join(ROOT, sidePath), 'utf8') : ''
+  for (const f of files.filter(x => x.startsWith('mods/') && x.endsWith('.pw.toml'))) {
+    const src = readFileSync(join(ROOT, f), 'utf8')
+    const side = src.match(/^\s*side\s*=\s*"([a-z]+)"/m)
+    if (!side) {
+      fail(f, 'no `side` — packwiz-installer cannot filter a server install without it')
+      continue
+    }
+    if (!['both', 'client', 'server'].includes(side[1])) {
+      fail(f, `side = "${side[1]}" is not one of both / client / server`)
+      continue
+    }
+    if (side[1] === 'both') continue
+    const slug = f.slice('mods/'.length, -'.pw.toml'.length)
+    if (!sideDoc.includes('`' + slug + '`')) {
+      fail(f, `side = "${side[1]}" but \`${slug}\` is not recorded in ${sidePath}.\n  Distribution Spec §11: "inspect exact mod requirement before classify — Do not guess."\n  A one-sided mod needs a written reason someone else can check.`)
+    }
+  }
+
+  return indexed
+}
+
 // ------------------------------------------------------- test: KubeJS syntax
 function testKubejs() {
   const targets = files.filter(f => f.startsWith('kubejs/') && f.endsWith('.js'))
@@ -203,6 +308,7 @@ if (phase === 'all' || phase === 'lint') {
   counts['TOML files'] = lintToml()
   counts['files scanned for placeholders'] = lintPlaceholders()
   counts['KubeJS scripts scanned for orphaned recipes'] = lintJeiOrphans()
+  counts['files in the packwiz index'] = lintPackManifest()
 }
 if (phase === 'all' || phase === 'test') {
   counts['KubeJS scripts'] = testKubejs()

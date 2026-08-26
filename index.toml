@@ -294,7 +294,7 @@ metafile = true
 
 [[files]]
 file = "mods/client-dynamic-light.pw.toml"
-hash = "237b0859d871b5f843ed689971ee1487a80c86db58aa656901b99d9c0d3a5f91"
+hash = "99d5022a4fda95d0f3599c4f97beb5642f37a66aafe5e58d48bfa371989b86a7"
 metafile = true
 
 [[files]]
@@ -659,7 +659,7 @@ metafile = true
 
 [[files]]
 file = "mods/sound-physics-remastered.pw.toml"
-hash = "416bb6449da951ec1a04156348c502b9e47a947212becc173d277faaddaaaccd"
+hash = "aa662713661e95a7fdd6bd4fc3bb8231a615dc144b7825fde504355dc0698a31"
 metafile = true
 
 [[files]]

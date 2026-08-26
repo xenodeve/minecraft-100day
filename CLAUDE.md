@@ -135,13 +135,24 @@ the flip. See `docs/agents/workflow.md`.
 
 ```bash
 node scripts/validate/verify.mjs          # both phases — this is the local ship gate
-node scripts/validate/verify.mjs lint     # JSON + TOML syntax, unfilled placeholders
+node scripts/validate/verify.mjs lint     # syntax · placeholders · JEI orphans · the packwiz manifest
 node scripts/validate/verify.mjs test     # node --check over every kubejs/**/*.js
+
+node scripts/build/build-instance.mjs     # the self-contained client instance (389 MB, 99 mods)
+node scripts/build/build-server.mjs       # the server pack (332 MB, 89 mods — Distribution Spec §12)
+node scripts/build/generate-checksums.mjs # build/SHA256SUMS.txt, and refuses a stale artifact
+
+node scripts/validate/config-drift.mjs <install>   # "friend A works, friend B doesn't" (§38)
 
 sh .githooks/check-tree-budget            # the guards, runnable by hand
 sh .githooks/check-gate-ledger
 sh .githooks/check-issue-ref
 ```
+
+**Two rig rules the boot test keeps re-teaching.** Stop every java process before booting
+(`Get-Process java | Stop-Process -Force` — `pkill -f` does **not** match them), and give a second
+server its own port. A stale server produces a `DirectoryLock` `IOException` that reads exactly like
+a corrupt save, and a `FAILED TO BIND TO PORT` that reads like a firewall problem. Neither is.
 
 **`gh` is installed but not on the shell PATH.** Call it as
 `"/c/Program Files/GitHub CLI/gh.exe"`. Authenticated as `xenodeve`; scopes include `repo` and
