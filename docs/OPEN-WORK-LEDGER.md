@@ -27,13 +27,24 @@ population (W3/W6/W7), the Brimm-vs-TakKit comparison (§15), the JEI active-rec
 Spec §5) and the twelve-test release gate (Distribution Spec §16) are all **measurements**, and a
 dedicated server cannot produce any of them.
 
-**One exception that needs no client: the three Player Microchip textures**, which need an artist.
-That is the whole list.
+**Three rows need no client, and none of the three is actionable today** — which is a different
+statement from *"everything left needs a client"*, and the difference is the point. Search the table
+for 🟡 and check it:
 
-The other exception was the **Season 2 viability sweep**, and it is now done — ADR 0004. Both were
-the honest correction to an earlier claim that *everything* left was downstream of a client launch,
-which was wrong when it was written: seven Track 5 rows were buildable at the time and none of them
-had been touched.
+| Row | What it actually waits on |
+|---|---|
+| The three Player Microchip textures (**#35**) | an **artist** |
+| Re-add `cbc_firepower_components` | an **upstream release** supporting CBC ≥ 5.9 |
+| Re-evaluate `TaCZ: Accelerated` | a **benchmark baseline** — which does need a client to profile with |
+
+A fourth, the **Season 2 viability sweep**, needed neither and is now done — ADR 0004 (#44).
+
+**Why this is spelled out rather than summarised.** An earlier version of this paragraph claimed
+*everything* left was downstream of a client launch. That was false when it was written: seven Track
+5 rows were buildable and none had been touched. The correction then claimed the Microchip textures
+were *"the whole list"*, which was also false, by two rows (#48). A claim of completeness in this
+file is load-bearing — it is what a session reads instead of the table — so it is now written to be
+checkable against the table rather than trusted.
 
 Everything else in the pack is a design target derived from the documents until a client says
 otherwise.
