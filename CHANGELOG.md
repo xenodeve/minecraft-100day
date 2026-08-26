@@ -37,6 +37,8 @@ no entry, no tag, and is never handed to a friend as if it were a release.
   version. It carries the four mods CurseForge's API will not serve, so a host does not have to
   hunt them down by hand.
 - **`SHA256SUMS.txt`** next to the downloads, so you can check that what you got is what was built.
+- **`MODLIST.md`** and a licence record for every mod in it. The pack ships 99 mods by dozens of
+  authors; `docs/distribution-licenses.md` says what each one's licence is and where that was read.
 - **A mod list you can actually read.** `MODLIST.md` sits at the top of both the client and the
   server download: all 99 mods, the exact jar filename of each, whether it runs on the client, the
   server or both, and a link to the page it came from. Every mod in this pack is somebody else's
@@ -84,3 +86,7 @@ armour will ever be worn by a mob._
 
 _The first release entry below this one will be `v0.1.0-alpha`, and it cannot be cut until the
 twelve-test release gate in Distribution Spec §16 passes — which needs a client._
+
+_**And it must not be published anywhere until the redistribution question is answered.** The pack
+bundles every jar, and at least two authors permit modpack inclusion only if their jar is not
+rehosted. `docs/distribution-licenses.md`._
