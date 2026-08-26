@@ -57,8 +57,27 @@ because the CurseForge API refuses to serve them:
 | Player Microchip (Tracker) | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/player-microchip) | All Rights Reserved | project page |
 | TakKit | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/takkit) | MIT License | project page |
 
-**Disabling API distribution is how an author says "not in someone else's pack."** It is a setting,
-not prose, and it is the clearest statement of intent in this audit.
+**That claim was too strong when this file first said it, and it is corrected here.**
+
+The original wording was *"disabling API distribution is how an author says 'not in someone else's
+pack'"*. What the flag **demonstrably** does is narrower: the third-party CurseForge API stops
+returning a download URL, which is why `pack.mjs` falls back to the website endpoint. It is not by
+itself a statement about modpacks.
+
+The measurement that forces the correction: **all four appear in this pack's own CurseForge manifest
+by project and file id**, which is the form CurseForge's own installer resolves —
+
+```
+takkit                1269552   IN MANIFEST
+flashier-flashlights  1604184   IN MANIFEST
+client-dynamic-light  1302060   IN MANIFEST
+player-microchip      1488872   IN MANIFEST
+```
+
+So the flag distinguishes *third-party launchers* from *CurseForge itself*, and reading it as "no
+modpacks" conflates the two. **What the author actually intended still has to be read off the
+project page** — which for these four has not been done. They stay in the unread column; they are
+just no longer described as prohibited.
 
 **But the four are not one case.** *TakKit* is **MIT** and *Client Dynamic Light* is **MPL-2.0** —
 both licences grant redistribution in their own text, so for those two the opt-out reads as a
@@ -74,6 +93,22 @@ nothing to stand on.
 | Serene Seasons | [Modrinth](https://modrinth.com/mod/serene-seasons) | All Rights Reserved | Modrinth API |
 
 Both **permit hosted modpacks** and both **forbid rehosting the jar**. Quoted above.
+
+## Read and permitted — with conditions
+
+Two authors state modpack terms plainly. Both were **misread by the abandoned classifier** and are
+recorded here from the prose itself.
+
+| Mod | What the author wrote | Reading |
+|---|---|---|
+| **Subtle Effects** | ✅ *"Use this mod in modpacks with credit and one or more links to any of the project pages"* · ❌ *"Reupload/publish this mod to any website without explicit permission"* | **modpack use permitted**, and `docs/MODLIST.md` already supplies the credit and the link. The reupload clause is the same rehosting question as Serene Seasons and Entity Culling |
+| **Immersive Posts** | *"Do not redistribute this mod unless as part of a pack!"* | **permitted for packs**, explicitly. The classifier read this as a prohibition — it is the opposite |
+
+## What the CurseForge half of this audit could not read
+
+Descriptions on 16 CurseForge project pages did not yield any modpack-permission prose to the
+scraper. That is a **limit of the method, not a finding about the mods** — CurseForge renders
+descriptions in a form this extraction did not reach. Those rows stay unread and need a browser.
 
 ## Permissively licensed — 59 mods
 
@@ -278,8 +313,25 @@ packwiz เอามอดที่มาจาก Modrinth ไปไว้ใ�
 | Player Microchip (Tracker) | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/player-microchip) | All Rights Reserved | project page |
 | TakKit | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/takkit) | MIT License | project page |
 
-**การปิดการแจกจ่ายผ่าน API คือวิธีที่ผู้เขียนบอกว่า "ไม่เอาไปใส่ pack ของคนอื่น"**
-มันเป็นการตั้งค่า ไม่ใช่ข้อความ และเป็นการแสดงเจตนาที่ชัดที่สุดใน audit นี้
+**คำกล่าวนั้นแรงเกินไปตอนที่ไฟล์นี้เขียนครั้งแรก และแก้ตรงนี้แล้ว**
+
+ถ้อยคำเดิมคือ *"การปิดการแจกจ่ายผ่าน API คือวิธีที่ผู้เขียนบอกว่าไม่เอาไปใส่ pack ของคนอื่น"*
+สิ่งที่แฟล็กนั้นทำ**ได้จริง**แคบกว่านั้น: CurseForge API ของบุคคลที่สามจะหยุดคืน URL ดาวน์โหลด
+ซึ่งเป็นเหตุผลที่ `pack.mjs` ถอยไปใช้ endpoint ของเว็บ มันไม่ใช่คำแถลงเรื่อง modpack ในตัวมันเอง
+
+การวัดที่บังคับให้ต้องแก้: **ทั้งสี่ตัวปรากฏใน CurseForge manifest ของ pack นี้เองด้วย project
+และ file id** ซึ่งเป็นรูปแบบที่ตัวติดตั้งของ CurseForge เองอ่าน —
+
+```
+takkit                1269552   IN MANIFEST
+flashier-flashlights  1604184   IN MANIFEST
+client-dynamic-light  1302060   IN MANIFEST
+player-microchip      1488872   IN MANIFEST
+```
+
+แฟล็กนั้นจึงแยก *launcher ของบุคคลที่สาม* ออกจาก *ตัว CurseForge เอง* และการอ่านมันว่า "ห้าม modpack"
+คือการรวมสองเรื่องเข้าด้วยกัน **เจตนาจริงของผู้เขียนยังต้องไปอ่านจากหน้าโปรเจกต์อยู่ดี** —
+ซึ่งสำหรับสี่ตัวนี้ยังไม่ได้ทำ พวกมันจึงยังอยู่ในคอลัมน์ที่ยังไม่ได้อ่าน แค่ไม่ได้ถูกอธิบายว่าต้องห้ามอีกต่อไป
 
 **แต่ทั้งสี่ไม่ใช่กรณีเดียวกัน** *TakKit* เป็น **MIT** และ *Client Dynamic Light* เป็น **MPL-2.0** —
 สัญญาอนุญาตทั้งสองให้สิทธิ์แจกจ่ายซ้ำในตัวข้อความเอง สำหรับสองตัวนี้การปิด API
@@ -295,6 +347,22 @@ packwiz เอามอดที่มาจาก Modrinth ไปไว้ใ�
 | Serene Seasons | [Modrinth](https://modrinth.com/mod/serene-seasons) | All Rights Reserved | Modrinth API |
 
 ทั้งคู่**อนุญาต modpack แบบโฮสต์** และทั้งคู่**ห้าม rehost ตัว jar** อ้างข้อความไว้ข้างบนแล้ว
+
+## อ่านแล้วและอนุญาต — โดยมีเงื่อนไข
+
+ผู้เขียนสองคนระบุเงื่อนไข modpack ไว้ตรง ๆ ทั้งคู่**ถูกตัวจัดประเภทที่เลิกใช้แล้วอ่านผิด**
+และบันทึกตรงนี้จากตัวข้อความเอง
+
+| มอด | ผู้เขียนเขียนว่า | การอ่าน |
+|---|---|---|
+| **Subtle Effects** | ✅ *"ใช้มอดนี้ใน modpack ได้โดยให้เครดิตและใส่ลิงก์ไปยังหน้าโปรเจกต์อย่างน้อยหนึ่งลิงก์"* · ❌ *"ห้ามอัปโหลดซ้ำ/เผยแพร่มอดนี้ไปยังเว็บไซต์ใด ๆ โดยไม่ได้รับอนุญาตชัดแจ้ง"* | **อนุญาตให้ใช้ใน modpack** และ `docs/MODLIST.md` ให้เครดิตกับลิงก์ไว้แล้ว ส่วนข้อห้ามอัปโหลดซ้ำคือคำถามเรื่อง rehost เดียวกับ Serene Seasons และ Entity Culling |
+| **Immersive Posts** | *"อย่าแจกจ่ายมอดนี้ซ้ำ เว้นแต่เป็นส่วนหนึ่งของ pack!"* | **อนุญาตสำหรับ pack** อย่างชัดเจน ตัวจัดประเภทอ่านมันเป็นข้อห้าม — ซึ่งตรงข้ามกัน |
+
+## สิ่งที่ฝั่ง CurseForge ของ audit นี้อ่านไม่ได้
+
+คำอธิบายบนหน้าโปรเจกต์ CurseForge 16 หน้าไม่ได้ให้ข้อความเรื่องสิทธิ์ modpack กับตัวดึงข้อมูลเลย
+นั่นเป็น**ข้อจำกัดของวิธี ไม่ใช่สิ่งที่พบเกี่ยวกับมอด** — CurseForge แสดงคำอธิบายในรูปแบบที่การดึงนี้เข้าไม่ถึง
+แถวเหล่านั้นยังเป็นยังไม่ได้อ่าน และต้องใช้เบราว์เซอร์
 
 ## สัญญาอนุญาตแบบเปิด — 59 มอด
 

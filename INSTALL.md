@@ -106,7 +106,7 @@ This is `0.1.0-alpha`.
 - ❌ **One known problem, unfixed:** Improved Mobs cannot read the defence values of Brimm Armors,
   so no Brimm armour will ever be worn by a mob.
 
-- ⚠️ **Do not post this publicly yet.** The pack bundles all 99 mods, and at least two authors
+- ⚠️ **Do not post this publicly yet.** The pack bundles all 99 mods, and at least three authors
   permit modpack inclusion only on condition that their jar is **not** rehosted. Whether this pack
   may be distributed at all is **unestablished** — not permitted, not prohibited, just unchecked
   until now. `docs/distribution-licenses.md` has the detail and names the decisions it needs.
@@ -222,7 +222,7 @@ java -jar packwiz-installer-bootstrap.jar http://localhost:8080/pack.toml
 - ❌ **ปัญหาที่รู้แล้วหนึ่งข้อ ยังไม่ได้แก้:** Improved Mobs อ่านค่าป้องกันของ Brimm Armors ไม่ได้
   ดังนั้นจะไม่มีมอบตัวไหนสวมเกราะ Brimm เลย
 - ⚠️ **ยังอย่าเพิ่งโพสต์สาธารณะ** pack รวมมอดทั้ง 99 ตัวไว้ข้างใน
-  และมีผู้เขียนอย่างน้อยสองคนที่อนุญาตให้ใส่ modpack ได้โดยมีเงื่อนไขว่าต้อง**ไม่** rehost ตัว jar ของเขา
+  และมีผู้เขียนอย่างน้อยสามคนที่อนุญาตให้ใส่ modpack ได้โดยมีเงื่อนไขว่าต้อง**ไม่** rehost ตัว jar ของเขา
   เรื่องที่ว่า pack นี้แจกจ่ายได้หรือไม่นั้น **ยังไม่ได้ถูกกำหนด** — ไม่ใช่อนุญาต ไม่ใช่ห้าม
   แค่ยังไม่มีใครตรวจจนถึงตอนนี้ `docs/distribution-licenses.md` มีรายละเอียดและระบุการตัดสินใจที่ต้องใช้
 
