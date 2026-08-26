@@ -20,7 +20,7 @@ no entry, no tag, and is never handed to a friend as if it were a release.
 
 ### Added
 
-- **106 mods**, pinned to exact versions with hashes. Create is `6.0.8` — forced by the addon
+- **107 mods**, pinned to exact versions with hashes. Create is `6.0.8` — forced by the addon
   version ranges, not chosen.
 - **A twelve-chapter quest campaign**, 48 quests. Objectives rather than a crafting checklist:
   *Establish Industrial Production*, *Build a Freight Corridor*, *Survive a Major Siege*.
@@ -39,7 +39,8 @@ no entry, no tag, and is never handed to a friend as if it were a release.
 - **`SHA256SUMS.txt`** next to the downloads, so you can check that what you got is what was built.
 - **A visual layer.** Denser, more natural grass; smooth colour transitions between biomes instead
   of hard seams; footprints in snow and sand; sparks, smoke and impact particles where the game
-  previously showed nothing; and doors, chests, levers and lanterns that animate when you use them.
+  previously showed nothing; doors, chests, levers and lanterns that animate when you use them; and
+  weather you can feel — rain and snow as real particles, wind, and ripples where rain hits water.
   **None of it is verified** — see the note at the end.
 - **`MODLIST.md`** and a licence record for every mod in it. The pack ships 99 mods by dozens of
   authors; `docs/distribution-licenses.md` says what each one's licence is and where that was read.

@@ -30,7 +30,7 @@ down, which is the part that stops a guess from looking identical to an inspecti
 | Side | Count |
 |---|---|
 | `both` | 89 |
-| `client` | 15 |
+| `client` | 16 |
 | `server` | 2 |
 
 ## The decisive shared fact
@@ -129,6 +129,7 @@ derivation was **wrong for this pack**.
 | Soft Imprints | `snow-imprints` | server `unsupported` | — | `client` |
 | Fancy World Animations | `fwa` | server `unsupported` | — | `client` |
 | **Subtle Effects** | `subtle-effects` | server **`optional`** → packwiz wrote `both` | `displayTest = "IGNORE_ALL_VERSION"`, `side = "CLIENT"`, **zero** `data/` | **`client`** |
+| Particle Rain (V2, #58) | `particle-rain` | server `unsupported` | **`side = "CLIENT"`** in its own `mods.toml`, **zero** `data/`, 46 `assets/` | `client` |
 | Fzzy Config | `fzzy-config` | server `required` | **`side = "BOTH"`** declared three times | `both` |
 | Kotlin for Forge | `kotlin-for-forge` | server `required` | 0 `assets/`, language provider for Fzzy Config | `both` |
 
@@ -226,7 +227,7 @@ gate ตรวจไม่ได้ว่าเหตุผล*ดี*หรื�
 | ฝั่ง | จำนวน |
 |---|---|
 | `both` | 89 |
-| `client` | 15 |
+| `client` | 16 |
 | `server` | 2 |
 
 ## ข้อเท็จจริงร่วมที่ชี้ขาด

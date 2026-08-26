@@ -3,9 +3,9 @@
 
 **What this is.** One row per mod the pack ships, its licence, and where that licence was read.
 *Visuals Spec §35* asks for it before shipping; ADR 0003 made the pack self-contained, which means
-it has been redistributing 99 jars since the first build (106 as of Visuals V1).
+it has been redistributing 99 jars since the first build (107 as of Visuals V2).
 
-**What it is not.** A legal opinion, and not a clean bill of health. **42 of 106 have not been read
+**What it is not.** A legal opinion, and not a clean bill of health. **42 of 107 have not been read
 yet.** A licence that could not be determined is recorded as unread, never assumed.
 
 - **Swept:** 2026-08-27 · issue #53
@@ -75,7 +75,7 @@ nothing to stand on.
 
 Both **permit hosted modpacks** and both **forbid rehosting the jar**. Quoted above.
 
-## Permissively licensed — 58 mods
+## Permissively licensed — 59 mods
 
 Redistribution is granted by the licence text itself. GPL/LGPL/MPL additionally require that the
 licence and source remain available; shipping the jars unmodified with `docs/MODLIST.md` linking
@@ -142,6 +142,7 @@ been modified.
 | Fancy World Animations | [Modrinth](https://modrinth.com/mod/fwa) | MIT | Modrinth API |
 | Kotlin for Forge | [Modrinth](https://modrinth.com/mod/kotlin-for-forge) | LGPL 2.1 only | Modrinth API |
 | Soft Imprints | [Modrinth](https://modrinth.com/mod/snow-imprints) | MIT | Modrinth API |
+| Particle Rain | [Modrinth](https://modrinth.com/mod/particle-rain) | MIT | Modrinth API |
 
 ## Not read yet — 42 mods
 
@@ -223,9 +224,9 @@ proposes but has not installed. `docs/khaojee-visual-reference.md` records their
 
 **นี่คืออะไร** หนึ่งแถวต่อหนึ่งมอดที่ pack ส่งไป สัญญาอนุญาตของมัน และอ่านมาจากไหน
 *Visuals Spec §35* ขอไว้ให้ทำก่อนส่งมอบ ส่วน ADR 0003 ทำให้ pack เป็นแบบมีทุกอย่างในตัว
-ซึ่งแปลว่ามันแจกจ่าย jar 99 ตัวซ้ำมาตั้งแต่ build แรก (106 ตัวนับตั้งแต่ Visuals V1)
+ซึ่งแปลว่ามันแจกจ่าย jar 99 ตัวซ้ำมาตั้งแต่ build แรก (107 ตัวนับตั้งแต่ Visuals V2)
 
-**ไม่ใช่อะไร** ไม่ใช่ความเห็นทางกฎหมาย และไม่ใช่ใบรับรองว่าทุกอย่างสะอาด **42 จาก 106 ยังไม่ได้อ่าน**
+**ไม่ใช่อะไร** ไม่ใช่ความเห็นทางกฎหมาย และไม่ใช่ใบรับรองว่าทุกอย่างสะอาด **42 จาก 107 ยังไม่ได้อ่าน**
 สัญญาอนุญาตที่หาไม่ได้ถูกบันทึกว่ายังไม่ได้อ่าน ไม่ใช่สมมติเอา
 
 - **กวาดเมื่อ:** 2026-08-27 · issue #53
@@ -295,7 +296,7 @@ packwiz เอามอดที่มาจาก Modrinth ไปไว้ใ�
 
 ทั้งคู่**อนุญาต modpack แบบโฮสต์** และทั้งคู่**ห้าม rehost ตัว jar** อ้างข้อความไว้ข้างบนแล้ว
 
-## สัญญาอนุญาตแบบเปิด — 58 มอด
+## สัญญาอนุญาตแบบเปิด — 59 มอด
 
 สิทธิ์แจกจ่ายซ้ำมาจากตัวข้อความสัญญาอนุญาตเอง GPL/LGPL/MPL ต้องการเพิ่มว่าสัญญาอนุญาตและซอร์ส
 ต้องยังเข้าถึงได้ การส่ง jar ไปโดยไม่ดัดแปลงพร้อม `docs/MODLIST.md` ที่ลิงก์ทุกโปรเจกต์
@@ -361,6 +362,7 @@ packwiz เอามอดที่มาจาก Modrinth ไปไว้ใ�
 | Fancy World Animations | [Modrinth](https://modrinth.com/mod/fwa) | MIT | Modrinth API |
 | Kotlin for Forge | [Modrinth](https://modrinth.com/mod/kotlin-for-forge) | LGPL 2.1 only | Modrinth API |
 | Soft Imprints | [Modrinth](https://modrinth.com/mod/snow-imprints) | MIT | Modrinth API |
+| Particle Rain | [Modrinth](https://modrinth.com/mod/particle-rain) | MIT | Modrinth API |
 
 ## ยังไม่ได้อ่าน — 42 มอด
 

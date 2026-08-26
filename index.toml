@@ -588,6 +588,11 @@ hash = "1c3d52224f1f174fbcf2c308a70e3c34a736694b626992891404db32cbd69c7e"
 metafile = true
 
 [[files]]
+file = "mods/particle-rain.pw.toml"
+hash = "0345711933e73891f8e1a7cff32ed0f9cef39ddee0b10e267736743f02fa4a00"
+metafile = true
+
+[[files]]
 file = "mods/placebo.pw.toml"
 hash = "969078b157cd783f7c38ac33407abc4f532c244c973d52810d559f02be06db90"
 metafile = true
