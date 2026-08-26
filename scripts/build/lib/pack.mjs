@@ -32,7 +32,34 @@ export function parseMeta(text) {
     mode: get('mode'),
     projectId: num('project-id'),
     fileId: num('file-id'),
+    // Modrinth's base62 project id. Present only on Modrinth-sourced metafiles,
+    // and the only stable handle we have to the project page — packwiz records
+    // no slug, which is exactly why the roster resolves ids instead of guessing.
+    modId: get('mod-id'),
   }
+}
+
+/** The roster digest, defined in exactly one place so the generator and the ship
+ *  gate cannot disagree about what "the same list" means.
+ *
+ *  Takes already-parsed metas rather than raw text: an earlier version re-derived
+ *  the fields with its own regexes, which is a second metafile parser living in
+ *  the file whose whole reason for existing is that a second copy drifts.
+ *
+ *  Sorted by metafile path, so a re-ordered directory listing is not a change.
+ *  Deliberately covers only locally-derivable facts — no resolved URLs — so the
+ *  gate that checks it never needs the network. */
+export function rosterDigest(entries) {
+  const rows = entries
+    .map(({ file, meta }) => [
+      file,
+      meta.name ?? '',
+      meta.filename ?? '',
+      meta.side ?? 'both',
+      meta.modId ?? meta.projectId ?? '',
+    ].join('\t'))
+    .sort()
+  return createHash('sha256').update(rows.join('\n')).digest('hex')
 }
 
 export function readPack(root) {

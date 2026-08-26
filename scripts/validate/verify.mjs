@@ -44,6 +44,7 @@ import { readFileSync, readdirSync, statSync, existsSync } from 'node:fs'
 import { execFileSync } from 'node:child_process'
 import { createHash } from 'node:crypto'
 import { join, relative, sep } from 'node:path'
+import { rosterDigest, parseMeta } from '../build/lib/pack.mjs'
 
 const ROOT = process.cwd()
 const SKIP_DIRS = new Set(['.git', 'node_modules', '.gradle', 'run', 'logs', 'crash-reports'])
@@ -285,6 +286,42 @@ function lintPackManifest() {
   return indexed
 }
 
+// -------------------------------------------------- lint: mod roster is fresh
+// `docs/MODLIST.md` is the only file a downloader reads to find out what they
+// just installed. If it disagrees with `mods/`, it is not merely out of date —
+// it is a false statement about the contents of an artifact somebody already
+// has on disk.
+//
+// The digest covers only what is derivable **locally**: name, filename, side,
+// and which project the metafile points at. Resolved URLs are deliberately
+// outside it, because this check must never need the network — a ship gate that
+// fails when CurseForge is slow is a gate people learn to bypass.
+function lintModlist() {
+  const metafiles = files.filter(f => f.startsWith('mods/') && f.endsWith('.pw.toml'))
+  if (!metafiles.length) return 0
+
+  const listPath = 'docs/MODLIST.md'
+  if (!existsSync(join(ROOT, listPath))) {
+    fail(listPath, `${metafiles.length} mods are installed and nothing tells a downloader what they are.\n  Run: node scripts/build/generate-modlist.mjs`)
+    return 0
+  }
+
+  const doc = readFileSync(join(ROOT, listPath), 'utf8')
+  const declared = doc.match(/<!--\s*roster-digest:\s*([0-9a-f]{64})\s*-->/)
+  if (!declared) {
+    fail(listPath, 'no `<!-- roster-digest: … -->` marker — the file cannot be checked against mods/, so it cannot be trusted.\n  Run: node scripts/build/generate-modlist.mjs')
+    return 0
+  }
+
+  const actual = rosterDigest(metafiles.map(f => ({
+    file: f, meta: parseMeta(readFileSync(join(ROOT, f), 'utf8')),
+  })))
+  if (declared[1] !== actual) {
+    fail(listPath, `stale — it describes a different set of mods than mods/ contains.\n  declared ${declared[1].slice(0, 12)}…, mods/ is ${actual.slice(0, 12)}…\n  Run: node scripts/build/generate-modlist.mjs`)
+  }
+  return metafiles.length
+}
+
 // ------------------------------------------------------- test: KubeJS syntax
 function testKubejs() {
   const targets = files.filter(f => f.startsWith('kubejs/') && f.endsWith('.js'))
@@ -309,6 +346,7 @@ if (phase === 'all' || phase === 'lint') {
   counts['files scanned for placeholders'] = lintPlaceholders()
   counts['KubeJS scripts scanned for orphaned recipes'] = lintJeiOrphans()
   counts['files in the packwiz index'] = lintPackManifest()
+  counts['mods in the shipped roster'] = lintModlist()
 }
 if (phase === 'all' || phase === 'test') {
   counts['KubeJS scripts'] = testKubejs()

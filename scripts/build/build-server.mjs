@@ -25,7 +25,7 @@
 // installer places correctly, and a stale copy inside a pack zip is a support
 // problem waiting to happen.
 
-import { readdirSync, writeFileSync, mkdirSync, existsSync, statSync, rmSync } from 'node:fs'
+import { readdirSync, writeFileSync, mkdirSync, existsSync, statSync, rmSync, copyFileSync } from 'node:fs'
 import { execFileSync } from 'node:child_process'
 import { join } from 'node:path'
 import { readPack, readMetas, fetchAndVerify, versionStamp } from './lib/pack.mjs'
@@ -85,6 +85,19 @@ const stripMarkdown = (dir) => {
 stripMarkdown(STAGE)
 console.log(`stripped ${stripped} maintainer .md file(s)`)
 
+// The mod roster ships *after* the strip, deliberately. The strip exists to keep
+// maintainer READMEs out of an install; `docs/MODLIST.md` is the opposite — it
+// is the one document written for the person who downloaded this. A server host
+// in particular needs it, because it is the only place that says which mods are
+// client-only and therefore correctly absent here.
+const roster = join(ROOT, 'docs', 'MODLIST.md')
+if (!existsSync(roster)) {
+  console.error('docs/MODLIST.md is missing — run: node scripts/build/generate-modlist.mjs')
+  process.exit(1)
+}
+copyFileSync(roster, join(STAGE, 'MODLIST.md'))
+console.log('bundled docs/MODLIST.md — the roster a downloader reads')
+
 writeFileSync(join(STAGE, 'pack-version.txt'), versionStamp(pack, 'server'))
 
 writeFileSync(join(STAGE, 'README.txt'), [
@@ -107,6 +120,10 @@ writeFileSync(join(STAGE, 'README.txt'), [
   '  pack-version.txt here against the one in the client instance',
   '  (.minecraft/pack-version.txt). If they disagree, that IS the problem —',
   '  do not debug anything else first.',
+  '',
+  'WHAT IS IN HERE',
+  '',
+  '  MODLIST.md lists every mod in this pack with a link to its source.',
   '',
   'WHAT IS NOT HERE',
   '',

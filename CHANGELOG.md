@@ -37,6 +37,10 @@ no entry, no tag, and is never handed to a friend as if it were a release.
   version. It carries the four mods CurseForge's API will not serve, so a host does not have to
   hunt them down by hand.
 - **`SHA256SUMS.txt`** next to the downloads, so you can check that what you got is what was built.
+- **A mod list you can actually read.** `MODLIST.md` sits at the top of both the client and the
+  server download: all 99 mods, the exact jar filename of each, whether it runs on the client, the
+  server or both, and a link to the page it came from. Every mod in this pack is somebody else's
+  work and this is where they are credited.
 
 ### Changed
 
