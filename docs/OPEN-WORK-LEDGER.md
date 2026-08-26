@@ -17,12 +17,26 @@ written, and **20 of the 22 customization rows implemented** with 3 declined-wit
 parked against named blockers (`docs/customization-map.md`). Every change was proven on a
 dedicated-server boot.
 
+**Release engineering is now done too.** Side classification, the server pack, checksums, the
+config ownership map and drift detection all landed (#41, #42, #43), and `verify.mjs` covers 7 of
+Distribution Spec §15's 10 checks.
+
 **What is left is one thing wearing several hats: nobody has launched a client.** The TTK matrix
 (§24 Phase 2), MSPT under automatic fire (Phase 4), horde MSPT at 50/100/150/200 (§23), wildlife
 population (W3/W6/W7), the Brimm-vs-TakKit comparison (§15), the JEI active-recipe check (Crafting
 Spec §5) and the twelve-test release gate (Distribution Spec §16) are all **measurements**, and a
-dedicated server cannot produce any of them. Everything in the pack is a design target derived from
-the documents until a client says otherwise.
+dedicated server cannot produce any of them.
+
+**One exception that needs no client: the three Player Microchip textures**, which need an artist.
+That is the whole list.
+
+The other exception was the **Season 2 viability sweep**, and it is now done — ADR 0004. Both were
+the honest correction to an earlier claim that *everything* left was downstream of a client launch,
+which was wrong when it was written: seven Track 5 rows were buildable at the time and none of them
+had been touched.
+
+Everything else in the pack is a design target derived from the documents until a client says
+otherwise.
 
 ---
 
@@ -45,7 +59,7 @@ tier — is now a decided operating mode rather than a pending task, which is wh
 | Item | Status | Gate | Next action |
 |---|---|---|---|
 | **Which Create major version the pack targets** | ✅ | — | **Create `6.0.8` — forced, not chosen.** The CORE addons' declared ranges intersect to `[6.0.8,6.1.0)` and 6.0.8 is the newest 1.20.1 build. Read from `META-INF/mods.toml` inside the jars (**#9**), see `docs/compatibility-matrix.md` |
-| Season 2 viability under the chosen Create version (VS2 / Clockwork / TFMG / Warium) | 🔴 | now answerable — the Create pin is known | Sweep the four Season 2 mods against Create 6.0.8 and record which doors the pin closes, as an ADR |
+| Season 2 viability under the chosen Create version (VS2 / Clockwork / TFMG / Warium) | ✅ | — | **ADR 0004** (#44). The pin closes **nothing** — all six Season 2 mods admit 6.0.8, and TFMG's `[6.0.6, 6.1.0)` is the same window Season 1 forces. Season 2 stays out of Alpha on scope, not compatibility |
 | `packwiz` not installed on the dev machine | ✅ | — | Built from source with Go 1.26.7 → `~/go/bin/packwiz.exe` (2026-08-25) |
 | `java` not on PATH | ✅ | — | Temurin **17.0.20.1** at `C:\Program Files\Eclipse Adoptium\jdk-17.0.20.101-hotspot`. **Prism Launcher 11.0.3** also installed — the official Minecraft launcher cannot import a modpack, so it was never a path to the goal |
 | 17 CORE mods are CurseForge-only, four of them hard Create dependencies | 🟢 | none — packwiz resolves both sources | Constrains distribution, not feasibility. Recorded in the matrix |
@@ -107,14 +121,15 @@ Folded into the operating layer under **#7**.
 |---|---|---|---|
 | Create `develop`, with its own ruleset | 🟡 | deliberately deferred — nothing to integrate and nobody running `main` | Create it in the same change that cuts the first `v0.x.0-alpha` tag. Distribution Spec §22; reasoning in `docs/agents/workflow.md` |
 | `scripts/build/build-instance.mjs` — the self-contained client artifact | ✅ | — | 93 jars, each hash-verified; Prism instance zip, one-step offline import (**#16**, ADR 0003) |
-| `scripts/build/` — `build-server`, `generate-checksums` | 🔴 | server pack needs side classification first | Distribution Spec §14. `build-instance` is the first of the set |
-| Grow `verify.mjs` into `validate-pack` | 🔴 | each check is gated on its own prerequisite | Distribution Spec §15 — the seven-item checklist is mapped against what exists in the script's own header |
-| COMMON / SERVER / CLIENT side classification | 🔴 | needs the mod list | Distribution Spec §11 — **read each mod's actual requirement, never guess** |
-| Server pack, version-locked to the client pack | 🔴 | needs a built client pack | Distribution Spec §12 |
-| Config ownership map — PACK CONTROLLED vs USER PREFERENCE | 🔴 | needs `config/` to exist | Distribution Spec §30. Decides what an update may overwrite; getting it wrong destroys a player's keybinds |
-| `scripts/validate/config-drift` | 🔴 | needs the ownership map above | Distribution Spec §38 — the tool for "friend A works, friend B doesn't" |
+| `scripts/build/` — `build-server`, `generate-checksums` | ✅ | — | **#42**. Both written, plus `lib/pack.mjs` extracted so the two builds cannot disagree about a hash check. `build-instance` went 222 → 149 lines |
+| Grow `verify.mjs` into `validate-pack` | ✅ 7 of 10 · 🟡 3 | the rest need a launched game or a dependency graph packwiz does not record | **#41**. Added pack metadata (incl. a stale `[index]` hash), missing mods, duplicate mods, unexpected client/server. Still open: missing dependencies, KubeJS startup errors, broken config references |
+| COMMON / SERVER / CLIENT side classification | ✅ | — | **#41**. `docs/side-classification.md` — 87 `both` · 10 `client` · 2 `server`, each one-sided call graded by evidence. Three errors found: two by cross-referencing the metafiles against the matrix (one wrong in each), one by a `clientSideOnly` sweep |
+| Server pack, version-locked to the client pack | ✅ | — | **#42**. 89 mods, 332 MB, `pack-version.txt` in both artifacts. Booted green from a **fresh** Forge install — and that boot verified the tracker recipes and found the Brimm × Improved Mobs interaction |
+| Config ownership map — PACK CONTROLLED vs USER PREFERENCE | ✅ | — | **#43**. `docs/config-ownership.md`. The rule is structural, not a list: the pack owns exactly the 39 files it ships, because those are the only ones in the index for packwiz to write |
+| `scripts/validate/config-drift` | ✅ | — | **#43**. Compares **values**, not hashes — measured: 4 of 4 TOML configs drift at byte level after one boot and 2 of 2 JSON do not, so a hash check would be wrong on every install |
 | Release gate — the 12 in-game tests | 🔴 | needs a launchable pack | Distribution Spec §16. **Not automatable.** Human protocol, sibling of §26–27 |
-| Checksums (`SHA256SUMS.txt`) + release tags + CurseForge / Modrinth publishing | 🔴 | needs a release | Distribution Spec §23, §33, §34, §39 |
+| Checksums (`SHA256SUMS.txt`) | ✅ | — | **#42**. All three artifacts pass `sha256sum -c`, and the script refuses to write the file if any artifact was built from a stale version |
+| Release tags + CurseForge / Modrinth publishing | 🔴 | **needs a release**, which needs the §16 gate, which needs a client | Distribution Spec §33, §34 |
 
 **Standing constraint from this spec, applies outside Track 5:** the pack is Git + packwiz — the
 manifest **plus** `config/`, `kubejs/`, `datapacks/`, `resourcepacks/`, `ftbquests/`. Zipping

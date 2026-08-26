@@ -33,6 +33,10 @@ no entry, no tag, and is never handed to a friend as if it were a release.
 - **A wildlife layer**, with the roster documented in `docs/wildlife-roster.md`.
 - **A tactical position beacon.** Renamed from "microchip" and moved onto the electronics chain —
   it clips to a plate carrier, it is not implanted.
+- **A server pack**, built from the same pinned list as the client pack and stamped with the same
+  version. It carries the four mods CurseForge's API will not serve, so a host does not have to
+  hunt them down by hand.
+- **`SHA256SUMS.txt`** next to the downloads, so you can check that what you got is what was built.
 
 ### Changed
 
@@ -61,8 +65,18 @@ no entry, no tag, and is never handed to a friend as if it were a release.
 - **`.packwizignore` was silently dropping a Hordes config file.** A bare `scripts/` pattern matched
   `config/hordes/.../horde_data/scripts/`, so the script that swaps to the drowned spawn table in
   oceans would never have reached a player.
+- **Three mods were marked for the wrong side.** Sound Physics Remastered and Client Dynamic Light
+  are client-side and were being installed on servers that cannot use them; Improved Mobs ships a
+  HUD element, so a client without it loses the difficulty bar. A server install is now two jars
+  lighter.
+- **The tactical beacon's recipes are confirmed to register.** They shipped unverified because the
+  only test server available excluded the mod itself; the server pack includes it, and all four
+  recipes resolve.
 
 _Still not released. Everything above is verified on a dedicated-server boot — configs parse,
-recipes register, quests load — and **none of it is verified in game**. The first release entry
-below this one will be `v0.1.0-alpha` and it cannot be cut until the twelve-test release gate in
-Distribution Spec §16 passes, which needs a client._
+recipes register, quests load — and **none of it is verified in game**. One known interaction is
+already recorded and unfixed: Improved Mobs cannot read Brimm Armors' defence values, so no Brimm
+armour will ever be worn by a mob._
+
+_The first release entry below this one will be `v0.1.0-alpha`, and it cannot be cut until the
+twelve-test release gate in Distribution Spec §16 passes — which needs a client._
