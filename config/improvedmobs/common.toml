@@ -199,7 +199,28 @@
 #Configs regarding mobs spawning with equipment
 [equipment]
 	#Blacklist items from whole mods. Add modid to prevent items from that mod being equipped. (For individual items use the equipment.json)
-	"Item Blacklist" = []
+	# `brimm` is Brimm Armors, read from its jar's META-INF/mods.toml, not guessed.
+	#
+	# WHY: Brimm is tactical PLAYER gear. A random zombie in a Ratnik plate
+	# carrier reads wrong and would blur the threat silhouettes Main §24 depends
+	# on. This makes the exclusion INTENTIONAL.
+	#
+	# WHAT IT DOES NOT DO: it does not silence the 45 ERROR lines at boot
+	# ("Error calculating default weights for item ratnik", from Brimm throwing
+	# IllegalStateException on m_7366_). Measured: with the blacklist set, the
+	# boot still logs 45 of them, because getDefaultWeight runs while BUILDING
+	# the pool, before the blacklist filters it.
+	#
+	# It does work for behaviour: the generated equipment.json contains ZERO
+	# brimm entries. Brimm armour was already unequippable via the exception
+	# path; this changes "excluded because a mod throws" into "excluded because
+	# we said so", which is what survives Brimm fixing their bug.
+	#
+	# Shipping a pre-generated equipment.json WOULD suppress the log noise, and
+	# was rejected: it is 47 KB, there is no regeneration option, and it would
+	# freeze the equipment pool against this exact mod list forever. That is a
+	# real cost for cosmetic log output with no gameplay effect.
+	"Item Blacklist" = ["brimm"]
 	#Use blacklist as whitelist
 	"Item Whitelist" = false
 	#Blacklist for items mobs should never be able to use.

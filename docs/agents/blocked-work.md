@@ -39,6 +39,10 @@ client.** That single fact blocks most of what follows.
 carries **45 ERROR lines** saying Improved Mobs cannot read Brimm Armors' defence values, so no Brimm
 armour will ever be worn by a mob. **Nothing crashed. Nothing failed. The pack is wrong anyway.**
 
+*(Since #70 that exclusion is deliberate — `brimm` is on Improved Mobs' item blacklist because Brimm
+is player gear. The 45 lines remain, measured: the blacklist filters the pool, not the scan that
+builds it. 50 ERROR lines is the expected baseline, not a regression.)*
+
 That is this repo's characteristic failure mode, and it is written up in
 `Obsidian-minecraft-100day/config-and-kubejs-fail-open.md`: **configs fail open and KubeJS drops
 broken files silently.** A green boot is evidence that the server started, and nothing more.
