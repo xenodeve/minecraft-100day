@@ -16,6 +16,61 @@ no entry, no tag, and is never handed to a friend as if it were a release.
 
 ---
 
+## v0.2.0-alpha — pre-release, 2026-08-28
+
+**This is a pre-release for testing, not a release.** The twelve-test gate in *Distribution Spec
+§16* has never run, because it needs a client somebody has actually played on. Treat everything
+below as untested in game.
+
+**One artifact is published: `Industrial-Civilization-Survival-0.2.0-alpha-friend.zip`** — 132 KB,
+a manifest plus our own configs, scripts and quests, with **zero third-party jars**. It installs a
+client, and the same file installs a server with `-s server`.
+
+**The other four artifacts are not published and will not be.** `-instance.zip`, `-server.zip`,
+`-alpha.zip` and `-curseforge-local.zip` each bundle 83–120 jars, and two authors permit modpack
+inclusion only if their jar is not rehosted. `docs/distribution-licenses.md` has the per-artifact
+table; **ADR 0005** is why the friend pack exists at all.
+
+### Fixed
+
+- **Monsters no longer swarm the first days.** The spawn director — the thing that holds elite
+  monsters back until day 20, mid-tier until day 6, and trolls until day 25 — was never installed
+  on anyone's game. It was marked server-only, and singleplayer runs its own server inside the
+  client, so it was missing from the two ways people actually play. Early game should be markedly
+  lighter. Reported from a real playtest.
+- **The game starts.** Sophisticated Tactical Backpacks asks for a file under one name and ships it
+  under another, which killed the client during model loading, every time. A 1 KB shim supplies it
+  under the expected name.
+
+### Added
+
+- **Shaders are possible, and still optional.** Oculus is included — it is Iris, built for Forge.
+  Nothing changes until you pick a shaderpack; none ships. **Do not install OptiFine**: it collides
+  with the renderer this pack uses, and the README says so where a player will see it.
+- **A profiler.** spark ships with the pack, because a profiler you have to install after the
+  problem starts is a profiler you do not have.
+- **Four performance mods, none of them measured yet.** BadOptimizations, AllTheLeaks, Dynamic FPS
+  and Legendary Block Entities. They are installed, not accepted — nobody has a frame-time number
+  for this pack, so nothing here claims they help.
+
+### Changed
+
+- **114 → 120 mods.**
+- **The version number identifies a build again.** Two different archives were both called
+  `0.1.0-alpha`, which made the "compare `pack-version.txt`" instruction in the README useless.
+
+### Known, and unfixed
+
+- **Nobody has played this.** A client reaches the main menu; nothing past that is tested. Damage
+  numbers, difficulty and spawn rates are all design targets.
+- **Do not keep a world you care about.** Worldgen is Biomes O' Plenty, chosen on quality and never
+  tested across seeds. If it has to change, existing worlds go with it.
+- Improved Mobs cannot read Brimm Armors' defence values, so no Brimm armour will ever be worn by a
+  mob.
+- Three of the four performance mods are client-only and have never been run at all.
+
+---
+
 ## Unreleased
 
 > **The pack version is now `0.2.0-alpha`, and this is still not a release.**
