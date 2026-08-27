@@ -90,6 +90,26 @@ author.**
    platform rules to anything in `overrides/`. Both are real problems and **neither is a reason to
    delay three or four friends.**
 
+### One scoped exception, added 2026-08-27 (#80)
+
+`scripts/build/build-curseforge-local.mjs` produces
+`…-alpha-curseforge-local.zip`, which **does** bundle the four API-blocked mods, so importing into
+the CurseForge App is one step.
+
+**That is this ADR's rule broken on purpose, and the scope is what makes it coherent.** This ADR
+reasons about *distribution*. That file is built on one machine for that machine, is named `local`,
+and carries a `README.txt` telling anyone who opens it not to share it and to send the friend pack
+instead.
+
+Two of the four could be shared anyway — **TakKit is MIT** and **Client Dynamic Light is MPL-2.0**,
+both of which grant redistribution in their own text. **Flashier Flashlights** and **Player
+Microchip** are All Rights Reserved with an explicit opt-out, and they are the reason the file is not
+simply folded into the normal export.
+
+**The rule still holds where it matters:** `build-friend-pack.mjs` refuses to emit an archive
+containing any jar at all, and the normal CurseForge export still references rather than bundles the
+four.
+
 ## Alternatives considered
 
 - **Keep self-contained and ask the affected authors.** Not rejected — it is simply slower, and it

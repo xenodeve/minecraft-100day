@@ -40,3 +40,7 @@ Thumbs.db
 
 # Client evidence bundles are captures, not sources. Send them, do not commit them.
 build/client-evidence-*.zip
+
+# The local CurseForge build bundles mods we may not redistribute. It is a
+# personal artifact, never a committed or published one.
+build/*-curseforge-local.zip

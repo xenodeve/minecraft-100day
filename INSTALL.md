@@ -39,6 +39,14 @@ This works offline, and it works when a mod's download page is unreachable.
 
 ## Option B — CurseForge App
 
+**Use `…-alpha-curseforge-local.zip`**, not the plain `…-alpha.zip`. The plain one references four
+mods whose authors disabled third-party downloading, and whether the CurseForge App resolves them is
+untested. The `-local` build carries those four directly, so the import is one step.
+
+**It is named `local` because it must not be shared** — two of those four are All Rights Reserved.
+To give the pack to someone, send the friend pack.
+
+
 1. **Minecraft** → **Create Custom Profile** → **Import**
 2. Select `Industrial-Civilization-Survival-0.1.0-alpha.zip` *(the 130 MB one)*
 3. Wait for it to download the mods, then **Play**.
