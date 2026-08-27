@@ -730,11 +730,6 @@ hash = "b45a8099d4302af4707f6db58779dbe39898d186e999366e64f16653398a9d63"
 metafile = true
 
 [[files]]
-file = "mods/sophisticated-tactical-backpacks.pw.toml"
-hash = "8a6df5154d5a2da77c6e3bef8ccac65ef353af21d5c336f858719e91785a5366"
-metafile = true
-
-[[files]]
 file = "mods/sound-physics-remastered.pw.toml"
 hash = "aa662713661e95a7fdd6bd4fc3bb8231a615dc144b7825fde504355dc0698a31"
 metafile = true

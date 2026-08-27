@@ -36,6 +36,21 @@ client.** That single fact blocks most of what follows.
 | JEI active-recipe check (Crafting Spec §5) | JEI is client-only |
 | Visuals V1/V2 verification, and V4–V10 entirely | **every visual mod is `side = "client"`** |
 
+### The first client launch happened, and it crashed (#84)
+
+**Dated 2026-08-27. This section is no longer hypothetical.**
+
+The client died before the main menu, in `BackpackDynamicModel.bake` on the Render thread — a
+Sophisticated Tactical Backpacks mixin whose `mixins.json` names its refMap
+`militarybackpack.refmap.json` while the jar contains `militarybackpack.mixins.refmap.json`.
+
+Sixteen green server boots could not see it, because model baking never runs on a server. And nothing
+static could have caught it either: that mod declares dependencies on `forge` and `minecraft` only,
+while mixing into another mod's internals.
+
+The mod is removed. **Whether the client now launches is unknown** — removing one crash does not
+promise the absence of the next.
+
 ### What you must not conclude from the green boots
 
 `Done (12.803s)`, 83 recipes, 0 failed — that is real, and it is **narrow**. The same green boot

@@ -448,6 +448,51 @@ server still running**:
 The first reads like a corrupt save and the second like a firewall problem. Neither is.
 `pkill -f` does **not** match these processes; `Get-Process java | Stop-Process -Force` does.
 
+### Boot 18 — the FIRST CLIENT LAUNCH, and it crashed (#84)
+
+2026-08-27, CurseForge App instance. **The first time anyone has run this pack's client.** It did not
+reach the main menu.
+
+```
+Description: Rendering overlay
+MixinApplyError: Mixin [militarybackpack.mixins.json:BackpackOverrideMixin] FAILED during APPLY
+Caused by: InvalidInjectionException: Critical injection failure:
+  @Inject on militarybackpack$resolve could not find any targets matching 'resolve'
+  in BackpackDynamicModel$BackpackItemOverrideList. No refMap loaded.
+```
+
+**The mod names its own refMap wrong.** `militarybackpack.mixins.json` declares
+`"refmap": "militarybackpack.refmap.json"`; the file in the jar is
+`militarybackpack.mixins.refmap.json`. Mixin loads nothing, cannot map `resolve` to the SRG name a
+shipped game uses, finds no target, and `"required": true` turns that into a crash.
+
+`javap` on the target settles both halves:
+
+```
+public BakedModel m_173464_(BakedModel, ItemStack, ClientLevel, LivingEntity, int)
+private void lambda$resolve$0/1/2(...)
+```
+
+`m_173464_` present, `resolve` absent, and `lambda$resolve$*` proving the source method *is* called
+`resolve`. The shipped refMap even carries the correct mapping — it is simply never loaded.
+
+**Three things this proves that sixteen server boots could not.**
+
+1. **The client render path is invisible to a dedicated server.** This fails in
+   `BackpackDynamicModel.bake` on the Render thread during model baking. No server boot reaches it.
+2. **A mod can hard-depend on another mod's internals while declaring nothing.**
+   `militarybackpack`'s `mods.toml` lists `forge` and `minecraft` only, and it mixins straight into
+   `sophisticatedbackpacks`. Forge had no range to check, packwiz nothing to resolve, `verify` no
+   declaration to validate. **Reading declared dependencies is necessary and not sufficient** — the
+   `cbc_firepower_components` lesson, one level worse.
+3. **`docs/agents/blocked-work.md` was right about the shape**: a green boot is not a correct pack.
+
+**Resolution:** removed. The design document gives it `EXPERIMENTAL` status and a cosmetic role, and
+nothing in `kubejs/` or `config/` references it. 114 → 113 mods.
+
+**Unverified until the developer relaunches.** Removing the mod removes *this* crash; whether the
+client then reaches the main menu is the next unknown, not a conclusion.
+
 ### Rig trap four: the world directory is `boottest`, not `world` (#78)
 
 `server.properties` sets `level-name=boottest`. Every reset this session ran
