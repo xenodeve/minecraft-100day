@@ -35,13 +35,13 @@ down, which is the part that stops a guess from looking identical to an inspecti
 
 | Side | Count |
 |---|---|
-| `both` | 93 |
-| `client` | 21 |
+| `both` | 95 |
+| `client` | 24 |
 | `server` | 1 |
 
 ## The decisive shared fact
 
-**All 22 one-sided mods register nothing into a synced registry** — no
+**All 25 one-sided mods register nothing into a synced registry** — no
 `assets/<id>/models/{item,block}`, no `data/<id>/{recipes,loot_tables,tags}`. That is what makes a
 one-sided classification safe at all: a mod that registers a block or an item *must* be on both
 sides or the registry sync fails on join, and none of these does.
@@ -201,6 +201,28 @@ declares an Oculus or Iris relationship — checked by grepping `mods.toml` acro
 selected renders the game normally, and `shaderpacks/` goes out empty. §23 already names the profile
 this unlocks: *Cinematic Optional = Enhanced + user-selected shader*.
 
+## The performance ADD/TEST layer (#97) — three client, one both
+
+*Performance Spec* `PERF-CLIENT-BADOPTIMIZATIONS`, `PERF-CLIENT-DYNAMICFPS`,
+`PERF-RENDER-LEGENDARY-BLOCK-ENTITIES`. All three authors declare **no server support at all** —
+`server_side: unsupported`, which is Modrinth's strongest negative, not the ambiguous `optional`
+that misled the Subtle Effects call.
+
+| Mod | Slug | Modrinth says | Jar says | Ours |
+|---|---|---|---|---|
+| BadOptimizations | `badoptimizations` | client `required`, server **`unsupported`** | its only dependency is `minecraft` at `side = "CLIENT"`; **zero** `data/<namespace>/` | `client` |
+| Dynamic FPS | `dynamic-fps` | client `required`, server **`unsupported`** | `displayTest = "IGNORE_ALL_VERSION"`; **zero** `data/<namespace>/`; 70 `assets/` | `client` |
+| Legendary Block Entities | `legendary-block-entities` | client `required`, server **`unsupported`** | every declared dependency `side = "CLIENT"`; **zero** `data/`; 1045 `assets/` | `client` |
+
+**Two `data/` counts that looked like registry content and were not.** BadOptimizations appeared to
+ship 14 `data/` entries; they are class paths under `mixin/entitydata/`. Dynamic FPS appeared to
+ship 2; they are `assets/dynamic_fps/data/default_config.json`, inside `assets/`. Both were checked
+rather than counted — a naive `grep data/` would have blocked all three of these on false evidence.
+
+**AllTheLeaks stays `both`** and needs no entry here. It declares `side = "BOTH"` on every
+dependency, ships zero `assets/` and zero `data/`, and a memory-leak fix is wanted on whichever side
+is leaking. It is also the only one of the four a dedicated server will load.
+
 ## What was checked and rejected
 
 **`improved-mobs` stays `both`.** The compatibility matrix recorded it as `SERVER`, and that is
@@ -292,13 +314,13 @@ gate ตรวจไม่ได้ว่าเหตุผล*ดี*หรื�
 
 | ฝั่ง | จำนวน |
 |---|---|
-| `both` | 93 |
-| `client` | 21 |
+| `both` | 95 |
+| `client` | 24 |
 | `server` | 1 |
 
 ## ข้อเท็จจริงร่วมที่ชี้ขาด
 
-**มอดฝั่งเดียวทั้ง 22 ตัวไม่ลงทะเบียนอะไรเข้า registry ที่ sync กันเลย** — ไม่มี
+**มอดฝั่งเดียวทั้ง 25 ตัวไม่ลงทะเบียนอะไรเข้า registry ที่ sync กันเลย** — ไม่มี
 `assets/<id>/models/{item,block}` ไม่มี `data/<id>/{recipes,loot_tables,tags}` นั่นคือสิ่งที่ทำให้
 การจำแนกเป็นฝั่งเดียวปลอดภัยตั้งแต่แรก: มอดที่ลงทะเบียนบล็อกหรือไอเทม *ต้อง* อยู่ทั้งสองฝั่ง
 ไม่งั้น registry sync จะพังตอน join และไม่มีตัวไหนในนี้ทำแบบนั้น
@@ -421,6 +443,28 @@ Oculus หรือ Iris — ตรวจด้วยการ grep `mods.toml` 
 **ไม่มี shaderpack แจกมาด้วย** *Visuals Spec §22* ห้าม shader ที่**บังคับ** ตัวโหลดที่ไม่ได้เลือกอะไร
 เรนเดอร์เกมตามปกติ และ `shaderpacks/` จะถูกส่งออกไปแบบว่าง §23 ตั้งชื่อ profile ที่อันนี้ปลดล็อกไว้แล้ว:
 *Cinematic Optional = Enhanced + user-selected shader*
+
+## ชั้น ADD/TEST ของ performance (#97) — สาม client หนึ่ง both
+
+*Performance Spec* `PERF-CLIENT-BADOPTIMIZATIONS`, `PERF-CLIENT-DYNAMICFPS`,
+`PERF-RENDER-LEGENDARY-BLOCK-ENTITIES` ผู้เขียนทั้งสามประกาศว่า**ไม่รองรับ server เลย** —
+`server_side: unsupported` ซึ่งเป็นคำปฏิเสธที่หนักที่สุดของ Modrinth ไม่ใช่ `optional` ที่กำกวม
+แบบที่เคยทำให้การตัดสิน Subtle Effects ผิด
+
+| มอด | Slug | Modrinth บอกว่า | jar บอกว่า | ของเรา |
+|---|---|---|---|---|
+| BadOptimizations | `badoptimizations` | client `required`, server **`unsupported`** | dependency ตัวเดียวของมันคือ `minecraft` ที่ `side = "CLIENT"`; **ไม่มี** `data/<namespace>/` | `client` |
+| Dynamic FPS | `dynamic-fps` | client `required`, server **`unsupported`** | `displayTest = "IGNORE_ALL_VERSION"`; **ไม่มี** `data/<namespace>/`; มี 70 `assets/` | `client` |
+| Legendary Block Entities | `legendary-block-entities` | client `required`, server **`unsupported`** | ทุก dependency ที่ประกาศเป็น `side = "CLIENT"`; **ไม่มี** `data/`; มี 1045 `assets/` | `client` |
+
+**สองกรณีที่การนับ `data/` ดูเหมือนเนื้อหา registry แต่ไม่ใช่** BadOptimizations ดูเหมือนมี
+14 รายการ `data/` แต่มันคือ path ของคลาสใต้ `mixin/entitydata/` ส่วน Dynamic FPS ดูเหมือนมี 2
+แต่มันคือ `assets/dynamic_fps/data/default_config.json` ซึ่งอยู่ใน `assets/`
+ทั้งคู่ถูกตรวจแทนที่จะนับเฉย ๆ — การ `grep data/` แบบตรงไปตรงมาจะบล็อกทั้งสามตัวนี้ด้วยหลักฐานเท็จ
+
+**AllTheLeaks คงเป็น `both`** และไม่ต้องมีรายการที่นี่ มันประกาศ `side = "BOTH"` ทุก dependency
+ไม่มี `assets/` ไม่มี `data/` และตัวแก้ memory leak ควรอยู่ฝั่งไหนก็ตามที่รั่ว
+มันยังเป็นตัวเดียวในสี่ตัวที่ dedicated server จะโหลดด้วย
 
 ## สิ่งที่ตรวจแล้วปฏิเสธ
 

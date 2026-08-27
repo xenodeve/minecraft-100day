@@ -245,6 +245,11 @@ file = "kubejs/server_scripts/progression/tactical_tracker.js"
 hash = "66050bc85f685b8ce1b389454dfacc5ec7803b948fd8c5a57cbeabe7a5e8e1b5"
 
 [[files]]
+file = "mods/alltheleaks.pw.toml"
+hash = "40bab1828ae2b4d755db64f1c887a2fe06171fad6ab54d4a1863ca5c30ff9b55"
+metafile = true
+
+[[files]]
 file = "mods/ambientsounds.pw.toml"
 hash = "fa96526cc55c9fbac742aea245930f1a2db2e68b50765f1bdbaf85477e1631bf"
 metafile = true
@@ -262,6 +267,11 @@ metafile = true
 [[files]]
 file = "mods/attract-to-sound.pw.toml"
 hash = "bcc326ac01e7bc64b5c01e501b65a351669bcc05247766e44e0e868cd9eac367"
+metafile = true
+
+[[files]]
+file = "mods/badoptimizations.pw.toml"
+hash = "b8c29dac6fb7c1cf18ca53b7a96c6c4854307999b77a751e803bdd9650a125e0"
 metafile = true
 
 [[files]]
@@ -397,6 +407,11 @@ metafile = true
 [[files]]
 file = "mods/domum-ornamentum.pw.toml"
 hash = "dec6adcd7a2404dc12b0df096820154c5c81fca5dcea69a3ec61ce2776e176b5"
+metafile = true
+
+[[files]]
+file = "mods/dynamic-fps.pw.toml"
+hash = "b67251b53eb4685d349bda68fde30b021e99900fe4d445e6c0f3e9fa0a908580"
 metafile = true
 
 [[files]]
@@ -582,6 +597,11 @@ metafile = true
 [[files]]
 file = "mods/kubejs.pw.toml"
 hash = "ed086cdfde6ba4bb175468a76f3df3b9517aea3fe95b09bed0f1fa70f7caeb6a"
+metafile = true
+
+[[files]]
+file = "mods/legendary-block-entities.pw.toml"
+hash = "4fa874d4ccf4f73f5df0b36df46e956d089137895eaded2a34a0fc45ec78bb28"
 metafile = true
 
 [[files]]

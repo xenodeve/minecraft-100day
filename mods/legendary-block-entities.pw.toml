@@ -1,0 +1,13 @@
+name = "Legendary Block Entities"
+filename = "legendaryblockentities-0.11.0.jar"
+side = "client"
+
+[download]
+url = "https://cdn.modrinth.com/data/4IM1Rjlr/versions/plTmjNoO/legendaryblockentities-0.11.0.jar"
+hash-format = "sha512"
+hash = "96133fecd286f5ed3a145c01fd78a05ce9c6c1a84dc41d59458eee0b12c33ff0b98074796e60dde64279dd8726c67464ddacb54503e2ab0b9733591a5c85e397"
+
+[update]
+[update.modrinth]
+mod-id = "4IM1Rjlr"
+version = "plTmjNoO"

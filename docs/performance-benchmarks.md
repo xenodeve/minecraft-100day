@@ -29,6 +29,28 @@ Not:
 Each run gets its own row. A row records **one** changed variable. If two things changed, the row is
 void — write two rows or discard the run.
 
+> ### ⚠ Four mods landed together, before any baseline existed (#97)
+>
+> `BadOptimizations`, `AllTheLeaks`, `Dynamic FPS` and `Legendary Block Entities` were installed in
+> a single commit on the developer's direction. **That breaks the rule above**, and the consequence
+> is concrete: the first measurement taken from now on cannot attribute anything to one of the four.
+>
+> **The reference point is commit `a62adb9`** — the last state without them, with spark already
+> present. A comparison against that measures the batch as a whole, which is the only honest thing
+> it can measure.
+>
+> **To isolate one**, remove its metafile, rebuild, and run the same scenario:
+>
+> ```
+> mods/badoptimizations.pw.toml
+> mods/alltheleaks.pw.toml
+> mods/dynamic-fps.pw.toml
+> mods/legendary-block-entities.pw.toml
+> ```
+>
+> Do not write a `keep` verdict for any of the four from a batch run. `inconclusive` is the correct
+> verdict until one of them has been measured alone.
+
 ## Run log
 
 | # | Date | Commit | Zone | One variable changed | Client 1% low | Server MSPT p95 | Verdict |

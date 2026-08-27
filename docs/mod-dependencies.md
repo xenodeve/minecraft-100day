@@ -1,15 +1,15 @@
 <!-- GENERATED FILE - do not edit by hand.
      Run: python scripts/build/generate-mod-dependencies.py
      Every line is read out of that mod's own META-INF/mods.toml. -->
-<!-- mod-count: 116 -->
-<!-- dependency-edges: 296 -->
+<!-- mod-count: 120 -->
+<!-- dependency-edges: 309 -->
 
 # Mod requirements · มอดแต่ละตัวต้องการอะไร
 
-**116 mods** and **296 declared dependencies** between them. Every line was read out of that
+**120 mods** and **309 declared dependencies** between them. Every line was read out of that
 mod's own `META-INF/mods.toml` - the same file Forge reads when it decides whether to boot.
 
-**116 มอด** และ **296 dependency** ที่ประกาศไว้ระหว่างกัน ทุกบรรทัดอ่านมาจาก `META-INF/mods.toml`
+**120 มอด** และ **309 dependency** ที่ประกาศไว้ระหว่างกัน ทุกบรรทัดอ่านมาจาก `META-INF/mods.toml`
 ในตัว jar เอง ซึ่งเป็นไฟล์เดียวกับที่ Forge อ่านตอนตัดสินใจว่าจะ boot ให้หรือไม่
 
 ## What the checkbox means · เครื่องหมายถูกแปลว่าอะไร
@@ -29,12 +29,12 @@ real - see *Never reaches a client install* below.
 
 | | Count |
 |---|---:|
-| Mods in the pack | 116 |
-| Declared dependencies | 296 |
+| Mods in the pack | 120 |
+| Declared dependencies | 309 |
 | **Mandatory and unsatisfied** | **0** |
 | Satisfied but outside the declared version range | 0 |
 | Version unresolvable from the jar alone | 0 |
-| Optional integrations this pack does not have | 29 |
+| Optional integrations this pack does not have | 35 |
 | Libraries bundled at conflicting versions | 1 |
 | Bundled libraries where one choice would leave a mod short | 1 |
 
@@ -55,7 +55,7 @@ integrated server อยู่ในตัว client เอง มอดที�
 
 - [ ] **ServerCore** (`servercore`) - `side = "server"`
 
-`side = "client"` is the harmless direction: 21 mods, none of which a dedicated server needs.
+`side = "client"` is the harmless direction: 24 mods, none of which a dedicated server needs.
 
 ## Libraries bundled by more than one mod, at different versions
 
@@ -144,6 +144,27 @@ a `NoSuchMethodError` at the moment the newer API is actually called, which may 
 
 - [ ] `shouldersurfing`
 
+### AllTheLeaks (Memory Leak Fix)
+
+`alltheleaks` 1.1.1+1.20.1-forge · loader `javafml` · `alltheleaks-1.1.1+1.20.1-forge.jar`
+
+- [x] in the pack
+- [x] on a client install
+- [x] on a dedicated server
+
+**Requires**
+
+- [x] `forge` `[47.2.0,)` - Forge itself
+- [x] `minecraft` `[1.20.1,1.20.2)` - Minecraft itself
+
+**Optional, and present**
+
+- [x] `geckolib` - geckolib `4.8.4`
+
+**Optional, and absent** - the mod runs without these
+
+- [ ] `moonlight`
+
 ### AmbientSounds
 
 `ambientsounds` 6.3.8 · loader `javafml` · `AmbientSounds_FORGE_v6.3.8_mc1.20.1.jar`
@@ -211,6 +232,18 @@ Declares no dependencies beyond Forge and Minecraft.
 - [ ] `smartbrainlib`
 - [ ] `superbwarfare`
 - [ ] `teammanagement`
+
+### BadOptimizations
+
+`badoptimizations` 2.4.1 · loader `javafml` · `BadOptimizations-2.4.1-1.20.1.jar`
+
+- [x] in the pack
+- [x] on a client install
+- [ ] on a dedicated server - `side = "client"`, and a server has no use for it
+
+**Requires**
+
+- [x] `minecraft` `1.20.1` - Minecraft itself
 
 ### Balm
 
@@ -638,6 +671,18 @@ Declares no dependencies beyond Forge and Minecraft.
 - [x] on a dedicated server
 
 Declares no dependencies beyond Forge and Minecraft.
+
+### Dynamic FPS
+
+`dynamic_fps` 3.11.4 · loader `javafml` · `dynamic-fps-3.11.4+minecraft-1.20.0-forge.jar`
+
+- [x] in the pack
+- [x] on a client install
+- [ ] on a dedicated server - `side = "client"`, and a server has no use for it
+
+**Requires**
+
+- [x] `minecraft` `[1.20.0,1.20.1]` - Minecraft itself
 
 ### Eating Animation [Neo/Forge]
 
@@ -1151,6 +1196,27 @@ Declares no dependencies beyond Forge and Minecraft.
 **Optional, and absent** - the mod runs without these
 
 - [ ] `roughlyenoughitems`
+
+### Legendary Block Entities
+
+`legendaryblockentities` 0.11.0 · loader `javafml` · `legendaryblockentities-0.11.0.jar`
+
+- [x] in the pack
+- [x] on a client install
+- [ ] on a dedicated server - `side = "client"`, and a server has no use for it
+
+**Requires**
+
+- [x] `forge` `[47,)` - Forge itself
+- [x] `minecraft` `[1.20.1,1.21)` - Minecraft itself
+
+**Optional, and absent** - the mod runs without these
+
+- [ ] `bclib`
+- [ ] `betterend`
+- [ ] `betternether`
+- [ ] `ironchest`
+- [ ] `quark`
 
 ### Lexiconfig
 

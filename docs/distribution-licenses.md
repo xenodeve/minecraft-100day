@@ -148,10 +148,12 @@ been modified.
 |---|---|---|---|
 | [TACZ] Durability | [Modrinth](https://modrinth.com/mod/tacz-durability) | GNU General Public License v3.0 only | Modrinth API |
 | AmbientSounds | [Modrinth](https://modrinth.com/mod/ambientsounds) | GNU Lesser General Public License v3.0 only | Modrinth API |
+| AllTheLeaks (Memory Leak Fix) | [CurseForge](https://www.curseforge.com/projects/1091339) | MIT License | jar `META-INF/mods.toml` |
 | Architectury API | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/architectury-api) | GNU Lesser General Public License version 3 (LGPLv3) | project page |
 | Atlas Lib | [Modrinth](https://modrinth.com/mod/atlas-lib) | GNU Lesser General Public License v2.1 only | Modrinth API |
 | Attract to Sound ([NEO]Forge/Fabric): Sound & Stealth. | [Modrinth](https://modrinth.com/mod/attract-to-sound) | GNU General Public License v3.0 only | Modrinth API |
 | Better Animations Collection | [Modrinth](https://modrinth.com/mod/better-animations-collection) | Mozilla Public License 2.0 | Modrinth API |
+| BadOptimizations | [Modrinth](https://modrinth.com/mod/badoptimizations) | MIT License | Modrinth API |
 | BlockUI | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/blockui) | GNU General Public License version 3 (GPLv3) | project page |
 | Carry On | [Modrinth](https://modrinth.com/mod/carry-on) | GNU Lesser General Public License v3.0 only | Modrinth API |
 | Chunky | [Modrinth](https://modrinth.com/mod/chunky) | GNU General Public License v3.0 only | Modrinth API |
@@ -164,6 +166,7 @@ been modified.
 | CreativeCore | [Modrinth](https://modrinth.com/mod/creativecore) | GNU Lesser General Public License v3.0 only | Modrinth API |
 | Curios API | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/curios) | GNU Lesser General Public License version 3 (LGPLv3) | project page |
 | Domum Ornamentum | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/domum-ornamentum) | GNU General Public License version 3 (GPLv3) | project page |
+| Dynamic FPS | [Modrinth](https://modrinth.com/mod/dynamic-fps) | MIT License | Modrinth API |
 | Eating Animation [Neo/Forge] | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/eating-animation-forge) | MIT License | project page |
 | Embeddium | [Modrinth](https://modrinth.com/mod/embeddium) | GNU Lesser General Public License v3.0 only | Modrinth API |
 | Farmer's Delight | [Modrinth](https://modrinth.com/mod/farmers-delight) | MIT License | Modrinth API |
@@ -178,6 +181,7 @@ been modified.
 | ItemPhysic | [Modrinth](https://modrinth.com/mod/itemphysic) | GNU Lesser General Public License v2.1 only | Modrinth API |
 | Jupiter | [Modrinth](https://modrinth.com/mod/jupiter) | GNU Lesser General Public License v3.0 or later | Modrinth API |
 | Just Enough Items (JEI) | [Modrinth](https://modrinth.com/mod/jei) | MIT License | Modrinth API |
+| Legendary Block Entities | [Modrinth](https://modrinth.com/mod/legendary-block-entities) | GNU Lesser General Public License v3.0 only | Modrinth API |
 | KubeJS | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/kubejs) | GNU Lesser General Public License version 3 (LGPLv3) | project page |
 | Lexiconfig | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/lexiconfig) | GNU General Public License version 3 (GPLv3) | project page |
 | ModernFix | [Modrinth](https://modrinth.com/mod/modernfix) | GNU Lesser General Public License v3.0 only | Modrinth API |
@@ -435,10 +439,12 @@ player-microchip      1488872   IN MANIFEST
 |---|---|---|---|
 | [TACZ] Durability | [Modrinth](https://modrinth.com/mod/tacz-durability) | GNU General Public License v3.0 only | Modrinth API |
 | AmbientSounds | [Modrinth](https://modrinth.com/mod/ambientsounds) | GNU Lesser General Public License v3.0 only | Modrinth API |
+| AllTheLeaks (Memory Leak Fix) | [CurseForge](https://www.curseforge.com/projects/1091339) | MIT License | jar `META-INF/mods.toml` |
 | Architectury API | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/architectury-api) | GNU Lesser General Public License version 3 (LGPLv3) | project page |
 | Atlas Lib | [Modrinth](https://modrinth.com/mod/atlas-lib) | GNU Lesser General Public License v2.1 only | Modrinth API |
 | Attract to Sound ([NEO]Forge/Fabric): Sound & Stealth. | [Modrinth](https://modrinth.com/mod/attract-to-sound) | GNU General Public License v3.0 only | Modrinth API |
 | Better Animations Collection | [Modrinth](https://modrinth.com/mod/better-animations-collection) | Mozilla Public License 2.0 | Modrinth API |
+| BadOptimizations | [Modrinth](https://modrinth.com/mod/badoptimizations) | MIT License | Modrinth API |
 | BlockUI | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/blockui) | GNU General Public License version 3 (GPLv3) | project page |
 | Carry On | [Modrinth](https://modrinth.com/mod/carry-on) | GNU Lesser General Public License v3.0 only | Modrinth API |
 | Chunky | [Modrinth](https://modrinth.com/mod/chunky) | GNU General Public License v3.0 only | Modrinth API |
@@ -451,6 +457,7 @@ player-microchip      1488872   IN MANIFEST
 | CreativeCore | [Modrinth](https://modrinth.com/mod/creativecore) | GNU Lesser General Public License v3.0 only | Modrinth API |
 | Curios API | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/curios) | GNU Lesser General Public License version 3 (LGPLv3) | project page |
 | Domum Ornamentum | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/domum-ornamentum) | GNU General Public License version 3 (GPLv3) | project page |
+| Dynamic FPS | [Modrinth](https://modrinth.com/mod/dynamic-fps) | MIT License | Modrinth API |
 | Eating Animation [Neo/Forge] | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/eating-animation-forge) | MIT License | project page |
 | Embeddium | [Modrinth](https://modrinth.com/mod/embeddium) | GNU Lesser General Public License v3.0 only | Modrinth API |
 | Farmer's Delight | [Modrinth](https://modrinth.com/mod/farmers-delight) | MIT License | Modrinth API |
@@ -465,6 +472,7 @@ player-microchip      1488872   IN MANIFEST
 | ItemPhysic | [Modrinth](https://modrinth.com/mod/itemphysic) | GNU Lesser General Public License v2.1 only | Modrinth API |
 | Jupiter | [Modrinth](https://modrinth.com/mod/jupiter) | GNU Lesser General Public License v3.0 or later | Modrinth API |
 | Just Enough Items (JEI) | [Modrinth](https://modrinth.com/mod/jei) | MIT License | Modrinth API |
+| Legendary Block Entities | [Modrinth](https://modrinth.com/mod/legendary-block-entities) | GNU Lesser General Public License v3.0 only | Modrinth API |
 | KubeJS | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/kubejs) | GNU Lesser General Public License version 3 (LGPLv3) | project page |
 | Lexiconfig | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/lexiconfig) | GNU General Public License version 3 (GPLv3) | project page |
 | ModernFix | [Modrinth](https://modrinth.com/mod/modernfix) | GNU Lesser General Public License v3.0 only | Modrinth API |

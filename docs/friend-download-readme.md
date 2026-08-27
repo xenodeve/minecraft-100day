@@ -1,6 +1,6 @@
 # Industrial Civilization Survival — วิธีติดตั้ง
 
-Minecraft **1.20.1** · Forge **47.4.23** · มอด **116** ตัว
+Minecraft **1.20.1** · Forge **47.4.23** · มอด **120** ตัว
 
 โหลดไฟล์เดียวพอ: **`Industrial-Civilization-Survival-0.1.0-alpha-friend.zip`** (127 KB)
 
@@ -21,7 +21,7 @@ Minecraft **1.20.1** · Forge **47.4.23** · มอด **116** ตัว
 
 - **Prism Launcher** — โหลดฟรีที่ <https://prismlauncher.org>
 - **Java 17** — Prism จะบอกเองถ้าไม่มี กดตามได้เลย
-- **RAM 8 GB** ให้ Minecraft (116 มอด กินพอสมควร)
+- **RAM 8 GB** ให้ Minecraft (120 มอด กินพอสมควร)
 
 ---
 
@@ -144,7 +144,7 @@ java -jar packwiz-installer-bootstrap.jar -g -s server pack.toml
 
 ## มีอะไรอยู่ในนี้บ้าง
 
-`MODLIST.md` ที่มากับไฟล์ ลงชื่อมอดทั้ง 116 ตัวพร้อมลิงก์ไปหน้าของคนทำ
+`MODLIST.md` ที่มากับไฟล์ ลงชื่อมอดทั้ง 120 ตัวพร้อมลิงก์ไปหน้าของคนทำ
 
 คร่าว ๆ คือ Create + เครื่องจักรอุตสาหกรรม, ปืนจาก TaCZ ที่ต้องผลิตกระสุนเอง, มอนสเตอร์ที่โหดขึ้นและมาเป็นกลุ่ม,
 เมือง NPC จาก MineColonies, มังกรจาก Ice & Fire, สัตว์ป่าจริงจัง, และเควส 48 ข้อ 12 บท
