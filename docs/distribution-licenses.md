@@ -43,17 +43,27 @@ their licences.** Swapping mods will not fix it; only changing how the pack is d
 | `…-alpha.zip` (CurseForge, 173 MB) | **40** referenced by project/file id · **72** bundled in `overrides/mods/` | **yes, 72** |
 | `…-alpha-curseforge-local.zip` (177 MB) | **36** referenced · **76** bundled, **including the four API-blocked mods** | **yes, 76** — ADR 0005's one scoped exception, **local use only** |
 
-**Only `-friend.zip` may be uploaded anywhere.** That is the practical form of everything above, and
-it is easy to undo by accident — putting all five artifacts in one shared folder republishes 113
-jars.
+**Only `-friend.zip` may be PUBLISHED.** Publishing means a public URL, an index, or a searchable
+link — GitHub Releases, CurseForge, Modrinth, a public Drive folder.
 
-| Artifact | Third-party jars | May be shared |
-|---|---|---|
-| `…-friend.zip` | **0** | **yes** — and it serves both client and server, via `-s server` |
-| `…-instance.zip` | 114 | no — internal test artifact |
-| `…-server.zip` | 94 | no — use the friend pack with `-s server` instead |
-| `…-alpha.zip` (CurseForge) | 72 | no |
-| `…-curseforge-local.zip` | 76 | **never** — two of its mods are ARR with an explicit opt-out |
+**Handing a build to the group is a different act, and it is not restricted (#105).** The developer
+has decided the pack is played inside a closed group of 3–4 people, and any artifact may go to
+them. The authors' conditions target **rehosting** — making their jar downloadable from somewhere
+other than their own page — and a file sent to the people who play the pack is not that. Reading it
+as if it were is over-reading them, and it once caused an agent to block the developer from sending
+a file to their own friends.
+
+| Artifact | Third-party jars | Publish to a public URL | Hand to the group |
+|---|---|---|---|
+| `…-friend.zip` | **0** | **yes** — and it serves both client and server, via `-s server` | yes |
+| `…-instance.zip` | 120 | no | yes |
+| `…-server.zip` | 96 | no — use the friend pack with `-s server` instead | yes |
+| `…-alpha.zip` (CurseForge) | ~79 | no | yes |
+| `…-curseforge-local.zip` | ~83 | **no** — it carries the four mods whose authors switched third-party downloading off | **yes — this is what it was built for** |
+
+The accident to avoid is still real, and it is now precisely stated: **putting a jar-bundling
+artifact behind a public link republishes ~113 jars.** A Drive link set to "anyone with the link"
+and posted publicly is a public link. One sent to three people is not.
 
 The CurseForge-format export is closest to compliant, and still bundles 72 jars — packwiz puts
 Modrinth-sourced mods in `overrides/` because a CurseForge manifest cannot reference them.
@@ -338,16 +348,26 @@ proposes but has not installed. `docs/khaojee-visual-reference.md` records their
 | `…-alpha.zip` (CurseForge, 173 MB) | **40** อ้างด้วย project/file id · **72** ใส่ไว้ใน `overrides/mods/` | **ใช่ 72 ตัว** |
 | `…-alpha-curseforge-local.zip` (177 MB) | **36** อ้างถึง · **76** ฝังไว้ **รวมมอดสี่ตัวที่ถูกปิดกั้น** | **ใช่ 76 ตัว** — ข้อยกเว้นเดียวที่กำหนดขอบเขตไว้ของ ADR 0005 **ใช้เองเท่านั้น** |
 
-**มีแค่ `-friend.zip` เท่านั้นที่อัปโหลดที่ไหนก็ได้** นั่นคือรูปแบบที่ใช้จริงของทุกอย่างข้างบน
-และมันพลาดได้ง่ายมาก — การเอา artifact ทั้งห้าไปใส่โฟลเดอร์แชร์เดียวกันคือการเผยแพร่ jar 113 ตัวซ้ำ
+**มีแค่ `-friend.zip` เท่านั้นที่ เผยแพร่ ได้** การเผยแพร่หมายถึง URL สาธารณะ, index
+หรือลิงก์ที่ค้นเจอ — GitHub Releases, CurseForge, Modrinth, โฟลเดอร์ Drive สาธารณะ
 
-| Artifact | jar ของบุคคลที่สาม | แชร์ได้ไหม |
-|---|---|---|
-| `…-friend.zip` | **0** | **ได้** — และใช้ได้ทั้ง client และ server ผ่าน `-s server` |
-| `…-instance.zip` | 114 | ไม่ได้ — เป็น artifact สำหรับทดสอบภายใน |
-| `…-server.zip` | 94 | ไม่ได้ — ใช้ friend pack กับ `-s server` แทน |
-| `…-alpha.zip` (CurseForge) | 72 | ไม่ได้ |
-| `…-curseforge-local.zip` | 76 | **ห้ามเด็ดขาด** — สองตัวในนั้นเป็น ARR และเจ้าของปิดกั้นไว้ |
+**การส่งไฟล์ให้คนในกลุ่มเป็นคนละเรื่อง และไม่ถูกจำกัด (#105)** ผู้พัฒนาตัดสินแล้วว่า
+แพคนี้เล่นกันในกลุ่มปิด 3–4 คน และ artifact ตัวไหนก็ส่งให้เขาได้ เงื่อนไขของผู้เขียนมอดเล็งไปที่
+**การโฮสต์ซ้ำ** คือการทำให้ jar ของเขาโหลดได้จากที่อื่นนอกจากหน้าของเขาเอง
+ไฟล์ที่ส่งให้คนที่เล่นแพคนี้ไม่ใช่แบบนั้น การตีความว่าใช่คือการอ่านเกินจากที่เขาเขียน
+และมันเคยทำให้ agent ไปห้ามผู้พัฒนาส่งไฟล์ให้เพื่อนตัวเองมาแล้ว
+
+| Artifact | jar ของบุคคลที่สาม | เผยแพร่สู่ URL สาธารณะ | ส่งให้คนในกลุ่ม |
+|---|---|---|---|
+| `…-friend.zip` | **0** | **ได้** — และใช้ได้ทั้ง client และ server ผ่าน `-s server` | ได้ |
+| `…-instance.zip` | 120 | ไม่ได้ | ได้ |
+| `…-server.zip` | 96 | ไม่ได้ — ใช้ friend pack กับ `-s server` แทน | ได้ |
+| `…-alpha.zip` (CurseForge) | ~79 | ไม่ได้ | ได้ |
+| `…-curseforge-local.zip` | ~83 | **ไม่ได้** — มันพกมอดสี่ตัวที่เจ้าของปิดการโหลดโดยบุคคลที่สามไว้ | **ได้ — มันถูกสร้างมาเพื่อการนี้** |
+
+อุบัติเหตุที่ต้องเลี่ยงยังมีจริง และตอนนี้ระบุได้แม่นขึ้น: **การเอา artifact ที่บรรจุ jar
+ไปไว้หลังลิงก์สาธารณะ คือการเผยแพร่ jar ซ้ำราว 113 ตัว** ลิงก์ Drive ที่ตั้งเป็นสาธารณะแล้วโพสต์ให้คนทั่วไป
+คือลิงก์สาธารณะ ส่วนลิงก์ที่ส่งให้คนสามคนไม่ใช่
 
 ตัว export รูปแบบ CurseForge ใกล้เคียงกับที่ถูกต้องที่สุด และก็ยังใส่ jar มา 72 ตัว —
 packwiz เอามอดที่มาจาก Modrinth ไปไว้ใน `overrides/` เพราะ manifest ของ CurseForge อ้างถึงมันไม่ได้
