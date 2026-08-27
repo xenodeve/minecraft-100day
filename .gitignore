@@ -3,6 +3,14 @@
 # and a hash. The .jar itself is NEVER committed: it is redistribution we have no
 # licence for, and it would put hundreds of MB into git history permanently.
 *.jar
+
+# One exception, and only this one. The refMap shim is OURS: 1 KB, no third-party
+# code, just the mapping Sophisticated Tactical Backpacks asks for under the name
+# its own config uses (#84, #86). Committing it is what puts it in the packwiz
+# index, which is what gets it into the friend pack — an indexed file ships inside
+# the archive, so packwiz-installer finds it locally instead of needing a URL we
+# do not have. Rebuild: python scripts/build/build-militarybackpack-refmap-shim.py
+!mods/militarybackpack-refmap-shim-*.jar
 *.zip
 *.mrpack
 

@@ -18,7 +18,7 @@
 import { readdirSync, writeFileSync, mkdirSync, existsSync, statSync, rmSync, copyFileSync } from 'node:fs'
 import { execFileSync } from 'node:child_process'
 import { join } from 'node:path'
-import { readPack, readMetas, fetchAndVerify, versionStamp } from './lib/pack.mjs'
+import { readPack, readMetas, fetchAndVerify, versionStamp, packOwnedJars } from './lib/pack.mjs'
 
 const ROOT = process.cwd()
 const CACHE = join(ROOT, 'build', '.jar-cache')
@@ -62,6 +62,15 @@ for (const dir of ['config', 'defaultconfigs', 'kubejs', 'datapacks', 'resourcep
     execFileSync('cp', ['-r', src, join(STAGE, '.minecraft', dir)])
     console.log(`bundled ${dir}/`)
   }
+}
+
+// Jars we author ourselves. A metafile loop cannot see them, which is how the
+// refMap shim reached none of the artifacts the first time (#86).
+let ownJars = 0
+for (const j of packOwnedJars(ROOT)) {
+  copyFileSync(j.path, join(join(STAGE, '.minecraft', 'mods'), j.filename))
+  ownJars++
+  console.log(`bundled our own ${j.filename}`)
 }
 
 let stripped = 0
@@ -151,12 +160,12 @@ const check = execFileSync('powershell', ['-NoProfile', '-Command',
   `$z.Dispose(); Write-Output "$n $b"`], { encoding: 'utf8' }).trim().split(/\s+/)
 
 const [jarsInZip, backslashEntries] = check.map(Number)
-if (jarsInZip !== metas.length || backslashEntries > 0) {
-  console.error(`\n✗ archive is malformed: ${jarsInZip}/${metas.length} jars found under .minecraft/mods/, ` +
+if (jarsInZip !== metas.length + ownJars || backslashEntries > 0) {
+  console.error(`\n✗ archive is malformed: ${jarsInZip}/${metas.length + ownJars} jars found under .minecraft/mods/, ` +
     `${backslashEntries} entries contain a backslash`)
   process.exit(1)
 }
-console.log(`archive verified — ${jarsInZip} jars under .minecraft/mods/, no backslash entries`)
+console.log(`archive verified — ${jarsInZip} jars under .minecraft/mods/ (${ownJars} ours), no backslash entries`)
 
 const size = statSync(join(ROOT, OUT)).size
 console.log(`\n✓ ${OUT}  (${(size / 1048576).toFixed(0)} MB, ${metas.length} mods)`)

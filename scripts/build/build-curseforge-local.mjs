@@ -25,7 +25,7 @@
 import { readFileSync, writeFileSync, mkdirSync, existsSync, statSync, rmSync, copyFileSync, readdirSync } from 'node:fs'
 import { join } from 'node:path'
 import { execFileSync } from 'node:child_process'
-import { readPack, readMetas } from './lib/pack.mjs'
+import { readPack, readMetas, packOwnedJars } from './lib/pack.mjs'
 
 const ROOT = process.cwd()
 const pack = readPack(ROOT)
@@ -80,6 +80,13 @@ for (const [slug, label, licence] of BLOCKED) {
   copyFileSync(cached, join(modsDir, filename))
   added.push({ slug, label, filename, licence })
   console.log(`  bundled ${label} — ${licence}`)
+}
+
+// Our own jars go in too — the CurseForge manifest has no way to reference a
+// file that exists only in this repository.
+for (const j of packOwnedJars(ROOT)) {
+  copyFileSync(j.path, join(modsDir, j.filename))
+  console.log(`  bundled our own ${j.filename}`)
 }
 
 // -- drop their manifest entries, so the App does not refetch what is here --

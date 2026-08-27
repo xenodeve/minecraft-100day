@@ -48,8 +48,12 @@ Sixteen green server boots could not see it, because model baking never runs on 
 static could have caught it either: that mod declares dependencies on `forge` and `minecraft` only,
 while mixing into another mod's internals.
 
-The mod is removed. **Whether the client now launches is unknown** — removing one crash does not
-promise the absence of the next.
+**Fixed, and confirmed on a client.** A 1 KB shim jar supplies the refMap under the name their config
+asks for; the mod is back in the pack. The developer verified the client reaches the main menu.
+
+**That is the first fix in this project validated by running the game rather than booting a server.**
+It also means the sentence above is now history, not a warning — but the shape of it still holds for
+everything else that has never been launched.
 
 ### What you must not conclude from the green boots
 

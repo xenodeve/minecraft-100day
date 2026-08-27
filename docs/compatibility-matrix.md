@@ -487,11 +487,23 @@ private void lambda$resolve$0/1/2(...)
    `cbc_firepower_components` lesson, one level worse.
 3. **`docs/agents/blocked-work.md` was right about the shape**: a green boot is not a correct pack.
 
-**Resolution:** removed. The design document gives it `EXPERIMENTAL` status and a cosmetic role, and
-nothing in `kubejs/` or `config/` references it. 114 → 113 mods.
+**Resolution: a 1 KB shim jar, and it works — confirmed on a client (#86).**
 
-**Unverified until the developer relaunches.** Removing the mod removes *this* crash; whether the
-client then reaches the main menu is the next unknown, not a conclusion.
+The mod was removed first (#84), then restored once the workaround was proven.
+`mods/militarybackpack-refmap-shim-1.0.1-pre-release-hotfix.jar` carries the same mapping under the
+name their config asks for. Three files, no code, `lowcodefml` so Forge loads a resource-only jar.
+Their jar is untouched, so its pinned hash still matches.
+
+**Mixin's refMap lookup does reach a sibling mod jar.** That was recorded as untested in #84; the
+developer confirmed the client reaches the main menu with the shim present, 2026-08-27.
+
+**This is the first fix in this project validated on a running client rather than a server boot.**
+
+`scripts/build/build-militarybackpack-refmap-shim.py` reads the mapping out of *their* jar rather
+than embedding a copy, and refuses to build if the bug is fixed upstream or if the `resolve` mapping
+moves — so the shim cannot quietly outlive its reason.
+
+**Do not generalise it.** It worked once, for one mod, on one launcher.
 
 ### Rig trap four: the world directory is `boottest`, not `world` (#78)
 

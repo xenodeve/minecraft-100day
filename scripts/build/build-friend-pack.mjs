@@ -21,7 +21,7 @@
 import { readdirSync, writeFileSync, mkdirSync, existsSync, statSync, rmSync, copyFileSync, readFileSync } from 'node:fs'
 import { join, relative, sep } from 'node:path'
 import { execFileSync } from 'node:child_process'
-import { readPack, readMetas, versionStamp } from './lib/pack.mjs'
+import { readPack, readMetas, versionStamp, packOwnedJars } from './lib/pack.mjs'
 
 const ROOT = process.cwd()
 const STAGE = join(ROOT, 'build', '.friend')
@@ -53,6 +53,16 @@ for (const f of readdirSync(join(ROOT, 'mods'))) {
   metaCount++
 }
 console.log(`manifest: pack.toml, index.toml, ${metaCount} metafiles`)
+
+// The one place a jar is allowed in the friend pack: our own. It is 1 KB, we
+// wrote it, and packwiz-installer cannot fetch it from anywhere — there is no
+// URL. Shipping it inside the archive is what makes it reach the friend at all.
+let ownJars = 0
+for (const j of packOwnedJars(ROOT)) {
+  copyFileSync(j.path, join(STAGE, 'mods', j.filename))
+  ownJars++
+  console.log(`bundled our own ${j.filename}`)
+}
 
 // -- the pack-owned layer ---------------------------------------------------
 let ownedBytes = 0, ownedFiles = 0
@@ -198,7 +208,11 @@ const listing = execFileSync('powershell', ['-NoProfile', '-Command',
 const jars = listing.filter(e => e.toLowerCase().endsWith('.jar'))
 const backslashes = listing.filter(e => e.includes('\\'))
 const problems = []
-if (jars.length) problems.push(`${jars.length} jar(s) present — this artifact must contain none: ${jars.slice(0, 3).join(', ')}`)
+// Zero THIRD-PARTY jars is the rule; our own shim is the sole exception and is
+// matched by name, so a stray mod jar still fails the build.
+const foreign = jars.filter(e => !/^mods\/militarybackpack-refmap-shim-[^/]*\.jar$/.test(e))
+if (foreign.length) problems.push(`${foreign.length} third-party jar(s) present — this artifact must contain none: ${foreign.slice(0, 3).join(', ')}`)
+if (jars.length !== ownJars) problems.push(`expected ${ownJars} of our own jar(s), found ${jars.length}`)
 if (backslashes.length) problems.push(`${backslashes.length} entry name(s) contain a backslash`)
 if (!listing.includes('pack.toml')) problems.push('pack.toml missing')
 if (!listing.some(e => e.startsWith('mods/'))) problems.push('no metafiles')
@@ -220,6 +234,6 @@ copyFileSync(driveReadme, join(ROOT, 'build', 'README.md'))
 console.log('wrote build/README.md — upload this next to the archive')
 
 const size = statSync(outAbs).size
-console.log(`\narchive verified — ${listing.length} entries, ${jars.length} jars, no backslash entries`)
+console.log(`\narchive verified — ${listing.length} entries, 0 third-party jars, ${ownJars} of ours, no backslash entries`)
 console.log(`\n✓ ${OUT}  (${(size / 1024).toFixed(0)} KB, ${metas.length} mods referenced, ${ownedFiles} pack-owned files)`)
 console.log(`  Our own layer is ${(ownedBytes / 1024).toFixed(0)} KB. The 405 MB instance zip is now an internal test artifact.`)
