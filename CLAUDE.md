@@ -58,10 +58,12 @@ In order, and stop pulling detail once you have enough for the task:
 
 1. **`Obsidian-minecraft-100day/Home.md`** — the team memory index. Skim the one-line
    descriptions; open only the notes this task touches.
-2. **`docs/OPEN-WORK-LEDGER.md`** — current open work. 🔴 UNTRACKED rows are MD-only and will
+2. **`docs/agents/blocked-work.md`** — *why* the open work is blocked, and the two claims this
+   repo has already had to retract. Read before the ledger, not instead of it.
+3. **`docs/OPEN-WORK-LEDGER.md`** — current open work. 🔴 UNTRACKED rows are MD-only and will
    not appear in `gh issue list`; they are the highest miss-risk.
-3. **The relevant GitHub issue** — `gh issue view <n> --comments`.
-4. **`DONE.md`** — only if you need the history of a past change. Not by default.
+4. **The relevant GitHub issue** — `gh issue view <n> --comments`.
+5. **`DONE.md`** — only if you need the history of a past change. Not by default.
 
 ---
 
@@ -190,6 +192,8 @@ docs/
                               tag for custom work, with their concrete targets
   compatibility-matrix.md     what has been OBSERVED — versions, sources, boot results
   agents/
+    blocked-work.md           READ FIRST if you are picking up open work — what is blocked,
+                              grouped by what would unblock it, with the evidence already gathered
     domain.md                 domain glossary — WHAT THE WORDS MEAN here
     reading-domain-docs.md    WHICH FILES to read before exploring, and when
     workflow.md               how to plan and implement here, branching, release tags

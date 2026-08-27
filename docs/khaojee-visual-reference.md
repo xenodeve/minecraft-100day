@@ -10,7 +10,7 @@ need, and what is its licence* — which is exactly the scope *Visuals Spec §37
 
 - **Reference modpack:** <https://modrinth.com/modpack/khaojee-enchanted-visuals>
 - **Reference video:** <https://youtu.be/cxahj-PuLb0>
-- **Swept:** 2026-08-27 · 24 projects
+- **Swept:** 2026-08-27 · **all 34** of §3's inventory (24 in the first pass, 10 in #66)
 - **Related:** issue #52, and the licence risk this audit surfaced — issue #53
 
 ## Method, so it can be redone
@@ -103,6 +103,64 @@ argument: on Forge 1.20.1 there is nothing to install.
   Entity Culling, ImmediatelyFast, ServerCore.
 - **Animation** — SPA, NEA, BAC, Smooth Movement.
 
+## The ten §3 listed and §4 never bucketed (#66)
+
+**V0 swept 24 of §3's 34.** It followed §4's ADOPT / PROTOTYPE / REJECT lists, and §4 does not
+mention every project §3 inventories. These are the other ten. **The first sweep did not say it was
+partial**, which is the defect being corrected here.
+
+### §12's premise is wrong: Continuity has a Forge build
+
+§12 reads *"Do not add Fabric compatibility infrastructure only for Continuity."* That is a decision
+resting on a false assumption:
+
+```
+3.0.0+1.20.1.forge     forge          continuity-3.0.0+1.20.1.forge.jar
+3.0.0+1.20.1           fabric,quilt   continuity-3.0.0+1.20.1.jar
+```
+
+**No bridge is needed for Continuity.** Fusion may still win on merit — it is maintained for both
+loaders and §12's use cases are industrial glass and station windows — but **V3 is a comparison
+between two Forge-native options**, not a platform-forced default. Whoever picks up V3 should compare
+them, not inherit the conclusion.
+
+### Available on Forge 1.20.1, and never decided about
+
+| Project | Slug | Version | Side | Licence | Status |
+|---|---|---|---|---|---|
+| Pufferfish's Biome Dither | `biome-dither` | `1.0.0` | **`client: unsupported` · `server: required`** | ⚠️ All Rights Reserved | **UNDECIDED** — the only server-side project in this inventory |
+| Punchy! | `punchy` | `2.7d` | `client: required` · `server: unsupported` | ⚠️ All Rights Reserved | **UNDECIDED** |
+| Better Biome Reblend | `better-biome-reblend` | `1.5.3` | — | LGPL-3.0-only | **SUPERSEDED** — §4 wrote *"Better Biome Blend / equivalent"*; we installed Better Biome **Blend**, a different project. Recorded so nobody re-finds it and assumes it was missed |
+
+Dither being **server-side** is worth flagging: every other visual project here is client-only, so it
+is the one entry in the whole inventory that a dedicated-server boot could actually test.
+
+### Not mods — resource packs, or nothing at all
+
+| Project | Slug | Reality | Licence |
+|---|---|---|---|
+| Connected Paths | `connected-paths` | resource pack (`minecraft`) | ⚠️ **CC-BY-NC-SA-4.0** — non-commercial **and** share-alike |
+| Rainbow's Foliage | `rainbows-foliage-polytone` | resource pack, and a **Polytone** pack — useless unless Polytone is adopted first (§19, still PROTOTYPE) | ⚠️ All Rights Reserved |
+| Just Expressions | `just-expressions` | resource pack | ⚠️ custom |
+| Fresh Animations: Player Extension | `fresh-animations-player-extension` | resource pack — confirms §11's *OFF* decision was about the right kind of thing | ⚠️ All Rights Reserved |
+| Client Backpack | `client-backpack` | **no 1.20.1 file at all** | CC-BY-NC-SA-4.0 |
+| Connected Texture+ | — | **no Modrinth match.** Like Musgo: *unresolved*, not absent. **Do not guess a slug** | unknown |
+
+**CC-BY-NC-SA on two of them is worth noticing** while #53 is open: `NC` is the only licence class in
+this whole audit that restricts *commercial* use, and `SA` would propagate its terms to anything it
+is combined with.
+
+### A caveat about the search rule itself
+
+The rule is *search by title, never compose a slug*. It held again — but it is **not infallible**.
+Searching `Continuity connected textures` returned **More Connected Textures**, a different project,
+as the top hit. The bare title `Continuity` found it immediately.
+
+**So: search the bare title, and check `title` on the hit before trusting it.** An augmented query
+can outrank the exact name, and the failure looks identical to "the project does not exist" — which
+is precisely how `Musgo` and `Connected Texture+` are currently recorded, and why both stay
+*unresolved* rather than *absent*.
+
 ## What V0 does not decide
 
 **Whether any of this works.** *Visuals Spec §41* rule 11 is *"Do not claim compatibility without
@@ -130,7 +188,7 @@ read all 107.
 
 - **modpack อ้างอิง:** <https://modrinth.com/modpack/khaojee-enchanted-visuals>
 - **วิดีโออ้างอิง:** <https://youtu.be/cxahj-PuLb0>
-- **กวาดเมื่อ:** 2026-08-27 · 24 โปรเจกต์
+- **กวาดเมื่อ:** 2026-08-27 · **ครบทั้ง 34** ตัวใน inventory ของ §3 (24 ตัวในรอบแรก, 10 ตัวใน #66)
 - **เกี่ยวข้อง:** issue #52 และความเสี่ยงเรื่องสัญญาอนุญาตที่ audit นี้เปิดโปงออกมา — issue #53
 
 ## วิธีทำ เพื่อให้ทำซ้ำได้
@@ -221,6 +279,63 @@ spec เลื่อนพวกนี้ออกไปด้วยเหตุ
 - **ประสิทธิภาพ** — ครบทั้งหกตัวที่ §24 บังคับ: Embeddium, ModernFix, FerriteCore,
   Entity Culling, ImmediatelyFast, ServerCore
 - **แอนิเมชัน** — SPA, NEA, BAC, Smooth Movement
+
+## สิบตัวที่ §3 ลงไว้และ §4 ไม่เคยจัดกลุ่ม (#66)
+
+**V0 กวาดไป 24 จาก 34 ของ §3** มันเดินตามรายการ ADOPT / PROTOTYPE / REJECT ของ §4
+และ §4 ไม่ได้เอ่ยถึงทุกโปรเจกต์ที่ §3 ลงไว้ นี่คืออีกสิบตัว **การกวาดรอบแรกไม่ได้บอกว่ามันไม่ครบ**
+ซึ่งคือข้อบกพร่องที่กำลังแก้ตรงนี้
+
+### หลักการของ §12 ผิด: Continuity มี build สำหรับ Forge
+
+§12 เขียนว่า *"อย่าเพิ่มโครงสร้างความเข้ากันได้ของ Fabric เพียงเพื่อ Continuity"*
+นั่นคือการตัดสินใจที่ตั้งอยู่บนสมมติฐานที่ผิด:
+
+```
+3.0.0+1.20.1.forge     forge          continuity-3.0.0+1.20.1.forge.jar
+3.0.0+1.20.1           fabric,quilt   continuity-3.0.0+1.20.1.jar
+```
+
+**ไม่ต้องใช้ bridge ใด ๆ สำหรับ Continuity** Fusion อาจยังชนะด้วยคุณสมบัติของมันเอง —
+มันดูแลให้ทั้งสอง loader และกรณีใช้งานของ §12 คือกระจกอุตสาหกรรมกับหน้าต่างสถานี — แต่
+**V3 คือการเปรียบเทียบระหว่างสองตัวเลือกที่เป็น Forge โดยกำเนิด** ไม่ใช่ค่าเริ่มต้นที่แพลตฟอร์มบังคับ
+ใครที่มาทำ V3 ต่อควรเปรียบเทียบเอง ไม่ใช่รับข้อสรุปไปเลย
+
+### ใช้ได้บน Forge 1.20.1 และไม่เคยมีใครตัดสิน
+
+| โปรเจกต์ | Slug | เวอร์ชัน | Side | สัญญาอนุญาต | สถานะ |
+|---|---|---|---|---|---|
+| Pufferfish's Biome Dither | `biome-dither` | `1.0.0` | **`client: unsupported` · `server: required`** | ⚠️ All Rights Reserved | **ยังไม่ตัดสิน** — เป็นโปรเจกต์ฝั่ง server ตัวเดียวใน inventory นี้ |
+| Punchy! | `punchy` | `2.7d` | `client: required` · `server: unsupported` | ⚠️ All Rights Reserved | **ยังไม่ตัดสิน** |
+| Better Biome Reblend | `better-biome-reblend` | `1.5.3` | — | LGPL-3.0-only | **ถูกแทนที่แล้ว** — §4 เขียนว่า *"Better Biome Blend / equivalent"* เราติดตั้ง Better Biome **Blend** ซึ่งเป็นคนละโปรเจกต์ บันทึกไว้เพื่อไม่ให้ใครไปเจอใหม่แล้วคิดว่าเราพลาด |
+
+การที่ Dither เป็น **ฝั่ง server** ควรถูกเน้น: โปรเจกต์ภาพอื่นทุกตัวในนี้เป็น client อย่างเดียว
+มันจึงเป็นรายการเดียวใน inventory ทั้งหมดที่การ boot dedicated server ทดสอบได้จริง
+
+### ไม่ใช่มอด — เป็น resource pack หรือไม่มีอะไรเลย
+
+| โปรเจกต์ | Slug | ความจริง | สัญญาอนุญาต |
+|---|---|---|---|
+| Connected Paths | `connected-paths` | resource pack (`minecraft`) | ⚠️ **CC-BY-NC-SA-4.0** — ห้ามเชิงพาณิชย์ **และ** ต้องเผยแพร่ต่อด้วยสัญญาเดียวกัน |
+| Rainbow's Foliage | `rainbows-foliage-polytone` | resource pack และเป็น pack ของ **Polytone** — ไร้ประโยชน์ถ้าไม่รับ Polytone มาก่อน (§19 ยังเป็น PROTOTYPE) | ⚠️ All Rights Reserved |
+| Just Expressions | `just-expressions` | resource pack | ⚠️ custom |
+| Fresh Animations: Player Extension | `fresh-animations-player-extension` | resource pack — ยืนยันว่าการตัดสินใจ *ปิด* ของ §11 มองถูกประเภท | ⚠️ All Rights Reserved |
+| Client Backpack | `client-backpack` | **ไม่มีไฟล์ 1.20.1 เลย** | CC-BY-NC-SA-4.0 |
+| Connected Texture+ | — | **ไม่เจอบน Modrinth** เหมือน Musgo: *ยังหาไม่เจอ* ไม่ใช่ไม่มี **ห้ามเดา slug** | ไม่ทราบ |
+
+**CC-BY-NC-SA บนสองตัวนั้นควรสังเกต** ในขณะที่ #53 ยังเปิดอยู่: `NC` เป็นสัญญาอนุญาตประเภทเดียว
+ในการ audit ทั้งหมดที่จำกัดการใช้*เชิงพาณิชย์* และ `SA` จะแพร่เงื่อนไขของมันไปยังทุกอย่างที่เอามารวมด้วย
+
+### ข้อควรระวังเกี่ยวกับกฎการค้นเอง
+
+กฎคือ *ค้นจากชื่อ ห้ามประกอบ slug* มันยังใช้ได้ — แต่มัน **ไม่ได้ไร้ที่ติ**
+การค้นด้วย `Continuity connected textures` ได้ **More Connected Textures** ซึ่งเป็นคนละโปรเจกต์
+ขึ้นมาเป็นอันดับหนึ่ง พอค้นด้วยชื่อเปล่า ๆ ว่า `Continuity` ก็เจอทันที
+
+**ดังนั้น: ค้นด้วยชื่อเปล่า ๆ และตรวจ `title` ของผลลัพธ์ก่อนเชื่อ** คำค้นที่เติมคำเข้าไป
+อาจชนะชื่อที่ตรงเป๊ะได้ และความล้มเหลวแบบนั้นหน้าตาเหมือนกับ "โปรเจกต์นี้ไม่มีอยู่" เป๊ะ ๆ —
+ซึ่งคือวิธีที่ `Musgo` กับ `Connected Texture+` ถูกบันทึกไว้ตอนนี้พอดี
+และเป็นเหตุผลที่ทั้งคู่ยังเป็น *ยังหาไม่เจอ* ไม่ใช่ *ไม่มี*
 
 ## สิ่งที่ V0 ไม่ได้ตัดสิน
 
