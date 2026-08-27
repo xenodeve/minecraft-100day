@@ -141,10 +141,12 @@ node scripts/validate/verify.mjs          # both phases — this is the local sh
 node scripts/validate/verify.mjs lint     # syntax · placeholders · JEI orphans · the packwiz manifest
 node scripts/validate/verify.mjs test     # node --check over every kubejs/**/*.js
 
-node scripts/build/build-instance.mjs     # the self-contained client instance (405 MB, 107 mods)
+node scripts/build/build-friend-pack.mjs  # THE ARTIFACT A FRIEND GETS — 123 KB, zero jars (ADR 0005)
+node scripts/build/build-instance.mjs     # internal TEST artifact only, 405 MB — never handed out
 node scripts/build/build-server.mjs       # the server pack (341 MB, 91 mods — Distribution Spec §12)
 node scripts/build/generate-checksums.mjs # build/SHA256SUMS.txt, and refuses a stale artifact
-node scripts/build/generate-modlist.mjs   # docs/MODLIST.md — 107 mods, source URLs resolved from ids
+node scripts/build/generate-modlist.mjs   # docs/MODLIST.md — 108 mods, source URLs resolved from ids
+pwsh scripts/collect-client-evidence.ps1  # after a CLIENT launch: log + crashes + mod list → one zip
 
 node scripts/validate/config-drift.mjs <install>   # "friend A works, friend B doesn't" (§38)
 

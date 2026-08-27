@@ -106,10 +106,11 @@ This is `0.1.0-alpha`.
 - ❌ **One known problem, unfixed:** Improved Mobs cannot read the defence values of Brimm Armors,
   so no Brimm armour will ever be worn by a mob.
 
-- ⚠️ **Do not post this publicly yet.** The pack bundles all 107 mods, and at least three authors
-  permit modpack inclusion only on condition that their jar is **not** rehosted. Whether this pack
-  may be distributed at all is **unestablished** — not permitted, not prohibited, just unchecked
-  until now. `docs/distribution-licenses.md` has the detail and names the decisions it needs.
+- ✅ **We no longer redistribute anyone else's mod files.** **ADR 0005**: the archive you receive is
+  **123 KB** — our configs, scripts, quests and the manifest — and each mod downloads from its own
+  author when you install. Several authors ask exactly that: use a pack, do not rehost the jar.
+- ⚠️ **Public release is still a separate question.** CurseForge and Modrinth each enforce their own
+  modpack rules at upload. `docs/distribution-licenses.md` has the detail.
 
 See `docs/OPEN-WORK-LEDGER.md` for what is next, `docs/distribution-licenses.md` for what the pack
 may and may not redistribute, and `CHANGELOG.md` for what changed.
@@ -221,10 +222,11 @@ java -jar packwiz-installer-bootstrap.jar http://localhost:8080/pack.toml
   และตัวเลขอาจผิดในแบบที่มีแต่การเล่นเท่านั้นที่จะเผย
 - ❌ **ปัญหาที่รู้แล้วหนึ่งข้อ ยังไม่ได้แก้:** Improved Mobs อ่านค่าป้องกันของ Brimm Armors ไม่ได้
   ดังนั้นจะไม่มีมอบตัวไหนสวมเกราะ Brimm เลย
-- ⚠️ **ยังอย่าเพิ่งโพสต์สาธารณะ** pack รวมมอดทั้ง 107 ตัวไว้ข้างใน
-  และมีผู้เขียนอย่างน้อยสามคนที่อนุญาตให้ใส่ modpack ได้โดยมีเงื่อนไขว่าต้อง**ไม่** rehost ตัว jar ของเขา
-  เรื่องที่ว่า pack นี้แจกจ่ายได้หรือไม่นั้น **ยังไม่ได้ถูกกำหนด** — ไม่ใช่อนุญาต ไม่ใช่ห้าม
-  แค่ยังไม่มีใครตรวจจนถึงตอนนี้ `docs/distribution-licenses.md` มีรายละเอียดและระบุการตัดสินใจที่ต้องใช้
+- ✅ **เราไม่แจกจ่ายไฟล์มอดของคนอื่นซ้ำอีกแล้ว** **ADR 0005**: ไฟล์ที่คุณได้รับมีขนาด
+  **123 KB** — config, script, quest และ manifest ของเรา — ส่วนมอดแต่ละตัวจะดาวน์โหลด
+  จากผู้เขียนของมันเองตอนคุณติดตั้ง ผู้เขียนหลายคนขอแบบนั้นเป๊ะ: ใช้ใน pack ได้ แต่อย่า rehost ตัว jar
+- ⚠️ **การเผยแพร่สาธารณะยังเป็นอีกคำถามหนึ่ง** CurseForge กับ Modrinth ต่างก็บังคับใช้กฎ modpack
+  ของตัวเองตอนอัปโหลด `docs/distribution-licenses.md` มีรายละเอียด
 
 ดังนั้นมันรันได้ แต่ยังไม่ได้เล่นแบบที่เอกสารออกแบบบรรยายไว้ ดูสิ่งที่จะทำต่อได้ที่
 `docs/OPEN-WORK-LEDGER.md`

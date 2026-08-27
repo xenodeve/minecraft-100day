@@ -1,6 +1,9 @@
 # ADR 0003 — Self-contained single-file distribution
 
-- **Status:** Accepted (2026-08-25) — implemented
+- **Status:** **Superseded in part by ADR 0005** (2026-08-27). The self-contained artifact still
+  exists and is still built — it is now the *internal test* artifact, not the one a friend
+  receives. The revisit trigger this ADR named for itself is what fired; see ADR 0005.
+- **Originally:** Accepted (2026-08-25) — implemented
 - **Area:** Infra
 - **Related:** #16, `scripts/build/build-instance.mjs`, `INSTALL.md`, Distribution Spec §6, §14, §36–37
 
