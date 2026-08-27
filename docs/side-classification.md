@@ -36,12 +36,12 @@ down, which is the part that stops a guess from looking identical to an inspecti
 | Side | Count |
 |---|---|
 | `both` | 93 |
-| `client` | 20 |
+| `client` | 21 |
 | `server` | 1 |
 
 ## The decisive shared fact
 
-**All 21 one-sided mods register nothing into a synced registry** — no
+**All 22 one-sided mods register nothing into a synced registry** — no
 `assets/<id>/models/{item,block}`, no `data/<id>/{recipes,loot_tables,tags}`. That is what makes a
 one-sided classification safe at all: a mod that registers a block or an item *must* be on both
 sides or the registry sync fails on join, and none of these does.
@@ -166,12 +166,52 @@ that will not start; the failure is asymmetric, so the declaration wins.
 level deeper than the V0 sweep looked — the same second-order-dependency lesson
 `cbc_firepower_components` taught, in a new place.
 
+## Oculus — the shader loader (#91)
+
+| Mod | Slug | Modrinth says | Jar says | Ours |
+|---|---|---|---|---|
+| Oculus | `oculus` | client `required`, server **`unsupported`** | `provides = ["iris"]`; its only mod dependency is `embeddium` at `side = "CLIENT"`; Minecraft pinned `[1.20.1]` | `client` |
+
+`side = "client"` is not in doubt here — the author supports no server at all. It is recorded
+because the gate requires a reason, and because two facts about this jar are worth a reader's time.
+
+**It is Iris.** `description = "Unofficial Fork of Iris, made to work with FML"`, and it registers
+the `iris` modId via `provides`. A player who knows Iris on Fabric already knows this mod.
+
+**It is not inert.** Its `mods.toml` carries
+
+```toml
+[mods."sodium:options"]
+"mixin.features.render.world.sky"=false
+"mixin.features.render.entity"=false
+"mixin.features.render.gui.font"=false
+```
+
+so three Embeddium optimisations are off **whether or not a shaderpack is selected**. Shipping the
+loader is therefore a trade, not a free option, and the size of the trade is **unmeasured** — this
+pack has no FPS baseline to measure it against. Ledger row.
+
+Compatibility was read in both directions rather than assumed: Oculus `1.8.0` declares
+`embeddium [0.3.1,)` and we ship `0.3.31`; Embeddium declares `oculus (1.6.15,)` under its own
+comment `# Enforce new enough Oculus`, and `1.8.0` clears it. Nothing else in the client stack
+declares an Oculus or Iris relationship — checked by grepping `mods.toml` across `immediatelyfast`,
+`entity-model-features`, `entitytexturefeatures`, `fusion`, `polytone` and `particle-rain`.
+
+**No shaderpack ships.** *Visuals Spec §22* forbids a **required** shader; a loader with nothing
+selected renders the game normally, and `shaderpacks/` goes out empty. §23 already names the profile
+this unlocks: *Cinematic Optional = Enhanced + user-selected shader*.
+
 ## What was checked and rejected
 
 **`improved-mobs` stays `both`.** The compatibility matrix recorded it as `SERVER`, and that is
 wrong: the jar ships `assets/improvedmobs/textures/gui/difficulty_bar.png` and a lang file. It draws
 a HUD element, so a client without it loses that element. The matrix row is corrected rather than
 the metafile.
+
+**OptiFine is not an option and never was.** *Performance Spec §5* lists `Install OptiFine` under
+**Do not** — it is not part of the target architecture and it collides with Embeddium. CurseForge's
+own shader guide names it as the first Forge route, which is why `build/README.md` now says so
+explicitly to anyone installing this pack.
 
 That makes two errors found by cross-referencing the two records — **one in each direction**. Which
 is the argument for keeping both records and checking them against each other, rather than
@@ -253,12 +293,12 @@ gate ตรวจไม่ได้ว่าเหตุผล*ดี*หรื�
 | ฝั่ง | จำนวน |
 |---|---|
 | `both` | 93 |
-| `client` | 20 |
+| `client` | 21 |
 | `server` | 1 |
 
 ## ข้อเท็จจริงร่วมที่ชี้ขาด
 
-**มอดฝั่งเดียวทั้ง 21 ตัวไม่ลงทะเบียนอะไรเข้า registry ที่ sync กันเลย** — ไม่มี
+**มอดฝั่งเดียวทั้ง 22 ตัวไม่ลงทะเบียนอะไรเข้า registry ที่ sync กันเลย** — ไม่มี
 `assets/<id>/models/{item,block}` ไม่มี `data/<id>/{recipes,loot_tables,tags}` นั่นคือสิ่งที่ทำให้
 การจำแนกเป็นฝั่งเดียวปลอดภัยตั้งแต่แรก: มอดที่ลงทะเบียนบล็อกหรือไอเทม *ต้อง* อยู่ทั้งสองฝั่ง
 ไม่งั้น registry sync จะพังตอน join และไม่มีตัวไหนในนี้ทำแบบนั้น
@@ -347,11 +387,51 @@ unzip -p mods/<jar> META-INF/mods.toml | grep clientSideOnly
 
 ---
 
+## Oculus — ตัวโหลด shader (#91)
+
+| มอด | Slug | Modrinth บอกว่า | jar บอกว่า | ของเรา |
+|---|---|---|---|---|
+| Oculus | `oculus` | client `required`, server **`unsupported`** | `provides = ["iris"]`; dependency ต่อมอดตัวเดียวของมันคือ `embeddium` ที่ `side = "CLIENT"`; Minecraft ตรึงไว้ `[1.20.1]` | `client` |
+
+`side = "client"` ไม่มีข้อสงสัยในกรณีนี้ ผู้เขียนไม่รองรับ server เลย ที่บันทึกไว้เพราะ gate บังคับให้มีเหตุผล
+และเพราะข้อเท็จจริงสองข้อเกี่ยวกับ jar นี้คุ้มค่าเวลาของคนอ่าน
+
+**มันคือ Iris** `description = "Unofficial Fork of Iris, made to work with FML"` และมันลงทะเบียน
+modId `iris` ผ่าน `provides` ผู้เล่นที่รู้จัก Iris บน Fabric อยู่แล้วก็รู้จักมอดตัวนี้แล้ว
+
+**มันไม่ได้เฉื่อย** `mods.toml` ของมันมี
+
+```toml
+[mods."sodium:options"]
+"mixin.features.render.world.sky"=false
+"mixin.features.render.entity"=false
+"mixin.features.render.gui.font"=false
+```
+
+การ optimise ของ Embeddium สามตัวจึงถูกปิด **ไม่ว่าจะเลือก shaderpack หรือไม่** การส่งตัวโหลดออกไป
+จึงเป็นการแลก ไม่ใช่ตัวเลือกที่ฟรี และขนาดของการแลกนั้น **ยังไม่ได้วัด** เพราะแพ็คนี้ไม่มีเส้นฐาน FPS
+ให้เทียบ เป็นแถวใน ledger
+
+ความเข้ากันได้ถูกอ่านสองทางแทนที่จะสันนิษฐาน: Oculus `1.8.0` ประกาศ `embeddium [0.3.1,)`
+และเรามี `0.3.31`; Embeddium ประกาศ `oculus (1.6.15,)` ใต้ comment ของมันเอง
+`# Enforce new enough Oculus` และ `1.8.0` ผ่าน ไม่มีอะไรอื่นใน client stack ประกาศความสัมพันธ์กับ
+Oculus หรือ Iris — ตรวจด้วยการ grep `mods.toml` ของ `immediatelyfast`, `entity-model-features`,
+`entitytexturefeatures`, `fusion`, `polytone` และ `particle-rain`
+
+**ไม่มี shaderpack แจกมาด้วย** *Visuals Spec §22* ห้าม shader ที่**บังคับ** ตัวโหลดที่ไม่ได้เลือกอะไร
+เรนเดอร์เกมตามปกติ และ `shaderpacks/` จะถูกส่งออกไปแบบว่าง §23 ตั้งชื่อ profile ที่อันนี้ปลดล็อกไว้แล้ว:
+*Cinematic Optional = Enhanced + user-selected shader*
+
 ## สิ่งที่ตรวจแล้วปฏิเสธ
 
 **`improved-mobs` คงเป็น `both`** compatibility matrix บันทึกมันเป็น `SERVER` และนั่นผิด: jar
 แจก `assets/improvedmobs/textures/gui/difficulty_bar.png` และไฟล์ lang มาด้วย มันวาด HUD
 ดังนั้น client ที่ไม่มีมันจะเสียองค์ประกอบนั้นไป แถวใน matrix ถูกแก้ ไม่ใช่ metafile
+
+**OptiFine ไม่ใช่ตัวเลือกและไม่เคยเป็น** *Performance Spec §5* ใส่ `Install OptiFine` ไว้ใต้หัวข้อ
+**Do not** — มันไม่ใช่ส่วนหนึ่งของ target architecture และมันชนกับ Embeddium คู่มือ shader ของ
+CurseForge เองระบุมันเป็นเส้นทาง Forge อันดับแรก ซึ่งเป็นเหตุผลที่ตอนนี้ `build/README.md`
+เขียนบอกเรื่องนี้ตรง ๆ ให้คนที่ติดตั้งแพ็คนี้
 
 นั่นทำให้เจอความผิดพลาดสองข้อจากการชนบันทึกสองอัน — **ข้อละทิศทาง** ซึ่งคือเหตุผลที่ควรเก็บบันทึก
 ทั้งสองอันไว้และเอามาตรวจกัน แทนที่จะสร้างอันหนึ่งจากอีกอัน
