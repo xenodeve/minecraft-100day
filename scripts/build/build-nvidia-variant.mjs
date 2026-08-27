@@ -158,14 +158,21 @@ console.log('  A CLEAN PROFILE, for measuring. Import as a new CurseForge profil
 // instance "without tracking changes". One tracked file with a written
 // uninstall step satisfies the qualifier.
 // ---------------------------------------------------------------------------
-const ADDON = join(ROOT, 'build', `${NAME}-${pack.version}-nvidia-upscaling-addon.zip`)
+// Named for what it IS, not for the pack (#113). The long pack prefix invited
+// the exact misreading this artifact exists to prevent -- that you must import
+// a whole profile. PERF-UPFG-004 is still respected: `DLSS+FG` reads as DLSS
+// AND FG, two features the mod verifiably has. It does not assert the compound
+// term "DLSS Frame Generation", which would claim a DLSS-G backend the spec
+// says is NOT ESTABLISHED.
+const ADDON = join(ROOT, 'build', '[Optional] DLSS+FG.zip')
 const ASTAGE = join(ROOT, 'build', '.nvidia-addon')
 if (existsSync(ASTAGE)) rmSync(ASTAGE, { recursive: true, force: true })
 mkdirSync(join(ASTAGE, 'mods'), { recursive: true })
 copyFileSync(jar, join(ASTAGE, 'mods', CANDIDATE.filename))
 
 writeFileSync(join(ASTAGE, 'README.txt'), [
-  `${pack.name} — ชั้นทดลอง NVIDIA Upscaling`,
+  `[Optional] DLSS+FG  —  ${CANDIDATE.name} ${CANDIDATE.version}`,
+  `ของเสริมสำหรับ ${pack.name}`,
   '',
   'ติดตั้ง',
   '',
@@ -181,9 +188,13 @@ writeFileSync(join(ASTAGE, 'README.txt'), [
   '',
   'มันคืออะไร',
   '',
-  `  ${CANDIDATE.name} ${CANDIDATE.version}`,
   '  ทำ upscaling แบบ DLSS / FSR / XeSS และมี frame generation ให้เลือกในเมนู',
   '  ตั้งค่าได้ในเกมที่ Options → Video Settings',
+  '',
+  '  ชื่อ DLSS+FG หมายถึง DLSS *และ* Frame Generation ซึ่งเป็นคนละฟีเจอร์กัน',
+  '  ส่วน DLSS upscaling ยืนยันแล้วว่ามีจริง แต่ frame generation ของมันใช้',
+  '  NVIDIA DLSS-G หรือไม่ ยังไม่มีใครยืนยัน เพราะฉะนั้นอย่าเรียกมันว่า',
+  '  "DLSS Frame Generation"',
   '',
   'สิ่งที่ต้องรู้ก่อนใช้',
   '',
@@ -240,7 +251,7 @@ if (aproblems.length) {
 rmSync(ASTAGE, { recursive: true, force: true })
 const asize = statSync(ADDON).size
 console.log(`\naddon verified — exactly ${alist.length} entries, no backslashes`)
-console.log(`\n✓ build/${NAME}-${pack.version}-nvidia-upscaling-addon.zip  (${(asize / 1048576).toFixed(0)} MB)`)
+console.log(`\n✓ build/[Optional] DLSS+FG.zip  (${(asize / 1048576).toFixed(0)} MB)`)
 console.log('  DROP-IN. Extract over an existing profile\'s .minecraft — no reinstall.')
 console.log('  Delete the jar to revert.')
 console.log('')
