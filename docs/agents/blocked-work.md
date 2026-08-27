@@ -78,10 +78,22 @@ than anything else in this repo.**
 
 ---
 
-## Blocked by: a licensing question nobody has answered
+## Was blocked by a licensing question — **answered by ADR 0005** (#53 closed)
 
-**Do not ship, publish, or hand this pack to anyone until this is resolved.** `INSTALL.md` and
-`CHANGELOG.md` both say so.
+> **Update, #103.** This section used to open *"Do not ship, publish, or hand this pack to anyone
+> until this is resolved."* **That is no longer the state.** #53 is closed and ADR 0005 is the
+> answer: the pack stopped bundling jars, and `-friend.zip` — a manifest plus our own layer, **zero
+> third-party jars** — may be shared. It is published as a pre-release and it installs both a client
+> and a server.
+>
+> **What is still forbidden, and always will be under this delivery model:** publishing any artifact
+> that bundles jars — `-instance.zip`, `-server.zip`, `-alpha.zip`, and above all
+> `-curseforge-local.zip`, which carries the four mods whose authors switched third-party
+> downloading off. `docs/distribution-licenses.md` holds the per-artifact table and it is the
+> authority.
+>
+> The analysis below is kept because it is *why* the answer is what it is — not because the ban is
+> still blanket.
 
 ### The shape of the problem — it is not the licence list
 
@@ -270,10 +282,20 @@ artifact สามตัว build ซ้ำได้และ checksum สะอ
 
 ---
 
-## ติดเพราะ: คำถามเรื่องสัญญาอนุญาตที่ยังไม่มีใครตอบ
+## เคยติดเพราะคำถามเรื่องสัญญาอนุญาต — **ADR 0005 ตอบแล้ว** (#53 ปิด)
 
-**อย่าส่ง อย่าเผยแพร่ อย่ายื่น pack นี้ให้ใครจนกว่าเรื่องนี้จะจบ** `INSTALL.md` กับ `CHANGELOG.md`
-เขียนไว้ทั้งคู่
+> **อัปเดต, #103** หัวข้อนี้เคยเปิดด้วยประโยคว่า *"อย่าส่ง อย่าเผยแพร่ อย่ายื่น pack นี้ให้ใคร"*
+> **นั่นไม่ใช่สถานะปัจจุบันแล้ว** #53 ปิดไปแล้ว และ ADR 0005 คือคำตอบ:
+> pack เลิกบรรจุ jar แล้ว และ `-friend.zip` — manifest บวกชั้นงานของเราเอง
+> **ไม่มี jar ของคนอื่นเลย** — แจกได้ มันถูกเผยแพร่เป็น pre-release และติดตั้งได้ทั้ง client และ server
+>
+> **สิ่งที่ยังห้ามอยู่ และจะห้ามตลอดไปภายใต้รูปแบบการส่งมอบนี้:** การเผยแพร่ artifact ใด
+> ก็ตามที่บรรจุ jar — `-instance.zip`, `-server.zip`, `-alpha.zip` และเหนือสิ่งอื่นใด
+> `-curseforge-local.zip` ซึ่งพกมอดสี่ตัวที่ผู้เขียนปิดการโหลดโดยบุคคลที่สามไว้
+> `docs/distribution-licenses.md` มีตารางราย artifact และมันคือผู้มีอำนาจ
+>
+> การวิเคราะห์ข้างล่างเก็บไว้เพราะมันคือ *เหตุผล* ที่คำตอบเป็นแบบนี้ ไม่ใช่เพราะคำสั่งห้าม
+> ยังเป็นการห้ามทั้งหมด
 
 ### รูปร่างของปัญหา — มันไม่ใช่รายการสัญญาอนุญาต
 
