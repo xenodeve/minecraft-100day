@@ -29,8 +29,8 @@ down, which is the part that stops a guess from looking identical to an inspecti
 
 | Side | Count |
 |---|---|
-| `both` | 89 |
-| `client` | 17 |
+| `both` | 93 |
+| `client` | 20 |
 | `server` | 2 |
 
 ## The decisive shared fact
@@ -129,6 +129,9 @@ derivation was **wrong for this pack**.
 | Soft Imprints | `snow-imprints` | server `unsupported` | — | `client` |
 | Fancy World Animations | `fwa` | server `unsupported` | — | `client` |
 | **Subtle Effects** | `subtle-effects` | server **`optional`** → packwiz wrote `both` | `displayTest = "IGNORE_ALL_VERSION"`, `side = "CLIENT"`, **zero** `data/` | **`client`** |
+| EMF (V4, #76) | `entity-model-features` | server `unsupported` | **`side = "CLIENT"`** in its own `mods.toml`, **zero** `data/`, 19 `assets/` | `client` |
+| ETF (V4, #76) | `entitytexturefeatures` | server `unsupported` | **`side = "CLIENT"`** declared, **zero** `data/`, 36 `assets/` | `client` |
+| Polytone (V5, #76) | `polytone` | server `unsupported` | **zero** `data/`, 14 `assets/`, no registry content | `client` |
 | Fusion (V3, #68) | `fusion-connected-textures` | server `unsupported` | **zero** `data/`, 10 `assets/`, no registry content | `client` |
 | Particle Rain (V2, #58) | `particle-rain` | server `unsupported` | **`side = "CLIENT"`** in its own `mods.toml`, **zero** `data/`, 46 `assets/` | `client` |
 | Fzzy Config | `fzzy-config` | server `required` | **`side = "BOTH"`** declared three times | `both` |
@@ -227,8 +230,8 @@ gate ตรวจไม่ได้ว่าเหตุผล*ดี*หรื�
 
 | ฝั่ง | จำนวน |
 |---|---|
-| `both` | 89 |
-| `client` | 17 |
+| `both` | 93 |
+| `client` | 20 |
 | `server` | 2 |
 
 ## ข้อเท็จจริงร่วมที่ชี้ขาด

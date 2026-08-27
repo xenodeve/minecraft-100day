@@ -8,6 +8,9 @@ to move something forward. Everything easy is done. What is left is blocked, and
 **Read this before `docs/OPEN-WORK-LEDGER.md`, not instead of it.** The ledger is the list; this is
 the reasoning.
 
+**For "why isn't mod X in the pack?"** see `docs/visuals-not-adopted.md` — 19 projects, each with
+the measurement that put it there.
+
 ---
 
 ## The one-paragraph state

@@ -1,0 +1,13 @@
+name = "Countered's Terrain Slabs"
+filename = "terrain_slabs-forge-4.0.2-beta.jar"
+side = "both"
+
+[download]
+url = "https://cdn.modrinth.com/data/SJu6sklj/versions/pqtbKcIJ/terrain_slabs-forge-4.0.2-beta.jar"
+hash-format = "sha512"
+hash = "303bb781a284ee7eaa19ca33981686e4aea14be587a91721b5cb43e464a5d23116866f11e8fd506605187f1ea5b472522618da919c8c52f7efd5cfacc15ab6e4"
+
+[update]
+[update.modrinth]
+mod-id = "SJu6sklj"
+version = "pqtbKcIJ"

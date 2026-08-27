@@ -280,6 +280,11 @@ hash = "52dd6d53a9d2327902621aa86b4c6a1e5382b966a5f9abdda248e7a49b29a002"
 metafile = true
 
 [[files]]
+file = "mods/biomes-o-plenty.pw.toml"
+hash = "2bcea8e16d358942a8f8b8cf6e39cc303d90fac29b1b3ecb8033bd214d4afa0f"
+metafile = true
+
+[[files]]
 file = "mods/blockui.pw.toml"
 hash = "2195b22648787aac875b1ea60c51cca57c1c0a4db4241ec52cd3ea2abfeaebf4"
 metafile = true
@@ -332,6 +337,11 @@ metafile = true
 [[files]]
 file = "mods/corpse.pw.toml"
 hash = "2fba2317a375669ccb1376525d4d4e0d1903cc5dc44fc70dce1d0e3dbb6aacb1"
+metafile = true
+
+[[files]]
+file = "mods/countereds-terrain-slabs.pw.toml"
+hash = "1ebd3a22f4bf045a61d06ba7cce57ae98aff39bcb4c259243a432ecab54b4f72"
 metafile = true
 
 [[files]]
@@ -410,8 +420,18 @@ hash = "a7f9970f68f2520ecc16794420e83c66ef2e8fb1b5113ffed1303cdaa8b48ade"
 metafile = true
 
 [[files]]
+file = "mods/entity-model-features.pw.toml"
+hash = "b6bad0dc31bec26203bced18c111495357a1708404d21c4ce71ead00142aa5ad"
+metafile = true
+
+[[files]]
 file = "mods/entityculling.pw.toml"
 hash = "fbad2488da791994cbb4a0541e2dd22c536dbe6ca8f7edfdd9af12120e283fd2"
+metafile = true
+
+[[files]]
+file = "mods/entitytexturefeatures.pw.toml"
+hash = "aa2a1abbccb92ccc4ba3a5a70d24edcd1e39a035f15fb9ba49c27f270a5e74e3"
 metafile = true
 
 [[files]]
@@ -635,6 +655,11 @@ hash = "4ab869d8784f4ac318b5c92fa3d9e65f997352b8b57f34b409ca6f171637f0fe"
 metafile = true
 
 [[files]]
+file = "mods/polytone.pw.toml"
+hash = "3056ab603e010010f9d1517519bdf64cfa003808980eead662d714ea39e4aba8"
+metafile = true
+
+[[files]]
 file = "mods/puzzles-lib.pw.toml"
 hash = "4dd7038889da90e145f9d074bec64a61aaae12dc57c875aa7ad99b8b2e07979b"
 metafile = true
@@ -642,6 +667,11 @@ metafile = true
 [[files]]
 file = "mods/refurbished-furniture.pw.toml"
 hash = "2bcee75d08b33dd6506b7cd3f67ea9d0d2c1bf14e26728fa8e12ef19c895b165"
+metafile = true
+
+[[files]]
+file = "mods/regions-unexplored.pw.toml"
+hash = "cc64ca541c4710726dc3fa4b283b1260cfb2d3ff8d1784f80e0180d248c35688"
 metafile = true
 
 [[files]]
@@ -752,6 +782,11 @@ metafile = true
 [[files]]
 file = "mods/tenshilib.pw.toml"
 hash = "25ac4e21c8f32b8bc174037bb4a6b4e9ca7b03018de859596113022de4906036"
+metafile = true
+
+[[files]]
+file = "mods/terrablender.pw.toml"
+hash = "14117b94c456598c9acece143c7a0da3cf56d13182d035a74a2da8a52dd19cbd"
 metafile = true
 
 [[files]]

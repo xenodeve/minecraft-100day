@@ -188,6 +188,8 @@ docs/
                               artifacts. `verify` refuses one that disagrees with mods/
   distribution-licenses.md    what the pack may redistribute — and the finding that the
                               conflict is with SELF-CONTAINED delivery, not the mod list
+  visuals-not-adopted.md      WHY a Visuals Spec project is NOT in the pack — 19 of §3's 34,
+                              grouped by blocked / unresolved / decided-against
   khaojee-visual-reference.md the Visuals Spec §36 source-tracking table — V0 audit results,
                               every version and licence measured, not recalled
   customization-map.md        WHAT STILL HAS TO BE BUILT — the 22 mods the design docs
