@@ -38,8 +38,15 @@ if (!existsSync(BUILD)) {
   process.exit(1)
 }
 
+// `-curseforge-local.zip` is excluded on purpose. SHA256SUMS.txt is a manifest
+// for people who received a download; that artifact is never handed to anyone —
+// it bundles the four mods whose authors disabled third-party distribution, and
+// ADR 0005 scopes it to the machine that built it. Listing it here would put a
+// file that must not be shared into the document people use to check what they
+// were sent.
 const artifacts = readdirSync(BUILD)
   .filter(f => f.endsWith('.zip') || f.endsWith('.mrpack'))
+  .filter(f => !f.endsWith('-curseforge-local.zip'))
   .sort()
 
 if (!artifacts.length) {

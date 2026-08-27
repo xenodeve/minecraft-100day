@@ -38,9 +38,10 @@ their licences.** Swapping mods will not fix it; only changing how the pack is d
 
 | Artifact | How mods reach the player | Rehosts a jar? |
 |---|---|---|
-| `…-instance.zip` (405 MB) | all 107 jars inside the zip | **yes, 107** |
-| `…-server.zip` (341 MB) | all 91 jars inside the zip | **yes, 91** |
-| `…-alpha.zip` (CurseForge, 148 MB) | **40** referenced by project/file id · **65** bundled in `overrides/mods/` | **yes, 65** |
+| `…-instance.zip` (430 MB) | all 114 jars inside the zip | **yes, 114** |
+| `…-server.zip` (362 MB) | all 94 jars inside the zip | **yes, 94** |
+| `…-alpha.zip` (CurseForge, 173 MB) | **40** referenced by project/file id · **72** bundled in `overrides/mods/` | **yes, 72** |
+| `…-alpha-curseforge-local.zip` (177 MB) | **36** referenced · **76** bundled, **including the four API-blocked mods** | **yes, 76** — ADR 0005's one scoped exception, **local use only** |
 
 The CurseForge-format export is closest to compliant, and still bundles 65 jars — packwiz puts
 Modrinth-sourced mods in `overrides/` because a CurseForge manifest cannot reference them.
@@ -313,9 +314,10 @@ proposes but has not installed. `docs/khaojee-visual-reference.md` records their
 
 | Artifact | มอดไปถึงผู้เล่นยังไง | rehost jar ไหม |
 |---|---|---|
-| `…-instance.zip` (405 MB) | jar ทั้ง 107 ตัวอยู่ใน zip | **ใช่ 107 ตัว** |
-| `…-server.zip` (341 MB) | jar ทั้ง 91 ตัวอยู่ใน zip | **ใช่ 91 ตัว** |
-| `…-alpha.zip` (CurseForge, 148 MB) | **40** อ้างด้วย project/file id · **65** ใส่ไว้ใน `overrides/mods/` | **ใช่ 65 ตัว** |
+| `…-instance.zip` (430 MB) | jar ทั้ง 114 ตัวอยู่ใน zip | **ใช่ 114 ตัว** |
+| `…-server.zip` (362 MB) | jar ทั้ง 94 ตัวอยู่ใน zip | **ใช่ 94 ตัว** |
+| `…-alpha.zip` (CurseForge, 173 MB) | **40** อ้างด้วย project/file id · **72** ใส่ไว้ใน `overrides/mods/` | **ใช่ 72 ตัว** |
+| `…-alpha-curseforge-local.zip` (177 MB) | **36** อ้างถึง · **76** ฝังไว้ **รวมมอดสี่ตัวที่ถูกปิดกั้น** | **ใช่ 76 ตัว** — ข้อยกเว้นเดียวที่กำหนดขอบเขตไว้ของ ADR 0005 **ใช้เองเท่านั้น** |
 
 ตัว export รูปแบบ CurseForge ใกล้เคียงกับที่ถูกต้องที่สุด และก็ยังใส่ jar มา 65 ตัว —
 packwiz เอามอดที่มาจาก Modrinth ไปไว้ใน `overrides/` เพราะ manifest ของ CurseForge อ้างถึงมันไม่ได้
