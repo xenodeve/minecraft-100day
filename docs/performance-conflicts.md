@@ -292,7 +292,7 @@ the pack: Super Resolution has no metafile and `verify` still reports 120 mods.
 
 | Artifact | Size | Use it to |
 |---|---|---|
-| `-nvidia-upscaling-addon.zip` | 31 MB | **try it** — extract over an existing profile's `.minecraft`; delete the jar to revert |
+| `[Optional] DLSS+FG.zip` | 31 MB | **try it** — extract over an existing profile's `.minecraft`; delete the jar to revert |
 | `-nvidia-upscaling.zip` | 214 MB | **measure it** — a clean profile where nothing else can differ |
 
 The add-on is the one to hand anybody. The full variant exists because a `PERF-UPFG-021` A/B is
