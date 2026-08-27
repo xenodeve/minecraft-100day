@@ -215,6 +215,72 @@ ingredient-dedupe-style options stay **OFF** per the spec until proven safe for 
 
 ---
 
+## C8 — ImmediatelyFast 1.2.7 × Oculus 1.8.0 shut the client down at startup
+
+**Status: fixed by upgrading ImmediatelyFast to `1.5.5+1.20.4-forge` (#107). Unverified on a
+client — nobody has launched one since.**
+
+**This is the first real compatibility bug the performance stack has produced**, and it arrived
+from a client smoke test rather than from any check in this repository.
+
+```
+java.lang.ClassNotFoundException: net.coderbot.iris.vertices.ImmediateState
+  at forge.net.raphimc.immediatelyfast.compat.IrisCompat.init(IrisCompat.java:41)
+  at com.mojang.blaze3d.platform.Window.<init>(Window.java:113)
+```
+
+**The chain, each link read out of a jar:**
+
+1. Oculus 1.8.0 ships `net/irisshaders/iris/vertices/ImmediateState.class` and **zero** classes
+   under `net/coderbot/iris/vertices/` — the Iris package was renamed.
+2. ImmediatelyFast 1.2.7's `IrisCompat` holds the constant
+   `String net.coderbot.iris.vertices.ImmediateState` and calls `Class.forName` on it.
+3. Oculus declares `provides = ["iris"]`, so `PlatformCode.getModVersion("iris")` finds it and
+   `IrisCompat.init()` runs.
+
+**Why it looked like the game quit rather than crashed.** `IrisCompat.init` catches
+`java.lang.Throwable` — and its handler is:
+
+```
+LOGGER.error("Failed to initialize Iris compatibility. Try updating Iris and ImmediatelyFast…")
+System.exit(-1)
+```
+
+**The mod shuts the JVM down on purpose.** No crash report is written, because nothing crashed.
+Anyone debugging this by looking for a crash report finds nothing and concludes the launcher is at
+fault.
+
+**The fix, chosen on evidence.** ImmediatelyFast 1.5.5's `IrisCompat` holds constants for **both**
+`net.coderbot.iris.vertices` and `net.irisshaders.iris.vertices` — verified by disassembling the
+jar the build actually fetched, not by reading a changelog. Downgrading Oculus was considered and
+rejected: `1.20.1-1.7.0` also has zero `net/coderbot/iris/vertices/ImmediateState`, so the rename
+predates it.
+
+**What is not known:** whether the shader path itself works. A main menu proves
+`ImmediatelyFast + Embeddium + Oculus` with **no shader selected**; `IrisCompat` exists to serve the
+active path, and that is a different set of code.
+
+**What would settle it:** launch → main menu with no shader → test world → back to menu → enable a
+shaderpack → re-enter → toggle the shader off and on at runtime. If something still fails after
+that, try `hud_batching = false` in `config/immediatelyfast.json` **before** removing anything —
+there are reported Forge 1.20.1 × Oculus HUD-batching issues, and that is a different fault from
+this one.
+
+### The check that should have caught it, and did not
+
+`#91` recorded: *"Nothing else in the client stack declares an Oculus or Iris relationship —
+checked by grepping `mods.toml`."*
+
+**True, and useless.** ImmediatelyFast's Iris integration is not declared anywhere — it is a string
+passed to `Class.forName`, reached because Oculus *provides* the `iris` modId. A `mods.toml` grep
+cannot see a code-level integration, and its silence was read as evidence of absence.
+
+> **Rule earned:** a mod declaring `provides = [...]` can activate compatibility code in mods that
+> never name it. Check what the **provided id** pulls in, not only what depends on the mod's own id.
+> `docs/mod-dependencies.md` reads declared dependencies and **cannot** see this class of coupling.
+
+---
+
 ## How to add an entry
 
 One heading per interaction, numbered `C<n>`. Each entry states:

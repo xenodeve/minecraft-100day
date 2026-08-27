@@ -41,6 +41,10 @@ table; **ADR 0005** is why the friend pack exists at all.
 - **The game starts.** Sophisticated Tactical Backpacks asks for a file under one name and ships it
   under another, which killed the client during model loading, every time. A 1 KB shim supplies it
   under the expected name.
+- **The game starts, again — shaders broke it and now do not.** Adding Oculus made ImmediatelyFast
+  try to reach into a part of Iris that newer versions renamed, and ImmediatelyFast responds to that
+  by shutting the game down on purpose. There is no crash report because nothing crashed. Fixed by
+  updating ImmediatelyFast, which now understands both the old and the new names. Both mods stay.
 
 ### Added
 
