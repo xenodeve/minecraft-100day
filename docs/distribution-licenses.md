@@ -250,6 +250,7 @@ the one page with no description field at all.
 | MrCrayfish's Furniture Mod: Refurbished | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/refurbished-furniture) | Custom License | project page |
 | Naturalist | [Modrinth](https://modrinth.com/mod/naturalist) | Custom | Modrinth API |
 | Not Enough Animations | [Modrinth](https://modrinth.com/mod/not-enough-animations) | tr7zw Protective License | Modrinth API |
+| Oculus | [Modrinth](https://modrinth.com/mod/oculus) | GNU Lesser General Public License v3.0 only | Modrinth API |
 | Simple Voice Chat | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/simple-voice-chat) | All Rights Reserved | project page |
 | Smooth Movement | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/smooth-movement) | All Rights Reserved | project page |
 | SmoothPlayerAnimations | [Modrinth](https://modrinth.com/mod/smoothplayeranimations) | All Rights Reserved | Modrinth API |
@@ -534,6 +535,7 @@ player-microchip      1488872   IN MANIFEST
 | MrCrayfish's Furniture Mod: Refurbished | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/refurbished-furniture) | Custom License | project page |
 | Naturalist | [Modrinth](https://modrinth.com/mod/naturalist) | Custom | Modrinth API |
 | Not Enough Animations | [Modrinth](https://modrinth.com/mod/not-enough-animations) | tr7zw Protective License | Modrinth API |
+| Oculus | [Modrinth](https://modrinth.com/mod/oculus) | GNU Lesser General Public License v3.0 only | Modrinth API |
 | Simple Voice Chat | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/simple-voice-chat) | All Rights Reserved | project page |
 | Smooth Movement | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/smooth-movement) | All Rights Reserved | project page |
 | SmoothPlayerAnimations | [Modrinth](https://modrinth.com/mod/smoothplayeranimations) | All Rights Reserved | Modrinth API |

@@ -1,15 +1,15 @@
 <!-- GENERATED FILE - do not edit by hand.
      Run: python scripts/build/generate-mod-dependencies.py
      Every line is read out of that mod's own META-INF/mods.toml. -->
-<!-- mod-count: 114 -->
-<!-- dependency-edges: 293 -->
+<!-- mod-count: 115 -->
+<!-- dependency-edges: 295 -->
 
 # Mod requirements · มอดแต่ละตัวต้องการอะไร
 
-**114 mods** and **293 declared dependencies** between them. Every line was read out of that
+**115 mods** and **295 declared dependencies** between them. Every line was read out of that
 mod's own `META-INF/mods.toml` - the same file Forge reads when it decides whether to boot.
 
-**114 มอด** และ **293 dependency** ที่ประกาศไว้ระหว่างกัน ทุกบรรทัดอ่านมาจาก `META-INF/mods.toml`
+**115 มอด** และ **295 dependency** ที่ประกาศไว้ระหว่างกัน ทุกบรรทัดอ่านมาจาก `META-INF/mods.toml`
 ในตัว jar เอง ซึ่งเป็นไฟล์เดียวกับที่ Forge อ่านตอนตัดสินใจว่าจะ boot ให้หรือไม่
 
 ## What the checkbox means · เครื่องหมายถูกแปลว่าอะไร
@@ -29,12 +29,12 @@ real - see *Never reaches a client install* below.
 
 | | Count |
 |---|---:|
-| Mods in the pack | 114 |
-| Declared dependencies | 293 |
+| Mods in the pack | 115 |
+| Declared dependencies | 295 |
 | **Mandatory and unsatisfied** | **0** |
 | Satisfied but outside the declared version range | 0 |
 | Version unresolvable from the jar alone | 0 |
-| Optional integrations this pack does not have | 30 |
+| Optional integrations this pack does not have | 29 |
 | Libraries bundled at conflicting versions | 1 |
 | Bundled libraries where one choice would leave a mod short | 1 |
 
@@ -55,7 +55,7 @@ integrated server อยู่ในตัว client เอง มอดที�
 
 - [ ] **ServerCore** (`servercore`) - `side = "server"`
 
-`side = "client"` is the harmless direction: 20 mods, none of which a dedicated server needs.
+`side = "client"` is the harmless direction: 21 mods, none of which a dedicated server needs.
 
 ## Libraries bundled by more than one mod, at different versions
 
@@ -674,9 +674,12 @@ Declares no dependencies beyond Forge and Minecraft.
 - [x] on a client install
 - [ ] on a dedicated server - `side = "client"`, and a server has no use for it
 
+**Optional, and present**
+
+- [x] `oculus` - oculus `1.8.0`
+
 **Optional, and absent** - the mod runs without these
 
-- [ ] `oculus`
 - [ ] `textrues_embeddium_options`
 
 ### Enhanced AI
@@ -1278,6 +1281,22 @@ Declares no dependencies beyond Forge and Minecraft.
 **Requires**
 
 - [x] `minecraft` `1.20.1` - Minecraft itself
+
+### Oculus
+
+`oculus` 1.8.0 · loader `javafml` · `oculus-mc1.20.1-1.8.0.jar`
+
+- [x] in the pack
+- [x] on a client install
+- [ ] on a dedicated server - `side = "client"`, and a server has no use for it
+
+**Requires**
+
+- [x] `minecraft` `[1.20.1]` - Minecraft itself
+
+**Optional, and present**
+
+- [x] `embeddium` - embeddium `0.3.31+mc1.20.1`
 
 ### Particle Rain
 

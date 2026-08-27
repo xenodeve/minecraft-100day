@@ -205,6 +205,32 @@ before adding it.
 **§3 Experimental mods are all absent by design** — AI Improvements, Let Me Despawn, Alternate
 Current, Canary, TaCZ Optimization, Smooth Boot Reloaded. Each needs its own benchmark branch.
 
+## Shader loader (Visuals Spec §22–§23, #91)
+
+| Mod | Version | Source | Side | Status | Tested |
+|---|---|---|---|---|---|
+| Oculus | `1.20.1-1.8.0` | MR | CLIENT | OPTIONAL LOADER | **UNTESTED** — no client launch since it was added |
+
+**A loader is not a shader.** §22 forbids a *required* shader; no shaderpack ships and
+`shaderpacks/` goes out empty, so the default render path is unchanged. §23's third profile —
+*Cinematic Optional = Enhanced + user-selected shader* — is what this makes reachable.
+
+**It is Iris.** `provides = ["iris"]`, and its description reads *"Unofficial Fork of Iris, made to
+work with FML"*.
+
+**Compatibility read in both directions, from the jars:** Oculus `1.8.0` declares
+`embeddium [0.3.1,)` and the pack ships `0.3.31`; Embeddium declares `oculus (1.6.15,)` under its
+own `# Enforce new enough Oculus` comment, which `1.8.0` clears. Nothing else in the client stack
+declares an Oculus or Iris relationship.
+
+**The cost is real and unmeasured.** Oculus's `mods.toml` sets three Embeddium mixins to `false` —
+`render.world.sky`, `render.entity`, `render.gui.font` — **regardless of whether a shaderpack is
+selected**. This pack has no FPS baseline, so how much that costs is not known and is not guessed
+here. Ledger row.
+
+**OptiFine remains forbidden** (*Performance Spec §5*, under `Do not`). CurseForge's own shader
+guide names it as the first Forge route, so `build/README.md` now tells a friend not to.
+
 ## Animation & movement stack (Animation Spec §2)
 
 | Mod | Version | Source | Side | Status | Tested |

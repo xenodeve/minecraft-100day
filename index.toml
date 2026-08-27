@@ -629,6 +629,11 @@ hash = "1c3d52224f1f174fbcf2c308a70e3c34a736694b626992891404db32cbd69c7e"
 metafile = true
 
 [[files]]
+file = "mods/oculus.pw.toml"
+hash = "f83b253ca6a8e6f2f847952704da0e1fb00e65cbb10b7c9cb15d1a1780618da0"
+metafile = true
+
+[[files]]
 file = "mods/particle-rain.pw.toml"
 hash = "0345711933e73891f8e1a7cff32ed0f9cef39ddee0b10e267736743f02fa4a00"
 metafile = true
