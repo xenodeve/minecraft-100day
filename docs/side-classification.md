@@ -208,7 +208,7 @@ wrong: the jar ships `assets/improvedmobs/textures/gui/difficulty_bar.png` and a
 a HUD element, so a client without it loses that element. The matrix row is corrected rather than
 the metafile.
 
-**OptiFine is not an option and never was.** *Performance Spec §5* lists `Install OptiFine` under
+**OptiFine is not an option and never was.** *Performance Spec: `PERF-RENDER-OPTIFINE`* lists `Install OptiFine` under
 **Do not** — it is not part of the target architecture and it collides with Embeddium. CurseForge's
 own shader guide names it as the first Forge route, which is why `build/README.md` now says so
 explicitly to anyone installing this pack.
@@ -428,7 +428,7 @@ Oculus หรือ Iris — ตรวจด้วยการ grep `mods.toml` 
 แจก `assets/improvedmobs/textures/gui/difficulty_bar.png` และไฟล์ lang มาด้วย มันวาด HUD
 ดังนั้น client ที่ไม่มีมันจะเสียองค์ประกอบนั้นไป แถวใน matrix ถูกแก้ ไม่ใช่ metafile
 
-**OptiFine ไม่ใช่ตัวเลือกและไม่เคยเป็น** *Performance Spec §5* ใส่ `Install OptiFine` ไว้ใต้หัวข้อ
+**OptiFine ไม่ใช่ตัวเลือกและไม่เคยเป็น** *Performance Spec: `PERF-RENDER-OPTIFINE`* ใส่ `Install OptiFine` ไว้ใต้หัวข้อ
 **Do not** — มันไม่ใช่ส่วนหนึ่งของ target architecture และมันชนกับ Embeddium คู่มือ shader ของ
 CurseForge เองระบุมันเป็นเส้นทาง Forge อันดับแรก ซึ่งเป็นเหตุผลที่ตอนนี้ `build/README.md`
 เขียนบอกเรื่องนี้ตรง ๆ ให้คนที่ติดตั้งแพ็คนี้

@@ -176,7 +176,7 @@ the jar, and a `mods.toml` entry looks identical whether the dependency is bundl
 
 ---
 
-## Performance stack (Performance Spec §2)
+## Performance stack (Performance Spec: the approved CORE stack)
 
 | Mod | Version | Source | Side | Status | Tested |
 |---|---|---|---|---|---|
@@ -205,6 +205,22 @@ before adding it.
 **§3 Experimental mods are all absent by design** — AI Improvements, Let Me Despawn, Alternate
 Current, Canary, TaCZ Optimization, Smooth Boot Reloaded. Each needs its own benchmark branch.
 
+## Profiler (Performance Spec: `PERF-PROFILE-SPARK`, #94)
+
+| Mod | Version | Source | Side | Status | Tested |
+|---|---|---|---|---|---|
+| spark | `1.10.53-forge` | MR | BOTH | DEV/ADMIN CORE | **UNTESTED** — no boot since it was added |
+
+**It makes nothing faster.** spark is the instrument, and `PERF-PRIORITY` puts it at position 1
+precisely because every other item on that list is gated on a baseline it cannot produce without
+one. `PERF-RULES` DO-1 is *"Profile before optimizing"*.
+
+The Forge 1.20.1 line has not moved since 2023-09-05 — `1.10.53-forge` is the newest build, not a
+stale pin. Read from the Modrinth API filtered to `loaders=["forge"] game_versions=["1.20.1"]`.
+
+`side = "both"` because a profiler is needed wherever the problem is, and Modrinth declares
+`client_side: optional` / `server_side: optional`.
+
 ## Shader loader (Visuals Spec §22–§23, #91)
 
 | Mod | Version | Source | Side | Status | Tested |
@@ -228,7 +244,7 @@ declares an Oculus or Iris relationship.
 selected**. This pack has no FPS baseline, so how much that costs is not known and is not guessed
 here. Ledger row.
 
-**OptiFine remains forbidden** (*Performance Spec §5*, under `Do not`). CurseForge's own shader
+**OptiFine remains forbidden** (*Performance Spec: `PERF-RENDER-OPTIFINE`*). CurseForge's own shader
 guide names it as the first Forge route, so `build/README.md` now tells a friend not to.
 
 ## Animation & movement stack (Animation Spec §2)
@@ -302,7 +318,7 @@ Microchip. They are named in the design documents but were not in the sweep list
 **Naturalist's newest 1.20.1 build is `5.0pre4`, a prerelease.** Pinning a prerelease into a CORE
 slot is a decision, not a default.
 
-### Boot 3 — with the Performance Spec §2 stack (2026-08-25)
+### Boot 3 — with the Performance Spec CORE stack (2026-08-25)
 
 Same server, 83 jars after client-only filtering.
 
@@ -314,7 +330,7 @@ Same server, 83 jars after client-only filtering.
 hardware and heap.
 
 That is an observation, not a benchmark. It is one cold start on one machine with no world cache,
-and startup time is not the metric the Performance Spec cares about — §33–39 define the real ones
+and startup time is not the metric the Performance Spec cares about — `PERF-BENCH-RULES` and `PERF-BENCH-ZONES` define the real ones
 (MSPT, TPS, entity tick time, client FPS) across four scenarios. Do not quote 22.295s as evidence
 the pack performs well; quote it only as evidence the stack loads and does not regress startup.
 

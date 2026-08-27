@@ -1,169 +1,115 @@
-# Addon Spec — Performance Optimization & Profiling Layer
-## Claude Code CLI Implementation Handoff
+# Addon Spec — Performance Optimization & Profiling
 
-> **Project:** Industrial Civilization Survival  
-> **Platform:** Minecraft 1.20.1 Forge / Java 17  
-> **Purpose:** สร้าง performance layer สำหรับ modpack ขนาดใหญ่ที่มี Create, MineColonies, TaCZ, Hordes, wildlife, advanced mob AI, worldgen, trains และในอนาคต Valkyrien Skies / Clockwork / Warium โดยต้อง optimize ทั้ง Client FPS, RAM, Server TPS/MSPT, entity ticking, recipe processing, chunk generation และ gunfight load
->
-> เอกสารนี้ต้องสามารถใช้เป็น standalone implementation context สำหรับ Claude Code CLI โดยไม่ต้องมี conversation history
->
-> **Core rule:** ห้ามติดตั้ง performance mods แบบ blind stacking ทุกตัวต้องผ่าน compatibility test และ benchmark ก่อน/หลัง
+**Status: Canonical.** This is the only Performance Spec an agent may treat as authority.
+
+```text
+Supersedes:
+  Performance Spec v1  — docs/archive/Addon Performance — Optimization & Profiling-v1.md
+  Performance Spec v2  — docs/archive/Addon Performance — Optimization And Profiling-v2.md
+```
+
+> **Project:** Industrial Civilization Survival
+> **Repository:** `xenodeve/minecraft-100day`
+> **Platform:** Minecraft 1.20.1 / Forge / Java 17
+> **Target team:** 3 players baseline, 4 players full team
+> **Pack profile:** 115+ mods; heavy Create, MineColonies, Hordes, TaCZ, worldgen and visual systems
 
 ---
 
-# 1. Performance Philosophy
+# 0. How to cite this document — `PERF-CITE`
 
-Industrial Civilization Survival เป็น modpack ที่มี workload หลายแบบพร้อมกัน:
-
-```text
-Create factories
-+
-Create trains / contraptions
-+
-MineColonies NPCs
-+
-TaCZ bullets / tracers / gun animations
-+
-Born in Chaos
-+
-The Hordes
-+
-Enhanced AI
-+
-Improved Mobs
-+
-Naturalist wildlife
-+
-Critters and Companions
-+
-IceAndFire creatures
-+
-CCTV / Security systems
-+
-World generation
-+
-Future Valkyrien Skies physics
-```
-
-ดังนั้น performance strategy ต้องแบ่งเป็นหลาย layer
+**Cite the `PERF-*` id. Never cite a section number.**
 
 ```text
-Client Rendering
-Server Simulation
-Memory
-Entity Management
-Recipe Processing
-Chunk Generation
-Gun System
-Pack Design
-Profiling
+correct    Performance Spec: PERF-RENDER-OPTIFINE
+wrong      Performance Spec §5
 ```
 
-เป้าหมายไม่ใช่:
+Section numbers are for reading. They are **not** a cross-document contract, and this repository
+learned that the expensive way: v1 §5 was *Embeddium Rules*, v2 §5 was *High-Priority Add
+Candidates*, and three committed documents cited "Performance Spec §5" for a rule that existed in
+only one of them (#91, #93).
+
+A `PERF-*` id stays correct when a heading moves from §5 to §12 to §18. Renaming an id is a breaking
+change and needs the same reference sweep a rename in code would.
+
+---
+
+# 1. Philosophy — `PERF-PHILOSOPHY`
+
+Goal:
+
+```text
+Stable 20 TPS
+Stable frame times
+Good 1% lows
+Predictable RAM usage
+Long-session stability
+Enough headroom for the civilization to grow
+```
+
+Do not optimize for benchmark screenshots or blind mod count.
+
+> **A faster broken game is not optimization.**
+
+Every optimization change needs evidence: FPS / 1% low, MSPT / TPS, RAM, startup time, worldgen
+time, entity/render cost, or long-session stability.
+
+The goal is **not**:
 
 ```text
 Install every optimization mod available
 ```
 
-เป้าหมายคือ:
+---
 
-> ใช้ optimization ที่วัดผลได้จริง โดยไม่เปลี่ยน gameplay หรือทำให้ระบบสำคัญของ pack พัง
+# 2. Loader decision — `PERF-LOADER`
+
+Remain on:
+
+```text
+Minecraft 1.20.1
+Forge 47.x
+```
+
+Do not migrate to Fabric or NeoForge for performance alone. Fabric has a lighter baseline, but this
+pack's real cost is the ecosystem already built on Forge: Create and its addons, TaCZ, MineColonies,
+Ice & Fire, Born in Chaos, KubeJS, Immersive Engineering, SecurityCraft, The Hordes, the AI layer,
+the configs and the quest campaign.
+
+This restates a hard platform rule from the main design document (§31). It is not negotiable here.
 
 ---
 
-# 2. Approved Core Performance Stack
-
-เริ่มจาก stack นี้ก่อน:
+# 3. Performance layers — `PERF-LAYERS`
 
 ```text
-1. Embeddium
-2. ModernFix
-3. FerriteCore
-4. Entity Culling
-5. ImmediatelyFast
-6. ServerCore
-7. FastSuite
-8. Clumps
-9. TaCZ: Accelerated
+Rendering
+Memory
+Client micro-optimization
+Server / game logic
+Recipe processing
+Entity count
+World generation
+Background resource usage
+Profiling
+Experimental broad optimizers
 ```
 
-Server/world tool:
-
-```text
-10. Chunky OR Chunk-Pregenerator
-```
-
-ห้ามติดตั้ง Chunky และ Chunk-Pregenerator พร้อมกันโดยไม่มีเหตุผล
+Keep the layers conceptually separate so overlapping optimizers are not stacked blindly.
 
 ---
 
-# 3. Experimental Performance Candidates
+# 4. Approved CORE stack
 
-ยังไม่ถือเป็น Core
+Everything in this section is **in the pack and stays in the pack** unless a measurement says
+otherwise.
 
-```text
-AI Improvements
-Let Me Despawn
-Alternate Current
-Canary
-TaCZ Optimization
-Smooth Boot Reloaded
-```
+## PERF-RENDER-EMBEDDIUM — Embeddium
 
-แต่ละตัวต้องมี isolated benchmark branch ก่อน merge
+Primary Forge renderer optimization. Keep as the default renderer.
 
----
-
-# 4. Embeddium
-
-## Source
-
-```text
-https://www.curseforge.com/minecraft/mc-mods/embeddium
-```
-
-## Status
-
-```text
-CORE
-CLIENT PERFORMANCE
-COMPATIBILITY TEST REQUIRED
-```
-
-## Role
-
-Embeddium เป็น rendering optimization layer หลักของ Forge 1.20.1
-
-หน้าที่หลัก:
-
-```text
-Terrain rendering
-Chunk rendering
-Render batching
-Client FPS improvement
-CPU/GPU render efficiency
-```
-
-เหมาะกับ pack เพราะเมืองจะมี:
-
-```text
-Create machines
-Belts
-Pipes
-Train tracks
-Street lights
-MineColonies buildings
-CCTV
-Furniture
-Industrial blocks
-Large cities
-```
-
----
-
-# 5. Embeddium Rules
-
-Do:
+**Do:**
 
 - Test with Create 6.0.x exact version
 - Test with TaCZ rendering
@@ -171,155 +117,33 @@ Do:
 - Test with Jade overlays
 - Test with ImmediatelyFast
 - Test with Entity Culling
-- Test shader compatibility only if shaders are officially supported later
+- Test shader compatibility — now in scope, see `PERF-RENDER-OCULUS`
 
-Do not:
+**Do not:** see `PERF-RENDER-OPTIFINE`.
 
-```text
-Install OptiFine
-```
-
-OptiFine ไม่ใช่ส่วนหนึ่งของ target architecture
-
----
-
-# 6. ModernFix
-
-## Source
+## PERF-RENDER-OPTIFINE — OptiFine is forbidden
 
 ```text
-https://www.curseforge.com/minecraft/mc-mods/modernfix
+DO NOT INSTALL OPTIFINE
 ```
 
-## Status
+OptiFine ไม่ใช่ส่วนหนึ่งของ target architecture. It collides with Embeddium, which is this pack's
+renderer.
 
-```text
-CORE
-COMMON
-MEMORY + STARTUP + BUG/PERFORMANCE FIXES
-```
+**This rule needs to be visible to players, not only to agents.** Consumer shader guides — including
+CurseForge's own — name OptiFine as the first Forge route. Both shipped READMEs therefore say so:
+the `README.txt` inside the friend archive and the `build/README.md` uploaded beside it (#91).
 
-## Role
+## PERF-RENDER-IMMEDIATELYFAST — ImmediatelyFast
 
-ModernFix ใช้สำหรับ:
+Optimizes immediate-mode rendering paths: entities, particles, text, GUI and related rendering.
 
-```text
-Memory reduction
-Startup optimization
-Resource/cache optimization
-Forge/mod performance fixes
-General bug fixes
-```
+## PERF-RENDER-ENTITY-CULLING — Entity Culling
 
-มีค่ามากกับ pack ที่มี:
+Avoid rendering entities and block entities hidden behind geometry. High value in cities,
+warehouses, factories, Horde fights and animal-heavy areas.
 
-```text
-Large item registry
-Large block registry
-Many recipes
-Many models
-Many resource packs
-Many mods
-```
-
----
-
-# 7. ModernFix Rules
-
-ต้อง:
-
-- Pin exact version
-- Inspect generated config
-- Keep defaults initially
-- Only disable individual fixes if an actual incompatibility is measured
-
-ห้าม:
-
-```text
-randomly toggle ModernFix mixins
-```
-
-เพราะเห็น config จำนวนมากแล้วคิดว่าเปิด/ปิดได้ตามใจ
-
----
-
-# 8. FerriteCore
-
-## Source
-
-```text
-https://www.curseforge.com/minecraft/mc-mods/ferritecore
-```
-
-## Status
-
-```text
-CORE
-MEMORY OPTIMIZATION
-```
-
-## Role
-
-ลด memory usage โดยเฉพาะ blockstate/model-related structures
-
-Pack นี้มี block variety สูงจาก:
-
-```text
-Create
-TFMG
-Immersive Engineering
-MineColonies
-SecurityCraft
-Macaw's Lights
-Refurbished Furniture
-Ecologics
-```
-
-ดังนั้น FerriteCore เป็น high-value low-complexity optimization
-
----
-
-# 9. Entity Culling
-
-## Source
-
-```text
-https://www.curseforge.com/minecraft/mc-mods/entityculling
-```
-
-## Status
-
-```text
-CORE
-CLIENT
-```
-
-## Role
-
-ไม่ render:
-
-```text
-Entities
-Block Entities
-```
-
-ที่ถูก geometry บังและมองไม่เห็น
-
-เหมาะกับ:
-
-```text
-Dense city
-MineColonies
-Factories
-Warehouses
-Interior machinery
-Large structures
-Horde outside walls
-```
-
----
-
-# 10. Entity Culling Important Constraint
+### Important constraint
 
 Entity Culling ต้องไม่:
 
@@ -329,7 +153,7 @@ change AI
 change mob existence
 ```
 
-มันควรเป็น visual/render optimization เท่านั้น
+มันควรเป็น visual/render optimization เท่านั้น.
 
 Test special rendering ของ:
 
@@ -341,117 +165,40 @@ IceAndFire creatures
 Valkyrien Skies later
 ```
 
-ว่าถูก cull ผิดหรือไม่
+ว่าถูก cull ผิดหรือไม่.
 
----
+## PERF-MEM-MODERNFIX — ModernFix
 
-# 11. ImmediatelyFast
+General memory, startup, cache and bugfix optimization.
 
-## Source
+ต้อง:
 
-```text
-https://www.curseforge.com/minecraft/mc-mods/immediatelyfast
-```
+- Pin exact version
+- Inspect generated config
+- Keep defaults initially
+- Only disable individual fixes if an actual incompatibility is **measured**
 
-## Status
-
-```text
-CORE
-CLIENT RENDERING
-```
-
-## Role
-
-Optimize immediate-mode rendering / batching เช่น:
+ห้าม:
 
 ```text
-Entities
-Particles
-Text
-GUI
-HUD
-Block entities
-Modded rendering paths
+randomly toggle ModernFix mixins
 ```
 
-เหมาะกับ:
+เพราะเห็น config จำนวนมากแล้วคิดว่าเปิด/ปิดได้ตามใจ.
 
-```text
-TaCZ tracers
-Muzzle flash
-Particles
-Horde mobs
-JEI
-Jade
-Create machinery
-```
+## PERF-MEM-FERRITECORE — FerriteCore
 
----
+Reduces memory used by block states, models and registries. Use on client and server where
+supported.
 
-# 12. Client Rendering Stack
+## PERF-SERVER-SERVERCORE — ServerCore
 
-Preferred starting stack:
+Server-side ticking, entity and spawn optimization. Test carefully with Enhanced AI, Improved Mobs,
+The Hordes, Attract to Sound, MineColonies and In Control!.
 
-```text
-Embeddium
-+
-ImmediatelyFast
-+
-Entity Culling
-```
+### Critical exclusions
 
-Benchmark แยก:
-
-```text
-Vanilla Forge baseline
-↓
-+ Embeddium
-↓
-+ ImmediatelyFast
-↓
-+ Entity Culling
-```
-
-Record FPS และ frame-time ทุกขั้น
-
-อย่า benchmark แค่ FPS average
-
----
-
-# 13. ServerCore
-
-## Source
-
-```text
-https://www.curseforge.com/minecraft/mc-mods/servercore
-```
-
-## Status
-
-```text
-CORE
-SERVER
-HEAVY CONFIG
-```
-
-## Role
-
-ServerCore ใช้ลด server simulation cost ผ่านระบบเช่น:
-
-```text
-Entity activation range
-Reduced inactive ticking
-Mob spawning optimization
-Server entity management
-```
-
-นี่เป็นหนึ่งในตัวสำคัญที่สุดของ pack เพราะ workload หลักของ server คือ entity
-
----
-
-# 14. ServerCore Critical Exclusions
-
-ห้ามใช้ activation/tick reduction กับ entity สำคัญโดยไม่ตรวจสอบ
+ห้ามใช้ activation / tick reduction กับ entity สำคัญโดยไม่ตรวจสอบ.
 
 ต้อง audit อย่างน้อย:
 
@@ -474,9 +221,7 @@ Clockwork entities later
 EXCLUDE FROM AGGRESSIVE INACTIVE TICKING
 ```
 
----
-
-# 15. ServerCore Philosophy
+### Philosophy
 
 ใช้:
 
@@ -486,7 +231,7 @@ ordinary hostile mobs far away
 ambient creatures
 ```
 
-เป็น target หลักของ reduced ticking
+เป็น target หลักของ reduced ticking.
 
 อย่าใช้ server optimization เพื่อทำให้:
 
@@ -497,50 +242,11 @@ MineColonies worker breaks
 Horde loses AI
 ```
 
----
+## PERF-RECIPE-FASTSUITE — FastSuite
 
-# 16. FastSuite
+Recipe-processing optimization for the large Create / KubeJS recipe graph.
 
-## Source
-
-```text
-https://www.curseforge.com/minecraft/mc-mods/fastsuite
-```
-
-## Status
-
-```text
-CORE
-COMMON
-RECIPE OPTIMIZATION
-```
-
-## Role
-
-Optimize recipe processing / recipe lookup
-
-Pack มี recipe volume สูงจาก:
-
-```text
-JEI
-KubeJS
-Create
-TaCZ
-Create: TaCZ
-TFMG
-Farmer's Delight
-MineColonies
-Immersive Engineering
-SecurityCraft
-Furniture
-Custom integration
-```
-
-FastSuite เหมาะกับ recipe-heavy pack
-
----
-
-# 17. FastSuite Test Matrix
+### Test matrix
 
 Test:
 
@@ -555,103 +261,98 @@ MineColonies recipes
 TaCZ ammunition
 ```
 
-หาก recipe lookup มี bug:
+หาก recipe lookup มี bug: ให้ isolate ก่อน disable FastSuite ทั้งหมด.
 
-ให้ isolate ก่อน disable FastSuite ทั้งหมด
+## PERF-ENTITY-CLUMPS — Clumps
+
+Merges XP orbs to reduce entity count after Horde fights, farms and large combat.
+
+## PERF-WORLD-PREGEN — Chunk pregeneration
+
+```text
+Chunky              = SELECTED
+Chunk-Pregenerator  = ALTERNATIVE / NOT SELECTED
+```
+
+**Use one, never both.** Chunky is selected because its Forge 1.20.1 path fitted this pack's sweep;
+Chunk-Pregenerator is a working alternative that was simply not chosen. It is recorded here so a
+later agent does not re-propose it believing the topic was forgotten.
+
+```text
+SERVER TOOL
+NOT GAMEPLAY CONTENT
+```
+
+**Purpose:** reduce chunk-generation spikes while players explore. The pack's worldgen carries
+Ecologics, Ice & Fire, oil resources, structures, biomes and Create-related world content, and
+players travel far by train and, later, ground vehicles and aircraft.
+
+### Strategy
+
+Before opening a persistent multiplayer world, pregenerate a safe operational region.
+
+```text
+5,000–10,000 blocks
+```
+
+Exact radius depends on storage, generation time, expected player count and exploration design.
+อย่า pregenerate 50,000 blocks แบบไม่มีเหตุผล.
+
+### Verification
+
+หลัง pregenerate, check:
+
+```text
+world size
+generation errors
+missing structures
+IceAndFire worldgen
+oil generation
+biome distribution
+server logs
+```
+
+Backup ก่อนทดลอง pregeneration command บน production world.
 
 ---
 
-# 18. Clumps
+# 5. Benchmark-gated candidate
 
-## Source
-
-```text
-https://www.curseforge.com/minecraft/mc-mods/clumps
-```
-
-## Status
+## PERF-TACZ-ACCELERATED — TaCZ: Accelerated
 
 ```text
-CORE
-SERVER + CLIENT ENTITY REDUCTION
-```
-
-## Role
-
-รวม XP orbs เพื่อลด entity count
-
-สำคัญหลัง:
-
-```text
-Horde battle
-Large mob farm
-Mass combat
-Dragon fight
-```
-
-Concept:
-
-```text
-100 XP orbs
-↓
-few merged XP entities
-```
-
----
-
-# 19. TaCZ: Accelerated
-
-## Source
-
-```text
-https://www.curseforge.com/minecraft/mc-mods/tacza
-```
-
-## Status
-
-```text
-CORE CANDIDATE
-PROMOTE AFTER BENCHMARK
+BENCHMARK-GATED CANDIDATE
+NOT CORE YET
 TACZ-SPECIFIC
 ```
 
-## Role
+**Status history, stated so it is not re-litigated.** v1 listed it in the Core stack *and* graded it
+`CORE CANDIDATE / PROMOTE AFTER BENCHMARK` — a contradiction the compatibility matrix recorded. v2
+resolved it by deleting the topic, which is **not** a decision to reject. The correct resolution is
+this status.
 
-Optimize TaCZ hot paths เช่น:
+**Source:** <https://www.curseforge.com/minecraft/mc-mods/tacza>
+
+**Role.** Optimize TaCZ hot paths: bullet processing, rendering, repeated lookups, temporary
+allocations, gunpack assets and cache. The pack has a genuine high-concurrency gunfire case —
+4–8 players, automatic rifles, Horde, Born in Chaos, TaCZ Additions, Guns Lights, Attract to Sound —
+so the potential is high.
+
+**Promotion path. Do not skip a step.**
 
 ```text
-Bullet processing
-Rendering
-Repeated lookups
-Temporary allocations
-Gunpack assets/cache
+Baseline TaCZ
+     ↓
+measure automatic-fire workload
+     ↓
++ TaCZ: Accelerated
+     ↓
+same benchmark, same scenario, same seed
+     ↓
+promote only if measurable AND compatible
 ```
 
-Pack มี high-concurrency gunfire use case:
-
-```text
-4–8 players
-+
-automatic rifles
-+
-Horde
-+
-Born in Chaos
-+
-TaCZ Additions
-+
-Guns Lights
-+
-Attract to Sound
-```
-
-ดังนั้นตัวนี้มี potential สูงมาก
-
----
-
-# 20. TaCZ: Accelerated Test Matrix
-
-ต้องทดสอบกับ:
+**Test matrix.** ต้องทดสอบกับ:
 
 ```text
 TaCZ exact version
@@ -686,1497 +387,646 @@ Network traffic if measurable
 
 ---
 
-# 21. Chunk Pregeneration
+# 6. High-priority add candidates
 
-เลือกหนึ่ง:
+All of these are gated behind a baseline (`PERF-PRIORITY`). None may be added blind.
 
-```text
-Chunky
-OR
-Chunk-Pregenerator
-```
+## PERF-CLIENT-BADOPTIMIZATIONS — BadOptimizations
 
-## Status
+Client micro-optimizations that complement Embeddium + ImmediatelyFast + Entity Culling.
 
-```text
-SERVER TOOL
-NOT GAMEPLAY CONTENT
-```
+Especially relevant now that the visual layer exists: Grassier Grass, Particle Rain, Subtle Effects,
+Fancy World Animations, EMF/ETF.
 
-## Purpose
+**Acceptance:**
 
-ลด chunk-generation spikes ตอนผู้เล่นสำรวจ
+- no rendering corruption
+- no compatibility regression
+- measurable or neutral frame-time result
 
-Pack worldgen มี:
+## PERF-MEM-ALLTHELEAKS — AllTheLeaks
 
-```text
-Ecologics
-IceAndFire
-Oil resources
-Structures
-Biomes
-Create-related world content
-Other modded generation
-```
-
-และ players จะเดินทางไกลด้วย:
-
-```text
-Train
-Ground vehicles
-Aircraft later
-```
-
----
-
-# 22. Pregeneration Strategy
-
-ก่อนเปิด persistent multiplayer world:
-
-pregenerate safe operational region
-
-Example conceptual radius:
-
-```text
-5,000–10,000 blocks
-```
-
-แต่ exact radius ขึ้นกับ:
-
-```text
-Storage
-Generation time
-Expected player count
-Exploration design
-```
-
-อย่า pregenerate 50,000 blocks แบบไม่มีเหตุผล
-
----
-
-# 23. Pregeneration Verification
-
-หลัง pregenerate:
-
-check:
-
-```text
-world size
-generation errors
-missing structures
-IceAndFire worldgen
-oil generation
-biome distribution
-server logs
-```
-
-Backup ก่อนทดลอง pregeneration command บน production world
-
----
-
-# 24. AI Improvements
-
-## Source
-
-```text
-https://www.curseforge.com/minecraft/mc-mods/ai-improvements
-```
-
-## Status
-
-```text
-EXPERIMENTAL
-DO NOT INSTALL IN MAIN BY DEFAULT
-```
-
-## Reason
-
-Pack มี:
-
-```text
-Enhanced AI
-Improved Mobs
-ServerCore
-```
-
-อยู่แล้ว
-
-AI Improvements อาจแตะ logic เดียวกัน
-
-ต้อง inspect:
-
-```text
-Mixins
-Goals
-Target classes
-Entity behavior
-```
-
-ก่อนใช้
-
----
-
-# 25. AI Improvements Benchmark Branch
-
-Branch:
-
-```text
-perf/ai-improvements
-```
+Long-session memory-leak mitigation.
 
 Test:
 
 ```text
-100 zombies
-Born in Chaos
-Horde
-MineColonies nearby
-Enhanced AI enabled
+30 min
+2 h
+4 h
 ```
 
-ถ้า MSPT ดีขึ้นแต่ mob behavior พัง:
+Record heap growth, GC frequency, FPS degradation, MSPT drift, post-world-reload memory.
 
-```text
-REJECT
-```
+Keep risky ingredient-dedupe-style features **OFF** unless proven safe for this exact pack.
 
-Gameplay correctness สำคัญกว่า benchmark number
+## PERF-CLIENT-DYNAMICFPS — Dynamic FPS
+
+Reduces CPU/GPU use while minimized, unfocused or idle. It does not primarily improve active
+gameplay FPS, but is useful when players keep Discord, a browser or voice tools open.
+
+Client QoL candidate.
+
+## PERF-RENDER-LEGENDARY-BLOCK-ENTITIES — Legendary Block Entities
+
+Forge-native block-entity rendering optimization, and the preferred direction over Fabric Enhanced
+Block Entities or FastChest bridge solutions.
+
+High value for warehouses, MineColonies, chest rooms, stations, industrial storage and cities.
+
+Test with Embeddium, ModernFix and resource packs.
 
 ---
 
-# 26. Let Me Despawn
+# 7. Profiling
 
-## Source
+## PERF-PROFILE-SPARK — spark
 
 ```text
-https://www.curseforge.com/minecraft/mc-mods/let-me-despawn
+DEV / ADMIN CORE
 ```
 
-## Status
+spark does not make the game faster. It identifies what is actually slow.
+
+Profile:
 
 ```text
-EXPERIMENTAL
-HEAVY CONFIG
-```
-
-## Role
-
-ลด persistent mob buildup ผ่าน despawn behavior
-
-เหมาะกับ common mobs
-
----
-
-# 27. Let Me Despawn Exclusion Candidates
-
-ห้ามปล่อย despawn แบบ generic กับ:
-
-```text
-Dragons
-Bosses
-Named mobs
-MineColonies NPCs
-Horde key entities
-Tamed animals
-Important wildlife
-Quest entities
-Special Born in Chaos elites
-```
-
-ต้อง inspect exact tags/entity IDs
-
----
-
-# 28. Alternate Current
-
-## Source
-
-```text
-https://www.curseforge.com/minecraft/mc-mods/alternate-current
-```
-
-## Status
-
-```text
-EXPERIMENTAL
-REDSTONE OPTIMIZATION
-```
-
-## Role
-
-Optimize redstone dust update logic
-
-Potentially useful in industrial cities
-
-Test interaction with:
-
-```text
-Create Redstone Links
-Observers
-SecurityCraft
-Industrial automation
-Rail signaling
-MineColonies automation
-```
-
----
-
-# 29. Canary
-
-## Source
-
-```text
-https://www.curseforge.com/minecraft/mc-mods/canary
-```
-
-## Status
-
-```text
-PROTOTYPE ONLY
-BROAD OPTIMIZATION
-```
-
-## Reason for Caution
-
-Canary เป็น broad optimization mod และอาจ overlap กับ:
-
-```text
-ModernFix
-ServerCore
-Enhanced AI
-Create
-MineColonies
-Future Valkyrien Skies
-```
-
-ห้ามใส่ main branch โดยตรง
-
----
-
-# 30. TaCZ Optimization
-
-## Source
-
-```text
-https://www.curseforge.com/minecraft/mc-mods/tacz-optimization
-```
-
-## Status
-
-```text
-OPTIONAL CLIENT PERFORMANCE PROFILE
-```
-
-## Role
-
-ลด rendering ของ:
-
-```text
-other players' guns
-attachments
-tracers
-effects
-```
-
-เหมาะกับ:
-
-```text
-low-end client
-large multiplayer firefights
-```
-
-แต่ visual fidelity ลด
-
-ดังนั้นไม่ควรเป็น default ถ้าไม่จำเป็น
-
----
-
-# 31. Performance Profiles
-
-Future optional client profiles:
-
-## Standard
-
-```text
-Full tactical visuals
-Normal tracers
-Normal animations
-```
-
-## Performance
-
-```text
-Reduced remote weapon visuals
-Reduced particles
-Lower render distance recommendations
-TaCZ Optimization enabled if stable
-```
-
-Gameplay configs ต้องเหมือนกัน
-
-ห้ามสร้าง gameplay advantage ต่างกัน
-
----
-
-# 32. Profiling Tool
-
-ใช้:
-
-```text
-spark
-```
-
-หรือ equivalent profiler ที่รองรับ exact environment
-
-ต้องเก็บ:
-
-```text
-TPS
-MSPT
-Entity tick time
-Chunk tick time
-World generation time
-Memory
-GC behavior
-```
-
-Client:
-
-```text
-FPS
-1% lows
-Frame time
-GPU usage
-CPU usage
-RAM
-VRAM if available
-```
-
----
-
-# 33. Benchmark Philosophy
-
-ห้ามใช้:
-
-```text
-"รู้สึกลื่นขึ้น"
-```
-
-เป็นหลักฐานหลัก
-
-ต้องมี baseline
-
-Example:
-
-```text
-Scenario A
-No optimization
-
-Scenario B
-+ ModernFix
-
-Scenario C
-+ FerriteCore
-
-Scenario D
-+ ServerCore
-```
-
-record results
-
----
-
-# 34. Benchmark Documentation
-
-Create:
-
-```text
-docs/performance.md
-```
-
-Recommended table:
-
-```text
-Build
-Scenario
-Players
-Entities
-MSPT Avg
-MSPT P95
-FPS Avg
-FPS 1% Low
-RAM
-Notes
-```
-
----
-
-# 35. Standard Benchmark World
-
-สร้าง world/save สำหรับ performance testing โดยเฉพาะ
-
-ต้องมี zones:
-
-```text
-Zone A — Empty baseline
-Zone B — Create factory
-Zone C — MineColonies settlement
-Zone D — Horde arena
-Zone E — Wildlife area
-Zone F — Dragon encounter
-Zone G — Train network
-```
-
-Future:
-
-```text
-Zone H — Valkyrien Skies physics
-```
-
----
-
-# 36. Benchmark Scenario A — Idle Base
-
-Target:
-
-```text
-Main city
-Create factory partially active
-MineColonies loaded
-No combat
-```
-
-Measure:
-
-```text
-Idle MSPT
-Client FPS
-RAM
-```
-
----
-
-# 37. Benchmark Scenario B — Factory Load
-
-Run:
-
-```text
-Belts
-Fans
-Presses
-Mixers
-Deployers
-Fluid systems
-Train station
-```
-
-Measure:
-
-```text
-MSPT
-Block entity tick
-Client FPS
-```
-
----
-
-# 38. Benchmark Scenario C — Horde Combat
-
-Test:
-
-```text
-50 mobs
-100 mobs
-150 mobs
-200 mobs
-```
-
-with:
-
-```text
-Enhanced AI
-Improved Mobs
-Attract to Sound
-TaCZ automatic fire
-```
-
-Record server degradation curve
-
----
-
-# 39. Benchmark Scenario D — Multiplayer Gunfight
-
-Test:
-
-```text
-2 players
-4 players
-8 players
-```
-
-all firing automatic weapons
-
-with:
-
-```text
-TaCZ Additions
-Guns Lights
-Attract to Sound
-```
-
-Measure:
-
-```text
-MSPT
-FPS
-Projectile processing
-Network stability
-```
-
----
-
-# 40. Benchmark Scenario E — MineColonies
-
-Population steps:
-
-```text
-10 NPC
-25 NPC
-50 NPC
-75 NPC
-```
-
-Measure:
-
-```text
-NPC tick cost
-Pathfinding
-MSPT
-```
-
-This is critical because MineColonies may become one of the largest persistent CPU costs
-
----
-
-# 41. Benchmark Scenario F — Wildlife
-
-Test:
-
-```text
-25 passive entities
-50 passive entities
-100 passive entities
-```
-
-from:
-
-```text
-Naturalist
-Critters and Companions
-Ecologics
-```
-
-Determine practical spawn budget
-
----
-
-# 42. Benchmark Scenario G — World Generation
-
-Measure:
-
-```text
-walking exploration
-train travel
-high-speed travel
-```
-
-with and without pregeneration
-
-Future:
-
-```text
-aircraft exploration
-```
-
----
-
-# 43. Performance Budget Philosophy
-
-The following systems compete for server CPU:
-
-```text
-MineColonies
-Hostile AI
-Wildlife
-Horde
-TaCZ projectiles
-Create
-World generation
-Future physics
-```
-
-ดังนั้นต้องมี budget
-
-ไม่ใช่ให้ทุก subsystem ใช้ทรัพยากรเต็มที่พร้อมกัน
-
----
-
-# 44. Entity Budget
-
-If entity count becomes excessive:
-
-reduce in this order:
-
-```text
-1. Decorative ambient wildlife
-2. Small critters
-3. Common passive animals
-4. Redundant hostile mobs
-5. Horde maximum size
-```
-
-Do not first nerf:
-
-```text
-MineColonies core behavior
-Dragon identity
-Create logistics
-Player combat
-```
-
----
-
-# 45. Horde Performance Budget
-
-Horde design must include technical cap
-
-Example test tiers:
-
-```text
-Tier I
-50 mobs
-
-Tier II
-100 mobs
-
-Tier III
-150 mobs
-```
-
-Do not assume:
-
-```text
-500 mobs = better horde
-```
-
-A smaller intelligent horde is preferable to a 5 TPS slideshow
-
----
-
-# 46. Mob AI Performance
-
-Threat difficulty should come from:
-
-```text
-AI
-positioning
-abilities
-armor
-mob composition
-sound response
-```
-
-not merely:
-
-```text
-huge mob count
-```
-
-This improves both gameplay and performance
-
----
-
-# 47. Create Performance Design
-
-Pack design itself must optimize Create
-
-Factories should not run forever with output storage full
-
-Preferred:
-
-```text
-Storage
-↓
-Threshold Switch
-↓
-Factory Control
-↓
-Stop when full
-```
-
-Use:
-
-```text
-Redstone control
-Threshold switches
-Clutches
-Stockpile limits
-```
-
----
-
-# 48. Create Anti-Pattern
-
-Avoid:
-
-```text
-Always-on belts
-Always-on deployers
-Always-on fans
-Always-on pumps
-Always-on crafting
-```
-
-when no production demand exists
-
-Consumption economy should create real demand
-
-but factories should still stop when buffers are full
-
----
-
-# 49. Item Entity Control
-
-Avoid large loose-item systems
-
-Use:
-
-```text
-Belts
-Funnels
-Chutes
-Storage
-```
-
-properly
-
-Do not intentionally allow thousands of dropped items
-
-Potential future cleanup tools only if needed
-
----
-
-# 50. MineColonies Performance Design
-
-Do not create enormous population caps before profiling
-
-Growth target should consider:
-
-```text
-Server hardware
-Player count
-Other entities
-```
-
-Monitor:
-
-```text
+entity ticking
 pathfinding
-citizen AI
-loaded colony chunks
-```
-
----
-
-# 51. Wildlife Performance Design
-
-Normal animals add atmosphere
-
-They are not core mechanics
-
-If performance budget is exceeded:
-
-```text
-reduce spawn frequency
-reduce group sizes
-reduce ambient species density
-```
-
-before compromising core industrial gameplay
-
----
-
-# 52. Attract to Sound Performance
-
-Potential danger:
-
-```text
-automatic weapon
-↓
-many gunshot events
-↓
-many mobs recalculate targets/path
-```
-
-This could become expensive
-
-Test:
-
-```text
-semi-auto
-full-auto
-multiple players
-HMG/autocannon later
-```
-
-If profiling identifies sound-event spam:
-
-first inspect mod configuration/API
-
-Possible strategy:
-
-```text
-event coalescing
-cooldown
-sound radius tuning
-```
-
-but only if supported or custom integration is justified
-
-Do not invent implementation prematurely
-
----
-
-# 53. TaCZ Projectile Budget
-
-Monitor:
-
-```text
-active bullets
-tracers
-impact particles
-muzzle effects
-```
-
-Particularly:
-
-```text
-LMG
-HMG
-Aircraft cannon
-CBC/Warium weapons
-```
-
-Late-game weapons must be benchmarked separately
-
----
-
-# 54. CCTV / Security Rendering
-
-CameraCraft live views may create additional rendering cost
-
-Test:
-
-```text
-1 camera
-4 cameras
-8 cameras
-security room with multiple feeds
-```
-
-If expensive:
-
-reduce simultaneously active live feeds
-
-Do not remove CCTV gameplay without measurement
-
----
-
-# 55. Dynamic Lights
-
-Dynamic lighting can be expensive depending on implementation
-
-Test:
-
-```text
-flashlights
-weapon lights
-multiple squad members
-city night operations
-```
-
-Client Dynamic Light and TaCZ lighting addons must be profiled together
-
----
-
-# 56. Resource Packs
-
-Avoid extremely high-resolution textures by default
-
-Pack-owned resource assets should match Minecraft/mod visual scale
-
-Optional high-res packs can be separate
-
----
-
-# 57. Render Distance Guidance
-
-Do not hard-force low render distance
-
-After profiling provide recommendation
-
-Possible example:
-
-```text
-Standard:
-12–16 chunks
-
-High-end:
-18–24 chunks
-
-Server simulation:
-separate tuned value
-```
-
-Do not lock until tested
-
----
-
-# 58. Simulation Distance
-
-Server simulation distance is more important than visual render distance for CPU load
-
-Test:
-
-```text
-6
-8
-10
-12
-```
-
-with:
-
-```text
+Horde AI
 MineColonies
 Create
-Hordes
-Wildlife
+chunk loading
+world generation
+GC
 ```
 
-Choose pack/server default after benchmark
+Required workflow:
+
+```text
+profile
+→ identify bottleneck
+→ change one variable
+→ benchmark
+→ keep or revert
+```
+
+Do not add broad optimizers because they are popular.
 
 ---
 
-# 59. Chunk Loading
+# 8. Experimental candidates
 
-Audit all mods capable of force-loading chunks
+## PERF-EXP-FASTNOISE — Fast Noise
 
-Potential sources:
+Worldgen experiment: potential noise / biome / surface-generation optimization.
+
+Test with identical seeds and compare terrain, biome placement, structures, Ice & Fire worldgen,
+BOP behaviour, generation time and MSPT / chunk hitching.
+
+**Reject if it changes world output unexpectedly.**
+
+## PERF-EXP-LETMEDESPAWN — Let Me Despawn
+
+Entity-lifetime experiment. Useful if equipment-bearing mobs become unintentionally persistent.
+
+Must exclude where necessary:
 
 ```text
-MineColonies
-Create trains
-player utilities
-server tools
+dragons
+bosses
+named mobs
+tamed animals
+important NPCs
+Horde event mobs
 ```
 
-Do not allow unlimited chunk loading
+Do not let despawn rules trivialize Horde events.
 
-Persistent loaded chunks can destroy idle server performance
+## PERF-EXP-ALTERNATE-CURRENT — Alternate Current
+
+Redstone-dust optimization. Only useful if profiling shows significant vanilla-redstone cost. Test
+Create, SecurityCraft, MineColonies and industrial control logic.
+
+## PERF-EXP-CANARY — Canary
+
+Broad Lithium-style optimization. Potentially powerful, but it touches AI, physics, game logic,
+chunks and collections.
+
+Use only in:
+
+```text
+perf/canary-experiment
+```
+
+Never blind-stack into `main`.
+
+## PERF-EXP-AI-IMPROVEMENTS — AI Improvements
+
+```text
+DEFER
+```
+
+AI already has many layers: Enhanced AI, Improved Mobs, Attract to Sound, The Hordes, ServerCore,
+In Control!. Reconsider only if spark proves AI or pathfinding is the bottleneck.
+
+## PERF-EXP-SMOOTHBOOT — Smooth Boot Reloaded
+
+Low priority. Startup scheduling only; it does not solve Horde TPS, Create load, MineColonies load
+or gameplay FPS.
 
 ---
 
-# 60. World Border
+# 9. Fabric performance mods and the Forge decision — `PERF-LOADER-TABLE`
 
-For multiplayer, consider world border appropriate to current season
+| Fabric-side item | Forge 1.20.1 decision | id |
+|---|---|---|
+| Sodium | Use **Embeddium** | `PERF-RENDER-EMBEDDIUM` |
+| Sodium Extra | Optional **Embeddium Extra** | `PERF-RENDER-EMBEDDIUM-EXTRA` |
+| Reese's Sodium Options | Not required; avoid redundant UI | — |
+| Mod Menu | Not applicable; Forge has a Mods screen | — |
+| Fabric API | Do not add | — |
+| Fabric Language Kotlin | Use **Kotlin for Forge** only when required | — |
+| Cloth Config | Forge native dependency; only when required | — |
+| Architectury | Forge native dependency; only when required | — |
+| YACL | Forge native dependency; only when required | — |
+| MidnightLib | Forge native dependency; only when required | — |
+| Lithium | Do not bridge; use ServerCore / ModernFix / FastSuite | — |
+| C2ME | Do not use in main | `PERF-REJECT-C2ME` |
+| More Culling | Do not bridge; Entity Culling + Embeddium cover the core need | — |
+| Enhanced Block Entities | Prefer **Legendary Block Entities** | `PERF-RENDER-LEGENDARY-BLOCK-ENTITIES` |
+| VMP | Not needed for 3–4 players | `PERF-REJECT-VMP` |
+| Iris | Optional Forge shader path is **Oculus** | `PERF-RENDER-OCULUS` |
+| Continuity | Visual feature, not performance; do not add under this spec | — |
+| Zoomify | QoL, not performance | — |
 
-Benefits:
+Libraries are dependencies, not optimization mods. Install one only when something actually
+requires it.
+
+## PERF-RENDER-OCULUS — Oculus, the optional shader path
+
+**In the pack** since #91, `side = "client"`, and it is Iris: `provides = ["iris"]`.
+
+A loader is not a shader. *Visuals Spec §22* forbids a **required** shader; no shaderpack ships,
+`shaderpacks/` goes out empty, and Oculus with nothing selected renders the game normally. *Visuals
+Spec §23*'s third profile — *Cinematic Optional = Enhanced + user-selected shader* — is what this
+makes reachable.
+
+**It is not free.** Oculus sets three Embeddium mixins to `false` — `render.world.sky`,
+`render.entity`, `render.gui.font` — whether or not a shaderpack is selected. The size of that trade
+is **unmeasured**; measuring it is a `PERF-PRIORITY` item behind the baseline.
+
+## PERF-RENDER-EMBEDDIUM-EXTRA — Embeddium Extra
 
 ```text
-controls storage growth
-limits accidental 100k-block exploration
-simplifies pregeneration
+ALLOWED / OPTIONAL
+NOT INSTALLED
 ```
 
-But do not use tiny border that harms exploration
+**Allowed is not the same as install now.** It adds option toggles — fog, clouds, particles,
+weather, block animations, biome colours, 51 option labels in total — and **optimizes nothing by
+itself**: every gain comes from a player switching something off. Its value is per-player graceful
+degradation of the visual layer, which is an accessibility argument, not a performance one.
 
-Exact size is design decision, not hard-coded here
+Evidence already gathered, so it does not have to be gathered twice: Modrinth `oY2B1pjg`,
+`embeddium_extra 0.5.4.4+mc1.20.1-build.131`, LGPL-3.0, Forge `[47.1.3,)`, `embeddium` at
+`versionRange = "*"`, every dependency `side = "CLIENT"`. Embeddium 0.3.31's own lang file has
+**zero** keys for particles/fog/clouds/weather/sky, so there is no duplication.
+
+**Install decision deferred to the client phase**, where the option UI can actually be looked at.
 
 ---
 
-# 61. Future Valkyrien Skies Performance Gate
+# 10. Explicit reject / not-main decisions
 
-Season 2 mods:
+## PERF-REJECT-NVIDIUM — Nvidium
 
 ```text
-Valkyrien Skies 2
-Clockwork
-Warium
+NOT MAIN
 ```
 
-must not enter main branch merely because they launch
+Potentially large gains for NVIDIA hardware at high render distance, but on Forge 1.20.1 it
+typically introduces bridge / rendering complexity and mixed-hardware problems. Embeddium stays the
+default. Never a pack requirement.
 
-Required benchmark:
+## PERF-REJECT-VULKANMOD — VulkanMod
 
 ```text
-1 vehicle
-3 vehicles
-5 vehicles
-active aircraft
-Create machinery on physics objects if supported
-combat
+EXPERIMENTAL RENDERER BRANCH ONLY
+```
+
+It replaces the rendering backend rather than applying a narrow optimization.
+
+Conflict surface:
+
+```text
+Embeddium
+ImmediatelyFast
+Entity Culling
+TaCZ
+Create
+EMF/ETF
+Fancy World Animations
+Particle Rain
+optional shaders
+```
+
+Never the default without a dedicated renderer benchmark.
+
+## PERF-REJECT-C2ME — C2ME
+
+```text
+NOT MAIN
+```
+
+Concurrency-heavy and Fabric-first. Prefer Chunky plus targeted worldgen optimization.
+
+## PERF-REJECT-VMP — VMP
+
+```text
+NOT NEEDED
+```
+
+Designed for high player counts; the target here is 3–4. The likely bottlenecks are mobs, NPCs,
+Create and worldgen — not player count.
+
+---
+
+# 11. Final recommended stack — `PERF-STACK`
+
+```text
+RENDER
+├─ Embeddium                     PERF-RENDER-EMBEDDIUM              [IN PACK]
+├─ ImmediatelyFast               PERF-RENDER-IMMEDIATELYFAST        [IN PACK]
+├─ Entity Culling                PERF-RENDER-ENTITY-CULLING         [IN PACK]
+├─ Oculus (optional shaders)     PERF-RENDER-OCULUS                 [IN PACK]
+├─ Embeddium Extra               PERF-RENDER-EMBEDDIUM-EXTRA        [ALLOWED, NOT INSTALLED]
+├─ BadOptimizations              PERF-CLIENT-BADOPTIMIZATIONS       [ADD/TEST]
+└─ Legendary Block Entities      PERF-RENDER-LEGENDARY-BLOCK-ENTITIES [ADD/TEST]
+
+MEMORY
+├─ ModernFix                     PERF-MEM-MODERNFIX                 [IN PACK]
+├─ FerriteCore                   PERF-MEM-FERRITECORE               [IN PACK]
+└─ AllTheLeaks                   PERF-MEM-ALLTHELEAKS               [ADD/TEST]
+
+SERVER / LOGIC
+├─ ServerCore                    PERF-SERVER-SERVERCORE             [IN PACK]
+├─ FastSuite                     PERF-RECIPE-FASTSUITE              [IN PACK]
+└─ Clumps                        PERF-ENTITY-CLUMPS                 [IN PACK]
+
+WORLD
+├─ Chunky                        PERF-WORLD-PREGEN                  [IN PACK]
+└─ Fast Noise                    PERF-EXP-FASTNOISE                 [EXPERIMENT]
+
+GUN SYSTEM
+└─ TaCZ: Accelerated             PERF-TACZ-ACCELERATED              [BENCHMARK-GATED]
+
+BACKGROUND
+└─ Dynamic FPS                   PERF-CLIENT-DYNAMICFPS             [ADD/OPTIONAL]
+
+PROFILING
+└─ spark                         PERF-PROFILE-SPARK                 [DEV CORE]
+
+CONDITIONAL
+├─ Let Me Despawn                PERF-EXP-LETMEDESPAWN
+└─ Alternate Current             PERF-EXP-ALTERNATE-CURRENT
+
+EXPERIMENTAL ONLY
+├─ Canary                        PERF-EXP-CANARY
+├─ AI Improvements               PERF-EXP-AI-IMPROVEMENTS
+├─ Smooth Boot Reloaded          PERF-EXP-SMOOTHBOOT
+├─ VulkanMod                     PERF-REJECT-VULKANMOD
+└─ Nvidium                       PERF-REJECT-NVIDIUM
 ```
 
 ---
 
-# 62. Season 2 Merge Gate
+# 12. Benchmark rules — `PERF-BENCH-RULES`
 
-Merge only if:
+Always compare:
 
 ```text
-No critical crashes
-No world corruption
-Acceptable MSPT
-Acceptable multiplayer sync
-No severe Create conflict
+before
+vs
+after
 ```
 
-If physics stack destabilizes main pack:
+Record exactly:
 
-keep Season 2 separate
+```text
+commit · mod list · config · seed · coordinates · entity count
+render distance · simulation distance · Java args · RAM allocation
+driver / GPU / CPU · client or server role
+```
+
+**Do not compare from memory.**
+
+Client metrics:
+
+```text
+Average FPS · 1% low · frame time · CPU · GPU · RAM · VRAM
+```
+
+Server metrics:
+
+```text
+TPS · MSPT · tick percentiles · entity tick time
+chunk generation time · pathfinding cost · memory · GC
+```
+
+Frame-time stability and 1% lows matter more than peak FPS.
 
 ---
 
-# 63. GC / JVM
+# 13. Standard benchmark zones — `PERF-BENCH-ZONES`
 
-Do not blindly copy giant JVM flag lists from Reddit
+**A — Empty baseline.** Low-entity area, no factory, no colony.
 
-Start with:
+**B — Create factory.** Small / medium / large. Measure kinetic networks, contraptions, items and
+processing.
 
-```text
-Java 17
-reasonable RAM allocation
-default/launcher-supported GC
-```
+> Operational rule: stop factories when storage is full where practical, using Threshold Switches,
+> Clutches and control logic.
 
-Measure first
+**C — MineColonies.** 10 / 25 / 50 / 75 NPCs. Measure pathfinding, rendering, MSPT and memory.
 
-Only add JVM tuning if profiling demonstrates GC issue
+**D — Horde arena.** 50 / 100 / 150 / 200 mobs, across idle, moving, attacking walls, automatic
+gunfire, rain and particles. **This is the primary stress benchmark.**
 
----
+**E — Wildlife.** 25 / 50 / 100 entities.
 
-# 64. RAM Allocation
+**F — Dragon.** Single dragon plus combat, terrain and particles.
 
-Do not tell users:
+**G — Create train.** Fast travel through multiple chunks, biomes and stations.
 
-```text
-allocate all system RAM
-```
-
-Too much heap can worsen GC behavior
-
-Recommended range must be determined after final mod count and profiling
-
-Document tested values later in README
+**H — Season 2 vehicles.** Valkyrien / Clockwork / Warium, only after Alpha, benchmarked separately.
 
 ---
 
-# 65. Memory Leak Testing
+# 14. TaCZ / sound-AI stress test — `PERF-BENCH-TACZ`
+
+Test semi-auto, burst, full-auto, and multiple players firing.
+
+Measure MSPT, frame time, particles, sound-attraction AI and pathfinding.
+
+Special risk:
+
+```text
+gunfire
+→ many mobs react
+→ many path searches
+→ MSPT spike
+```
+
+Profile Attract to Sound before rate-limiting it or writing a custom integration.
+
+---
+
+# 15. Entity budget — `PERF-BUDGET-ENTITY`
+
+If server load becomes excessive, reduce in this order:
+
+```text
+1. ambient decorative wildlife
+2. small critters
+3. duplicate species
+4. common passive density
+5. Horde cap if necessary
+```
+
+Cut last:
+
+```text
+Create identity
+MineColonies identity
+core hostile encounters
+dragons
+```
+
+---
+
+# 16. Visual performance budget — `PERF-BUDGET-VISUAL`
+
+If client load becomes excessive, reduce in this order:
+
+```text
+1. extra particles
+2. decorative 3D world elements
+3. dense foliage
+4. optional Fresh Animations coverage
+5. weather particle density
+```
+
+**Do not remove gameplay systems to save visual FPS first.**
+
+---
+
+# 17. RAM and long-session testing — `PERF-BENCH-LONGSESSION`
+
+Do not assume more allocated RAM is faster; an oversized heap can worsen GC pause behaviour.
+
+Test practical client allocations:
+
+```text
+8 GB · 10 GB · 12 GB
+```
+
+Choose the smallest stable allocation that avoids memory pressure in representative gameplay.
 
 Long-session test:
 
 ```text
-30 minutes
-1 hour
-2 hours
-4 hours
+30 min · 2 h · 4 h
 ```
 
-Record:
-
-```text
-heap usage
-GC recovery
-entity count
-loaded chunks
-```
-
-Look for memory that never returns
+Track RAM growth, GC frequency, FPS degradation, MSPT drift, entity accumulation and chunk-ticket
+accumulation.
 
 ---
 
-# 66. Dedicated Server Soak Test
+# 18. Worldgen tournament — `PERF-WORLD-TOURNAMENT`
 
-Run server unattended with representative loaded systems
+Before persistent multiplayer play, use Chunky to pregenerate a moderate operational region
+(`PERF-WORLD-PREGEN`).
 
-Test:
-
-```text
-2 hours
-6 hours
-12 hours
-```
-
-Inspect:
+When comparing worldgen options:
 
 ```text
-MSPT drift
-RAM growth
-log errors
-entity accumulation
+Base
+Biomes O' Plenty
+Regions Unexplored
+Both
 ```
+
+measure chunk-generation time, train-travel stutter, RAM, MSPT and world size.
+
+**Worldgen is not chosen by visuals alone.** ADR 0006 chose Biomes O' Plenty on quality; the
+performance half of that comparison has not been run.
 
 ---
 
-# 67. Client Soak Test
+# 19. One major variable at a time — `PERF-METHOD-ONEVAR`
 
-Spend long session in:
+Preferred:
 
 ```text
-main city
-factory
-horde
-train travel
+Baseline → + BadOptimizations → measure → keep/revert
+Baseline → + AllTheLeaks     → long-run test → keep/revert
 ```
 
-Check:
+Avoid:
 
 ```text
-FPS degradation
-VRAM
-RAM
-resource reload
++ 8 optimization mods
+→ performance changes
+→ nobody knows which mod caused it
 ```
 
 ---
 
-# 68. Performance Regression Rule
+# 20. Documentation — `PERF-DOCS`
 
-Every major feature addition must answer:
+Create and maintain:
 
 ```text
-Did MSPT worsen?
-Did FPS worsen?
-Did RAM increase significantly?
+docs/performance-baseline.md
+docs/performance-benchmarks.md
+docs/performance-conflicts.md
 ```
 
-If yes:
-
-document expected cost
-
-Do not accept unexplained regressions
-
----
-
-# 69. Performance Regression Threshold
-
-Exact thresholds depend on hardware
-
-But any change causing:
+Each run records:
 
 ```text
->10–15% sustained MSPT regression
-```
-
-in equivalent scenario should be investigated
-
-Likewise major FPS/frame-time regression
-
-Do not automatically reject if feature value justifies cost
-
-but document trade-off
-
----
-
-# 70. Hardware Test Profiles
-
-Maintain at least:
-
-```text
-Developer PC
-Mid-range friend PC
-Dedicated server target
-```
-
-Do not optimize only for one high-end machine
-
----
-
-# 71. Clean Benchmark Protocol
-
-Before comparison:
-
-```text
-Same world
-Same location
-Same entity count
-Same render distance
-Same simulation distance
-Same weather/time if possible
-Same JVM/RAM
-Same mod configuration
-```
-
-Change one variable at a time where practical
-
----
-
-# 72. Experimental Branch Structure
-
-Use branches:
-
-```text
-perf/canary
-perf/ai-improvements
-perf/alternate-current
-perf/let-me-despawn
-perf/tacz-optimization
-```
-
-Do not test all experimental mods together first
-
----
-
-# 73. Benchmark Decision States
-
-Every candidate gets:
-
-```text
-KEEP
-KEEP + CONFIG
-OPTIONAL PROFILE
-REJECT
-RETEST
-```
-
-Document reason
-
----
-
-# 74. Performance Compatibility Matrix
-
-Add performance-specific columns to:
-
-```text
-docs/compatibility-matrix.md
-```
-
-Example:
-
-```text
-Mod
-Version
-Category
-Client/Server
-Measured Benefit
-Known Conflict
-Status
+date · commit · mods changed · configs changed · scenario · metrics · verdict
 ```
 
 ---
 
-# 75. Performance Changelog
+# 21. Performance profiles — `PERF-PROFILES`
 
-If optimization changes gameplay-adjacent behavior:
+**Standard.** All approved CORE performance mods.
 
-document it
+**Low-End Client.** Same gameplay, lower particles, Fresh Animations coverage, foliage density,
+weather density and render distance. `PERF-RENDER-EMBEDDIUM-EXTRA` is the intended mechanism for
+this if it is ever installed.
 
-Example:
-
-```text
-Changed ServerCore activation range for passive wildlife
-Excluded dragons from reduced ticking
-Reduced wildlife group sizes
-```
+**Experimental.** Controlled testing only: Fast Noise, Let Me Despawn, Alternate Current, Canary,
+VulkanMod, Nvidium.
 
 ---
 
-# 76. Definition of Done — Core Stack
+# 22. Priority order — `PERF-PRIORITY`
 
-Performance addon is Alpha-ready when:
+```text
+1. spark                       <- the only item that does not need a baseline
+2. establish client/server baseline
+3. AllTheLeaks
+4. BadOptimizations
+5. Dynamic FPS
+6. Legendary Block Entities
+7. Fast Noise
+8. Let Me Despawn
+9. Alternate Current
+10. broad experiments only if profiling justifies them
+```
 
-- Embeddium works with client stack
-- ModernFix works
-- FerriteCore works
-- Entity Culling works without visual bugs
-- ImmediatelyFast works
-- ServerCore is configured safely
-- FastSuite does not break recipes
-- Clumps works
-- TaCZ: Accelerated is benchmarked
-- One chunk pregeneration tool is selected
-- Dedicated server boots
-- Existing world loads
-- Multiplayer combat works
-- No critical log spam
-- Performance baseline is documented
+Items 3–10 are gated on item 2. Item 2 needs a launched client, which is this project's standing
+blocker (`docs/OPEN-WORK-LEDGER.md`).
 
 ---
 
-# 77. Definition of Done — Profiling
+# 23. Definition of done — client — `PERF-DOD-CLIENT`
 
-Performance methodology is complete when:
+- stable frame pacing in normal play
+- main city remains playable
+- Horde + rain + TaCZ remains readable
+- 1% lows do not collapse catastrophically
+- visual layer does not dominate frame time
+- no progressive memory leak
+- no rendering corruption
 
-```text
-docs/performance.md
-```
+# 24. Definition of done — server — `PERF-DOD-SERVER`
 
-contains at least:
-
-```text
-Idle city baseline
-Factory benchmark
-MineColonies benchmark
-Horde benchmark
-Gunfight benchmark
-Wildlife benchmark
-Worldgen benchmark
-```
-
----
-
-# 78. Target Runtime Quality
-
-Target:
-
-```text
-20 TPS server under normal gameplay
-```
-
-with healthy MSPT headroom
-
-Heavy Horde / major battle may temporarily increase MSPT
-
-but should remain playable
-
-Client target:
-
-```text
-stable frame pacing
-```
-
-is more important than peak FPS
+- normal gameplay stays at 20 TPS
+- safe Horde caps are known
+- MineColonies scaling is documented
+- Create factories have operational limits
+- worldgen spikes are controlled
+- automatic fire does not cause pathological AI spikes
+- long sessions do not progressively degrade
 
 ---
 
-# 79. Failure Conditions
-
-Performance layer fails if optimization causes:
-
-```text
-Frozen dragons
-Broken MineColonies workers
-Disappearing Horde mobs
-Broken recipes
-Invisible weapons
-Broken Create contraptions
-Desynced trains
-Incorrect tracker behavior
-World corruption
-```
-
-A faster broken game is not an optimization
-
----
-
-# 80. Claude Code Hard Rules
+# 25. Hard rules — `PERF-RULES`
 
 ## DO
 
-1. Pin exact performance mod versions.
-2. Benchmark before and after.
-3. Change one major optimization variable at a time.
-4. Profile real pack scenarios.
-5. Test dedicated server.
-6. Test multiplayer.
-7. Protect important entities from aggressive despawn/tick optimization.
-8. Document measured benefit.
-9. Use pack design optimization alongside mods.
-10. Pregenerate chunks for persistent multiplayer where appropriate.
-11. Keep experimental mods isolated until proven.
-12. Review logs after every performance stack change.
-13. Maintain a reproducible benchmark world.
-14. Keep gameplay correctness above raw benchmark score.
+1. Profile before optimizing.
+2. Keep Embeddium as primary renderer.
+3. Keep ModernFix + FerriteCore.
+4. Keep Entity Culling + ImmediatelyFast.
+5. Keep ServerCore + FastSuite + Clumps.
+6. Use Chunky operationally.
+7. Add spark as dev/admin core.
+8. Test AllTheLeaks for long-session stability.
+9. Test BadOptimizations as client micro-optimization.
+10. Prefer Legendary Block Entities over EBE / FastChest bridge approaches.
+11. Track 1% lows and frame times, not just average FPS.
+12. Benchmark Hordes at controlled entity counts.
+13. Keep experimental optimizers isolated on their own branch.
+14. Verify after every performance-stack change.
+15. **Cite `PERF-*` ids, never section numbers** (`PERF-CITE`).
 
 ## DO NOT
 
-1. Do not install every optimization mod simultaneously.
-2. Do not use OptiFine.
-3. Do not assume two optimization mods are compatible because both launch.
-4. Do not blindly copy JVM flags.
-5. Do not despawn bosses/dragons/important NPCs.
-6. Do not reduce MineColonies functionality without measurement.
-7. Do not destroy wildlife diversity just to win benchmark numbers.
-8. Do not let Create factories run unnecessarily forever.
-9. Do not claim improvement from subjective feel only.
-10. Do not merge Canary or AI Improvements without benchmark.
-11. Do not use both Chunky and Chunk-Pregenerator by default.
-12. Do not sacrifice core gameplay for decorative performance gains.
+1. Do not migrate loaders only for performance.
+2. Do not add Fabric API / Sinytra just to obtain optimization mods.
+3. Do not bridge Lithium into Forge 1.20.1.
+4. Do not put C2ME into main.
+5. Do not add VMP for a 3–4 player server.
+6. Do not blind-stack AI Improvements.
+7. Do not blind-stack Canary.
+8. Do not make VulkanMod the default renderer.
+9. Do not make Nvidium a pack requirement.
+10. **Do not install OptiFine.**
+11. Do not claim a performance win without evidence.
+12. Do not sacrifice pack identity merely to chase benchmark numbers.
 
 ---
 
-# 81. Final Approved Stack
+# 26. Final feature definition — `PERF-DEFINITION`
 
-## Core
+> **The Performance Layer makes Industrial Civilization Survival stable under the systems that
+> define the pack: large Create factories, MineColonies settlements, Horde events, tactical
+> gunfights, wildlife, weather, world generation and long multiplayer sessions. It favors targeted,
+> measured optimization over blind stacking.**
 
-```text
-Embeddium
-ModernFix
-FerriteCore
-Entity Culling
-ImmediatelyFast
-ServerCore
-FastSuite
-Clumps
-TaCZ: Accelerated
-```
+Guiding sentence:
 
-## Server Tool
-
-```text
-Chunky
-OR
-Chunk-Pregenerator
-```
-
-## Experimental
-
-```text
-AI Improvements
-Let Me Despawn
-Alternate Current
-Canary
-TaCZ Optimization
-Smooth Boot Reloaded
-```
+> **Stable 20 TPS, stable frame times, predictable memory usage, and enough headroom for the
+> civilization to grow.**
 
 ---
 
-# 82. Final Feature Definition
+# 27. Provenance — what this merge changed
 
-> **The Performance Optimization Layer keeps Industrial Civilization Survival playable as its civilization grows from a small settlement into a dense industrial world containing factories, MineColonies citizens, wildlife, hordes, gunfights, trains and eventually physics-based vehicles. Optimization must be measured, reproducible and gameplay-safe rather than achieved by blindly stacking performance mods.**
+Written for #93, from v1 and v2. Neither original is authority any more.
 
-The desired architecture is:
+**Taken from v1, because v2 dropped them.** The OptiFine prohibition; Embeddium's compatibility test
+list; ModernFix's pin-and-do-not-toggle rule; the Entity Culling constraint; ServerCore's Critical
+Exclusions and Philosophy; FastSuite's test matrix; the Chunky vs Chunk-Pregenerator decision;
+TaCZ: Accelerated and its test matrix; pregeneration strategy and verification.
 
-```text
-Performance Mods
-        +
-Spawn / Entity Budgets
-        +
-Factory Shutdown Logic
-        +
-Chunk Pregeneration
-        +
-Profiling
-        +
-Compatibility Testing
-        ↓
-Sustainable Long-Term World
-```
+**Taken from v2, because v1 never had them.** BadOptimizations, AllTheLeaks, Dynamic FPS, Legendary
+Block Entities, spark, Fast Noise; the Fabric→Forge decision table; the four explicit rejects;
+benchmark zones A–H; the TaCZ stress test; the entity and visual budgets; long-session testing; the
+worldgen tournament; one-variable-at-a-time; both Definitions of Done; the priority order.
 
-The goal is not maximum benchmark FPS.
+**Decided here, in neither original.**
 
-The goal is:
-
-> **A 100–300+ day multiplayer industrial civilization world that remains smooth enough to keep playing as it becomes larger and more complex.**
+- TaCZ: Accelerated is `BENCHMARK-GATED CANDIDATE`, with a written promotion path. v1 contradicted
+  itself about it and v2 deleted it; neither is a status.
+- Chunk-Pregenerator is `ALTERNATIVE / NOT SELECTED` rather than absent.
+- Oculus and Embeddium Extra get their own ids, because #91 shipped one and the other is a live
+  question. Embeddium Extra is `ALLOWED / OPTIONAL / NOT INSTALLED` — allowed is not install-now.
+- `PERF-*` ids exist at all, and `PERF-CITE` makes citing a section number a rule violation.
