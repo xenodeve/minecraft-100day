@@ -27,12 +27,13 @@ population (W3/W6/W7), the Brimm-vs-TakKit comparison (§15), the JEI active-rec
 Spec §5) and the twelve-test release gate (Distribution Spec §16) are all **measurements**, and a
 dedicated server cannot produce any of them.
 
-**Four rows need no client, and one of them is actionable right now.** That is a different
+**Five rows need no client, and two of them are actionable right now.** That is a different
 statement from *"everything left needs a client"*, and the difference is the point:
 
 | Row | What it actually waits on |
 |---|---|
-| **Redistribution licences (#53)** | **nothing — hand-reading 40 CurseForge project pages** |
+| **Redistribution licences (#53)** | **nothing — but all 107 pages are now read; what is left is a *decision*** |
+| **Decide on Biome Dither / Punchy (#66)** | **nothing — available and undecided** |
 | The three Player Microchip textures (**#35**) | an **artist** |
 | Re-add `cbc_firepower_components` | an **upstream release** supporting CBC ≥ 5.9 |
 | Re-evaluate `TaCZ: Accelerated` | a **benchmark baseline** — which does need a client to profile with |
@@ -89,6 +90,7 @@ tier — is now a decided operating mode rather than a pending task, which is wh
 | **Visuals V0** — reference audit | ✅ | — | **#52**. `docs/khaojee-visual-reference.md` — 24 projects swept by title, versions and licences read from the Modrinth API. Six of the seven adoption-set mods have real Forge 1.20.1 builds |
 | **Visuals V1** — safe visual baseline | ⚠️ **staged, unverified** | **needs a client** | **#56**. Five client mods + Fzzy Config + Kotlin for Forge added and pinned; 99 → 106 mods. Server pack 89 → 91 and still boots green. **Not one §38 criterion is testable without a client** — every visual mod is `side = "client"` and the server boot cannot see them |
 | **Visuals V2** — weather | ⚠️ **staged, unverified** | **needs a client** | **#58**. Particle Rain, MIT, `side = "CLIENT"` by its own declaration. §9's mandatory stress test and §32's ADS/NVG visibility rule are both client measurements |
+| **Pufferfish's Biome Dither** and **Punchy!** — decide | 🔴 | **nothing — available and undecided** | **#66**. Both have Forge 1.20.1 builds and appear in Visuals Spec §3's inventory but in none of §4's buckets. Dither is `server: required` — the **only** server-side project in the visual inventory, and so the only one a dedicated-server boot could test. Both All Rights Reserved, so adding either enlarges #53 |
 | **Visuals V3** — connected textures | 🔴 | **needs a decision, not a client** | **#58**. Fusion is a *library* — it changes nothing without a connected-texture resource pack, and §12 never names one. Choosing it is art direction, and §35 flags resource packs as the category most likely to forbid redistribution while #53 is open |
 | **Visuals V4** — selective Fresh Animations | 🔴 | needs `docs/animation-coverage.md`, which needs a client | Visuals Spec §11 via the Animation Spec. EMF + ETF are Forge mods; **Fresh Animations is a resource pack**. Player Extension stays OFF |
 | **Visuals V5–V8** — decorative and worldgen prototypes | 🔴 | needs a client, and §33 wants worldgen settled before persistent play | BOP and Regions Unexplored both need **TerraBlender** (absent). §15 requires multiple seeds. Particle Interactions has **no 1.20.1 build** and should move to §44 |
