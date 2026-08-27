@@ -281,6 +281,70 @@ cannot see a code-level integration, and its silence was read as evidence of abs
 
 ---
 
+## C9 — a shader pack plus a TaCZ gun in hand overflows a 2 GB vertex buffer
+
+**Status: LIVE. Reproduced six times in one hour. Fail path traced; the filler is indicated, not
+yet proven. Issue #117.**
+
+```
+java.lang.OutOfMemoryError: Failed to resize buffer from 2146435072 bytes to -2146435072 bytes
+```
+
+`2146435072` is `Integer.MAX_VALUE - 1024`, Minecraft's buffer cap. Doubling it overflows to
+negative. **This is not memory pressure** — the heap held **2.4 GB of 4 GB** at every one of the six
+crashes, and the buffer is off-heap. Raising `-Xmx` cannot touch it.
+
+**The crash report names the wrong mods, and the reason is worth knowing.** Minecraft caught the
+first OOM, opened `OutOfMemoryScreen`, and died again drawing that screen's text into the same
+broken buffer. The report captures only that second failure, so it blames the mixins on the text
+draw — Oculus and Embeddium. **The real path is in `logs/latest.log`, not in the report:**
+
+```
+oculus 1.8.0  HandRenderer.renderSolid (HandRenderer.java:96)
+  ItemInHandRenderer.renderHandsWithItems
+    Forge RenderHandEvent
+      simplebedrockmodel  FirstPersonRenderHandler.onRenderHand
+        tacz 1.1.8-hotfix  GunItemRendererWrapper.renderFirstPerson
+          BedrockModel.render -> BedrockPart.render -> BedrockCubePerFace.compile
+            BufferBuilder.endVertex -> ensureCapacity -> MemoryTracker.resize   <- OOM
+```
+
+`net.irisshaders.iris.pathways.HandRenderer` **runs only when a shader pack is loaded.** With
+shaders off the hand goes down the vanilla path and this frame never appears.
+
+**The differential, which is the strongest evidence here:**
+
+| Instance | Shader pack | Crashes |
+|---|---|---|
+| `Industrial Civilization Survival` | **none** (`shaderPack=` empty) | none since 2026-08-27 20:14 — that one was `C8`, already fixed |
+| `Industrial Civilization Survival (2)` | **`Bliss-Shader Dev.zip`** | **6 in one hour**, 2026-08-28 05:17 – 06:14 |
+
+Within instance (2), across all seven archived logs: `Using shaderpack: Bliss-Shader Dev.zip` in
+**7 of 7** runs. Not one crashing run had shaders off. World join to crash: **about 60 seconds**.
+
+**What it is not.**
+
+- **Not the #115 add-ons.** PFG was in **1 of 6** crashes; the five before it are identical in
+  failure path and `zcat` finds zero `pfg-1.4.0` mentions in their logs. The first crash predates
+  the add-on being built.
+- **Not the AllTheLeaks world-retention report** in the same crash file (`ServerLevel: 4`,
+  `LevelChunk: 224`, `IntegratedServer: 1`). Real, and worth its own entry — but the heap was 40%
+  free, so it did not cause this.
+
+**Not known.** Whether a TaCZ newer than `1.1.8-hotfix` fixes it — unchecked, and **must not be
+assumed**. Whether other shader packs behave the same. Whether any first-person model does it or
+only TaCZ's Bedrock-format one; `carryon` and `securitycraft` sit in the same listener list.
+
+**What would settle it, disproof first.** In instance (2), one variable per run
+(`PERF-METHOD-ONEVAR`):
+
+1. **Shaders off**, same world, same gun, 5 minutes. Still crashes → the hypothesis is dead and the
+   shader is not the trigger.
+2. Only if it survives — **shaders on, no gun in hand**, 5 minutes. No crash → the gun model is
+   confirmed as what fills the buffer.
+
+---
+
 ---
 
 # Upscaling / Frame Generation — `C-UPFG-*`
