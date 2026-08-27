@@ -3,9 +3,9 @@
 
 **What this is.** One row per mod the pack ships, its licence, and where that licence was read.
 *Visuals Spec §35* asks for it before shipping; ADR 0003 made the pack self-contained, which means
-it has been redistributing every jar it ships since the first build — **113** of them today.
+it has been redistributing every jar it ships since the first build — **114** of them today.
 
-**What it is not.** A legal opinion, and not a clean bill of health. **All 113 have now been read. 38 of them say nothing about
+**What it is not.** A legal opinion, and not a clean bill of health. **All 114 have now been read. 38 of them say nothing about
 redistribution, which is not the same as permitting it.** A licence that could not be determined is recorded as unread, never assumed.
 
 - **Swept:** 2026-08-27 · issue #53
@@ -50,7 +50,7 @@ jars.
 | Artifact | Third-party jars | May be shared |
 |---|---|---|
 | `…-friend.zip` | **0** | **yes** — and it serves both client and server, via `-s server` |
-| `…-instance.zip` | 113 | no — internal test artifact |
+| `…-instance.zip` | 114 | no — internal test artifact |
 | `…-server.zip` | 94 | no — use the friend pack with `-s server` instead |
 | `…-alpha.zip` (CurseForge) | 72 | no |
 | `…-curseforge-local.zip` | 76 | **never** — two of its mods are ARR with an explicit opt-out |
@@ -137,7 +137,7 @@ to rely on something other than a written grant.
 modpacks on a bullet reading `- Large Modpacks`. In context that sits under a **Performance**
 heading and describes what the mod is suitable for, not what you may do with it. It is silent.
 
-## Permissively licensed — 64 mods
+## Permissively licensed — 65 mods
 
 Redistribution is granted by the licence text itself. GPL/LGPL/MPL additionally require that the
 licence and source remain available; shipping the jars unmodified with `docs/MODLIST.md` linking
@@ -211,8 +211,9 @@ been modified.
 | Polytone | [Modrinth](https://modrinth.com/mod/polytone) | GPL 3.0 or later | Modrinth API |
 | TerraBlender | [Modrinth](https://modrinth.com/mod/terrablender) | LGPL 3.0 only | Modrinth API |
 | Biomes O' Plenty | [Modrinth](https://modrinth.com/mod/biomes-o-plenty) | All Rights Reserved | Modrinth API |
+| Tactical Backpacks refMap shim | *(ours — `scripts/build/build-militarybackpack-refmap-shim.py`)* | MIT | we wrote it |
 
-## Read, and silent — 40 mods · unreadable — 1
+## Read, and silent — 41 mods · unreadable — 1
 
 **Every page below has now been read.** They carry a custom or All-Rights-Reserved licence and say
 nothing about modpacks — which is the ordinary case, and which is **not** permission. Three mods that
@@ -260,6 +261,7 @@ the one page with no description field at all.
 | Fzzy Config | [Modrinth](https://modrinth.com/mod/fzzy-config) | TDL M | Modrinth API |
 | Grassier Grass | [Modrinth](https://modrinth.com/mod/grassier-grass) | All Rights Reserved | Modrinth API |
 | Fusion (Connected Textures) | [Modrinth](https://modrinth.com/mod/fusion-connected-textures) | All Rights Reserved | Modrinth API |
+| Sophisticated Tactical Backpacks | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/sophisticated-tactical-backpacks) | All Rights Reserved | project page |
 
 ## Decisions this needs, which are not the agent's to make
 
@@ -290,9 +292,9 @@ proposes but has not installed. `docs/khaojee-visual-reference.md` records their
 
 **นี่คืออะไร** หนึ่งแถวต่อหนึ่งมอดที่ pack ส่งไป สัญญาอนุญาตของมัน และอ่านมาจากไหน
 *Visuals Spec §35* ขอไว้ให้ทำก่อนส่งมอบ ส่วน ADR 0003 ทำให้ pack เป็นแบบมีทุกอย่างในตัว
-ซึ่งแปลว่ามันแจกจ่าย jar ทุกตัวที่มันส่งซ้ำมาตั้งแต่ build แรก — วันนี้คือ **113** ตัว
+ซึ่งแปลว่ามันแจกจ่าย jar ทุกตัวที่มันส่งซ้ำมาตั้งแต่ build แรก — วันนี้คือ **114** ตัว
 
-**ไม่ใช่อะไร** ไม่ใช่ความเห็นทางกฎหมาย และไม่ใช่ใบรับรองว่าทุกอย่างสะอาด **ทั้ง 113 ตัวถูกอ่านแล้ว 38 ตัวไม่ได้พูดถึงการแจกจ่ายซ้ำเลย ซึ่งไม่เท่ากับการอนุญาต**
+**ไม่ใช่อะไร** ไม่ใช่ความเห็นทางกฎหมาย และไม่ใช่ใบรับรองว่าทุกอย่างสะอาด **ทั้ง 114 ตัวถูกอ่านแล้ว 38 ตัวไม่ได้พูดถึงการแจกจ่ายซ้ำเลย ซึ่งไม่เท่ากับการอนุญาต**
 สัญญาอนุญาตที่หาไม่ได้ถูกบันทึกว่ายังไม่ได้อ่าน ไม่ใช่สมมติเอา
 
 - **กวาดเมื่อ:** 2026-08-27 · issue #53
@@ -336,7 +338,7 @@ proposes but has not installed. `docs/khaojee-visual-reference.md` records their
 | Artifact | jar ของบุคคลที่สาม | แชร์ได้ไหม |
 |---|---|---|
 | `…-friend.zip` | **0** | **ได้** — และใช้ได้ทั้ง client และ server ผ่าน `-s server` |
-| `…-instance.zip` | 113 | ไม่ได้ — เป็น artifact สำหรับทดสอบภายใน |
+| `…-instance.zip` | 114 | ไม่ได้ — เป็น artifact สำหรับทดสอบภายใน |
 | `…-server.zip` | 94 | ไม่ได้ — ใช้ friend pack กับ `-s server` แทน |
 | `…-alpha.zip` (CurseForge) | 72 | ไม่ได้ |
 | `…-curseforge-local.zip` | 76 | **ห้ามเด็ดขาด** — สองตัวในนั้นเป็น ARR และเจ้าของปิดกั้นไว้ |
@@ -421,7 +423,7 @@ player-microchip      1488872   IN MANIFEST
 จากบูลเล็ตที่เขียนว่า `- Large Modpacks` เมื่อดูบริบทแล้วมันอยู่ใต้หัวข้อ **Performance**
 และอธิบายว่ามอดเหมาะกับอะไร ไม่ใช่ว่าคุณทำอะไรกับมันได้ มันเงียบ
 
-## สัญญาอนุญาตแบบเปิด — 64 มอด
+## สัญญาอนุญาตแบบเปิด — 65 มอด
 
 สิทธิ์แจกจ่ายซ้ำมาจากตัวข้อความสัญญาอนุญาตเอง GPL/LGPL/MPL ต้องการเพิ่มว่าสัญญาอนุญาตและซอร์ส
 ต้องยังเข้าถึงได้ การส่ง jar ไปโดยไม่ดัดแปลงพร้อม `docs/MODLIST.md` ที่ลิงก์ทุกโปรเจกต์
@@ -493,8 +495,9 @@ player-microchip      1488872   IN MANIFEST
 | Countered's Terrain Slabs | [Modrinth](https://modrinth.com/mod/countereds-terrain-slabs) | MIT | Modrinth API |
 | Polytone | [Modrinth](https://modrinth.com/mod/polytone) | GPL 3.0 or later | Modrinth API |
 | TerraBlender | [Modrinth](https://modrinth.com/mod/terrablender) | LGPL 3.0 only | Modrinth API |
+| Tactical Backpacks refMap shim | *(ours — `scripts/build/build-militarybackpack-refmap-shim.py`)* | MIT | we wrote it |
 
-## อ่านแล้วและเงียบ — 40 มอด · อ่านไม่ได้ — 1
+## อ่านแล้วและเงียบ — 41 มอด · อ่านไม่ได้ — 1
 
 **ทุกหน้าด้านล่างถูกอ่านแล้ว** พวกมันมีสัญญาอนุญาตแบบ custom หรือ All Rights Reserved
 และไม่ได้พูดถึง modpack เลย — ซึ่งเป็นกรณีปกติ และ**ไม่ใช่**การอนุญาต มอดสามตัวที่เคยอยู่ในรายการนี้
@@ -543,6 +546,7 @@ player-microchip      1488872   IN MANIFEST
 | Grassier Grass | [Modrinth](https://modrinth.com/mod/grassier-grass) | All Rights Reserved | Modrinth API |
 | Fusion (Connected Textures) | [Modrinth](https://modrinth.com/mod/fusion-connected-textures) | All Rights Reserved | Modrinth API |
 | Biomes O' Plenty | [Modrinth](https://modrinth.com/mod/biomes-o-plenty) | All Rights Reserved | Modrinth API |
+| Sophisticated Tactical Backpacks | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/sophisticated-tactical-backpacks) | All Rights Reserved | project page |
 
 ## การตัดสินใจที่ต้องใช้ และไม่ใช่หน้าที่ของ agent
 

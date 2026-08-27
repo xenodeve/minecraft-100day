@@ -20,7 +20,7 @@ no entry, no tag, and is never handed to a friend as if it were a release.
 
 ### Added
 
-- **113 mods**, pinned to exact versions with hashes. Create is `6.0.8` — forced by the addon
+- **114 mods**, pinned to exact versions with hashes. Create is `6.0.8` — forced by the addon
   version ranges, not chosen.
 - **A twelve-chapter quest campaign**, 48 quests. Objectives rather than a crafting checklist:
   *Establish Industrial Production*, *Build a Freight Corridor*, *Survive a Major Siege*.

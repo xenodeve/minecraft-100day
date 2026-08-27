@@ -595,6 +595,10 @@ hash = "44fccb986223e1c667e26127337c41e651c90b6583316d9f0f83201f668a8d23"
 metafile = true
 
 [[files]]
+file = "mods/militarybackpack-refmap-shim-1.0.1-pre-release-hotfix.jar"
+hash = "d6c500720931f56801b36b1059516d97ddb5220b9bb83d0da50f5c113ccc83c1"
+
+[[files]]
 file = "mods/minecolonies.pw.toml"
 hash = "7853c06a90fb36d5518566ab5ae1f77bdba37eb0ffffc6c73b26d402db64c31f"
 metafile = true
@@ -727,6 +731,11 @@ metafile = true
 [[files]]
 file = "mods/sophisticated-core.pw.toml"
 hash = "b45a8099d4302af4707f6db58779dbe39898d186e999366e64f16653398a9d63"
+metafile = true
+
+[[files]]
+file = "mods/sophisticated-tactical-backpacks.pw.toml"
+hash = "8a6df5154d5a2da77c6e3bef8ccac65ef353af21d5c336f858719e91785a5366"
 metafile = true
 
 [[files]]

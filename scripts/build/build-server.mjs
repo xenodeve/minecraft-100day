@@ -28,7 +28,7 @@
 import { readdirSync, writeFileSync, mkdirSync, existsSync, statSync, rmSync, copyFileSync } from 'node:fs'
 import { execFileSync } from 'node:child_process'
 import { join } from 'node:path'
-import { readPack, readMetas, fetchAndVerify, versionStamp } from './lib/pack.mjs'
+import { readPack, readMetas, fetchAndVerify, versionStamp, packOwnedJars } from './lib/pack.mjs'
 
 const ROOT = process.cwd()
 const CACHE = join(ROOT, 'build', '.jar-cache')
@@ -74,6 +74,15 @@ for (const dir of ['config', 'defaultconfigs', 'kubejs', 'datapacks']) {
 
 // Same reason as the client build: this copy does not go through
 // `.packwizignore`, and the maintainer READMEs each say they are not shipped.
+// Jars we author ourselves. A metafile loop cannot see them, which is how the
+// refMap shim reached none of the artifacts the first time (#86).
+let ownJars = 0
+for (const j of packOwnedJars(ROOT)) {
+  copyFileSync(j.path, join(join(STAGE, 'mods'), j.filename))
+  ownJars++
+  console.log(`bundled our own ${j.filename}`)
+}
+
 let stripped = 0
 const stripMarkdown = (dir) => {
   for (const name of readdirSync(dir)) {
@@ -170,7 +179,7 @@ const check = execFileSync('powershell', ['-NoProfile', '-Command',
 
 const [jarsInZip, backslashEntries, questFiles] = check.map(Number)
 const problems = []
-if (jarsInZip !== serverMods.length) problems.push(`${jarsInZip}/${serverMods.length} jars under mods/`)
+if (jarsInZip !== serverMods.length + ownJars) problems.push(`${jarsInZip}/${serverMods.length + ownJars} jars under mods/`)
 if (backslashEntries > 0) problems.push(`${backslashEntries} entries contain a backslash`)
 if (questFiles === 0) problems.push('no quest data — §12 requires it')
 
@@ -191,7 +200,7 @@ if (problems.length) {
   for (const p of problems) console.error(`   ${p}`)
   process.exit(1)
 }
-console.log(`archive verified — ${jarsInZip} jars, ${questFiles} quest files, 0 client-only mods, no backslash entries`)
+console.log(`archive verified — ${jarsInZip} jars (${ownJars} ours), ${questFiles} quest files, 0 client-only mods, no backslash entries`)
 
 const size = statSync(join(ROOT, OUT)).size
 console.log(`\n✓ ${OUT}  (${(size / 1048576).toFixed(0)} MB, ${serverMods.length} mods)`)

@@ -1,0 +1,13 @@
+name = "Sophisticated Tactical Backpacks"
+filename = "militarybackpack-1.0.0-all.jar"
+side = "both"
+
+[download]
+hash-format = "sha1"
+hash = "f53938adacff46da4831aa9a91ac13c68e13151d"
+mode = "metadata:curseforge"
+
+[update]
+[update.curseforge]
+file-id = 8715431
+project-id = 1665194

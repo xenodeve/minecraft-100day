@@ -62,6 +62,20 @@ export function rosterDigest(entries) {
   return createHash('sha256').update(rows.join('\n')).digest('hex')
 }
 
+/** Jars in `mods/` that are OURS, not packwiz metafiles.
+ *
+ *  Normally `mods/` holds only `*.pw.toml` and every build iterates those. The
+ *  refMap shim (#86) is a real jar we author and commit, and it is invisible to
+ *  a metafile loop — which is exactly how it reached none of the four artifacts
+ *  on its first attempt. `.gitignore` permits precisely one filename pattern
+ *  here, so this cannot quietly start shipping someone else's mod. */
+export function packOwnedJars(root) {
+  const dir = join(root, 'mods')
+  return readdirSync(dir)
+    .filter(f => f.endsWith('.jar'))
+    .map(f => ({ filename: f, path: join(dir, f) }))
+}
+
 export function readPack(root) {
   const pack = readFileSync(join(root, 'pack.toml'), 'utf8')
   const field = (k) => (pack.match(new RegExp(`^${k}\\s*=\\s*"([^"]*)"`, 'm')) || [])[1]
