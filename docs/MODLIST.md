@@ -1,4 +1,4 @@
-<!-- roster-digest: 33af75d973ca7d0b667d510263ed185e29bccab14907962e814198a2ccf8768a -->
+<!-- roster-digest: 847e4a5c1407256231461151e39ea8cd01e9e8896a3dfeff9762924ccf0a8a51 -->
 <!-- mod-count: 120 -->
 <!-- GENERATED FILE — do not edit by hand.
      Run: node scripts/build/generate-modlist.mjs
@@ -71,7 +71,7 @@ mods are not installed on a server and are not missing when they are absent.
 | Biomes O' Plenty | `BiomesOPlenty-forge-1.20.1-19.0.0.96.jar` | [Modrinth](https://modrinth.com/mod/biomes-o-plenty) |
 | BlockUI | `blockui-1.20.1-1.0.194-snapshot.jar` | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/blockui) |
 | Born in Chaos | `born_in_chaos_[Forge]1.20.1_1.7.5.jar` | [Modrinth](https://modrinth.com/mod/borninchaos) |
-| Brimm Armors \| Tactical Military Armors | `brimm-2.0.3.jar` | [CurseForge](https://www.curseforge.com/projects/1281654) |
+| Brimm Armors \| Tactical Military Armors | `brimm-2.0.3.jar` | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/brimm-armors-tactical-military-armors) |
 | CAPS_Awim - TACTICAL_GEAR | `caps_awim_tactical_gear_rework-3.0.0408.26_en-forge-1.20.1.jar` | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/caps-awim-tactical-gear) |
 | Carry On | `carryon-forge-1.20.1-2.1.2.7.jar` | [Modrinth](https://modrinth.com/mod/carry-on) |
 | Chunky | `Chunky-1.3.146.jar` | [Modrinth](https://modrinth.com/mod/chunky) |
@@ -178,7 +178,7 @@ Not installed on a server. `docs/side-classification.md` records the evidence fo
 | Fancy World Animations | `fwa+1.20.1-forge-1.2.31.jar` | [Modrinth](https://modrinth.com/mod/fwa) |
 | Fusion (Connected Textures) | `fusion-1.3.14a-forge-mc1.20.1.jar` | [Modrinth](https://modrinth.com/mod/fusion-connected-textures) |
 | Grassier Grass | `grassiergrass-forge-1.4.5+mc1.20.1.jar` | [Modrinth](https://modrinth.com/mod/grassier-grass) |
-| ImmediatelyFast | `ImmediatelyFast-1.2.7+1.20.2.jar` | [Modrinth](https://modrinth.com/mod/immediatelyfast) |
+| ImmediatelyFast | `ImmediatelyFast-Forge-1.5.5+1.20.4.jar` | [Modrinth](https://modrinth.com/mod/immediatelyfast) |
 | Legendary Block Entities | `legendaryblockentities-0.11.0.jar` | [Modrinth](https://modrinth.com/mod/legendary-block-entities) |
 | Mouse Tweaks | `MouseTweaks-forge-mc1.20.1-2.25.1.jar` | [Modrinth](https://modrinth.com/mod/mouse-tweaks) |
 | Not Enough Animations | `notenoughanimations-forge-1.12.4-mc1.20.1.jar` | [Modrinth](https://modrinth.com/mod/not-enough-animations) |

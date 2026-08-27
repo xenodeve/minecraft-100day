@@ -184,7 +184,7 @@ the jar, and a `mods.toml` entry looks identical whether the dependency is bundl
 | ModernFix | `5.27.77+mc1.20.1` | MR | COMMON | CORE | |
 | FerriteCore | `6.0.1` | MR | COMMON | CORE | |
 | Entity Culling | `1.10.5` | MR | CLIENT | CORE | |
-| ImmediatelyFast | `1.2.7+1.20.2` | MR | CLIENT | CORE | packwiz resolved this, not the `1.5.5+1.20.4` the sweep saw — that build is 1.20.4-first |
+| ImmediatelyFast | `1.5.5+1.20.4-forge` | MR | CLIENT | CORE | **upgraded from `1.2.7+1.20.2` by #107** — 1.2.7 × Oculus 1.8.0 killed the client at startup. The old note said 1.5.5 "is 1.20.4-first" and passed it over: **that was wrong.** Its own `mods.toml` declares `minecraft [1.20,1.20.4]` and Modrinth lists 1.20.1 explicitly. The filename is not the support range |
 | ServerCore | `1.5.2+1.20.1` | MR | SERVER | CORE | |
 | FastSuite | `5.1.2` | MR | COMMON | CORE | pulls `Placebo 8.6.3` |
 | Clumps | `12.0.0.4` | MR | COMMON | CORE | |

@@ -1010,7 +1010,7 @@ Declares no dependencies beyond Forge and Minecraft.
 
 ### ImmediatelyFast
 
-`immediatelyfast` 1.2.7+1.20.2 · loader `javafml` · `ImmediatelyFast-1.2.7+1.20.2.jar`
+`immediatelyfast` 1.5.5+1.20.4 · loader `javafml` · `ImmediatelyFast-Forge-1.5.5+1.20.4.jar`
 
 - [x] in the pack
 - [x] on a client install
@@ -1019,7 +1019,7 @@ Declares no dependencies beyond Forge and Minecraft.
 **Requires**
 
 - [x] `forge` `[46,)` - Forge itself
-- [x] `minecraft` `[1.20,1.20.2]` - Minecraft itself
+- [x] `minecraft` `[1.20,1.20.4]` - Minecraft itself
 
 ### Immersive Engineering
 
