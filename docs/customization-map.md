@@ -87,7 +87,7 @@ Every remaining item needs a **client**:
 - §23 — MSPT at 50 / 100 / 150 / 200 horde mobs, which decides `hordeSpawnMax`
 - Wildlife **W3/W6/W7** — measured population, which decides every spawn weight
 - **Brimm** — reading two armour sets off JEI tooltips
-- **Player Microchip textures** — art
+- ~~**Player Microchip textures** — art~~ — **placeholders shipped (#74)**; real art replaces them without touching anything else
 - Crafting Spec **§5** — confirming JEI shows the active recipe for `tacz:ak47`, not the stale one
 - Distribution Spec **§16** — the twelve-test release gate, explicitly not automatable
 <!-- lang:end -->
