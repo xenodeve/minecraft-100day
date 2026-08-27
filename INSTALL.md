@@ -1,15 +1,31 @@
 <!-- lang:en -->
 # Installing Industrial Civilization Survival
 
-**What you get:** `Industrial Civilization Survival 0.1.0-alpha` — Minecraft **1.20.1**,
-Forge **47.4.23**, **93 mods**.
+> ## ⚠ This is the **internal** install guide
+>
+> **If you are giving the pack to someone, they need
+> [`docs/friend-download-readme.md`](docs/friend-download-readme.md) instead** — shipped beside the
+> friend archive as `build/README.md`. It is written for them, in Thai, and it points at the one
+> artifact that may leave this machine.
+>
+> **The self-contained `-instance.zip` described below must not be handed to anyone.** It bundles
+> every third-party jar, and at least two authors permit modpack inclusion only if their jar is not
+> rehosted — **ADR 0005** demoted it to an internal test artifact for exactly that reason, and
+> `docs/distribution-licenses.md` carries the per-mod table. Nothing here overrides that.
 
-Two files are built. **Use the first one.**
+**What you get:** `Industrial Civilization Survival 0.2.0-alpha` — Minecraft **1.20.1**,
+Forge **47.4.23**, **120 mods**.
 
-| File | What it is |
-|---|---|
-| `…-0.1.0-alpha-instance.zip` (388 MB) | **Self-contained.** Every mod is inside it. Import and play — nothing is downloaded, nothing is fetched by hand |
-| `…-0.1.0-alpha.zip` (130 MB) | CurseForge format. The launcher resolves most mods itself; four must be downloaded manually |
+Five artifacts are built; `build/SHA256SUMS.txt` lists the four that are checksummed and their exact
+sizes. Sizes are deliberately not repeated here — they went stale twice.
+
+| File | What it is | May leave this machine |
+|---|---|---|
+| `…-0.2.0-alpha-friend.zip` | manifest plus our own layer, **zero third-party jars** | **yes** — this is the one |
+| `…-0.2.0-alpha-instance.zip` | **Self-contained.** Every mod is inside it. Import and play — nothing is downloaded | no |
+| `…-0.2.0-alpha.zip` | CurseForge format. The launcher resolves most mods itself; four must be downloaded manually | no |
+| `…-0.2.0-alpha-server.zip` | dedicated server | no |
+| `…-0.2.0-alpha-curseforge-local.zip` | CurseForge App import, bundles the 4 API-blocked mods | **never** |
 
 **The official Minecraft launcher cannot import a modpack.** You need Prism or the CurseForge App.
 This is not a limitation of this pack; the official launcher has no modpack support at all.
@@ -19,7 +35,7 @@ This is not a limitation of this pack; the official launcher has no modpack supp
 ## Before you start
 
 - **Java 17.** Forge 47.x for 1.20.1 requires it. Both launchers below can install it for you.
-- **8 GB of RAM allocated to the game**, 6 GB minimum. 93 mods with Create contraptions,
+- **8 GB of RAM allocated to the game**, 6 GB minimum. 120 mods with Create contraptions,
   MineColonies pathfinding and Born in Chaos is not a light pack.
 - **~2 GB of disk** for the instance.
 
@@ -31,7 +47,7 @@ This is not a limitation of this pack; the official launcher has no modpack supp
 ## Option A — Prism Launcher, self-contained *(recommended — one step)*
 
 1. **Add Instance** → **Import from zip**
-2. Select **`Industrial-Civilization-Survival-0.1.0-alpha-instance.zip`**
+2. Select **`Industrial-Civilization-Survival-0.2.0-alpha-instance.zip`**
 3. **Launch.**
 
 That is the whole procedure. Memory is preset to 4–8 GB and Forge 47.4.23 is pinned in the file.
@@ -51,7 +67,7 @@ To give the pack to someone, send the friend pack.
 
 
 1. **Minecraft** → **Create Custom Profile** → **Import**
-2. Select `Industrial-Civilization-Survival-0.1.0-alpha.zip` *(the 130 MB one)*
+2. Select `Industrial-Civilization-Survival-0.2.0-alpha.zip`
 3. Wait for it to download the mods, then **Play**.
 
 Use this if you want the CurseForge App to manage the instance. It resolves the four
@@ -92,7 +108,7 @@ options or keybinds. The same four mods above still need manual download.
 
 ## First launch
 
-Expect **3–6 minutes** on first launch. Forge is loading 93 mods, and Create, MineColonies and
+Expect **3–6 minutes** on first launch. Forge is loading 120 mods, and Create, MineColonies and
 KubeJS all build registries and recipes on startup.
 
 **If it crashes**, the useful file is `logs/latest.log` in the instance folder — the last few
@@ -102,7 +118,7 @@ hundred lines name the mod. `crash-reports/` has the same information formatted 
 
 ## What is in the pack, and what is not
 
-This is `0.1.0-alpha`.
+This is `0.2.0-alpha`.
 
 - ✅ **107 mods** at exact, verified versions; Create pinned to `6.0.8`. **`MODLIST.md`, at the top
   of this download, lists every one of them with a link to where it came from.**
@@ -130,15 +146,28 @@ may and may not redistribute, and `CHANGELOG.md` for what changed.
 <!-- lang:th -->
 # วิธีติดตั้ง Industrial Civilization Survival
 
-**สิ่งที่คุณได้:** `Industrial Civilization Survival 0.1.0-alpha` — Minecraft **1.20.1**,
-Forge **47.4.23**, **93 mods**
+**สิ่งที่คุณได้:** `Industrial Civilization Survival 0.2.0-alpha` — Minecraft **1.20.1**,
+Forge **47.4.23**, **120 mods**
 
-มีไฟล์ที่ build ออกมาสองตัว **ใช้ตัวแรก**
+> ## ⚠ นี่คือคู่มือติดตั้งสำหรับ**ภายใน**
+>
+> **ถ้าจะส่ง pack ให้คนอื่น เขาต้องใช้**
+> [`docs/friend-download-readme.md`](docs/friend-download-readme.md) แทน — ไฟล์นั้นถูกส่งไป
+> คู่กับ friend archive ในชื่อ `build/README.md` มันเขียนสำหรับเขา
+> และชี้ไปที่ artifact ตัวเดียวที่ออกจากเครื่องนี้ได้
+>
+> **`-instance.zip` ที่อธิบายข้างล่างห้ามส่งให้ใคร** มันบรรจุ jar ของคนอื่น
+> ไว้ทั้งหมด และมีผู้เขียนอย่างน้อยสองคนที่อนุญาตให้ใส่ modpack ได้
+> เฉพาะถ้าไม่เอา jar ของเขาไปแจกซ้ำ — **ADR 0005** ลดสถานะมันเป็น artifact
+> สำหรับทดสอบภายในด้วยเหตุผลนั้น และ `docs/distribution-licenses.md` มีตารางรายมอด
+
+artifact ที่ build ออกมามีห้าตัว `build/SHA256SUMS.txt` ระบุสี่ตัวที่มี checksum พร้อมขนาดจริง
+ขนาดไม่ถูกเขียนซ้ำที่นี่โดยตั้งใจ เพราะมันค้างเก่ามาแล้วสองครั้ง
 
 | ไฟล์ | คืออะไร |
 |---|---|
-| `…-0.1.0-alpha-instance.zip` (388 MB) | **มีทุกอย่างในตัว** mod ทุกตัวอยู่ข้างใน import แล้วเล่นได้เลย — ไม่โหลดอะไร ไม่ต้องไปหยิบอะไรเอง |
-| `…-0.1.0-alpha.zip` (130 MB) | รูปแบบ CurseForge launcher ไป resolve mod ส่วนใหญ่เอง แต่มีสี่ตัวที่ต้องโหลดด้วยมือ |
+| `…-0.2.0-alpha-instance.zip` | **มีทุกอย่างในตัว** mod ทุกตัวอยู่ข้างใน import แล้วเล่นได้เลย — **ห้ามแจกไฟล์นี้ ดู ADR 0005** |
+| `…-0.2.0-alpha.zip` | รูปแบบ CurseForge launcher ไป resolve mod ส่วนใหญ่เอง แต่มีสี่ตัวที่ต้องโหลดด้วยมือ |
 
 **Launcher ทางการของ Minecraft import modpack ไม่ได้** ต้องใช้ Prism หรือ CurseForge App
 นี่ไม่ใช่ข้อจำกัดของ pack นี้ แต่ launcher ทางการไม่มีฟีเจอร์ modpack เลย
@@ -157,7 +186,7 @@ Forge **47.4.23**, **93 mods**
 ## ทางเลือก A — Prism Launcher แบบมีทุกอย่างในตัว *(แนะนำ — ขั้นตอนเดียว)*
 
 1. **Add Instance** → **Import from zip**
-2. เลือก **`Industrial-Civilization-Survival-0.1.0-alpha-instance.zip`**
+2. เลือก **`Industrial-Civilization-Survival-0.2.0-alpha-instance.zip`**
 3. **Launch**
 
 จบแค่นั้น แรมถูกตั้งไว้ให้แล้ว 4–8 GB และ Forge 47.4.23 ถูก pin อยู่ในไฟล์
@@ -169,7 +198,7 @@ Forge **47.4.23**, **93 mods**
 ## ทางเลือก B — CurseForge App
 
 1. **Minecraft** → **Create Custom Profile** → **Import**
-2. เลือก `Industrial-Civilization-Survival-0.1.0-alpha.zip` *(ตัว 130 MB)*
+2. เลือก `Industrial-Civilization-Survival-0.2.0-alpha.zip`
 3. รอโหลด mod เสร็จ แล้วกด **Play**
 
 ใช้ทางนี้ถ้าอยากให้ CurseForge App เป็นคนจัดการ instance มันจัดการ mod สี่ตัวที่ถูกจำกัดด้วย API
@@ -220,7 +249,7 @@ java -jar packwiz-installer-bootstrap.jar http://localhost:8080/pack.toml
 
 ## ใน pack มีอะไร และยังไม่มีอะไร
 
-นี่คือ `0.1.0-alpha`
+นี่คือ `0.2.0-alpha`
 
 - ✅ **107 mod** ที่เวอร์ชันเป๊ะและตรวจสอบแล้ว Create pin ที่ `6.0.8`
   **`MODLIST.md` ที่อยู่บนสุดของไฟล์ที่โหลดมา ลงชื่อทุกตัวพร้อมลิงก์ไปยังที่มาของมัน**
