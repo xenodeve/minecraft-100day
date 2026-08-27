@@ -281,6 +281,94 @@ cannot see a code-level integration, and its silence was read as evidence of abs
 
 ---
 
+---
+
+# Upscaling / Frame Generation — `C-UPFG-*`
+
+Ids defined by *Upscaling Spec* `PERF-UPFG-033`. These belong to the **opt-in variant**
+(`-nvidia-upscaling.zip`), not to the pack: Super Resolution has no metafile and `verify` still
+reports 120 mods.
+
+## C-UPFG-00 — the DLSS model is downloaded at runtime, and it resolves "latest"
+
+**Status: verified from bytecode. Not a fault — a constraint on every benchmark.**
+
+Super Resolution does **not** ship a DLSS model and does not redistribute one. `NgxDlssLatestProvider`
+fetches it from NVIDIA:
+
+```
+BASE_URL    https://ngx.download.nvidia.com/
+CONFIG_URL  https://ngx.download.nvidia.com/dev-models/org/nvidia/team/ngx/models/config/versions/2/…
+pattern     org/nvidia/team/ngx/models/dlss/versions/(\d+)/files/160_([0-9A-Fa-f]+)\.bin
+log line    "Resolved latest DLSS object from NGX: app_{} = {}, {}"
+```
+
+**Why it matters for `PERF-UPFG-021`.** The A/B matrix requires every variable held fixed. This one
+moves on NVIDIA's schedule, not ours. **Any A/B run must record the resolved DLSS object from the
+log**, or run A and B far enough apart in configuration but close enough in time that it cannot have
+changed.
+
+`PERF-UPFG-031` asks for six fields. Four are answered above. Two are **not determined** and stay
+open: where the model is cached on disk, and whether uninstalling cleans it up.
+
+Offline behaviour is a log string — `"No DLSS object found on NGX server for any known app id"` —
+not an observation. Nobody has pulled the network and watched.
+
+## C-UPFG-01 — Super Resolution × Oculus
+
+**Status: UNTESTED.** Both rewrite the render path; Oculus already disables three Embeddium mixins
+(C1). Test shader OFF and shader ON separately — `PERF-UPFG-012`, `PERF-UPFG-038`.
+
+## C-UPFG-02 — Super Resolution × ImmediatelyFast
+
+**Status: UNTESTED, and this pairing has already produced one client-killing bug.** C8 was
+ImmediatelyFast reaching into Iris internals and calling `System.exit(-1)` when they moved. It is
+now at 1.5.5. `PERF-UPFG-011` requires this pair be tested deliberately rather than assumed.
+
+## C-UPFG-03 — Super Resolution × TaCZ HUD / weapon rendering
+
+**Status: UNTESTED.** Upscaling reconstructs from a lower internal resolution; a weapon HUD drawn at
+native and a scope drawn through reconstruction are different problems. `PERF-UPFG-036` has the
+subjective checklist.
+
+## C-UPFG-07 — the client bound to the wrong GPU
+
+**Status: LIVE on the developer's machine. Blocks every measurement.**
+
+`latest.log` from 2026-08-28:
+
+```
+Found graphics card: NVIDIA GeForce RTX 4070 SUPER
+Found graphics card: Intel(R) UHD Graphics 770
+Found graphics card: NVIDIA GeForce RTX 5060 Ti
+OpenGL Renderer:     NVIDIA GeForce RTX 5060 Ti/PCIe/SSE2      <- the weaker card, on PCIe 4.0 x4
+```
+
+The narrow link starves texture and chunk uploads, which shows up as **frame-time spikes rather than
+lower average FPS** — the reported symptom exactly: 80–140 FPS that does not feel smooth.
+
+**No upscaling or FG verdict may be drawn until this is fixed**, and neither may any performance
+baseline. `PERF-UPFG-021` compares runs; two runs on different GPUs are not comparable.
+
+**How to check, in one line.** Do not judge by feel:
+
+```
+grep "OpenGL Renderer" .minecraft/logs/latest.log
+```
+
+Anyone with more than one GPU can hit this, and nothing in the game says which card it picked.
+
+## Licence discrepancy on Candidate A — recorded, not blocking
+
+The jar's `mods.toml` declares `license = "MIT"`; Modrinth reports `GPL-3.0-or-later`. Both permit
+redistribution so nothing is blocked, but two sources disagree.
+
+The jar ships `licenses/` with thirteen third-party licences including **`ngx.txt` — "NVIDIA RTX SDKs
+LICENSE"** — so the author has done the SDK licensing work rather than leaving it to us
+(`PERF-UPFG-029`).
+
+---
+
 ## How to add an entry
 
 One heading per interaction, numbered `C<n>`. Each entry states:
