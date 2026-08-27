@@ -126,7 +126,7 @@ hash = "c922606233ee35e14bb508b6b58c17b35a20e39ece89076795528a859c775946"
 
 [[files]]
 file = "config/improvedmobs/common.toml"
-hash = "a8364ac6a95a957c0a83fa0b7a4f1782cff594969e1e709339f6c55478ff6fb6"
+hash = "108cbd59f3375d48cbef2d3ecdb3b3f886fa1989b64fe39e12db21c49e4839d6"
 
 [[files]]
 file = "config/incontrol/spawn.json"
@@ -771,3 +771,39 @@ metafile = true
 file = "mods/yacl.pw.toml"
 hash = "f3b3d035b89519faccc4ddd8b0b4407ce96c0eb49068fe50a445d43a3baa8bea"
 metafile = true
+
+[[files]]
+file = "resourcepacks/industrial-civilization-connected-textures/assets/ics_ct/textures/block/control_room_window.png"
+hash = "c7f33108275f2ef52f6d8be5ee97b2fa3ecc24780bfa77f6117b09045b76ef38"
+
+[[files]]
+file = "resourcepacks/industrial-civilization-connected-textures/assets/ics_ct/textures/block/control_room_window.png.mcmeta"
+hash = "49b4c1cc9f9260ceea290f3694234ae4eeafd72b440baa44c99d3e62c02f88ea"
+
+[[files]]
+file = "resourcepacks/industrial-civilization-connected-textures/assets/ics_ct/textures/block/factory_glass.png"
+hash = "f9e21af406b8f7ea9b790cd071088c36c028912c94e9cc7f5db97c203f969f12"
+
+[[files]]
+file = "resourcepacks/industrial-civilization-connected-textures/assets/ics_ct/textures/block/factory_glass.png.mcmeta"
+hash = "49b4c1cc9f9260ceea290f3694234ae4eeafd72b440baa44c99d3e62c02f88ea"
+
+[[files]]
+file = "resourcepacks/industrial-civilization-connected-textures/assets/ics_ct/textures/block/industrial_panel.png"
+hash = "39a623f37ef621f10c59802bd3dce048e3429c148f3cce4b02b06cb20525c337"
+
+[[files]]
+file = "resourcepacks/industrial-civilization-connected-textures/assets/ics_ct/textures/block/industrial_panel.png.mcmeta"
+hash = "1949d84d772ac3c89e5d34571d31457222af56ba58fed5245c0f0a94776bce18"
+
+[[files]]
+file = "resourcepacks/industrial-civilization-connected-textures/assets/ics_ct/textures/block/station_glass.png"
+hash = "d2312e44402e2abb0057c24ef3c8866f515c7427031e9fbac76764cd3387b85b"
+
+[[files]]
+file = "resourcepacks/industrial-civilization-connected-textures/assets/ics_ct/textures/block/station_glass.png.mcmeta"
+hash = "49b4c1cc9f9260ceea290f3694234ae4eeafd72b440baa44c99d3e62c02f88ea"
+
+[[files]]
+file = "resourcepacks/industrial-civilization-connected-textures/pack.mcmeta"
+hash = "80006d33962df7d359bbef210570fe3ad6269cf4dc5d712b837069332a5cf3c7"

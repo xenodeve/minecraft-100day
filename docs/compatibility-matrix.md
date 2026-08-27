@@ -448,6 +448,27 @@ server still running**:
 The first reads like a corrupt save and the second like a firewall problem. Neither is.
 `pkill -f` does **not** match these processes; `Get-Process java | Stop-Process -Force` does.
 
+### Improved Mobs × Brimm: the blacklist fixes the behaviour, not the log (#70)
+
+`[equipment] "Item Blacklist" = ["brimm"]` was set from the modid in Brimm's own `META-INF/mods.toml`.
+**Measured on a boot: the 45 `Error calculating default weights` lines are still there.**
+
+| Claim | Result |
+|---|---|
+| the blacklist removes the ERROR lines | ❌ **false** — still 45 |
+| the blacklist keeps Brimm out of the equipment pool | ✅ true — generated `equipment.json` has **zero** brimm entries |
+
+The stack says why: `EquipmentList.getDefaultWeight` runs while **building** the pool, so every armour
+item is asked for its defence value *before* the blacklist can filter it. Brimm throws on 45 of them,
+Improved Mobs catches, logs, and moves on.
+
+**A pre-generated `equipment.json` would suppress the noise and was rejected.** It is 47 KB, the
+config exposes no regeneration option, and it would pin the equipment pool to this exact mod list
+forever. That is a durable cost for cosmetic log output with no gameplay effect.
+
+So the boot is still 50 ERROR lines, 45 of them this, and **that is now the expected baseline** —
+do not read it as a regression.
+
 **Stop every java process before a boot, and give a second server its own port** — `servertest`
 uses `25577`.
 
