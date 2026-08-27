@@ -21,6 +21,12 @@ errors is wildly asymmetric.
 - A mod wrongly left `both` costs a few megabytes on a server that ignores it.
 - A mod wrongly marked `client` is **a server that does not start**, on a friend's machine, with a
   stack trace that names a missing class rather than a missing mod.
+- A mod wrongly marked `server` is **a client that starts perfectly** with one of its systems
+  silently absent. This third case was missing from the list until #88, and it is the worst of the
+  three: the other two announce themselves, and this one does not. In Control sat in the server
+  tier from `141b368` to `e392755` — 32 commits — while every client install ran with no spawn
+  director at all, and eighteen green server boots said nothing because they were the one side
+  where the classification happened to be right.
 
 The gate cannot check whether the reason is *good*. It can check that someone was made to write one
 down, which is the part that stops a guess from looking identical to an inspection.
@@ -29,13 +35,13 @@ down, which is the part that stops a guess from looking identical to an inspecti
 
 | Side | Count |
 |---|---|
-| `both` | 92 |
+| `both` | 93 |
 | `client` | 20 |
-| `server` | 2 |
+| `server` | 1 |
 
 ## The decisive shared fact
 
-**All twelve one-sided mods register nothing into a synced registry** — no
+**All 21 one-sided mods register nothing into a synced registry** — no
 `assets/<id>/models/{item,block}`, no `data/<id>/{recipes,loot_tables,tags}`. That is what makes a
 one-sided classification safe at all: a mod that registers a block or an item *must* be on both
 sides or the registry sync fails on join, and none of these does.
@@ -105,14 +111,25 @@ No declaration, but two independent facts:
 Named in §11's own example list of client candidates: **Mouse Tweaks**, **Not Enough Animations**,
 **Client Dynamic Light**.
 
-## Server-side — nothing to draw
+## Server-side — nothing to draw, **and nothing a singleplayer world needs**
 
-The mirror of Tier 3: zero `assets/`, so the mod cannot render anything a client would miss.
+The mirror of Tier 3 used to read: *zero `assets/`, so the mod cannot render anything a client would
+miss.* **That test is not sufficient and #88 is the proof.** It asks what a client *renderer* loses.
+The question that actually decides this field is what the **integrated server inside a client**
+loses — because singleplayer and LAN hosting both run one, and packwiz omits a `side = "server"` mod
+from every client artifact.
 
-| Mod | Slug | `assets/` | `data/` | Role |
-|---|---|---|---|---|
-| In Control! | `in-control` | **0** | 5 | spawn director — pure server logic |
-| ServerCore | `servercore` | **0** | 0 | server tick optimisation |
+A mod belongs here only when **both** hold: it renders nothing, *and* a singleplayer world is
+unaffected by its absence. Pure server logic that changes gameplay fails the second test no matter
+how empty its `assets/` is.
+
+| Mod | Slug | `assets/` | `data/` | Role | Singleplayer without it |
+|---|---|---|---|---|---|
+| ServerCore | `servercore` | **0** | 0 | server tick optimisation | loses an optimisation, plays the same |
+
+**Removed from this tier by #88: In Control!** (`in-control`). It passed the render test — zero
+`assets/` — and failed the one that mattered: it is the pack's entire spawn director, so a
+singleplayer world without it has no density cap and no day-gating. Now `side = "both"`.
 
 ---
 
@@ -222,6 +239,11 @@ unzip -l <jar> | grep -c ' data/'
 - มอดที่ถูกทิ้งไว้เป็น `both` ผิด ๆ เสียพื้นที่ไม่กี่เมกะไบต์บน server ที่ไม่สนใจมัน
 - มอดที่ถูกทำเครื่องหมาย `client` ผิด ๆ คือ **server ที่ start ไม่ขึ้น** บนเครื่องของเพื่อน
   พร้อม stack trace ที่บอกชื่อคลาสที่หายไป ไม่ใช่ชื่อมอดที่หายไป
+- มอดที่ถูกทำเครื่องหมาย `server` ผิด ๆ คือ **client ที่ start ขึ้นเรียบร้อยดี** โดยที่ระบบหนึ่ง
+  ของมันหายไปเงียบ ๆ กรณีที่สามนี้ไม่มีอยู่ในรายการนี้จนถึง #88 และมันร้ายที่สุดในสามข้อ
+  เพราะอีกสองข้อประกาศตัวเอง ส่วนข้อนี้ไม่ In Control อยู่ในชั้น server ตั้งแต่ `141b368`
+  ถึง `e392755` เป็นเวลา 32 commit โดยที่ทุก client install รันโดยไม่มี spawn director เลย
+  และการ boot server เขียว 18 ครั้งไม่พูดอะไรเลย เพราะมันคือด้านเดียวที่การจำแนกนี้บังเอิญถูก
 
 gate ตรวจไม่ได้ว่าเหตุผล*ดี*หรือเปล่า แต่มันตรวจได้ว่ามีคนถูกบังคับให้เขียนมันลงมา ซึ่งเป็นส่วนที่
 หยุดไม่ให้การเดาดูเหมือนการตรวจสอบ
@@ -232,11 +254,11 @@ gate ตรวจไม่ได้ว่าเหตุผล*ดี*หรื�
 |---|---|
 | `both` | 93 |
 | `client` | 20 |
-| `server` | 2 |
+| `server` | 1 |
 
 ## ข้อเท็จจริงร่วมที่ชี้ขาด
 
-**มอดฝั่งเดียวทั้งสิบสองตัวไม่ลงทะเบียนอะไรเข้า registry ที่ sync กันเลย** — ไม่มี
+**มอดฝั่งเดียวทั้ง 21 ตัวไม่ลงทะเบียนอะไรเข้า registry ที่ sync กันเลย** — ไม่มี
 `assets/<id>/models/{item,block}` ไม่มี `data/<id>/{recipes,loot_tables,tags}` นั่นคือสิ่งที่ทำให้
 การจำแนกเป็นฝั่งเดียวปลอดภัยตั้งแต่แรก: มอดที่ลงทะเบียนบล็อกหรือไอเทม *ต้อง* อยู่ทั้งสองฝั่ง
 ไม่งั้น registry sync จะพังตอน join และไม่มีตัวไหนในนี้ทำแบบนั้น
@@ -303,14 +325,25 @@ unzip -p mods/<jar> META-INF/mods.toml | grep clientSideOnly
 ที่ §11 ระบุชื่อไว้เองในรายการตัวอย่างของ client candidate: **Mouse Tweaks**,
 **Not Enough Animations**, **Client Dynamic Light**
 
-## ฝั่ง server — ไม่มีอะไรให้วาด
+## ฝั่ง server — ไม่มีอะไรให้วาด **และไม่มีอะไรที่โลก singleplayer ต้องใช้**
 
-ภาพสะท้อนของชั้นที่ 3: ไม่มี `assets/` เลย มอดจึงเรนเดอร์อะไรที่ client จะพลาดไม่ได้
+ภาพสะท้อนของชั้นที่ 3 เคยเขียนไว้ว่า: *ไม่มี `assets/` เลย มอดจึงเรนเดอร์อะไรที่ client จะพลาดไม่ได้*
+**เกณฑ์นั้นไม่พอ และ #88 คือหลักฐาน** มันถามว่าตัว*เรนเดอร์*ฝั่ง client เสียอะไรไป
+คำถามที่ตัดสินฟิลด์นี้จริง ๆ คือ **integrated server ที่อยู่ในตัว client** เสียอะไรไป
+เพราะทั้ง singleplayer และการเปิด LAN ต่างก็รันมันอยู่ และ packwiz ตัดมอดที่ `side = "server"`
+ออกจาก artifact ฝั่ง client ทุกแบบ
 
-| มอด | Slug | `assets/` | `data/` | บทบาท |
-|---|---|---|---|---|
-| In Control! | `in-control` | **0** | 5 | spawn director — ตรรกะฝั่ง server ล้วน |
-| ServerCore | `servercore` | **0** | 0 | การปรับ tick ของ server |
+มอดจะอยู่ชั้นนี้ได้ก็ต่อเมื่อ **เข้าเงื่อนไขทั้งสองข้อ**: มันไม่เรนเดอร์อะไร *และ*
+โลก singleplayer ไม่ได้รับผลกระทบจากการที่มันหายไป ตรรกะฝั่ง server ล้วนที่เปลี่ยน gameplay
+ตกข้อที่สองเสมอ ไม่ว่า `assets/` ของมันจะว่างแค่ไหน
+
+| มอด | Slug | `assets/` | `data/` | บทบาท | singleplayer ที่ไม่มีมัน |
+|---|---|---|---|---|---|
+| ServerCore | `servercore` | **0** | 0 | การปรับ tick ของ server | เสียการ optimise ไป แต่เล่นได้เหมือนเดิม |
+
+**ถูกเอาออกจากชั้นนี้โดย #88: In Control!** (`in-control`) มันผ่านเกณฑ์เรื่องการเรนเดอร์ — ไม่มี
+`assets/` — แต่ตกเกณฑ์ที่สำคัญกว่า: มันคือ spawn director ทั้งหมดของแพ็ค โลก singleplayer
+ที่ไม่มีมันจึงไม่มีเพดานความหนาแน่นและไม่มีการล็อกตามวัน ตอนนี้เป็น `side = "both"` แล้ว
 
 ---
 

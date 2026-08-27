@@ -114,7 +114,7 @@ the jar, and a `mods.toml` entry looks identical whether the dependency is bundl
 | The Hordes | `1.20.1-1.6.3g` | MR | COMMON | CORE | |
 | Enhanced AI | `3.3.7.3` | MR | COMMON | CORE | |
 | Improved Mobs | `1.20.1-1.13.7-forge` | MR | COMMON | CORE-LITE | corrected from SERVER — the jar ships `textures/gui/difficulty_bar.png`, so a client without it loses that HUD. See `docs/side-classification.md` |
-| In Control! | `1.20-9.4.7` | MR | SERVER | CORE | |
+| In Control! | `1.20-9.4.7` | MR | BOTH | CORE | corrected from SERVER (#88) — `side = "server"` kept it out of every client artifact, and singleplayer runs an integrated server, so no client install ever had a spawn director. Measured: the played instance had 113 jars, no `incontrol-1.20-9.4.7.jar`, and `config/incontrol/spawn.json` present |
 
 ## Civilization / progression
 

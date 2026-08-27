@@ -165,3 +165,14 @@ counting with MSPT on screen, and that needs a client.
 
 **Verified so far:** the file parses and the server boots with no `incontrol` error line. That is
 all a server boot can prove.
+
+**And it proved less than it looked like it did (#88).** Until 2026-08-28 the metafile carried
+`side = "server"`, so packwiz left the jar out of every client artifact while shipping this config
+into all of them. Every rule in `spawn.json` was live on a dedicated server and absent in
+singleplayer and on a LAN host — the two ways this pack is actually played. A green server boot was
+never evidence about a client, and here it was evidence about the only side that worked.
+
+The failure shape is the one this repo keeps meeting: **the config was present, so nothing looked
+missing.** `Obsidian-minecraft-100day/config-and-kubejs-fail-open.md` describes the same trap one
+layer down. Reading `spawn.json` off a client install tells you nothing about whether anything
+reads it — check the mod list in `logs/latest.log` instead.

@@ -170,6 +170,13 @@ naturally.**
 
 `Rounds` is AK-47 rounds at 9 damage, point-blank, ignoring armour.
 
+> **The tiers below describe gating that was not running (#88).** Until 2026-08-28 the In Control
+> metafile carried `side = "server"`, which kept the mod out of every client artifact — so on
+> singleplayer and on a LAN host the elite tier spawned from day 1 rather than day 20, the mid tier
+> from day 1 rather than day 6, the swarm tier at full rate rather than 60%, and hostiles were
+> capped by vanilla rather than by the rule here. Read the tiers as the *intent*; whether a
+> given install honoured them depends on whether it shipped the jar.
+
 **Elite tier** — as gated in `config/incontrol/spawn.json`
 
 | Entity | HP | Damage | Armour | Rounds |
