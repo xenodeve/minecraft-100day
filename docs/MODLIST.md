@@ -1,4 +1,4 @@
-<!-- roster-digest: 90f7d1b44f3620054098814f6a5ec636e1088a78c54d04d15032a10606403b88 -->
+<!-- roster-digest: a046b6f8e51eaf701e3a9735bd6862fa5cc2196417562d62c84ddd961d2b4212 -->
 <!-- mod-count: 114 -->
 <!-- GENERATED FILE — do not edit by hand.
      Run: node scripts/build/generate-modlist.mjs
@@ -14,11 +14,11 @@ the original.
 
 **Where you will find this file.** It ships at the top of the client instance zip and at the top of
 the server zip. The CurseForge-format zip instead carries packwiz's own `modlist.html`, which lists
-112 names — the client-side set — with no versions, sides or links. This
+113 names — the client-side set — with no versions, sides or links. This
 file is the complete one.
 
 **ไฟล์นี้อยู่ตรงไหน** มันอยู่บนสุดของ zip ตัว client instance และบนสุดของ zip ตัว server
-ส่วน zip รูปแบบ CurseForge จะมี `modlist.html` ของ packwiz เองแทน ซึ่งลงชื่อไว้ 112 ชื่อ —
+ส่วน zip รูปแบบ CurseForge จะมี `modlist.html` ของ packwiz เองแทน ซึ่งลงชื่อไว้ 113 ชื่อ —
 ชุดฝั่ง client — โดยไม่มีเวอร์ชัน ไม่มี side ไม่มีลิงก์ ไฟล์นี้คือตัวที่ครบ
 
 ## Reading the table
@@ -35,7 +35,7 @@ mod's name — twice now, a guessed slug in this repo has pointed at the wrong p
 at a modpack rather than the mod.
 
 **Client / Server** tells you where a mod runs. If you are hosting a server, you need the
-92 in *Both* and the 2 in *Server only*; the 20 client-only
+93 in *Both* and the 1 in *Server only*; the 20 client-only
 mods are not installed on a server and are not missing when they are absent.
 
 ## อ่านตารางยังไง
@@ -48,8 +48,8 @@ mods are not installed on a server and are not missing when they are absent.
 สคริปต์นี้จึงตาม id ไปจนถึงหน้าที่มันไปจบแล้วลิงก์หน้านั้น มันไม่ประกอบ URL ขึ้นจากชื่อมอดเด็ดขาด —
 สอง​ครั้งแล้วที่ slug ที่เดาใน repo นี้ชี้ไปผิดโปรเจกต์ ครั้งหนึ่งชี้ไปที่ modpack แทนที่จะเป็นตัวมอด
 
-**Client / Server** บอกว่ามอดตัวนั้นทำงานฝั่งไหน ถ้าคุณจะเปิด server คุณต้องใช้ 92 ตัวใน *Both*
-กับ 2 ตัวใน *Server only* ส่วนมอดฝั่ง client 20 ตัวจะไม่ถูกติดตั้งบน server
+**Client / Server** บอกว่ามอดตัวนั้นทำงานฝั่งไหน ถ้าคุณจะเปิด server คุณต้องใช้ 93 ตัวใน *Both*
+กับ 1 ตัวใน *Server only* ส่วนมอดฝั่ง client 20 ตัวจะไม่ถูกติดตั้งบน server
 และการที่มันไม่อยู่ตรงนั้นไม่ใช่ของหาย
 
 > **หมายเหตุ** ตารางด้านล่างมีชุดเดียว ไม่ได้ทำสองภาษา เพราะเนื้อในเป็นชื่อมอด ชื่อไฟล์ และ URL ซึ่งเป็น
@@ -57,7 +57,7 @@ mods are not installed on a server and are not missing when they are absent.
 
 ---
 
-## Both — client and server · ทั้งสองฝั่ง (92)
+## Both — client and server · ทั้งสองฝั่ง (93)
 
 | Mod · มอด | File · ไฟล์ | Source · ต้นทาง |
 |---|---|---|
@@ -70,7 +70,7 @@ mods are not installed on a server and are not missing when they are absent.
 | Biomes O' Plenty | `BiomesOPlenty-forge-1.20.1-19.0.0.96.jar` | [Modrinth](https://modrinth.com/mod/biomes-o-plenty) |
 | BlockUI | `blockui-1.20.1-1.0.194-snapshot.jar` | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/blockui) |
 | Born in Chaos | `born_in_chaos_[Forge]1.20.1_1.7.5.jar` | [Modrinth](https://modrinth.com/mod/borninchaos) |
-| Brimm Armors \| Tactical Military Armors | `brimm-2.0.3.jar` | [CurseForge](https://www.curseforge.com/projects/1281654) |
+| Brimm Armors \| Tactical Military Armors | `brimm-2.0.3.jar` | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/brimm-armors-tactical-military-armors) |
 | CAPS_Awim - TACTICAL_GEAR | `caps_awim_tactical_gear_rework-3.0.0408.26_en-forge-1.20.1.jar` | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/caps-awim-tactical-gear) |
 | Carry On | `carryon-forge-1.20.1-2.1.2.7.jar` | [Modrinth](https://modrinth.com/mod/carry-on) |
 | Chunky | `Chunky-1.3.146.jar` | [Modrinth](https://modrinth.com/mod/chunky) |
@@ -111,6 +111,7 @@ mods are not installed on a server and are not missing when they are absent.
 | Immersive Engineering | `ImmersiveEngineering-1.20.1-10.2.0-183.jar` | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/immersive-engineering) |
 | Immersive Posts | `ImmersivePosts-1.20.1-4.3.0-15.jar` | [Modrinth](https://modrinth.com/mod/immersiveposts) |
 | Improved Mobs | `improvedmobs-1.20.1-1.13.7-forge.jar` | [Modrinth](https://modrinth.com/mod/improved-mobs) |
+| In Control! | `incontrol-1.20-9.4.7.jar` | [Modrinth](https://modrinth.com/mod/in-control) |
 | InsaneLib | `insanelib-1.23.4.6.jar` | [Modrinth](https://modrinth.com/mod/insanelib) |
 | ItemPhysic | `ItemPhysic_FORGE_v1.8.13_mc1.20.1.jar` | [Modrinth](https://modrinth.com/mod/itemphysic) |
 | Jade 🔍 | `Jade-1.20.1-Forge-11.13.3.jar` | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/jade) |
@@ -141,7 +142,7 @@ mods are not installed on a server and are not missing when they are absent.
 | Smooth Movement | `smoothmovement-1.20.1-2.6.jar` | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/smooth-movement) |
 | Sophisticated Backpacks | `sophisticatedbackpacks-1.20.1-3.24.67.2109.jar` | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/sophisticated-backpacks) |
 | Sophisticated Core | `sophisticatedcore-1.20.1-1.3.84.2308.jar` | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/sophisticated-core) |
-| Sophisticated Tactical Backpacks | `militarybackpack-1.0.0-all.jar` | [CurseForge](https://www.curseforge.com/projects/1665194) |
+| Sophisticated Tactical Backpacks | `militarybackpack-1.0.0-all.jar` | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/sophisticated-tactical-backpacks) |
 | Structurize | `structurize-1.20.1-1.0.818.jar` | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/structurize) |
 | TaCZ Additions | `taczadditions-1.20.1-1.3.0.jar` | [Modrinth](https://modrinth.com/mod/tacz-additions) |
 | TaCZ x Guns Lights Addon [NEW] - Update 2.5.0 | `tacz_x_guns_lights_addon-2.5.0.jar` | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/tacz-x-gunslightsaddon-addon) |
@@ -183,11 +184,10 @@ Not installed on a server. `docs/side-classification.md` records the evidence fo
 | Sound Physics Remastered | `sound-physics-remastered-forge-1.20.1-1.5.1.jar` | [Modrinth](https://modrinth.com/mod/sound-physics-remastered) |
 | Subtle Effects | `SubtleEffects-forge-1.20.1-1.14.3.jar` | [Modrinth](https://modrinth.com/mod/subtle-effects) |
 
-## Server only · เฉพาะฝั่ง server (2)
+## Server only · เฉพาะฝั่ง server (1)
 
 | Mod · มอด | File · ไฟล์ | Source · ต้นทาง |
 |---|---|---|
-| In Control! | `incontrol-1.20-9.4.7.jar` | [Modrinth](https://modrinth.com/mod/in-control) |
 | ServerCore | `servercore-forge-1.5.2+1.20.1.jar` | [Modrinth](https://modrinth.com/mod/servercore) |
 
 ---

@@ -1,6 +1,16 @@
 name = "In Control!"
 filename = "incontrol-1.20-9.4.7.jar"
-side = "server"
+# `both`, not `server`, and the distinction is not cosmetic (#88).
+#
+# In Control is pure server logic and ships zero `assets/`, which is what put it
+# in the server-only tier. That test asks whether a CLIENT RENDERER would lose
+# something. The question that decides this field is whether the INTEGRATED
+# SERVER INSIDE A CLIENT needs the mod -- and singleplayer runs one.
+#
+# Measured: the client instance the pack was played on had 113 jars and no
+# incontrol-1.20-9.4.7.jar, while config/incontrol/spawn.json was present. Every
+# day-gate in that file had never run for anyone not on a dedicated server.
+side = "both"
 
 [download]
 url = "https://cdn.modrinth.com/data/KpICtuVx/versions/o5DOK4Rj/incontrol-1.20-9.4.7.jar"
