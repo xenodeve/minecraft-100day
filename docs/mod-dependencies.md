@@ -1,15 +1,15 @@
 <!-- GENERATED FILE - do not edit by hand.
      Run: python scripts/build/generate-mod-dependencies.py
      Every line is read out of that mod's own META-INF/mods.toml. -->
-<!-- mod-count: 115 -->
-<!-- dependency-edges: 295 -->
+<!-- mod-count: 116 -->
+<!-- dependency-edges: 296 -->
 
 # Mod requirements · มอดแต่ละตัวต้องการอะไร
 
-**115 mods** and **295 declared dependencies** between them. Every line was read out of that
+**116 mods** and **296 declared dependencies** between them. Every line was read out of that
 mod's own `META-INF/mods.toml` - the same file Forge reads when it decides whether to boot.
 
-**115 มอด** และ **295 dependency** ที่ประกาศไว้ระหว่างกัน ทุกบรรทัดอ่านมาจาก `META-INF/mods.toml`
+**116 มอด** และ **296 dependency** ที่ประกาศไว้ระหว่างกัน ทุกบรรทัดอ่านมาจาก `META-INF/mods.toml`
 ในตัว jar เอง ซึ่งเป็นไฟล์เดียวกับที่ Forge อ่านตอนตัดสินใจว่าจะ boot ให้หรือไม่
 
 ## What the checkbox means · เครื่องหมายถูกแปลว่าอะไร
@@ -29,8 +29,8 @@ real - see *Never reaches a client install* below.
 
 | | Count |
 |---|---:|
-| Mods in the pack | 115 |
-| Declared dependencies | 295 |
+| Mods in the pack | 116 |
+| Declared dependencies | 296 |
 | **Mandatory and unsatisfied** | **0** |
 | Satisfied but outside the declared version range | 0 |
 | Version unresolvable from the jar alone | 0 |
@@ -1601,6 +1601,18 @@ Declares no dependencies beyond Forge and Minecraft.
 
 - [x] `cloth_config` - cloth-config `11.1.136`
 - [x] `voicechat` - simple-voice-chat `1.20.1-2.6.22`
+
+### spark
+
+`spark` 1.10.53 · loader `javafml` · `spark-1.10.53-forge.jar`
+
+- [x] in the pack
+- [x] on a client install
+- [x] on a dedicated server
+
+**Requires**
+
+- [x] `forge` `[34,)` - Forge itself
 
 ### Structurize
 

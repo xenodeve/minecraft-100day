@@ -194,6 +194,7 @@ been modified.
 | ServerCore | [Modrinth](https://modrinth.com/mod/servercore) | MIT License | Modrinth API |
 | Simple Voice Radio | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/simple-voice-radio) | GNU General Public License version 3 (GPLv3) | project page |
 | Sound Physics Remastered | [Modrinth](https://modrinth.com/mod/sound-physics-remastered) | GNU General Public License v3.0 only | Modrinth API |
+| spark | [Modrinth](https://modrinth.com/mod/spark) | GNU General Public License v3.0 only | Modrinth API |
 | Structurize | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/structurize) | GNU General Public License version 3 (GPLv3) | project page |
 | TaCZ x Guns Lights Addon [NEW] - Update 2.5.0 | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/tacz-x-gunslightsaddon-addon) | Academic Free License v3.0 | project page |
 | The Hordes | [Modrinth](https://modrinth.com/mod/the-hordes) | GNU Lesser General Public License v2.1 only | Modrinth API |
@@ -480,6 +481,7 @@ player-microchip      1488872   IN MANIFEST
 | ServerCore | [Modrinth](https://modrinth.com/mod/servercore) | MIT License | Modrinth API |
 | Simple Voice Radio | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/simple-voice-radio) | GNU General Public License version 3 (GPLv3) | project page |
 | Sound Physics Remastered | [Modrinth](https://modrinth.com/mod/sound-physics-remastered) | GNU General Public License v3.0 only | Modrinth API |
+| spark | [Modrinth](https://modrinth.com/mod/spark) | GNU General Public License v3.0 only | Modrinth API |
 | Structurize | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/structurize) | GNU General Public License version 3 (GPLv3) | project page |
 | TaCZ x Guns Lights Addon [NEW] - Update 2.5.0 | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/tacz-x-gunslightsaddon-addon) | Academic Free License v3.0 | project page |
 | The Hordes | [Modrinth](https://modrinth.com/mod/the-hordes) | GNU Lesser General Public License v2.1 only | Modrinth API |
