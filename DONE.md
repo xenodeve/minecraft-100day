@@ -525,6 +525,11 @@ was the trustworthy route.
   requires the user to click a link. `INSTALL.md` names all four with URLs.
 - CameraCraft has no 1.20.1 Forge build anywhere; the CCTV layer needs another answer.
 - `TaCZ: Accelerated` is Core in Performance Spec §2 and CORE CANDIDATE in §19. Not added.
+  > **Numbering note, added by #93.** The `§` numbers in this entry and in the `#13` line above
+  > are **v1 numbering**, correct when written and now dead: the Performance Spec is a single
+  > canonical file whose rules carry stable `PERF-*` ids, and v1 lives in `docs/archive/`. The
+  > contradiction described here was resolved as a *status*, not by deletion — see
+  > `PERF-TACZ-ACCELERATED`. This log is history and is not rewritten.
 
 **Not done, and not claimed:** the **client** has never been launched — that needs the developer's
 Microsoft account. No balance, no KubeJS, no configs. The pack runs; it does not yet play the way
