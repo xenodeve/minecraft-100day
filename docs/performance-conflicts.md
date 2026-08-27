@@ -288,16 +288,29 @@ cannot see a code-level integration, and its silence was read as evidence of abs
 Ids defined by *Upscaling Spec* `PERF-UPFG-033`. These belong to the **opt-in artifacts**, not to
 the pack: Super Resolution has no metafile and `verify` still reports 120 mods.
 
-**Two shapes, and they answer different questions (#111):**
+**Four artifacts. Three of them are the same shape, and one is a different question (#111, #115):**
 
-| Artifact | Size | Use it to |
-|---|---|---|
-| `[Optional] DLSS+FG.zip` | 31 MB | **try it** — extract over an existing profile's `.minecraft`; delete the jar to revert |
-| `-nvidia-upscaling.zip` | 214 MB | **measure it** — a clean profile where nothing else can differ |
+| Artifact | Size | Carries | Use it to |
+|---|---|---|---|
+| `[Optional] Super Resolution(Upscaling).zip` | 31 MB | Candidate A `1.20.1-0.9.1-alpha.1+gl-forge` | **try A** |
+| `[Optional] MCDLSSG(DLSS Frame Gen).zip` | 22 MB | Candidate B `0.1.0-alpha+opengl` | **try B** |
+| `[Optional] PFG(Frame Gen).zip` | 59 KB | Candidate C `1.4.0` | **try C** |
+| `-nvidia-upscaling.zip` | 214 MB | Candidate A only | **measure A** — a clean profile where nothing else can differ |
 
-The add-on is the one to hand anybody. The full variant exists because a `PERF-UPFG-021` A/B is
-invalidated by an unnoticed difference between two profiles, and only a clean import rules that out.
-Both carry a byte-identical jar from the same pin.
+The add-ons are what you hand anybody: extract over an existing profile's `.minecraft`, delete the
+jar to revert. The full variant exists because a `PERF-UPFG-021` A/B is invalidated by an unnoticed
+difference between two profiles, and only a clean import rules that out.
+
+**The names are not decoration** (`PERF-UPFG-004`). A says *Upscaling* because its DLSS **upscaling**
+path is verified and its FG backend is not. B says *DLSS Frame Gen* because that is an **explicit
+upstream claim** the spec records for that mod — a claim repeated, not a result measured. C says only
+*Frame Gen*, because `PERF-UPFG-007` forbids calling PFG NVIDIA DLSS-G and PFG ships no vendor SDK at
+all.
+
+**Every jar is pinned and re-checked at build time, but the pins are not equal evidence.** Modrinth
+publishes A's sha512 and CurseForge publishes C's sha1, so those two are checked against an
+**upstream** number. GitHub publishes no digest for B, so B's sha512 is the digest of the asset as
+downloaded from the pinned release URL — a reproducibility pin, not an attestation.
 
 ## C-UPFG-00 — the DLSS model is downloaded at runtime, and it resolves "latest"
 
@@ -367,6 +380,76 @@ grep "OpenGL Renderer" .minecraft/logs/latest.log
 ```
 
 Anyone with more than one GPU can hit this, and nothing in the game says which card it picked.
+
+## C-UPFG-08 — the three add-ons are mutually exclusive, and Forge will not enforce it
+
+**Status: verified from the jars. No incompatibility is declared by any of the three.**
+
+`PERF-UPFG-009` and the spec's hard rule DO-NOT 3 forbid running A, B and C together. **Nothing in
+the software implements that rule.** `mcdlssg`'s `META-INF/mods.toml` declares no `breaks` or
+`conflicts` against `super_resolution`, and none of the three declares one against the others — so a
+player who extracts two add-ons over the same `.minecraft` gets two mods hooking the same frame
+path, and Forge starts normally.
+
+**What that costs.** Not necessarily a crash — the bad case is that it *works*, badly, and the
+resulting stutter or artefact cannot be attributed to either mod. That is the failure `PERF-UPFG-021`
+exists to prevent.
+
+**What holds the line instead.** One paragraph on the first screen of all three `README.txt` files,
+naming the other two by filename and saying to delete the previous jar first. The build enforces the
+other half: each archive is read back and rejected if it contains any candidate but its own.
+
+**Not known.** Whether two of them actually load together in game, and what it looks like if they do.
+Nobody has tried it and nobody should, except deliberately and last.
+
+## C-UPFG-09 — Candidate B is the least-run software in this repo
+
+**Status: measured from the upstream release at pin time, 2026-08-28.**
+
+`github.com/Tunanodra/MC-DLSSFG`, release tag `ITJUSTWORK`, marked **pre-release**, published
+2026-07-19. The asset `mcdlssg-forge-1.20.1-0.1.0-alpha+opengl.jar` had **3 downloads**, and the
+repository **1 star**. `PERF-UPFG-029` asks for exactly this scrutiny before adopting a native-code
+mod, so it is recorded as a number rather than an impression.
+
+**A second licence disagreement, same shape as Candidate A's.** `mods.toml` declares `MIT`; GitHub
+reports the repository licence as **"Other"**. Both are handed to the group and neither is published,
+so nothing is blocked (`docs/distribution-licenses.md`), but two sources disagree.
+
+**Related to Candidate A, but not derived from it.** Its own description says *"Inspired by the Super
+Resolution project"* and it bundles the same twelve third-party licences including `ngx.txt`. It is
+**not a fork** — the jar contains zero classes under `io/homo/superresolution`. Two independent
+implementations of the same idea is exactly why they must not be loaded together (`C-UPFG-08`).
+
+**Windows only.** Four DLLs ship inside — `MCDLSSG`, `MCDLSSGNGX`, `MCDLSSGStreamline`,
+`MCDLSSGXeSS` — and no Linux `.so`. Candidate A ships both.
+
+**Not known.** Whether it launches at all. Nobody in this group has run it.
+
+## C-UPFG-10 — Candidate C is a different technique, and V-Sync fights it
+
+**Status: read from the jar and the author's own description. Not launched.**
+
+PFG is the odd one out and that is its value: `PERF-UPFG-007` asks whether a simpler FG-focused
+implementation beats the larger upscaling framework on compatibility or overhead, and PFG is the
+clean test. It does frame generation **only**, via *"multi-scale optical flow, up to 6x, computed
+entirely in fragment shaders"* — coarse-to-fine pyramidal Lucas-Kanade, per its description. **No
+vendor SDK, no native library of any kind, no runtime download.** That is why it is 61 KB rather than
+22–31 MB, and why it is not NVIDIA-only.
+
+**The setting that will invalidate the test.** The author advises capping render FPS **below** the
+monitor refresh rate and keeping **V-Sync off** while FG is active. The current test client runs
+`enableVsync: true` with `maxFps: 260` — so a run started today measures the interaction, not the
+mod. Change it before testing C, and record that it was changed (`PERF-METHOD-ONEVAR`).
+
+**Toggle key `K`**, which means a run can be A/B-ed within one session — the only one of the three
+that can.
+
+**Two facts recorded as seen, not smoothed.** The filename says `1.4.0` while `mods.toml` says
+`1.2.0`; and the licence is `All Rights Reserved`, which is the same footing as four mods already in
+the pack — fine to hand to the group, never to publish.
+
+**Not known.** Everything about how it looks in motion. Optical-flow FG has characteristic artefacts
+around fast-moving thin geometry, and this pack renders gun HUDs and scopes (`C-UPFG-03`).
 
 ## Licence discrepancy on Candidate A — recorded, not blocking
 
