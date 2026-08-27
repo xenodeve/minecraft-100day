@@ -443,6 +443,11 @@ hash = "efda76423b21f9bfab4ad8d0411f0b06a199ab7e3e12ca16dc0586c1828b8f07"
 metafile = true
 
 [[files]]
+file = "mods/fusion-connected-textures.pw.toml"
+hash = "1e5995b1594b080c95279dc079bdf98c30f616b04f5ef0fffafb2a273cd0eeb6"
+metafile = true
+
+[[files]]
 file = "mods/fwa.pw.toml"
 hash = "f4c2535e8b6e5bed303a9062aadddf9c71372431acbc17017f1214b62aa98288"
 metafile = true

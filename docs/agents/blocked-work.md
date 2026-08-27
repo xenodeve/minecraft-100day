@@ -97,6 +97,10 @@ since #50, before anyone thought of it as compliance.
 2. **"16 CurseForge pages could not be read — the platform renders descriptions unreachably."**
    Retracted in #63. It was a regex bug: a project page carries ~49 `description` fields and the
    extraction matched the first. 19 of 20 parse fine.
+3. **"Continuity has a native Forge build, so §12's premise is false."** Retracted in #68. The build
+   requires Sinytra Connector and Forgified Fabric API. **Never call a build native from its
+   `loaders` field alone — read the required dependencies**, which is the same rule
+   `cbc_firepower_components` taught this repo and ADR 0004 applied correctly.
 
 Both went into committed documents unchecked. If you find yourself writing *"the tool cannot reach
 it"*, check that it is not *"my extraction is wrong."*
@@ -123,9 +127,11 @@ Choosing it is art direction (§12's use cases are factory glass, control rooms,
 §35 singles out connected-texture packs as the category most likely to forbid redistribution — while
 the licensing question above is open.
 
-**And §12's stated reason is wrong.** It prefers Fusion to avoid a Fabric bridge for Continuity.
-**Continuity has a Forge 1.20.1 build** (`continuity-3.0.0+1.20.1.forge.jar`). Fusion may still win
-on merit; V3 is a real comparison, not a forced default. Do not inherit the conclusion.
+**§12's stated reason is correct, and an earlier version of this file said it was not.** Retracted
+in #68. Continuity *does* publish `continuity-3.0.0+1.20.1.forge.jar`, but that build **requires
+Sinytra Connector and Forgified Fabric API** — it is Fabric code through a bridge. `loaders:
+["forge"]` says how it installs, not what it is. Adopting it means adding a Fabric bridge to a
+107-mod Forge pack for connected textures, which is exactly what §12 refuses.
 
 ---
 
@@ -281,6 +287,10 @@ artifact สามตัว build ซ้ำได้และ checksum สะอ
 2. **"หน้า CurseForge 16 หน้าอ่านไม่ได้ — แพลตฟอร์มแสดงคำอธิบายในรูปแบบที่เข้าไม่ถึง"**
    ถอนคืนใน #63 มันเป็นบั๊กของ regex: หน้าโปรเจกต์มีฟิลด์ `description` ราว 49 ฟิลด์
    และการดึงข้อมูลไปจับเอาอันแรก 19 จาก 20 หน้า parse ได้ปกติ
+3. **"Continuity มี native Forge build หลักการของ §12 จึงผิด"** ถอนคืนใน #68
+   build นั้นต้องใช้ Sinytra Connector กับ Forgified Fabric API **ห้ามเรียก build ว่า native
+   จากฟิลด์ `loaders` อย่างเดียว ให้อ่าน dependency ที่บังคับด้วย** ซึ่งเป็นกฎเดียวกับที่
+   `cbc_firepower_components` สอน repo นี้ และ ADR 0004 เอาไปใช้ได้ถูกต้อง
 
 ทั้งคู่เข้าไปอยู่ในเอกสารที่ commit แล้วโดยไม่ได้ตรวจ ถ้าคุณกำลังจะเขียนว่า *"เครื่องมือเข้าไม่ถึง"*
 ให้ตรวจก่อนว่ามันไม่ใช่ *"การดึงข้อมูลของผมผิด"*
@@ -307,10 +317,11 @@ connected-texture resource pack ที่เข้ากันได้"* — **
 และ §35 แยก connected-texture pack ออกมาเป็นหมวดที่มีโอกาสห้ามแจกจ่ายซ้ำมากที่สุด —
 ในขณะที่คำถามเรื่องสัญญาอนุญาตข้างบนยังเปิดอยู่
 
-**และเหตุผลที่ §12 ให้ไว้ผิด** มันเลือก Fusion เพื่อเลี่ยง Fabric bridge สำหรับ Continuity
-**Continuity มี build สำหรับ Forge 1.20.1** (`continuity-3.0.0+1.20.1.forge.jar`)
-Fusion อาจยังชนะด้วยคุณสมบัติของมันเอง V3 เป็นการเปรียบเทียบจริง ไม่ใช่ค่าเริ่มต้นที่ถูกบังคับ
-อย่ารับข้อสรุปไปเลย
+**เหตุผลที่ §12 ให้ไว้ถูกต้อง และไฟล์นี้เวอร์ชันก่อนหน้าเขียนว่ามันผิด** ถอนคืนใน #68
+Continuity *มี* `continuity-3.0.0+1.20.1.forge.jar` จริง แต่ build นั้น **ต้องใช้ Sinytra Connector
+และ Forgified Fabric API** — มันคือโค้ด Fabric ที่วิ่งผ่าน bridge `loaders: ["forge"]`
+บอกว่ามันติดตั้งยังไง ไม่ได้บอกว่ามันคืออะไร การรับมันมาแปลว่าต้องเพิ่ม Fabric bridge
+เข้าไปใน pack Forge ที่มี 107 มอด เพียงเพื่อ connected texture ซึ่งคือสิ่งที่ §12 ปฏิเสธพอดี
 
 ---
 
