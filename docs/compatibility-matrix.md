@@ -205,6 +205,67 @@ before adding it.
 **§3 Experimental mods are all absent by design** — AI Improvements, Let Me Despawn, Alternate
 Current, Canary, TaCZ Optimization, Smooth Boot Reloaded. Each needs its own benchmark branch.
 
+## Performance ADD/TEST layer (#97)
+
+| Mod | Version | Source | Side | Status | Tested |
+|---|---|---|---|---|---|
+| BadOptimizations | `2.4.1` | MR | CLIENT | ADD/TEST | **UNTESTED** — client-only, no client launch since |
+| AllTheLeaks | `1.1.1+1.20.1-forge` | CF `1091339` | BOTH | ADD/TEST | **boots green** — see Boot 19 |
+| Dynamic FPS | `3.11.4` | MR | CLIENT | ADD/TEST | **UNTESTED** — client-only |
+| Legendary Block Entities | `0.11.0` | MR | CLIENT | ADD/TEST | **UNTESTED** — client-only |
+
+### Boot 19 — spark + AllTheLeaks on a dedicated server (2026-08-28)
+
+```
+Done (3.916s)     4 ERROR lines     reused config/
+```
+
+**4 is the reused-config baseline exactly**, so the two server-side additions introduced no new
+error. The four lines are the same ones as before: two `minVersion` mixin notices (`yacl`,
+`soundattract`), the Ice & Fire `#c:bosses` tag reference, and one separator line.
+
+**Do not read 3.916s as a speed-up.** The previous recorded boot was `Done (11.980s)` on a
+*different* configuration — that one generated a world, this one reused `boottest`. `PERF-BENCH-RULES`
+does not list startup time as a metric, and comparing across a changed variable is exactly what
+`PERF-METHOD-ONEVAR` forbids.
+
+**AllTheLeaks is not inert in this pack — measured, not assumed.** It loaded **17 patch classes**
+after matching versions in our exact mod list, covering:
+
+```
+forge (Issue10684, Issue39, +2 untracked)   minecraft (2 untracked)
+create        curios        architectury    sereneseasons        spark (Issue447)
+```
+
+One WARN, and it is interop rather than a fault:
+`mixinsquared-annotation-adjuster` reports modifying AllTheLeaks' `VillagesTradelistMixin`.
+
+**spark works, with a caveat that matters for the baseline run.** It logs
+`Starting background profiler...` and then:
+
+> `The async-profiler engine is not supported for your os/arch (windows11/amd64), so the built-in
+> Java engine will be used instead.`
+
+So on this machine spark samples with the JVM's own engine. That is still usable for
+`PERF-PRIORITY` item 2, but anyone expecting async-profiler output — flame graphs at native
+resolution — will not get it on Windows.
+
+**Three of the four ADD/TEST mods were not tested by this boot** and could not be: BadOptimizations,
+Dynamic FPS and Legendary Block Entities are `client`, and a dedicated server never loads them.
+
+**All four arrived in one commit, and that is a deviation from `PERF-METHOD-ONEVAR`**, which asks
+for one variable per measurement. The developer directed the batch; the cost is that a frame-time
+change after this cannot be attributed to one of the four. The pre-batch reference commit is
+`a62adb9`, and each mod is a single metafile, so isolating one later means removing one
+`mods/*.pw.toml` and rebuilding.
+
+**Three of the four cannot be tested by a server boot at all** — they are `client`. A green server
+boot after this change says nothing about BadOptimizations, Dynamic FPS or Legendary Block Entities.
+That is the `blocked-work.md` failure shape stated in advance rather than discovered later.
+
+**`ADD/TEST` is a status, not a verdict.** Each carries acceptance criteria in the spec that only a
+measurement can satisfy — see `docs/OPEN-WORK-LEDGER.md`.
+
 ## Profiler (Performance Spec: `PERF-PROFILE-SPARK`, #94)
 
 | Mod | Version | Source | Side | Status | Tested |

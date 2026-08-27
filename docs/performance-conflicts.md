@@ -125,6 +125,64 @@ real and currently unbudgeted cost in Zone B and Zone G.
 
 ---
 
+## C6 — spark cannot use async-profiler on Windows
+
+**Status: live, measured, and it constrains the baseline run rather than the pack.**
+
+Server boot of 2026-08-28 (`Boot 19`):
+
+> `The async-profiler engine is not supported for your os/arch (windows11/amd64), so the built-in
+> Java engine will be used instead.`
+
+spark works — it starts its background profiler — but on this machine it samples with the JVM's own
+engine rather than async-profiler.
+
+**What this costs.** The built-in engine cannot see native frames and samples on safepoints, so it
+under-attributes JIT-compiled and native work. For `PERF-PRIORITY` item 2 that is acceptable: the
+questions are *which mod is hot* and *is MSPT drifting*, and the Java engine answers both.
+
+**What is not known:** whether any bottleneck this pack has is one the Java engine will misattribute.
+Nothing here is measured yet.
+
+**What would settle it:** if a profile shows a flat, uninformative distribution, run the same
+scenario on a Linux server where async-profiler is available before concluding anything about the
+pack.
+
+---
+
+## C7 — AllTheLeaks actively patches seven of our mods
+
+**Status: live, working as intended. Recorded because it is a surface, not a fault.**
+
+Measured at `Boot 19`: AllTheLeaks loaded **17 patch classes** after version-matching against this
+pack's actual mod list:
+
+```
+forge         Issue10684, Issue39, UntrackedIssue001, UntrackedIssue002
+minecraft     UntrackedIssue001, UntrackedIssue002
+create        curios        architectury        sereneseasons
+spark         Issue447
+```
+
+**Why this is worth a conflicts entry.** A mod that rewrites behaviour in seven others is a
+correctness surface, not just a memory optimisation. If something subtle breaks in Create, Curios or
+Serene Seasons after this, AllTheLeaks belongs on the suspect list — and without this record nobody
+would think to look there.
+
+It also patches **spark**, which is the instrument the baseline will be measured with. That is not
+circular in a harmful way, but it is worth knowing before reading a profile.
+
+One WARN, interop rather than fault: `mixinsquared-annotation-adjuster` reports modifying
+AllTheLeaks' `VillagesTradelistMixin`.
+
+**What is not known:** whether any of the 17 changes behaviour visibly. The boot is green and the
+ERROR count matches baseline; nothing beyond that has been exercised.
+
+**What would settle it:** the `PERF-MEM-ALLTHELEAKS` long-session runs, plus normal play. Its risky
+ingredient-dedupe-style options stay **OFF** per the spec until proven safe for this pack.
+
+---
+
 ## How to add an entry
 
 One heading per interaction, numbered `C<n>`. Each entry states:

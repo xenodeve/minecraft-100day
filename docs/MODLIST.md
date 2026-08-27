@@ -1,12 +1,12 @@
-<!-- roster-digest: 3096f2e2b6cb64b2fc380e48ae06609833f5400dc3b04a9b664ff010b3088552 -->
-<!-- mod-count: 116 -->
+<!-- roster-digest: 33af75d973ca7d0b667d510263ed185e29bccab14907962e814198a2ccf8768a -->
+<!-- mod-count: 120 -->
 <!-- GENERATED FILE — do not edit by hand.
      Run: node scripts/build/generate-modlist.mjs
      `verify` refuses a roster that disagrees with mods/. -->
 
 # What is in this pack · ในแพ็กนี้มีอะไรบ้าง
 
-**Industrial Civilization Survival 0.1.0-alpha** — **116 mods** on Minecraft `1.20.1`,
+**Industrial Civilization Survival 0.1.0-alpha** — **120 mods** on Minecraft `1.20.1`,
 Forge `47.4.23`.
 
 Every mod here is somebody else's work. This file exists so you can see whose, and go and find
@@ -14,17 +14,17 @@ the original.
 
 **Where you will find this file.** It ships at the top of the client instance zip and at the top of
 the server zip. The CurseForge-format zip instead carries packwiz's own `modlist.html`, which lists
-115 names — the client-side set — with no versions, sides or links. This
+119 names — the client-side set — with no versions, sides or links. This
 file is the complete one.
 
 **ไฟล์นี้อยู่ตรงไหน** มันอยู่บนสุดของ zip ตัว client instance และบนสุดของ zip ตัว server
-ส่วน zip รูปแบบ CurseForge จะมี `modlist.html` ของ packwiz เองแทน ซึ่งลงชื่อไว้ 115 ชื่อ —
+ส่วน zip รูปแบบ CurseForge จะมี `modlist.html` ของ packwiz เองแทน ซึ่งลงชื่อไว้ 119 ชื่อ —
 ชุดฝั่ง client — โดยไม่มีเวอร์ชัน ไม่มี side ไม่มีลิงก์ ไฟล์นี้คือตัวที่ครบ
 
 ## Reading the table
 
 **The File column is the exact jar filename**, not a tidied-up version number. That is deliberate:
-116 mods use 116 filename conventions, and parsing a version out of them would mean
+120 mods use 120 filename conventions, and parsing a version out of them would mean
 guessing. The
 filename is what is actually on your disk, so it is also what you can match against your `mods/`
 folder when something goes wrong.
@@ -35,21 +35,21 @@ mod's name — twice now, a guessed slug in this repo has pointed at the wrong p
 at a modpack rather than the mod.
 
 **Client / Server** tells you where a mod runs. If you are hosting a server, you need the
-94 in *Both* and the 1 in *Server only*; the 21 client-only
+95 in *Both* and the 1 in *Server only*; the 24 client-only
 mods are not installed on a server and are not missing when they are absent.
 
 ## อ่านตารางยังไง
 
-**คอลัมน์ File คือชื่อไฟล์ jar จริง ๆ** ไม่ใช่เลขเวอร์ชันที่จัดให้สวย ตั้งใจให้เป็นแบบนั้น เพราะมอด 116 ตัว
-ใช้รูปแบบการตั้งชื่อไฟล์ 116 แบบ การพยายามแกะเวอร์ชันออกมาคือการเดา ชื่อไฟล์คือสิ่งที่อยู่บนเครื่องคุณจริง ๆ
+**คอลัมน์ File คือชื่อไฟล์ jar จริง ๆ** ไม่ใช่เลขเวอร์ชันที่จัดให้สวย ตั้งใจให้เป็นแบบนั้น เพราะมอด 120 ตัว
+ใช้รูปแบบการตั้งชื่อไฟล์ 120 แบบ การพยายามแกะเวอร์ชันออกมาคือการเดา ชื่อไฟล์คือสิ่งที่อยู่บนเครื่องคุณจริง ๆ
 ดังนั้นมันจึงเป็นสิ่งที่คุณเอาไปเทียบกับโฟลเดอร์ `mods/` ได้ตอนมีอะไรผิดพลาด
 
 **ลิงก์ต้นทาง resolve มา ไม่ได้เดา** packwiz บันทึก project *id* ไว้ ไม่เคยบันทึก slug
 สคริปต์นี้จึงตาม id ไปจนถึงหน้าที่มันไปจบแล้วลิงก์หน้านั้น มันไม่ประกอบ URL ขึ้นจากชื่อมอดเด็ดขาด —
 สอง​ครั้งแล้วที่ slug ที่เดาใน repo นี้ชี้ไปผิดโปรเจกต์ ครั้งหนึ่งชี้ไปที่ modpack แทนที่จะเป็นตัวมอด
 
-**Client / Server** บอกว่ามอดตัวนั้นทำงานฝั่งไหน ถ้าคุณจะเปิด server คุณต้องใช้ 94 ตัวใน *Both*
-กับ 1 ตัวใน *Server only* ส่วนมอดฝั่ง client 21 ตัวจะไม่ถูกติดตั้งบน server
+**Client / Server** บอกว่ามอดตัวนั้นทำงานฝั่งไหน ถ้าคุณจะเปิด server คุณต้องใช้ 95 ตัวใน *Both*
+กับ 1 ตัวใน *Server only* ส่วนมอดฝั่ง client 24 ตัวจะไม่ถูกติดตั้งบน server
 และการที่มันไม่อยู่ตรงนั้นไม่ใช่ของหาย
 
 > **หมายเหตุ** ตารางด้านล่างมีชุดเดียว ไม่ได้ทำสองภาษา เพราะเนื้อในเป็นชื่อมอด ชื่อไฟล์ และ URL ซึ่งเป็น
@@ -57,12 +57,13 @@ mods are not installed on a server and are not missing when they are absent.
 
 ---
 
-## Both — client and server · ทั้งสองฝั่ง (94)
+## Both — client and server · ทั้งสองฝั่ง (95)
 
 | Mod · มอด | File · ไฟล์ | Source · ต้นทาง |
 |---|---|---|
 | [TACZ] Durability | `gundb-2.1.0-all.jar` | [Modrinth](https://modrinth.com/mod/tacz-durability) |
 | [TaCZ] Timeless and Classics Zero Guns | `tacz-1.20.1-1.1.8-hotfix.jar` | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/timeless-and-classics-zero) |
+| AllTheLeaks (Memory Leak Fix) | `alltheleaks-1.1.1+1.20.1-forge.jar` | [CurseForge](https://www.curseforge.com/projects/1091339) |
 | Architectury API | `architectury-9.2.14-forge.jar` | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/architectury-api) |
 | Atlas Lib | `Atlas Lib-1.20.1-1.1.12.jar` | [Modrinth](https://modrinth.com/mod/atlas-lib) |
 | Attract to Sound ([NEO]Forge/Fabric): Sound & Stealth. | `forge_soundattract_1.20.1-6.3.8.jar` | [Modrinth](https://modrinth.com/mod/attract-to-sound) |
@@ -156,7 +157,7 @@ mods are not installed on a server and are not missing when they are absent.
 | Visual Workbench | `VisualWorkbench-v8.0.1-1.20.1-Forge.jar` | [Modrinth](https://modrinth.com/mod/visual-workbench) |
 | YetAnotherConfigLib (YACL) | `yet_another_config_lib_v3-3.6.6+1.20.1-forge.jar` | [Modrinth](https://modrinth.com/mod/yacl) |
 
-## Client only · เฉพาะฝั่ง client (21)
+## Client only · เฉพาะฝั่ง client (24)
 
 Not installed on a server. `docs/side-classification.md` records the evidence for each call.
 
@@ -167,15 +168,18 @@ Not installed on a server. `docs/side-classification.md` records the evidence fo
 | [EMF] Entity Model Features | `entity_model_features-3.2.4-1.20.1-forge.jar` | [Modrinth](https://modrinth.com/mod/entity-model-features) |
 | [ETF] Entity Texture Features | `entity_texture_features_1.20.1-forge-7.1.jar` | [Modrinth](https://modrinth.com/mod/entitytexturefeatures) |
 | AmbientSounds | `AmbientSounds_FORGE_v6.3.8_mc1.20.1.jar` | [Modrinth](https://modrinth.com/mod/ambientsounds) |
+| BadOptimizations | `BadOptimizations-2.4.1-1.20.1.jar` | [Modrinth](https://modrinth.com/mod/badoptimizations) |
 | Better Animations Collection | `BetterAnimationsCollection-v8.0.1-1.20.1-Forge.jar` | [Modrinth](https://modrinth.com/mod/better-animations-collection) |
 | Better Biome Blend | `betterbiomeblend-forge-1.20.1-1.4.0.jar` | [Modrinth](https://modrinth.com/mod/better-biome-blend) |
 | Client Dynamic Light | `clientdynamiclight-1.20.1-3.2.1.jar` | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/client-dynamic-light) |
+| Dynamic FPS | `dynamic-fps-3.11.4+minecraft-1.20.0-forge.jar` | [Modrinth](https://modrinth.com/mod/dynamic-fps) |
 | Embeddium | `embeddium-0.3.31+mc1.20.1.jar` | [Modrinth](https://modrinth.com/mod/embeddium) |
 | Entity Culling | `entityculling-forge-1.10.5-mc1.20.1.jar` | [Modrinth](https://modrinth.com/mod/entityculling) |
 | Fancy World Animations | `fwa+1.20.1-forge-1.2.31.jar` | [Modrinth](https://modrinth.com/mod/fwa) |
 | Fusion (Connected Textures) | `fusion-1.3.14a-forge-mc1.20.1.jar` | [Modrinth](https://modrinth.com/mod/fusion-connected-textures) |
 | Grassier Grass | `grassiergrass-forge-1.4.5+mc1.20.1.jar` | [Modrinth](https://modrinth.com/mod/grassier-grass) |
 | ImmediatelyFast | `ImmediatelyFast-1.2.7+1.20.2.jar` | [Modrinth](https://modrinth.com/mod/immediatelyfast) |
+| Legendary Block Entities | `legendaryblockentities-0.11.0.jar` | [Modrinth](https://modrinth.com/mod/legendary-block-entities) |
 | Mouse Tweaks | `MouseTweaks-forge-mc1.20.1-2.25.1.jar` | [Modrinth](https://modrinth.com/mod/mouse-tweaks) |
 | Not Enough Animations | `notenoughanimations-forge-1.12.4-mc1.20.1.jar` | [Modrinth](https://modrinth.com/mod/not-enough-animations) |
 | Oculus | `oculus-mc1.20.1-1.8.0.jar` | [Modrinth](https://modrinth.com/mod/oculus) |
