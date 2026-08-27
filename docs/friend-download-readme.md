@@ -1,0 +1,144 @@
+# Industrial Civilization Survival — วิธีติดตั้ง
+
+Minecraft **1.20.1** · Forge **47.4.23** · มอด **114** ตัว
+
+โหลดไฟล์เดียวพอ: **`Industrial-Civilization-Survival-0.1.0-alpha-friend.zip`** (127 KB)
+
+---
+
+## ทำไมมันเล็กแค่นี้
+
+เพราะข้างในไม่มีตัวมอด มีแต่ config, สคริปต์, เควส และ**รายชื่อว่าต้องใช้มอดตัวไหนเวอร์ชันอะไร**
+ตอนติดตั้งโปรแกรมจะไปโหลดมอดจากคนทำมอดเองทีละตัว
+
+ทำแบบนี้เพราะผู้เขียนมอดหลายคนอนุญาตให้เอาไปใส่ pack ได้ แต่ขอว่าอย่าเอาไฟล์ของเขาไปแจกต่อ
+
+ผลพลอยได้คือเวลามีอัปเดต จะโหลดกันแค่ไม่กี่ร้อย KB ไม่ใช่ 400 MB ทุกครั้ง
+
+---
+
+## สิ่งที่ต้องมีก่อน
+
+- **Prism Launcher** — โหลดฟรีที่ <https://prismlauncher.org>
+- **Java 17** — Prism จะบอกเองถ้าไม่มี กดตามได้เลย
+- **RAM 8 GB** ให้ Minecraft (114 มอด กินพอสมควร)
+
+---
+
+## ติดตั้ง
+
+**1. สร้าง instance ใน Prism**
+
+Add Instance → Custom → เลือก Minecraft **1.20.1** → Mod Loader เลือก **Forge 47.4.23**
+
+**2. เปิดโฟลเดอร์ของ instance**
+
+คลิกขวาที่ instance → **Folder** จะเปิดโฟลเดอร์ขึ้นมา เข้าไปที่ `.minecraft` ข้างใน
+
+**3. แตกไฟล์ zip ลงไปตรงนั้น**
+
+แตก `...-friend.zip` แล้วเอาของข้างในทั้งหมดวางใน `.minecraft` จะได้หน้าตาแบบนี้
+
+```
+.minecraft/
+    pack.toml
+    index.toml
+    mods/          ← ตอนนี้มีแต่ไฟล์ .pw.toml ยังไม่มี .jar
+    config/
+    kubejs/
+    defaultconfigs/
+    resourcepacks/
+```
+
+**4. โหลดตัวติดตั้งมอด**
+
+โหลด `packwiz-installer-bootstrap.jar` จาก
+<https://github.com/packwiz/packwiz-installer-bootstrap/releases>
+แล้วเอาไปวางใน `.minecraft` ที่เดียวกัน
+
+**5. ตั้งให้มันทำงานก่อนเปิดเกม**
+
+ใน Prism → คลิกขวาที่ instance → **Edit** → **Settings** → ติ๊ก **Custom commands**
+แล้วใส่ในช่อง **Pre-launch command**
+
+```
+"$INST_JAVA" -jar packwiz-installer-bootstrap.jar pack.toml
+```
+
+**6. กด Launch**
+
+ครั้งแรกจะโหลดมอดสักพัก ครั้งต่อ ๆ ไปจะเช็คแค่ว่ามีอะไรเปลี่ยนไหม
+
+---
+
+## มอด 4 ตัวที่ต้องโหลดเอง ครั้งเดียวจบ
+
+คนทำมอดสี่ตัวนี้ปิดการโหลดอัตโนมัติไว้ ตัวติดตั้งจึงดึงให้ไม่ได้ โหลดเองแล้วเอา `.jar`
+ไปวางใน `.minecraft/mods/` **ทำครั้งเดียว** อัปเดตหลังจากนั้นไม่ต้องทำอีก
+
+| มอด | ลิงก์ |
+|---|---|
+| TakKit | <https://www.curseforge.com/minecraft/mc-mods/takkit> |
+| Flashier Flashlights | <https://www.curseforge.com/minecraft/mc-mods/flashier-flashlights> |
+| Client Dynamic Light | <https://www.curseforge.com/minecraft/mc-mods/client-dynamic-light> |
+| Player Microchip | <https://www.curseforge.com/minecraft/mc-mods/player-microchip> |
+
+เลือกเวอร์ชันสำหรับ **1.20.1 Forge**
+
+---
+
+## เปิด server ก็ใช้ไฟล์เดียวกันนี้
+
+ไม่ต้องโหลดไฟล์อื่น
+
+1. ติดตั้ง **Forge 47.4.23** แบบ server จาก <https://files.minecraftforge.net> (เลือก Installer → Install server)
+2. แตก zip ตัวเดียวกันลงในโฟลเดอร์ server
+3. เอา `packwiz-installer-bootstrap.jar` ไปวางไว้ด้วย
+4. รันคำสั่งนี้ก่อนเปิด server หนึ่งครั้ง
+
+```
+java -jar packwiz-installer-bootstrap.jar -g -s server pack.toml
+```
+
+`-s server` บอกให้มันข้ามมอดที่ทำงานเฉพาะฝั่งผู้เล่น เช่นมอดภาพกับมอดเสียง จะเหลือ 94 ตัว
+
+5. เปิด server ตามปกติ
+
+**ทุกคนต้องใช้เวอร์ชันเดียวกัน** เทียบไฟล์ `pack-version.txt` ได้ ถ้าเลขไม่ตรงกันคือปัญหาอยู่ตรงนั้น อย่าเพิ่งไปหาที่อื่น
+
+---
+
+## เรื่องที่ต้องรู้ก่อนเล่น
+
+**pack นี้ยังไม่เคยมีใครเล่นจริง** ที่ตรวจไปทั้งหมดเป็นการเปิด server เช็คว่าไฟล์ config อ่านได้
+สูตรคราฟต์ลงทะเบียนได้ เควสโหลดได้ — **ไม่ได้แปลว่ามันสนุกหรือสมดุล** ตัวเลขดาเมจ ความยาก
+อัตราการเกิดมอนสเตอร์ ทั้งหมดเป็นค่าที่ตั้งจากเอกสารออกแบบ ยังไม่มีใครวัดในเกมจริง
+
+**สร้างโลกทดสอบก่อน** ระบบสร้างโลกใช้ Biomes O' Plenty ซึ่งยังไม่ได้ทดสอบว่าหาน้ำมันหรือหาที่ตั้งเมืองง่ายแค่ไหน
+ถ้าเจอปัญหาแล้วต้องแก้ อาจต้องเริ่มโลกใหม่
+
+**เจอบั๊กบอกได้เลย** โดยเฉพาะถ้าเปิดไม่ติด ส่งไฟล์ `.minecraft/logs/latest.log` มาให้ดู
+
+---
+
+## มีอะไรอยู่ในนี้บ้าง
+
+`MODLIST.md` ที่มากับไฟล์ ลงชื่อมอดทั้ง 114 ตัวพร้อมลิงก์ไปหน้าของคนทำ
+
+คร่าว ๆ คือ Create + เครื่องจักรอุตสาหกรรม, ปืนจาก TaCZ ที่ต้องผลิตกระสุนเอง, มอนสเตอร์ที่โหดขึ้นและมาเป็นกลุ่ม,
+เมือง NPC จาก MineColonies, มังกรจาก Ice & Fire, สัตว์ป่าจริงจัง, และเควส 48 ข้อ 12 บท
+
+---
+
+## ติดตั้งไม่ผ่าน?
+
+**Prism บอกว่าไม่มี Java** — กดปุ่มที่มันแนะนำ มันจัดการให้เอง
+
+**pre-launch command ไม่ทำงาน** — เช็คว่า `packwiz-installer-bootstrap.jar` อยู่ใน `.minecraft`
+ที่เดียวกับ `pack.toml` ไม่ใช่โฟลเดอร์นอก
+
+**โหลดมอดไม่ครบ 4 ตัว** — อันนั้นคือสี่ตัวข้างบน ต้องโหลดเอง
+
+**เกมค้างตอนโหลด** — ให้ RAM 8 GB ใน Prism → Edit → Settings → Memory
+
+**เปิดแล้วเด้ง** — ส่ง `.minecraft/logs/latest.log` มา อย่าเดาเอง ในนั้นบอกไว้หมด

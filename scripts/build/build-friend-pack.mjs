@@ -138,6 +138,19 @@ writeFileSync(join(STAGE, 'README.txt'), [
   '',
   ...MANUAL.map(([n, slug]) => `    ${n}\n      https://www.curseforge.com/minecraft/mc-mods/${slug}`),
   '',
+  'RUNNING A SERVER FROM THIS SAME FILE',
+  '',
+  '  No other download. Install Forge ' + FORGE + ' as a dedicated server, unzip',
+  '  this over it, put the bootstrap jar beside pack.toml, and run once:',
+  '',
+  '    java -jar packwiz-installer-bootstrap.jar -g -s server pack.toml',
+  '',
+  '  -s server skips the client-only mods (graphics, sound, HUD). Then start the',
+  '  server normally.',
+  '',
+  '  Everyone must be on the same version. Compare pack-version.txt; if the',
+  '  numbers differ, that IS the problem - do not debug anything else first.',
+  '',
   'UPDATING',
   '',
   '  Replace this archive\'s contents and launch. The pre-launch step reconciles',
@@ -194,6 +207,17 @@ if (problems.length) {
   for (const p of problems) console.error(`  ${p}`)
   process.exit(1)
 }
+
+// The readme that sits BESIDE the archive, for whoever is handed the link. The
+// one inside the zip is for someone who already downloaded it; this one is for
+// someone looking at a folder and deciding what to click.
+const driveReadme = join(ROOT, 'docs', 'friend-download-readme.md')
+if (!existsSync(driveReadme)) {
+  console.error('docs/friend-download-readme.md is missing — the upload has no instructions')
+  process.exit(1)
+}
+copyFileSync(driveReadme, join(ROOT, 'build', 'README.md'))
+console.log('wrote build/README.md — upload this next to the archive')
 
 const size = statSync(outAbs).size
 console.log(`\narchive verified — ${listing.length} entries, ${jars.length} jars, no backslash entries`)

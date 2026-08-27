@@ -43,7 +43,19 @@ their licences.** Swapping mods will not fix it; only changing how the pack is d
 | `…-alpha.zip` (CurseForge, 173 MB) | **40** referenced by project/file id · **72** bundled in `overrides/mods/` | **yes, 72** |
 | `…-alpha-curseforge-local.zip` (177 MB) | **36** referenced · **76** bundled, **including the four API-blocked mods** | **yes, 76** — ADR 0005's one scoped exception, **local use only** |
 
-The CurseForge-format export is closest to compliant, and still bundles 65 jars — packwiz puts
+**Only `-friend.zip` may be uploaded anywhere.** That is the practical form of everything above, and
+it is easy to undo by accident — putting all five artifacts in one shared folder republishes 114
+jars.
+
+| Artifact | Third-party jars | May be shared |
+|---|---|---|
+| `…-friend.zip` | **0** | **yes** — and it serves both client and server, via `-s server` |
+| `…-instance.zip` | 114 | no — internal test artifact |
+| `…-server.zip` | 94 | no — use the friend pack with `-s server` instead |
+| `…-alpha.zip` (CurseForge) | 72 | no |
+| `…-curseforge-local.zip` | 76 | **never** — two of its mods are ARR with an explicit opt-out |
+
+The CurseForge-format export is closest to compliant, and still bundles 72 jars — packwiz puts
 Modrinth-sourced mods in `overrides/` because a CurseForge manifest cannot reference them.
 
 ## Four authors switched off third-party distribution
@@ -319,7 +331,18 @@ proposes but has not installed. `docs/khaojee-visual-reference.md` records their
 | `…-alpha.zip` (CurseForge, 173 MB) | **40** อ้างด้วย project/file id · **72** ใส่ไว้ใน `overrides/mods/` | **ใช่ 72 ตัว** |
 | `…-alpha-curseforge-local.zip` (177 MB) | **36** อ้างถึง · **76** ฝังไว้ **รวมมอดสี่ตัวที่ถูกปิดกั้น** | **ใช่ 76 ตัว** — ข้อยกเว้นเดียวที่กำหนดขอบเขตไว้ของ ADR 0005 **ใช้เองเท่านั้น** |
 
-ตัว export รูปแบบ CurseForge ใกล้เคียงกับที่ถูกต้องที่สุด และก็ยังใส่ jar มา 65 ตัว —
+**มีแค่ `-friend.zip` เท่านั้นที่อัปโหลดที่ไหนก็ได้** นั่นคือรูปแบบที่ใช้จริงของทุกอย่างข้างบน
+และมันพลาดได้ง่ายมาก — การเอา artifact ทั้งห้าไปใส่โฟลเดอร์แชร์เดียวกันคือการเผยแพร่ jar 114 ตัวซ้ำ
+
+| Artifact | jar ของบุคคลที่สาม | แชร์ได้ไหม |
+|---|---|---|
+| `…-friend.zip` | **0** | **ได้** — และใช้ได้ทั้ง client และ server ผ่าน `-s server` |
+| `…-instance.zip` | 114 | ไม่ได้ — เป็น artifact สำหรับทดสอบภายใน |
+| `…-server.zip` | 94 | ไม่ได้ — ใช้ friend pack กับ `-s server` แทน |
+| `…-alpha.zip` (CurseForge) | 72 | ไม่ได้ |
+| `…-curseforge-local.zip` | 76 | **ห้ามเด็ดขาด** — สองตัวในนั้นเป็น ARR และเจ้าของปิดกั้นไว้ |
+
+ตัว export รูปแบบ CurseForge ใกล้เคียงกับที่ถูกต้องที่สุด และก็ยังใส่ jar มา 72 ตัว —
 packwiz เอามอดที่มาจาก Modrinth ไปไว้ใน `overrides/` เพราะ manifest ของ CurseForge อ้างถึงมันไม่ได้
 
 ## ผู้เขียนสี่คนปิดการแจกจ่ายผ่านบุคคลที่สาม
