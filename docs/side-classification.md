@@ -29,7 +29,7 @@ down, which is the part that stops a guess from looking identical to an inspecti
 
 | Side | Count |
 |---|---|
-| `both` | 93 |
+| `both` | 92 |
 | `client` | 20 |
 | `server` | 2 |
 

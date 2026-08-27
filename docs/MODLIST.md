@@ -1,12 +1,12 @@
-<!-- roster-digest: 28bf451a75fb400cd74ddb468900b4847d72e8442aabcf539af8cc25f4fc52a7 -->
-<!-- mod-count: 115 -->
+<!-- roster-digest: 90f7d1b44f3620054098814f6a5ec636e1088a78c54d04d15032a10606403b88 -->
+<!-- mod-count: 114 -->
 <!-- GENERATED FILE — do not edit by hand.
      Run: node scripts/build/generate-modlist.mjs
      `verify` refuses a roster that disagrees with mods/. -->
 
 # What is in this pack · ในแพ็กนี้มีอะไรบ้าง
 
-**Industrial Civilization Survival 0.1.0-alpha** — **115 mods** on Minecraft `1.20.1`,
+**Industrial Civilization Survival 0.1.0-alpha** — **114 mods** on Minecraft `1.20.1`,
 Forge `47.4.23`.
 
 Every mod here is somebody else's work. This file exists so you can see whose, and go and find
@@ -14,17 +14,17 @@ the original.
 
 **Where you will find this file.** It ships at the top of the client instance zip and at the top of
 the server zip. The CurseForge-format zip instead carries packwiz's own `modlist.html`, which lists
-113 names — the client-side set — with no versions, sides or links. This
+112 names — the client-side set — with no versions, sides or links. This
 file is the complete one.
 
 **ไฟล์นี้อยู่ตรงไหน** มันอยู่บนสุดของ zip ตัว client instance และบนสุดของ zip ตัว server
-ส่วน zip รูปแบบ CurseForge จะมี `modlist.html` ของ packwiz เองแทน ซึ่งลงชื่อไว้ 113 ชื่อ —
+ส่วน zip รูปแบบ CurseForge จะมี `modlist.html` ของ packwiz เองแทน ซึ่งลงชื่อไว้ 112 ชื่อ —
 ชุดฝั่ง client — โดยไม่มีเวอร์ชัน ไม่มี side ไม่มีลิงก์ ไฟล์นี้คือตัวที่ครบ
 
 ## Reading the table
 
 **The File column is the exact jar filename**, not a tidied-up version number. That is deliberate:
-115 mods use 115 filename conventions, and parsing a version out of them would mean
+114 mods use 114 filename conventions, and parsing a version out of them would mean
 guessing. The
 filename is what is actually on your disk, so it is also what you can match against your `mods/`
 folder when something goes wrong.
@@ -35,20 +35,20 @@ mod's name — twice now, a guessed slug in this repo has pointed at the wrong p
 at a modpack rather than the mod.
 
 **Client / Server** tells you where a mod runs. If you are hosting a server, you need the
-93 in *Both* and the 2 in *Server only*; the 20 client-only
+92 in *Both* and the 2 in *Server only*; the 20 client-only
 mods are not installed on a server and are not missing when they are absent.
 
 ## อ่านตารางยังไง
 
-**คอลัมน์ File คือชื่อไฟล์ jar จริง ๆ** ไม่ใช่เลขเวอร์ชันที่จัดให้สวย ตั้งใจให้เป็นแบบนั้น เพราะมอด 115 ตัว
-ใช้รูปแบบการตั้งชื่อไฟล์ 115 แบบ การพยายามแกะเวอร์ชันออกมาคือการเดา ชื่อไฟล์คือสิ่งที่อยู่บนเครื่องคุณจริง ๆ
+**คอลัมน์ File คือชื่อไฟล์ jar จริง ๆ** ไม่ใช่เลขเวอร์ชันที่จัดให้สวย ตั้งใจให้เป็นแบบนั้น เพราะมอด 114 ตัว
+ใช้รูปแบบการตั้งชื่อไฟล์ 114 แบบ การพยายามแกะเวอร์ชันออกมาคือการเดา ชื่อไฟล์คือสิ่งที่อยู่บนเครื่องคุณจริง ๆ
 ดังนั้นมันจึงเป็นสิ่งที่คุณเอาไปเทียบกับโฟลเดอร์ `mods/` ได้ตอนมีอะไรผิดพลาด
 
 **ลิงก์ต้นทาง resolve มา ไม่ได้เดา** packwiz บันทึก project *id* ไว้ ไม่เคยบันทึก slug
 สคริปต์นี้จึงตาม id ไปจนถึงหน้าที่มันไปจบแล้วลิงก์หน้านั้น มันไม่ประกอบ URL ขึ้นจากชื่อมอดเด็ดขาด —
 สอง​ครั้งแล้วที่ slug ที่เดาใน repo นี้ชี้ไปผิดโปรเจกต์ ครั้งหนึ่งชี้ไปที่ modpack แทนที่จะเป็นตัวมอด
 
-**Client / Server** บอกว่ามอดตัวนั้นทำงานฝั่งไหน ถ้าคุณจะเปิด server คุณต้องใช้ 93 ตัวใน *Both*
+**Client / Server** บอกว่ามอดตัวนั้นทำงานฝั่งไหน ถ้าคุณจะเปิด server คุณต้องใช้ 92 ตัวใน *Both*
 กับ 2 ตัวใน *Server only* ส่วนมอดฝั่ง client 20 ตัวจะไม่ถูกติดตั้งบน server
 และการที่มันไม่อยู่ตรงนั้นไม่ใช่ของหาย
 
@@ -57,7 +57,7 @@ mods are not installed on a server and are not missing when they are absent.
 
 ---
 
-## Both — client and server · ทั้งสองฝั่ง (93)
+## Both — client and server · ทั้งสองฝั่ง (92)
 
 | Mod · มอด | File · ไฟล์ | Source · ต้นทาง |
 |---|---|---|
@@ -132,7 +132,6 @@ mods are not installed on a server and are not missing when they are absent.
 | PlayerRevive | `PlayerRevive_FORGE_v2.0.31_mc1.20.1.jar` | [Modrinth](https://modrinth.com/mod/playerrevive) |
 | Polymorph | `polymorph-forge-0.49.10+1.20.1.jar` | [Modrinth](https://modrinth.com/mod/polymorph) |
 | Puzzles Lib | `PuzzlesLib-v8.1.33-1.20.1-Forge.jar` | [Modrinth](https://modrinth.com/mod/puzzles-lib) |
-| Regions Unexplored | `RegionsUnexploredForge-0.5.6+1.20.1.jar` | [Modrinth](https://modrinth.com/mod/regions-unexplored) |
 | Rhino | `rhino-forge-2001.2.3-build.10.jar` | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/rhino) |
 | Ritchie's Projectile Library | `ritchiesprojectilelib-2.1.1+mc.1.20.1-forge.jar` | [Modrinth](https://modrinth.com/mod/rpl) |
 | Security Craft | `[1.20.1] SecurityCraft v1.10.2.1.jar` | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/security-craft) |

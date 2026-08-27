@@ -448,6 +448,47 @@ server still running**:
 The first reads like a corrupt save and the second like a firewall problem. Neither is.
 `pkill -f` does **not** match these processes; `Get-Process java | Stop-Process -Force` does.
 
+### Rig trap four: the world directory is `boottest`, not `world` (#78)
+
+`server.properties` sets `level-name=boottest`. Every reset this session ran
+`Remove-Item "$t\world"` — which matched nothing — so **every boot reused a world generated under an
+earlier mod list**, silently.
+
+It surfaced only when Regions Unexplored was removed and Forge logged:
+
+```
+[GameData/REGISTRIES]: Unidentified mapping from registry minecraft:block
+[GameData/REGISTRIES]: Unidentified mapping from registry minecraft:entity_type
+[GameData/REGISTRIES]: Unidentified mapping from registry minecraft:item
+[GameData/REGISTRIES]: There are unidentified mappings in this world — we are going to attempt to process anyway
+```
+
+plus **3120** `regions_unexplored` references in a log from a pack that no longer contained it.
+
+**That is ADR 0006's thesis demonstrated by accident**: a save remembers the registry it was built
+with. Deleting `boottest` and re-booting gave 0 unidentified mappings and 0 references.
+
+**Reset `boottest`, and check the delete actually happened** — `-ErrorAction SilentlyContinue` hides a
+path that never matched.
+
+### The equipment.json hypothesis, now measured rather than argued (#70 → #78)
+
+#70 rejected shipping a pre-generated `config/improvedmobs/equipment.json` on reasoning: it would
+suppress the 45 Brimm errors but freeze the equipment pool. **A boot that reset the world but not
+`config/` measured it.**
+
+| | fresh `config/` | `config/` retained |
+|---|---|---|
+| `Error calculating default weights` | **45** | **0** |
+| total ERROR lines | 50 | **4** |
+
+Improved Mobs loads an existing `equipment.json` instead of rebuilding the pool, so the registry scan
+that throws never runs. **The suppression is real.** So is the cost: the file is **47,640 bytes** and
+it pins the pool to whatever mod list generated it.
+
+**The #70 decision stands, now on evidence instead of prediction.** And the baseline it set matters:
+**50 ERROR lines is the figure for a fresh config**, 4 for a retained one. Compare like with like.
+
 ### Improved Mobs × Brimm: the blacklist fixes the behaviour, not the log (#70)
 
 `[equipment] "Item Blacklist" = ["brimm"]` was set from the modid in Brimm's own `META-INF/mods.toml`.

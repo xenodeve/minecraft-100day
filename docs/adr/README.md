@@ -18,6 +18,7 @@ measurements and live in `docs/balance.md`.
 | [0003](0003-self-contained-single-file-distribution.md) | Self-contained single-file distribution | Infra | Accepted |
 | [0004](0004-the-create-pin-closes-no-season-2-doors.md) | The Create 6.0.8 pin closes no Season 2 doors | Compatibility | Accepted |
 | [0005](0005-thin-distribution-we-do-not-rehost-jars.md) | Thin distribution: we do not rehost other people's jars | Infra · Distribution | Accepted |
+| [0006](0006-biomes-o-plenty-is-the-one-biome-expansion.md) | Biomes O' Plenty is the one biome expansion | Worldgen · Compatibility | Accepted |
 
 ## Conventions
 
