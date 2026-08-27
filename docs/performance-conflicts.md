@@ -285,9 +285,19 @@ cannot see a code-level integration, and its silence was read as evidence of abs
 
 # Upscaling / Frame Generation — `C-UPFG-*`
 
-Ids defined by *Upscaling Spec* `PERF-UPFG-033`. These belong to the **opt-in variant**
-(`-nvidia-upscaling.zip`), not to the pack: Super Resolution has no metafile and `verify` still
-reports 120 mods.
+Ids defined by *Upscaling Spec* `PERF-UPFG-033`. These belong to the **opt-in artifacts**, not to
+the pack: Super Resolution has no metafile and `verify` still reports 120 mods.
+
+**Two shapes, and they answer different questions (#111):**
+
+| Artifact | Size | Use it to |
+|---|---|---|
+| `-nvidia-upscaling-addon.zip` | 31 MB | **try it** — extract over an existing profile's `.minecraft`; delete the jar to revert |
+| `-nvidia-upscaling.zip` | 214 MB | **measure it** — a clean profile where nothing else can differ |
+
+The add-on is the one to hand anybody. The full variant exists because a `PERF-UPFG-021` A/B is
+invalidated by an unnoticed difference between two profiles, and only a clean import rules that out.
+Both carry a byte-identical jar from the same pin.
 
 ## C-UPFG-00 — the DLSS model is downloaded at runtime, and it resolves "latest"
 

@@ -25,7 +25,7 @@
 //   fetches it from https://ngx.download.nvidia.com/ at runtime and resolves
 //   "latest", so the DLSS object can change between runs without the pack
 //   changing. Any A/B under PERF-UPFG-021 must record which object was used.
-import { existsSync, mkdirSync, rmSync, copyFileSync, readFileSync, statSync } from 'node:fs'
+import { existsSync, mkdirSync, rmSync, copyFileSync, readFileSync, writeFileSync, statSync } from 'node:fs'
 import { join } from 'node:path'
 import { execFileSync } from 'node:child_process'
 import { createHash } from 'node:crypto'
@@ -143,9 +143,108 @@ const jars = listing.filter(e => e.toLowerCase().endsWith('.jar')).length
 
 console.log(`\narchive verified — ${listing.length} entries, ${jars} jars, Candidate A present`)
 console.log(`\n✓ build/${NAME}-${pack.version}-nvidia-upscaling.zip  (${(size / 1048576).toFixed(0)} MB)`)
-console.log('  CurseForge App → Create Custom Profile → Import. OPT-IN TEST BUILD.')
+console.log('  A CLEAN PROFILE, for measuring. Import as a new CurseForge profile.')
+
+// ---------------------------------------------------------------------------
+// The add-on: the same jar, without the 214 MB reinstall.
+//
+// The full variant above is the right shape for a PERF-UPFG-021 A/B, where an
+// unnoticed difference between two profiles would invalidate the run. It is the
+// WRONG shape for someone who just wants to try the mod: importing it makes the
+// CurseForge App fetch and install all 120 mods a second time, and nobody will
+// do that for one optional jar.
+//
+// PERF-UPFG-023 asks for isolated profiles and forbids mutating the playable
+// instance "without tracking changes". One tracked file with a written
+// uninstall step satisfies the qualifier.
+// ---------------------------------------------------------------------------
+const ADDON = join(ROOT, 'build', `${NAME}-${pack.version}-nvidia-upscaling-addon.zip`)
+const ASTAGE = join(ROOT, 'build', '.nvidia-addon')
+if (existsSync(ASTAGE)) rmSync(ASTAGE, { recursive: true, force: true })
+mkdirSync(join(ASTAGE, 'mods'), { recursive: true })
+copyFileSync(jar, join(ASTAGE, 'mods', CANDIDATE.filename))
+
+writeFileSync(join(ASTAGE, 'README.txt'), [
+  `${pack.name} — ชั้นทดลอง NVIDIA Upscaling`,
+  '',
+  'ติดตั้ง',
+  '',
+  '  แตกไฟล์นี้ทับโฟลเดอร์ .minecraft ของ profile ที่คุณเล่นอยู่',
+  '  ไม่ต้องสร้าง profile ใหม่ ไม่ต้องโหลดมอดใหม่ทั้งชุด',
+  '',
+  '  จะได้ไฟล์เดียวเพิ่มเข้าไป:',
+  `    mods/${CANDIDATE.filename}`,
+  '',
+  'ถอน',
+  '',
+  '  ลบไฟล์ jar นั้นทิ้ง จบ ไม่มีอะไรค้าง',
+  '',
+  'มันคืออะไร',
+  '',
+  `  ${CANDIDATE.name} ${CANDIDATE.version}`,
+  '  ทำ upscaling แบบ DLSS / FSR / XeSS และมี frame generation ให้เลือกในเมนู',
+  '  ตั้งค่าได้ในเกมที่ Options → Video Settings',
+  '',
+  'สิ่งที่ต้องรู้ก่อนใช้',
+  '',
+  '  เป็นซอฟต์แวร์ ALPHA และ **ยังไม่มีใครวัดว่ามันช่วยหรือทำให้แย่ลง**',
+  '  ไม่ได้อยู่ในรายชื่อมอดของแพ็ค การมีหรือไม่มีมันไม่กระทบการเข้า server',
+  '',
+  '  ตอนเปิดครั้งแรกมันจะโหลดไฟล์โมเดล DLSS จาก ngx.download.nvidia.com',
+  '  นั่นคือตัวมอดไปโหลดจาก NVIDIA เอง ไม่ใช่แพ็คนี้แจกไฟล์ของ NVIDIA ซ้ำ',
+  '  ถ้าไม่มีเน็ตตอนเปิดครั้งแรก ส่วน DLSS อาจใช้ไม่ได้',
+  '',
+  '  ถ้าจะเปิด Frame Generation ให้เริ่มที่ 2× ก่อน อย่าเริ่มที่ 4× หรือ 6×',
+  '  และ FPS ที่เพิ่มจาก frame generation ไม่เท่ากับการตอบสนองที่ดีขึ้น',
+  '',
+  'เจอปัญหา',
+  '',
+  '  ลบ jar ออกก่อนเป็นอย่างแรก แล้วส่ง .minecraft/logs/latest.log มา',
+  '  โดยเฉพาะถ้าเปิดกับ shader แล้วภาพเพี้ยน หรือ HUD ปืนดูผิดปกติ',
+  '',
+].join('\n'))
+
+if (existsSync(ADDON)) rmSync(ADDON)
+execFileSync('powershell', ['-NoProfile', '-Command', `
+$ErrorActionPreference = 'Stop'
+Add-Type -AssemblyName System.IO.Compression
+Add-Type -AssemblyName System.IO.Compression.FileSystem
+$stage = '${ASTAGE}'
+$out   = '${ADDON}'
+$zip = [System.IO.Compression.ZipFile]::Open($out, [System.IO.Compression.ZipArchiveMode]::Create)
+try {
+  Get-ChildItem -Path $stage -Recurse -File | ForEach-Object {
+    $rel = $_.FullName.Substring($stage.Length + 1).Replace('\\', '/')
+    [System.IO.Compression.ZipFileExtensions]::CreateEntryFromFile($zip, $_.FullName, $rel, [System.IO.Compression.CompressionLevel]::Optimal) | Out-Null
+  }
+} finally { $zip.Dispose() }
+`], { stdio: 'pipe' })
+
+const alist = execFileSync('powershell', ['-NoProfile', '-Command',
+  `Add-Type -AssemblyName System.IO.Compression.FileSystem;` +
+  `$z=[System.IO.Compression.ZipFile]::OpenRead('${ADDON}');` +
+  `$z.Entries | ForEach-Object { $_.FullName }; $z.Dispose()`,
+], { encoding: 'utf8' }).split(/\r?\n/).filter(Boolean)
+
+const aproblems = []
+const want = [`mods/${CANDIDATE.filename}`, 'README.txt']
+for (const w of want) if (!alist.includes(w)) aproblems.push(`${w} missing`)
+if (alist.length !== want.length) aproblems.push(`expected exactly ${want.length} entries, found ${alist.length}: ${alist.join(', ')}`)
+if (alist.some(e => e.includes('\\'))) aproblems.push('entry names contain a backslash')
+if (aproblems.length) {
+  console.error('\n✗ add-on is malformed:')
+  for (const p of aproblems) console.error(`  - ${p}`)
+  process.exit(1)
+}
+
+rmSync(ASTAGE, { recursive: true, force: true })
+const asize = statSync(ADDON).size
+console.log(`\naddon verified — exactly ${alist.length} entries, no backslashes`)
+console.log(`\n✓ build/${NAME}-${pack.version}-nvidia-upscaling-addon.zip  (${(asize / 1048576).toFixed(0)} MB)`)
+console.log('  DROP-IN. Extract over an existing profile\'s .minecraft — no reinstall.')
+console.log('  Delete the jar to revert.')
 console.log('')
-console.log('  Super Resolution is ALPHA software and nothing about it has been measured here.')
-console.log('  It is not in the pack roster — deleting this file rolls the experiment back.')
-console.log('  On first run it downloads a DLSS model from ngx.download.nvidia.com; that is the')
-console.log('  mod fetching from NVIDIA, not this pack redistributing anything.')
+console.log('  Super Resolution is ALPHA and nothing about it has been measured here.')
+console.log('  Neither artifact is in the pack roster; verify still reports the same mod count.')
+console.log('  On first run it downloads a DLSS model from ngx.download.nvidia.com — the mod')
+console.log('  fetching from NVIDIA, not this pack redistributing anything.')
