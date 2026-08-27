@@ -86,11 +86,19 @@ than anything else in this repo.**
 > third-party jars** — may be shared. It is published as a pre-release and it installs both a client
 > and a server.
 >
-> **What is still forbidden, and always will be under this delivery model:** publishing any artifact
-> that bundles jars — `-instance.zip`, `-server.zip`, `-alpha.zip`, and above all
-> `-curseforge-local.zip`, which carries the four mods whose authors switched third-party
-> downloading off. `docs/distribution-licenses.md` holds the per-artifact table and it is the
-> authority.
+> **What is still forbidden: *publishing* any artifact that bundles jars** — putting it behind a
+> public URL, an index, or a searchable link. That covers `-instance.zip`, `-server.zip`,
+> `-alpha.zip`, and above all `-curseforge-local.zip`, which carries the four mods whose authors
+> switched third-party downloading off.
+>
+> **Handing one to the group is not publishing, and is not restricted (#105).** The developer
+> settled it: this pack is played inside a closed group of 3–4 people, and any artifact may go to
+> them — `-curseforge-local.zip` was built for exactly that. **Do not re-raise this.** An agent
+> already read the old wording as a ban and blocked the developer from sending a file to their own
+> friends.
+>
+> `docs/distribution-licenses.md` holds the per-artifact table, with separate columns for the two
+> acts, and it is the authority.
 >
 > The analysis below is kept because it is *why* the answer is what it is — not because the ban is
 > still blanket.
