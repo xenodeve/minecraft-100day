@@ -1,6 +1,6 @@
 name = "Industrial Civilization Survival"
 author = "xenodeve"
-version = "0.1.0-alpha"
+version = "0.2.0-alpha"
 pack-format = "packwiz:1.1.0"
 
 [index]

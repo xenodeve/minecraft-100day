@@ -18,6 +18,23 @@ no entry, no tag, and is never handed to a friend as if it were a release.
 
 ## Unreleased
 
+> **The pack version is now `0.2.0-alpha`, and this is still not a release.**
+>
+> The number moved because it had stopped identifying a build. `build/README.md` tells every friend
+> to compare `pack-version.txt` and treat a mismatch as the problem — advice that is useless when
+> two materially different archives both say `0.1.0-alpha`. Since the last one was handed out the
+> pack gained In Control on clients (#88), Oculus (#91), spark (#94), four performance candidates
+> (#97), and went 114 → 120 mods. A bug report against "0.1.0-alpha" would name an ambiguous
+> artifact.
+>
+> `0.2.0-alpha` is the next rung on *Distribution Spec §8*'s own ladder
+> (`0.1.0-alpha → 0.2.0-alpha → 0.5.0-beta → 0.9.0-rc1 → 1.0.0`), and six new mods plus a
+> gameplay-affecting fix is a MINOR step rather than a PATCH.
+>
+> **No tag, no GitHub Release, no release entry** — the rule below still holds, and §16 has never
+> run. The one release this repository has is `militarybackpack-refmap-shim-v1.0.1`, which is a
+> 1 KB shim jar on its own version line and **not** the pack (#101).
+
 ### Added
 
 - **114 mods**, pinned to exact versions with hashes. Create is `6.0.8` — forced by the addon

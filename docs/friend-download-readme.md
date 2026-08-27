@@ -2,7 +2,7 @@
 
 Minecraft **1.20.1** · Forge **47.4.23** · มอด **120** ตัว
 
-โหลดไฟล์เดียวพอ: **`Industrial-Civilization-Survival-0.1.0-alpha-friend.zip`** (127 KB)
+โหลดไฟล์เดียวพอ: **`Industrial-Civilization-Survival-0.2.0-alpha-friend.zip`** (132 KB)
 
 ---
 

@@ -6,7 +6,7 @@
 
 # What is in this pack · ในแพ็กนี้มีอะไรบ้าง
 
-**Industrial Civilization Survival 0.1.0-alpha** — **120 mods** on Minecraft `1.20.1`,
+**Industrial Civilization Survival 0.2.0-alpha** — **120 mods** on Minecraft `1.20.1`,
 Forge `47.4.23`.
 
 Every mod here is somebody else's work. This file exists so you can see whose, and go and find
