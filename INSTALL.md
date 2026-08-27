@@ -25,6 +25,9 @@ This is not a limitation of this pack; the official launcher has no modpack supp
 
 ---
 
+> **Sharing this pack?** Upload **only** `…-friend.zip`, with `build/README.md` beside it.
+> Every other artifact bundles other people's jars — see `docs/distribution-licenses.md`.
+
 ## Option A — Prism Launcher, self-contained *(recommended — one step)*
 
 1. **Add Instance** → **Import from zip**
