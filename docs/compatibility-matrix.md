@@ -205,14 +205,14 @@ before adding it.
 **§3 Experimental mods are all absent by design** — AI Improvements, Let Me Despawn, Alternate
 Current, Canary, TaCZ Optimization, Smooth Boot Reloaded. Each needs its own benchmark branch.
 
-## Performance ADD/TEST layer (#97)
+## Performance candidates — installed, none benchmarked (#97, statuses per #99)
 
 | Mod | Version | Source | Side | Status | Tested |
 |---|---|---|---|---|---|
-| BadOptimizations | `2.4.1` | MR | CLIENT | ADD/TEST | **UNTESTED** — client-only, no client launch since |
-| AllTheLeaks | `1.1.1+1.20.1-forge` | CF `1091339` | BOTH | ADD/TEST | **boots green** — see Boot 19 |
-| Dynamic FPS | `3.11.4` | MR | CLIENT | ADD/TEST | **UNTESTED** — client-only |
-| Legendary Block Entities | `0.11.0` | MR | CLIENT | ADD/TEST | **UNTESTED** — client-only |
+| BadOptimizations | `2.4.1` | MR | CLIENT | `INSTALLED / CLIENT-UNVERIFIED` | client-only; no client launch since |
+| AllTheLeaks | `1.1.1+1.20.1-forge` | CF `1091339` | BOTH | `INSTALLED / SERVER-SMOKE-PASSED / PERFORMANCE-UNVERIFIED` | Boot 19 green — startup compatibility only |
+| Dynamic FPS | `3.11.4` | MR | CLIENT | `INSTALLED / CLIENT-UNVERIFIED` | client-only |
+| Legendary Block Entities | `0.11.0` | MR | CLIENT | `INSTALLED / CLIENT-UNVERIFIED` | client-only |
 
 ### Boot 19 — spark + AllTheLeaks on a dedicated server (2026-08-28)
 
@@ -250,7 +250,7 @@ So on this machine spark samples with the JVM's own engine. That is still usable
 `PERF-PRIORITY` item 2, but anyone expecting async-profiler output — flame graphs at native
 resolution — will not get it on Windows.
 
-**Three of the four ADD/TEST mods were not tested by this boot** and could not be: BadOptimizations,
+**Three of the four candidates were not tested by this boot** and could not be: BadOptimizations,
 Dynamic FPS and Legendary Block Entities are `client`, and a dedicated server never loads them.
 
 **All four arrived in one commit, and that is a deviation from `PERF-METHOD-ONEVAR`**, which asks
@@ -263,8 +263,15 @@ change after this cannot be attributed to one of the four. The pre-batch referen
 boot after this change says nothing about BadOptimizations, Dynamic FPS or Legendary Block Entities.
 That is the `blocked-work.md` failure shape stated in advance rather than discovered later.
 
-**`ADD/TEST` is a status, not a verdict.** Each carries acceptance criteria in the spec that only a
-measurement can satisfy — see `docs/OPEN-WORK-LEDGER.md`.
+**These are lifecycle positions, not verdicts** (`PERF-LIFECYCLE`). The ladder is
+`DISCOVERED → APPROVED → INSTALLED → SMOKE TESTED → BENCHMARKED → ACCEPTED → CORE`, and
+**`INSTALLED → CORE` is forbidden**: a green boot proves startup compatibility and nothing else.
+
+AllTheLeaks earned `SERVER-SMOKE-PASSED`, not `BENCHMARKED`. The other three earned nothing yet,
+because a dedicated server never loads a `client` mod.
+
+**The roster is frozen** (`PERF-FREEZE`) until the baseline exists and all four are assessed
+individually. The un-mixing plan is the A/B table in `docs/performance-benchmarks.md`.
 
 ## Profiler (Performance Spec: `PERF-PROFILE-SPARK`, #94)
 

@@ -316,6 +316,69 @@ Backup ก่อนทดลอง pregeneration command บน production world
 
 ---
 
+# 4b. The candidate lifecycle — `PERF-LIFECYCLE`
+
+Every performance mod occupies exactly one of these, and the status is written next to it wherever
+it is named.
+
+```text
+DISCOVERED
+   ↓
+APPROVED AS CANDIDATE
+   ↓
+INSTALLED
+   ↓
+SMOKE TESTED
+   ↓
+BENCHMARKED
+   ↓
+ACCEPTED
+   ↓
+CORE
+```
+
+## `INSTALLED → CORE` is forbidden
+
+**A green boot proves startup compatibility and nothing else.** It does not prove runtime
+correctness, long-session correctness, or client behaviour — and for a `client` mod a dedicated
+server boot proves nothing at all, because the server never loads it.
+
+Skipping straight to `CORE` because the pack still launches is the single failure this section
+exists to prevent. It is DO-NOT 13 in `PERF-RULES`.
+
+## Where the four candidates actually are
+
+Installed by #97, reviewed in #99. `ADD/TEST` described the spec's *intent*; these describe the
+mod's *state*.
+
+| Mod | Status |
+|---|---|
+| BadOptimizations | `INSTALLED / CLIENT-UNVERIFIED` |
+| AllTheLeaks | `INSTALLED / SERVER-SMOKE-PASSED / PERFORMANCE-UNVERIFIED` |
+| Dynamic FPS | `INSTALLED / CLIENT-UNVERIFIED` |
+| Legendary Block Entities | `INSTALLED / CLIENT-UNVERIFIED` |
+
+AllTheLeaks is the only one a server boot could touch, and what it earned is
+`SERVER-SMOKE-PASSED` — not `BENCHMARKED`.
+
+# 4c. Roster freeze — `PERF-FREEZE`
+
+```text
+FROZEN. No further performance mod enters the pack.
+```
+
+**Lifts when** the baseline exists (`PERF-PRIORITY` item 2) **and** all four candidates above have
+been assessed individually.
+
+This explicitly covers `PERF-EXP-FASTNOISE`, `PERF-EXP-LETMEDESPAWN` and
+`PERF-EXP-ALTERNATE-CURRENT`, which are next in the priority order and stay out regardless.
+
+**Why a rule and not a preference.** #97 installed four candidates in one commit, one phase ahead of
+the plan, against `PERF-METHOD-ONEVAR`. Nothing stopped it because nothing was written down. A
+fifth mod arriving now would make the batch unattributable in a second dimension.
+
+The freeze does **not** block: removing a candidate, changing a config, or fixing a bug.
+
 # 5. Benchmark-gated candidate
 
 ## PERF-TACZ-ACCELERATED — TaCZ: Accelerated
@@ -389,7 +452,10 @@ Network traffic if measurable
 
 # 6. High-priority add candidates
 
-All of these are gated behind a baseline (`PERF-PRIORITY`). None may be added blind.
+**All four are now `INSTALLED` and none is `BENCHMARKED`** — see `PERF-LIFECYCLE` for exactly where
+each one stands, and `PERF-FREEZE` for why no fifth may join them.
+
+The acceptance criteria below are what each still owes. Installing a mod does not satisfy them.
 
 ## PERF-CLIENT-BADOPTIMIZATIONS — BadOptimizations
 
@@ -661,13 +727,13 @@ RENDER
 ├─ Entity Culling                PERF-RENDER-ENTITY-CULLING         [IN PACK]
 ├─ Oculus (optional shaders)     PERF-RENDER-OCULUS                 [IN PACK]
 ├─ Embeddium Extra               PERF-RENDER-EMBEDDIUM-EXTRA        [ALLOWED, NOT INSTALLED]
-├─ BadOptimizations              PERF-CLIENT-BADOPTIMIZATIONS       [ADD/TEST]
-└─ Legendary Block Entities      PERF-RENDER-LEGENDARY-BLOCK-ENTITIES [ADD/TEST]
+├─ BadOptimizations              PERF-CLIENT-BADOPTIMIZATIONS       [INSTALLED / CLIENT-UNVERIFIED]
+└─ Legendary Block Entities      PERF-RENDER-LEGENDARY-BLOCK-ENTITIES [INSTALLED / CLIENT-UNVERIFIED]
 
 MEMORY
 ├─ ModernFix                     PERF-MEM-MODERNFIX                 [IN PACK]
 ├─ FerriteCore                   PERF-MEM-FERRITECORE               [IN PACK]
-└─ AllTheLeaks                   PERF-MEM-ALLTHELEAKS               [ADD/TEST]
+└─ AllTheLeaks                   PERF-MEM-ALLTHELEAKS               [INSTALLED / SERVER-SMOKE-PASSED]
 
 SERVER / LOGIC
 ├─ ServerCore                    PERF-SERVER-SERVERCORE             [IN PACK]
@@ -682,7 +748,7 @@ GUN SYSTEM
 └─ TaCZ: Accelerated             PERF-TACZ-ACCELERATED              [BENCHMARK-GATED]
 
 BACKGROUND
-└─ Dynamic FPS                   PERF-CLIENT-DYNAMICFPS             [ADD/OPTIONAL]
+└─ Dynamic FPS                   PERF-CLIENT-DYNAMICFPS             [INSTALLED / CLIENT-UNVERIFIED]
 
 PROFILING
 └─ spark                         PERF-PROFILE-SPARK                 [DEV CORE]
@@ -991,6 +1057,8 @@ blocker (`docs/OPEN-WORK-LEDGER.md`).
 10. **Do not install OptiFine.**
 11. Do not claim a performance win without evidence.
 12. Do not sacrifice pack identity merely to chase benchmark numbers.
+13. **Do not move a mod from `INSTALLED` to `CORE`** because the pack still launches (`PERF-LIFECYCLE`).
+14. Do not add a performance mod while `PERF-FREEZE` holds.
 
 ---
 

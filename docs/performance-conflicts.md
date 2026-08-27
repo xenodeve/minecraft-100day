@@ -141,6 +141,12 @@ engine rather than async-profiler.
 under-attributes JIT-compiled and native work. For `PERF-PRIORITY` item 2 that is acceptable: the
 questions are *which mod is hot* and *is MSPT drifting*, and the Java engine answers both.
 
+**What it stays good for.** Tick hotspots, entity ticking, MineColonies, Create, mob AI and worldgen
+— the questions `PERF-PRIORITY` item 2 actually asks. The fallback does not make spark useless.
+
+**What no document may say.** That a profile taken on this machine is equivalent to native
+async-profiler output. It is not, and writing so would launder a limitation into a result.
+
 **What is not known:** whether any bottleneck this pack has is one the Java engine will misattribute.
 Nothing here is measured yet.
 
@@ -153,6 +159,32 @@ pack.
 ## C7 — AllTheLeaks actively patches seven of our mods
 
 **Status: live, working as intended. Recorded because it is a surface, not a fault.**
+
+> ### Stop thinking of this as "a mod that reduces memory"
+>
+> ```text
+> AllTheLeaks = memory / leak fix layer
+>             + behavioral compatibility patch layer
+> ```
+>
+> The second layer is the one that matters for debugging. **AllTheLeaks belongs at the top of the
+> bisect list** for symptoms like:
+>
+> ```text
+> Create state behaving oddly
+> Curios item lifecycle behaving oddly
+> Serene Seasons lifecycle behaving oddly
+> world unload / reload bugs
+> ```
+>
+> What `Boot 19` actually proved, and what it did not:
+>
+> ```text
+> startup compatibility   ✅
+> runtime correctness     ❓
+> long-session correctness ❓
+> client behavior          ❓
+> ```
 
 Measured at `Boot 19`: AllTheLeaks loaded **17 patch classes** after version-matching against this
 pack's actual mod list:
