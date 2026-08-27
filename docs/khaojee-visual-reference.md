@@ -109,20 +109,33 @@ argument: on Forge 1.20.1 there is nothing to install.
 mention every project §3 inventories. These are the other ten. **The first sweep did not say it was
 partial**, which is the defect being corrected here.
 
-### §12's premise is wrong: Continuity has a Forge build
+### §12 was right about Continuity — an earlier version of this file said otherwise (#68)
 
-§12 reads *"Do not add Fabric compatibility infrastructure only for Continuity."* That is a decision
-resting on a false assumption:
+**This section previously claimed §12's premise was false.** It is not. Retracted here rather than
+quietly edited, because it was committed and acted on.
+
+A `continuity-3.0.0+1.20.1.forge.jar` does exist. Reading **only** that, I concluded Continuity had a
+native Forge build and that §12's *"Do not add Fabric compatibility infrastructure only for
+Continuity"* rested on a false assumption. It does not. The build declares two **required**
+dependencies:
 
 ```
-3.0.0+1.20.1.forge     forge          continuity-3.0.0+1.20.1.forge.jar
-3.0.0+1.20.1           fabric,quilt   continuity-3.0.0+1.20.1.jar
+required  Aqlf1Shp  ->  Forgified Fabric API (forgified-fabric-api)
+required  u58R1TMW  ->  Sinytra Connector (connector)
 ```
 
-**No bridge is needed for Continuity.** Fusion may still win on merit — it is maintained for both
-loaders and §12's use cases are industrial glass and station windows — but **V3 is a comparison
-between two Forge-native options**, not a platform-forced default. Whoever picks up V3 should compare
-them, not inherit the conclusion.
+**It is Fabric code running through a bridge.** `loaders: ["forge"]` describes how it installs, not
+what it is. Adopting Continuity would mean adding Connector plus Forgified Fabric API to a 107-mod
+Forge pack, for connected textures. **§12's policy is exactly on point.**
+
+### The rule that failed, stated where the next sweep will read it
+
+**Never call a build native from its `loaders` field alone. Read the required dependencies.**
+
+This repo already learned that: `cbc_firepower_components` was removed after a boot, because the
+original sweep read only the range pointing at `create` and missed the one pointing at
+`createbigcannons`. The compatibility matrix wrote it up as a rule, ADR 0004 applied it to Season 2
+— and this sweep did not apply it here.
 
 ### Available on Forge 1.20.1, and never decided about
 
@@ -286,20 +299,32 @@ spec เลื่อนพวกนี้ออกไปด้วยเหตุ
 และ §4 ไม่ได้เอ่ยถึงทุกโปรเจกต์ที่ §3 ลงไว้ นี่คืออีกสิบตัว **การกวาดรอบแรกไม่ได้บอกว่ามันไม่ครบ**
 ซึ่งคือข้อบกพร่องที่กำลังแก้ตรงนี้
 
-### หลักการของ §12 ผิด: Continuity มี build สำหรับ Forge
+### §12 ถูกเรื่อง Continuity — ไฟล์นี้เวอร์ชันก่อนเขียนตรงข้าม (#68)
 
-§12 เขียนว่า *"อย่าเพิ่มโครงสร้างความเข้ากันได้ของ Fabric เพียงเพื่อ Continuity"*
-นั่นคือการตัดสินใจที่ตั้งอยู่บนสมมติฐานที่ผิด:
+**หัวข้อนี้เคยอ้างว่าหลักการของ §12 ผิด** มันไม่ผิด ถอนคืนตรงนี้แทนที่จะแก้เงียบ ๆ
+เพราะมันถูก commit ไปแล้วและถูกเอาไปใช้แล้ว
+
+`continuity-3.0.0+1.20.1.forge.jar` มีอยู่จริง การอ่าน**แค่**สิ่งนั้นทำให้ผมสรุปว่า
+Continuity มี native Forge build และหลักการของ §12 ตั้งอยู่บนสมมติฐานที่ผิด ซึ่งไม่จริง
+build นั้นประกาศ dependency ที่ **บังคับ** สองตัว:
 
 ```
-3.0.0+1.20.1.forge     forge          continuity-3.0.0+1.20.1.forge.jar
-3.0.0+1.20.1           fabric,quilt   continuity-3.0.0+1.20.1.jar
+required  Aqlf1Shp  ->  Forgified Fabric API (forgified-fabric-api)
+required  u58R1TMW  ->  Sinytra Connector (connector)
 ```
 
-**ไม่ต้องใช้ bridge ใด ๆ สำหรับ Continuity** Fusion อาจยังชนะด้วยคุณสมบัติของมันเอง —
-มันดูแลให้ทั้งสอง loader และกรณีใช้งานของ §12 คือกระจกอุตสาหกรรมกับหน้าต่างสถานี — แต่
-**V3 คือการเปรียบเทียบระหว่างสองตัวเลือกที่เป็น Forge โดยกำเนิด** ไม่ใช่ค่าเริ่มต้นที่แพลตฟอร์มบังคับ
-ใครที่มาทำ V3 ต่อควรเปรียบเทียบเอง ไม่ใช่รับข้อสรุปไปเลย
+**มันคือโค้ด Fabric ที่วิ่งผ่าน bridge** `loaders: ["forge"]` อธิบายว่ามันติดตั้งยังไง
+ไม่ได้อธิบายว่ามันคืออะไร การรับ Continuity มาแปลว่าต้องเพิ่ม Connector บวก Forgified Fabric API
+เข้าไปใน pack Forge ที่มี 107 มอด เพียงเพื่อ connected texture **นโยบายของ §12 ตรงประเด็นเป๊ะ**
+
+### กฎที่ล้มเหลว เขียนไว้ในที่ที่การกวาดครั้งหน้าจะอ่านเจอ
+
+**ห้ามเรียก build ว่า native จากฟิลด์ `loaders` อย่างเดียว ให้อ่าน dependency ที่บังคับด้วย**
+
+repo นี้เคยเรียนเรื่อนี้มาแล้ว: `cbc_firepower_components` ถูกถอดออกหลังจากการ boot
+เพราะการกวาดครั้งแรกอ่านแค่ช่วงที่ชี้ไป `create` และพลาดช่วงที่ชี้ไป `createbigcannons`
+compatibility matrix เขียนมันเป็นกฎ ADR 0004 เอาไปใช้กับ Season 2 —
+และการกวาดครั้งนี้ก็ไม่ได้เอามาใช้ตรงนี้
 
 ### ใช้ได้บน Forge 1.20.1 และไม่เคยมีใครตัดสิน
 
