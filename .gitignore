@@ -37,3 +37,6 @@ Thumbs.db
 # Build cache for the self-contained instance artifact (ADR 0003)
 /build/.jar-cache/
 /build/.instance/
+
+# Client evidence bundles are captures, not sources. Send them, do not commit them.
+build/client-evidence-*.zip
