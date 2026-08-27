@@ -146,7 +146,7 @@ node scripts/build/build-instance.mjs     # internal TEST artifact only, 430 MB 
 node scripts/build/build-curseforge-local.mjs  # CurseForge App import, LOCAL ONLY — bundles the 4 blocked mods
 node scripts/build/build-server.mjs       # the server pack (341 MB, 91 mods — Distribution Spec §12)
 node scripts/build/generate-checksums.mjs # build/SHA256SUMS.txt, and refuses a stale artifact
-node scripts/build/generate-modlist.mjs   # docs/MODLIST.md — 108 mods, source URLs resolved from ids
+node scripts/build/generate-modlist.mjs   # docs/MODLIST.md — 113 mods, source URLs resolved from ids
 pwsh scripts/collect-client-evidence.ps1  # after a CLIENT launch: log + crashes + mod list → one zip
 
 node scripts/validate/config-drift.mjs <install>   # "friend A works, friend B doesn't" (§38)

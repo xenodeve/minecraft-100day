@@ -3,9 +3,9 @@
 
 **What this is.** One row per mod the pack ships, its licence, and where that licence was read.
 *Visuals Spec §35* asks for it before shipping; ADR 0003 made the pack self-contained, which means
-it has been redistributing every jar it ships since the first build — **114** of them today.
+it has been redistributing every jar it ships since the first build — **113** of them today.
 
-**What it is not.** A legal opinion, and not a clean bill of health. **All 114 have now been read. 38 of them say nothing about
+**What it is not.** A legal opinion, and not a clean bill of health. **All 113 have now been read. 38 of them say nothing about
 redistribution, which is not the same as permitting it.** A licence that could not be determined is recorded as unread, never assumed.
 
 - **Swept:** 2026-08-27 · issue #53
@@ -44,13 +44,13 @@ their licences.** Swapping mods will not fix it; only changing how the pack is d
 | `…-alpha-curseforge-local.zip` (177 MB) | **36** referenced · **76** bundled, **including the four API-blocked mods** | **yes, 76** — ADR 0005's one scoped exception, **local use only** |
 
 **Only `-friend.zip` may be uploaded anywhere.** That is the practical form of everything above, and
-it is easy to undo by accident — putting all five artifacts in one shared folder republishes 114
+it is easy to undo by accident — putting all five artifacts in one shared folder republishes 113
 jars.
 
 | Artifact | Third-party jars | May be shared |
 |---|---|---|
 | `…-friend.zip` | **0** | **yes** — and it serves both client and server, via `-s server` |
-| `…-instance.zip` | 114 | no — internal test artifact |
+| `…-instance.zip` | 113 | no — internal test artifact |
 | `…-server.zip` | 94 | no — use the friend pack with `-s server` instead |
 | `…-alpha.zip` (CurseForge) | 72 | no |
 | `…-curseforge-local.zip` | 76 | **never** — two of its mods are ARR with an explicit opt-out |
@@ -254,7 +254,6 @@ the one page with no description field at all.
 | SmoothPlayerAnimations | [Modrinth](https://modrinth.com/mod/smoothplayeranimations) | All Rights Reserved | Modrinth API |
 | Sophisticated Backpacks | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/sophisticated-backpacks) | All Rights Reserved | project page |
 | Sophisticated Core | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/sophisticated-core) | All Rights Reserved | project page |
-| Sophisticated Tactical Backpacks | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/sophisticated-tactical-backpacks) | All Rights Reserved | project page |
 | TaCZ Additions | [Modrinth](https://modrinth.com/mod/tacz-additions) | All Rights Reserved | Modrinth API |
 | TenshiLib | [Modrinth](https://modrinth.com/mod/tenshilib) | All Rights Reserved | Modrinth API |
 | TownTalk | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/towntalk) | All Rights Reserved | project page |
@@ -291,9 +290,9 @@ proposes but has not installed. `docs/khaojee-visual-reference.md` records their
 
 **นี่คืออะไร** หนึ่งแถวต่อหนึ่งมอดที่ pack ส่งไป สัญญาอนุญาตของมัน และอ่านมาจากไหน
 *Visuals Spec §35* ขอไว้ให้ทำก่อนส่งมอบ ส่วน ADR 0003 ทำให้ pack เป็นแบบมีทุกอย่างในตัว
-ซึ่งแปลว่ามันแจกจ่าย jar ทุกตัวที่มันส่งซ้ำมาตั้งแต่ build แรก — วันนี้คือ **114** ตัว
+ซึ่งแปลว่ามันแจกจ่าย jar ทุกตัวที่มันส่งซ้ำมาตั้งแต่ build แรก — วันนี้คือ **113** ตัว
 
-**ไม่ใช่อะไร** ไม่ใช่ความเห็นทางกฎหมาย และไม่ใช่ใบรับรองว่าทุกอย่างสะอาด **ทั้ง 114 ตัวถูกอ่านแล้ว 38 ตัวไม่ได้พูดถึงการแจกจ่ายซ้ำเลย ซึ่งไม่เท่ากับการอนุญาต**
+**ไม่ใช่อะไร** ไม่ใช่ความเห็นทางกฎหมาย และไม่ใช่ใบรับรองว่าทุกอย่างสะอาด **ทั้ง 113 ตัวถูกอ่านแล้ว 38 ตัวไม่ได้พูดถึงการแจกจ่ายซ้ำเลย ซึ่งไม่เท่ากับการอนุญาต**
 สัญญาอนุญาตที่หาไม่ได้ถูกบันทึกว่ายังไม่ได้อ่าน ไม่ใช่สมมติเอา
 
 - **กวาดเมื่อ:** 2026-08-27 · issue #53
@@ -332,12 +331,12 @@ proposes but has not installed. `docs/khaojee-visual-reference.md` records their
 | `…-alpha-curseforge-local.zip` (177 MB) | **36** อ้างถึง · **76** ฝังไว้ **รวมมอดสี่ตัวที่ถูกปิดกั้น** | **ใช่ 76 ตัว** — ข้อยกเว้นเดียวที่กำหนดขอบเขตไว้ของ ADR 0005 **ใช้เองเท่านั้น** |
 
 **มีแค่ `-friend.zip` เท่านั้นที่อัปโหลดที่ไหนก็ได้** นั่นคือรูปแบบที่ใช้จริงของทุกอย่างข้างบน
-และมันพลาดได้ง่ายมาก — การเอา artifact ทั้งห้าไปใส่โฟลเดอร์แชร์เดียวกันคือการเผยแพร่ jar 114 ตัวซ้ำ
+และมันพลาดได้ง่ายมาก — การเอา artifact ทั้งห้าไปใส่โฟลเดอร์แชร์เดียวกันคือการเผยแพร่ jar 113 ตัวซ้ำ
 
 | Artifact | jar ของบุคคลที่สาม | แชร์ได้ไหม |
 |---|---|---|
 | `…-friend.zip` | **0** | **ได้** — และใช้ได้ทั้ง client และ server ผ่าน `-s server` |
-| `…-instance.zip` | 114 | ไม่ได้ — เป็น artifact สำหรับทดสอบภายใน |
+| `…-instance.zip` | 113 | ไม่ได้ — เป็น artifact สำหรับทดสอบภายใน |
 | `…-server.zip` | 94 | ไม่ได้ — ใช้ friend pack กับ `-s server` แทน |
 | `…-alpha.zip` (CurseForge) | 72 | ไม่ได้ |
 | `…-curseforge-local.zip` | 76 | **ห้ามเด็ดขาด** — สองตัวในนั้นเป็น ARR และเจ้าของปิดกั้นไว้ |
@@ -537,7 +536,6 @@ player-microchip      1488872   IN MANIFEST
 | SmoothPlayerAnimations | [Modrinth](https://modrinth.com/mod/smoothplayeranimations) | All Rights Reserved | Modrinth API |
 | Sophisticated Backpacks | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/sophisticated-backpacks) | All Rights Reserved | project page |
 | Sophisticated Core | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/sophisticated-core) | All Rights Reserved | project page |
-| Sophisticated Tactical Backpacks | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/sophisticated-tactical-backpacks) | All Rights Reserved | project page |
 | TaCZ Additions | [Modrinth](https://modrinth.com/mod/tacz-additions) | All Rights Reserved | Modrinth API |
 | TenshiLib | [Modrinth](https://modrinth.com/mod/tenshilib) | All Rights Reserved | Modrinth API |
 | TownTalk | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/towntalk) | All Rights Reserved | project page |
