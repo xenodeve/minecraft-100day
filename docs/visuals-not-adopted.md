@@ -5,7 +5,7 @@
 companion to `docs/khaojee-visual-reference.md`, which records what *was* swept; this one exists so
 "why isn't X in?" has an answer that does not require re-deriving it.
 
-**§3 lists 34 projects. 15 are in. 19 are not.** Every one of the 19 is below.
+**§3 lists 34 projects. 14 are in. 20 are not.** Every one of the 19 is below.
 
 - **Swept:** 2026-08-27 · #52, #66, #74, #76
 - **Method:** search by **bare title** through the Modrinth API, then read the version endpoint for a
@@ -67,7 +67,7 @@ this repo — `smoothplayeranimations`, `create-industry` (a *modpack*, not TFMG
 `Continuity connected textures` returned **More Connected Textures**, a different project, while the
 bare title found it at once.
 
-## Decided against — available, and not wanted (4)
+## Decided against — available, and not wanted (5)
 
 | Project | Decision | Reason |
 |---|---|---|
@@ -75,6 +75,7 @@ bare title found it at once.
 | **Pufferfish's Biome Dither** | **deferred past Alpha** (#74) | Not colour blending — it **mutates surface blocks** (`server: required`). Better Biome Blend covers the visual seam client-side and reversibly |
 | **Punchy!** | **rejected for Alpha** (#74) | First-person animation and in-hand physics, a layer §10 already assigned to SPA + NEA with TaCZ owning weapon handling |
 | **Better Biome Reblend** | **superseded** | §4 wrote *"Better Biome Blend / equivalent"*; we installed Better Biome **Blend** (Unlicense). Different project. Recorded so nobody re-finds it and assumes it was missed |
+| **Regions Unexplored** | **removed — ADR 0006** | Installed in #76, removed in #78. §14 allows one biome expansion; **Create Steam 'n' Rails registers tracks for Biomes O' Plenty and not for this**, and it ships 82 wood block models against BOP's 39 with none of them supported. Its tag integration is the better of the two and that loss is recorded in the ADR |
 
 ## Installed but not yet decided about — the worldgen question (#76)
 
@@ -84,19 +85,15 @@ not the same as choosing them.
 | Project | Version | Side |
 |---|---|---|
 | Biomes O' Plenty | `19.0.0.96` | `both` · ⚠️ All Rights Reserved |
-| Regions Unexplored | `F-0.5.6+1.20.1` | `both` |
-| TerraBlender | `3.0.1.10` | `both` — required by both of the above |
+| TerraBlender | `3.0.1.10` | `both` — required by Biomes O' Plenty |
 | Countered's Terrain Slabs | `4.0.2-beta` | `both` |
 | Polytone | `1.20-3.5.26` | `client` |
 
-> **⛔ Do not create a world you intend to keep.**
+> **✅ §14 is satisfied — one expansion, chosen in ADR 0006.** Regions Unexplored was removed in #78.
 >
-> §14 says *"Prefer one biome expansion unless testing proves both are worth the cost. Avoid
-> kitchen-sink geography."* **Both are installed.** That is harmless only because no world has been
-> generated — the moment one is, the choice is made for you.
->
-> §15 wants multiple seeds compared across Base / BOP / RU / both, and §33 says worldgen must be
-> settled **before** persistent play. **V8 picks one. Until then, test worlds only.**
+> **Still test worlds only.** §15 wants BOP compared across multiple seeds for spawn safety,
+> settlement sites, oil access, dragon worldgen and rail corridors, and that is V6. ADR 0006 picked
+> *which* mod to test, not whether it passes.
 
 They booted: `Done (9.084s)`, 83 recipes, 0 failed, **50 ERROR lines — the exact baseline, no new
 error class**, with BOP, Regions Unexplored, TerraBlender and Terrain Slabs all loading server-side.
@@ -117,7 +114,7 @@ only test tool actually applies to them — unlike every other mod in the visual
 เป็นคู่หูของ `docs/khaojee-visual-reference.md` ซึ่งบันทึกสิ่งที่*ถูกกวาด*ไปแล้ว
 ส่วนไฟล์นี้มีไว้ให้คำถาม "ทำไม X ไม่ได้อยู่ในนี้" มีคำตอบโดยไม่ต้องไปไล่หาใหม่
 
-**§3 ลงไว้ 34 โปรเจกต์ อยู่ใน pack 15 ไม่อยู่ 19** ทั้ง 19 ตัวอยู่ด้านล่าง
+**§3 ลงไว้ 34 โปรเจกต์ อยู่ใน pack 14 ไม่อยู่ 20** ทั้ง 19 ตัวอยู่ด้านล่าง
 
 - **กวาดเมื่อ:** 2026-08-27 · #52, #66, #74, #76
 - **วิธี:** ค้นด้วย**ชื่อเปล่า ๆ** ผ่าน Modrinth API แล้วอ่าน version endpoint หาไฟล์ที่เป็นทั้ง `forge`
@@ -179,7 +176,7 @@ Fusion, EMF และ ETF คือตัวมอด ส่วนพวกน�
 การค้น `Continuity connected textures` ได้ **More Connected Textures** ซึ่งเป็นคนละโปรเจกต์
 ส่วนการค้นชื่อเปล่า ๆ เจอทันที
 
-## ตัดสินแล้วว่าไม่เอา — ใช้ได้ แต่ไม่ต้องการ (4)
+## ตัดสินแล้วว่าไม่เอา — ใช้ได้ แต่ไม่ต้องการ (5)
 
 | โปรเจกต์ | การตัดสิน | เหตุผล |
 |---|---|---|
@@ -187,6 +184,7 @@ Fusion, EMF และ ETF คือตัวมอด ส่วนพวกน�
 | **Pufferfish's Biome Dither** | **เลื่อนหลัง Alpha** (#74) | ไม่ใช่การไล่สี — มัน **เปลี่ยนบล็อกพื้นผิว** (`server: required`) Better Biome Blend ครอบคลุมรอยต่อเชิงภาพฝั่ง client และย้อนกลับได้ |
 | **Punchy!** | **ปฏิเสธสำหรับ Alpha** (#74) | แอนิเมชันมุมมองบุคคลที่หนึ่งและฟิสิกส์ของในมือ เป็นชั้นที่ §10 ยกให้ SPA + NEA ไปแล้ว โดย TaCZ เป็นเจ้าของการถืออาวุธ |
 | **Better Biome Reblend** | **ถูกแทนที่** | §4 เขียนว่า *"Better Biome Blend / equivalent"* เราติดตั้ง Better Biome **Blend** (Unlicense) เป็นคนละโปรเจกต์ บันทึกไว้เพื่อไม่ให้ใครไปเจอใหม่แล้วคิดว่าเราพลาด |
+| **Regions Unexplored** | **ถอดออก — ADR 0006** | ติดตั้งใน #76 ถอดใน #78 §14 อนุญาตให้มีการขยายชีวนิเวศตัวเดียว **Create Steam 'n' Rails ลงทะเบียนรางให้ Biomes O' Plenty แต่ไม่ให้ตัวนี้** และมันมี model บล็อกไม้ 82 ตัวเทียบกับ 39 ของ BOP โดยไม่มีตัวไหนถูกรองรับเลย การทำ tag ของมันดีกว่าในสองตัว และการสูญเสียนั้นบันทึกไว้ใน ADR |
 
 ## ติดตั้งแล้วแต่ยังไม่ได้ตัดสิน — คำถามเรื่อง worldgen (#76)
 
@@ -195,19 +193,15 @@ Fusion, EMF และ ETF คือตัวมอด ส่วนพวกน�
 | โปรเจกต์ | เวอร์ชัน | Side |
 |---|---|---|
 | Biomes O' Plenty | `19.0.0.96` | `both` · ⚠️ All Rights Reserved |
-| Regions Unexplored | `F-0.5.6+1.20.1` | `both` |
-| TerraBlender | `3.0.1.10` | `both` — สองตัวข้างบนต้องใช้ |
+| TerraBlender | `3.0.1.10` | `both` — Biomes O' Plenty ต้องใช้ |
 | Countered's Terrain Slabs | `4.0.2-beta` | `both` |
 | Polytone | `1.20-3.5.26` | `client` |
 
-> **⛔ อย่าสร้างโลกที่ตั้งใจจะเก็บไว้**
+> **✅ §14 พอใจแล้ว — มีการขยายตัวเดียว เลือกไว้ใน ADR 0006** Regions Unexplored ถูกถอดใน #78
 >
-> §14 บอกว่า *"เลือกการขยายชีวนิเวศแค่ตัวเดียว เว้นแต่การทดสอบพิสูจน์ว่าคุ้มทั้งสอง
-> เลี่ยงภูมิศาสตร์แบบครัวรวมมิตร"* **ตอนนี้ติดตั้งไว้ทั้งคู่** มันไม่มีผลเสียก็ต่อเมื่อยังไม่มีโลกถูกสร้าง —
-> วินาทีที่มีโลกเกิดขึ้น การเลือกก็ถูกตัดสินไปแทนคุณแล้ว
->
-> §15 ต้องการการเทียบหลาย seed ระหว่าง Base / BOP / RU / ทั้งคู่ และ §33 บอกว่า worldgen
-> ต้องนิ่ง **ก่อน** เริ่มเล่นถาวร **V8 เป็นตัวเลือกหนึ่งตัว จนกว่าจะถึงตอนนั้น ใช้โลกทดสอบเท่านั้น**
+> **ยังใช้โลกทดสอบเท่านั้นอยู่ดี** §15 ต้องการให้เทียบ BOP หลาย seed เรื่องความปลอดภัยจุดเกิด
+> ที่ตั้งนิคม การเข้าถึงน้ำมัน worldgen ของมังกร และเส้นทางราง ซึ่งคือ V6
+> ADR 0006 เลือกว่าจะทดสอบมอด*ตัวไหน* ไม่ได้บอกว่ามันผ่าน
 
 มัน boot ผ่าน: `Done (9.084s)`, recipe 83, fail 0, **บรรทัด ERROR 50 บรรทัด — เท่าเส้นฐานพอดี
 ไม่มี error ชนิดใหม่** โดย BOP, Regions Unexplored, TerraBlender และ Terrain Slabs

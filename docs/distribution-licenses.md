@@ -3,9 +3,9 @@
 
 **What this is.** One row per mod the pack ships, its licence, and where that licence was read.
 *Visuals Spec §35* asks for it before shipping; ADR 0003 made the pack self-contained, which means
-it has been redistributing every jar it ships since the first build — **115** of them today.
+it has been redistributing every jar it ships since the first build — **114** of them today.
 
-**What it is not.** A legal opinion, and not a clean bill of health. **All 115 have now been read. 38 of them say nothing about
+**What it is not.** A legal opinion, and not a clean bill of health. **All 114 have now been read. 38 of them say nothing about
 redistribution, which is not the same as permitting it.** A licence that could not be determined is recorded as unread, never assumed.
 
 - **Swept:** 2026-08-27 · issue #53
@@ -124,7 +124,7 @@ to rely on something other than a written grant.
 modpacks on a bullet reading `- Large Modpacks`. In context that sits under a **Performance**
 heading and describes what the mod is suitable for, not what you may do with it. It is silent.
 
-## Permissively licensed — 65 mods
+## Permissively licensed — 64 mods
 
 Redistribution is granted by the licence text itself. GPL/LGPL/MPL additionally require that the
 licence and source remain available; shipping the jars unmodified with `docs/MODLIST.md` linking
@@ -196,7 +196,6 @@ been modified.
 | [ETF] Entity Texture Features | [Modrinth](https://modrinth.com/mod/entitytexturefeatures) | LGPL 3.0 only | Modrinth API |
 | Countered's Terrain Slabs | [Modrinth](https://modrinth.com/mod/countereds-terrain-slabs) | MIT | Modrinth API |
 | Polytone | [Modrinth](https://modrinth.com/mod/polytone) | GPL 3.0 or later | Modrinth API |
-| Regions Unexplored | [Modrinth](https://modrinth.com/mod/regions-unexplored) | MIT | Modrinth API |
 | TerraBlender | [Modrinth](https://modrinth.com/mod/terrablender) | LGPL 3.0 only | Modrinth API |
 | Biomes O' Plenty | [Modrinth](https://modrinth.com/mod/biomes-o-plenty) | All Rights Reserved | Modrinth API |
 
@@ -279,9 +278,9 @@ proposes but has not installed. `docs/khaojee-visual-reference.md` records their
 
 **นี่คืออะไร** หนึ่งแถวต่อหนึ่งมอดที่ pack ส่งไป สัญญาอนุญาตของมัน และอ่านมาจากไหน
 *Visuals Spec §35* ขอไว้ให้ทำก่อนส่งมอบ ส่วน ADR 0003 ทำให้ pack เป็นแบบมีทุกอย่างในตัว
-ซึ่งแปลว่ามันแจกจ่าย jar ทุกตัวที่มันส่งซ้ำมาตั้งแต่ build แรก — วันนี้คือ **115** ตัว
+ซึ่งแปลว่ามันแจกจ่าย jar ทุกตัวที่มันส่งซ้ำมาตั้งแต่ build แรก — วันนี้คือ **114** ตัว
 
-**ไม่ใช่อะไร** ไม่ใช่ความเห็นทางกฎหมาย และไม่ใช่ใบรับรองว่าทุกอย่างสะอาด **ทั้ง 115 ตัวถูกอ่านแล้ว 38 ตัวไม่ได้พูดถึงการแจกจ่ายซ้ำเลย ซึ่งไม่เท่ากับการอนุญาต**
+**ไม่ใช่อะไร** ไม่ใช่ความเห็นทางกฎหมาย และไม่ใช่ใบรับรองว่าทุกอย่างสะอาด **ทั้ง 114 ตัวถูกอ่านแล้ว 38 ตัวไม่ได้พูดถึงการแจกจ่ายซ้ำเลย ซึ่งไม่เท่ากับการอนุญาต**
 สัญญาอนุญาตที่หาไม่ได้ถูกบันทึกว่ายังไม่ได้อ่าน ไม่ใช่สมมติเอา
 
 - **กวาดเมื่อ:** 2026-08-27 · issue #53
@@ -398,7 +397,7 @@ player-microchip      1488872   IN MANIFEST
 จากบูลเล็ตที่เขียนว่า `- Large Modpacks` เมื่อดูบริบทแล้วมันอยู่ใต้หัวข้อ **Performance**
 และอธิบายว่ามอดเหมาะกับอะไร ไม่ใช่ว่าคุณทำอะไรกับมันได้ มันเงียบ
 
-## สัญญาอนุญาตแบบเปิด — 65 มอด
+## สัญญาอนุญาตแบบเปิด — 64 มอด
 
 สิทธิ์แจกจ่ายซ้ำมาจากตัวข้อความสัญญาอนุญาตเอง GPL/LGPL/MPL ต้องการเพิ่มว่าสัญญาอนุญาตและซอร์ส
 ต้องยังเข้าถึงได้ การส่ง jar ไปโดยไม่ดัดแปลงพร้อม `docs/MODLIST.md` ที่ลิงก์ทุกโปรเจกต์
@@ -469,7 +468,6 @@ player-microchip      1488872   IN MANIFEST
 | [ETF] Entity Texture Features | [Modrinth](https://modrinth.com/mod/entitytexturefeatures) | LGPL 3.0 only | Modrinth API |
 | Countered's Terrain Slabs | [Modrinth](https://modrinth.com/mod/countereds-terrain-slabs) | MIT | Modrinth API |
 | Polytone | [Modrinth](https://modrinth.com/mod/polytone) | GPL 3.0 or later | Modrinth API |
-| Regions Unexplored | [Modrinth](https://modrinth.com/mod/regions-unexplored) | MIT | Modrinth API |
 | TerraBlender | [Modrinth](https://modrinth.com/mod/terrablender) | LGPL 3.0 only | Modrinth API |
 
 ## อ่านแล้วและเงียบ — 40 มอด · อ่านไม่ได้ — 1
