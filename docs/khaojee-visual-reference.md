@@ -174,6 +174,21 @@ can outrank the exact name, and the failure looks identical to "the project does
 is precisely how `Musgo` and `Connected Texture+` are currently recorded, and why both stay
 *unresolved* rather than *absent*.
 
+### Decided (#74) — both were the only "available and undecided" rows, and neither is adopted
+
+| Project | Decision | Reason |
+|---|---|---|
+| **Pufferfish's Biome Dither** | **DEFER past Alpha** | It is not a colour-blending mod. It **mutates surface blocks between biomes** — `server: required`, `client: unsupported`, which is what gives it away. `Better Biome Blend` already covers the *visual* seam, client-side and reversibly. Adding a second worldgen mutation before a persistent world exists collides with §33's own rule that worldgen be settled first, and with the Ecologics / Ice & Fire / oil-field geography already in play |
+| **Punchy!** | **REJECT for Alpha** | Its 1.20.1 build is real. It adds first-person animation and in-hand physics — which is **the layer this pack already assigned**: *Visuals Spec §10* gives the player to `Smooth Player Animations + NEA`, and TaCZ owns first-person weapon handling. Two mods animating the same hands is a conflict surface bought for nothing |
+
+**Dither's `server: required` is the interesting part.** It made it the only project in this whole
+inventory a dedicated-server boot could have tested — the one case where this repo's single
+verification tool would have applied. It is still deferred, because "we could test it" is not "we
+want it".
+
+Neither decision needs revisiting unless a client launch shows `Better Biome Blend` leaving seams
+that only surface-block mixing fixes.
+
 ## What V0 does not decide
 
 **Whether any of this works.** *Visuals Spec §41* rule 11 is *"Do not claim compatibility without
@@ -361,6 +376,20 @@ compatibility matrix เขียนมันเป็นกฎ ADR 0004 เอ�
 อาจชนะชื่อที่ตรงเป๊ะได้ และความล้มเหลวแบบนั้นหน้าตาเหมือนกับ "โปรเจกต์นี้ไม่มีอยู่" เป๊ะ ๆ —
 ซึ่งคือวิธีที่ `Musgo` กับ `Connected Texture+` ถูกบันทึกไว้ตอนนี้พอดี
 และเป็นเหตุผลที่ทั้งคู่ยังเป็น *ยังหาไม่เจอ* ไม่ใช่ *ไม่มี*
+
+### ตัดสินแล้ว (#74) — ทั้งคู่เป็นสองแถวเดียวที่ "ใช้ได้และยังไม่ตัดสิน" และไม่รับทั้งคู่
+
+| โปรเจกต์ | การตัดสิน | เหตุผล |
+|---|---|---|
+| **Pufferfish's Biome Dither** | **เลื่อนออกไปหลัง Alpha** | มันไม่ใช่มอดไล่สี มัน **เปลี่ยนบล็อกพื้นผิวระหว่างชีวนิเวศ** — `server: required`, `client: unsupported` ซึ่งเป็นสิ่งที่ฟ้องตัวมันเอง `Better Biome Blend` ครอบคลุมรอยต่อเชิง*ภาพ*อยู่แล้ว ทำงานฝั่ง client และย้อนกลับได้ การเพิ่มการกลายพันธุ์ของ worldgen อีกก้อนก่อนจะมีโลกถาวรชนกับกฎของ §33 เองที่ว่า worldgen ต้องนิ่งก่อน และชนกับภูมิศาสตร์ของ Ecologics / Ice & Fire / แหล่งน้ำมันที่มีอยู่แล้ว |
+| **Punchy!** | **ปฏิเสธสำหรับ Alpha** | build 1.20.1 ของมันมีจริง มันเพิ่มแอนิเมชันมุมมองบุคคลที่หนึ่งและฟิสิกส์ของของในมือ — ซึ่งเป็น**ชั้นที่ pack นี้มีเจ้าของแล้ว**: *Visuals Spec §10* ยกผู้เล่นให้ `Smooth Player Animations + NEA` และ TaCZ เป็นเจ้าของการถืออาวุธมุมมองบุคคลที่หนึ่ง การมีสองมอดขยับมือเดียวกันคือพื้นที่ขัดแย้งที่ซื้อมาโดยไม่ได้อะไร |
+
+**`server: required` ของ Dither คือส่วนที่น่าสนใจ** มันทำให้ Dither เป็นโปรเจกต์เดียวใน inventory
+ทั้งหมดนี้ที่การ boot dedicated server จะทดสอบได้ — กรณีเดียวที่เครื่องมือตรวจสอบชิ้นเดียวของ repo นี้
+จะใช้ได้ และมันก็ยังถูกเลื่อนอยู่ดี เพราะ "เราทดสอบมันได้" ไม่เท่ากับ "เราอยากได้มัน"
+
+ทั้งสองการตัดสินไม่ต้องทบทวนใหม่ เว้นแต่การเปิด client จะแสดงว่า `Better Biome Blend`
+ทิ้งรอยต่อไว้ในแบบที่มีแต่การผสมบล็อกพื้นผิวเท่านั้นที่แก้ได้
 
 ## สิ่งที่ V0 ไม่ได้ตัดสิน
 

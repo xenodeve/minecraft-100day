@@ -143,22 +143,22 @@ Sinytra Connector and Forgified Fabric API** — it is Fabric code through a bri
 
 | Work | Waiting on |
 |---|---|
-| Three Player Microchip textures (#35) | **an artist.** 16×16 PNGs; §20 wants the beacon to look like it clips to a plate carrier. Names and recipes are done |
+| ~~Three Player Microchip textures (#35)~~ | **no longer blocked.** Placeholders shipped in #74 — readable silhouettes at the mod's own texture paths, so mechanics, recipes and the Curios slot can be exercised now. Real art drops in over them |
 | Re-add `cbc_firepower_components` | an **upstream release** supporting CBC ≥ 5.9. Watch the project; one `packwiz mr add` when it exists |
 
 ---
 
-## Available and undecided — the only work that needs neither
+## Available and undecided — closed in #74
 
-Two projects from the Visuals Spec inventory have Forge 1.20.1 builds and **no decision recorded
-anywhere** (#66):
+**Both were decided in #74 and neither is adopted.** Kept here so nobody re-opens them:
 
 | Project | Version | Side | Note |
 |---|---|---|---|
-| Pufferfish's Biome Dither | `1.0.0` | **`server: required`, `client: unsupported`** | the **only** server-side project in the whole visual inventory — the one thing a dedicated-server boot could actually test |
-| Punchy! | `2.7d` | `client: required` | — |
+| Pufferfish's Biome Dither | `1.0.0` | **`server: required`** | **DEFERRED past Alpha** — it mutates surface blocks, not just colour; Better Biome Blend already covers the visual seam; §33 wants worldgen settled before a persistent world |
+| Punchy! | `2.7d` | `client: required` | **REJECTED for Alpha** — first-person animation is already owned by SPA + NEA and TaCZ |
 
-Both are All Rights Reserved, so adding either enlarges the licensing question above.
+Revisit only if a client launch shows Better Biome Blend leaving seams that surface-block mixing
+would fix.
 
 ---
 
@@ -333,22 +333,21 @@ Continuity *มี* `continuity-3.0.0+1.20.1.forge.jar` จริง แต่ b
 
 | งาน | รออะไร |
 |---|---|
-| texture ของ Player Microchip สามไฟล์ (#35) | **คนทำงานศิลป์** PNG ขนาด 16×16; §20 อยากให้ beacon ดูเหมือนหนีบอยู่กับเสื้อเกราะ ชื่อกับ recipe เสร็จแล้ว |
+| ~~texture ของ Player Microchip สามไฟล์ (#35)~~ | **ไม่ติดแล้ว** ส่ง placeholder ไปใน #74 — เงาที่อ่านออกได้ วางที่ path texture ของมอดเอง กลไก recipe และช่อง Curios จึงทดสอบได้แล้ว งานศิลป์จริงมาทับทีหลังได้เลย |
 | เพิ่ม `cbc_firepower_components` กลับ | **release จากต้นน้ำ** ที่รองรับ CBC ≥ 5.9 เฝ้าโปรเจกต์ไว้ พอมีก็ `packwiz mr add` ครั้งเดียว |
 
 ---
 
-## ใช้ได้และยังไม่ถูกตัดสิน — งานเดียวที่ไม่ต้องรออะไรเลย
+## ใช้ได้และยังไม่ถูกตัดสิน — ปิดไปแล้วใน #74
 
-โปรเจกต์สองตัวจาก inventory ของ Visuals Spec มี build สำหรับ Forge 1.20.1 และ
-**ไม่มีการตัดสินบันทึกไว้ที่ไหนเลย** (#66):
+**ทั้งคู่ถูกตัดสินใน #74 และไม่รับทั้งคู่** เก็บไว้ตรงนี้เพื่อไม่ให้ใครไปเปิดใหม่:
 
 | โปรเจกต์ | เวอร์ชัน | Side | หมายเหตุ |
 |---|---|---|---|
-| Pufferfish's Biome Dither | `1.0.0` | **`server: required`, `client: unsupported`** | เป็นโปรเจกต์ฝั่ง server **ตัวเดียว**ใน inventory ภาพทั้งหมด — สิ่งเดียวที่การ boot dedicated server ทดสอบได้จริง |
-| Punchy! | `2.7d` | `client: required` | — |
+| Pufferfish's Biome Dither | `1.0.0` | **`server: required`** | **เลื่อนออกไปหลัง Alpha** — มันเปลี่ยนบล็อกพื้นผิว ไม่ใช่แค่สี; Better Biome Blend ครอบคลุมรอยต่อเชิงภาพแล้ว; §33 ต้องการให้ worldgen นิ่งก่อนมีโลกถาวร |
+| Punchy! | `2.7d` | `client: required` | **ปฏิเสธสำหรับ Alpha** — แอนิเมชันมุมมองบุคคลที่หนึ่งมีเจ้าของแล้วคือ SPA + NEA และ TaCZ |
 
-ทั้งคู่เป็น All Rights Reserved การเพิ่มตัวไหนก็ตามจึงขยายคำถามเรื่องสัญญาอนุญาตข้างบน
+ทบทวนใหม่ต่อเมื่อการเปิด client แสดงว่า Better Biome Blend ทิ้งรอยต่อไว้ในแบบที่การผสมบล็อกพื้นผิวจะแก้ได้
 
 ---
 

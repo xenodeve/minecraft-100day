@@ -161,6 +161,18 @@ file = "kubejs/assets/player_tracking_chip/lang/en_us.json"
 hash = "c355dfda4c51704b96f04ad3ef0de1520e5df38bb1d8d30a831dade74f0c82bf"
 
 [[files]]
+file = "kubejs/assets/player_tracking_chip/textures/item/scalpeltexture.png"
+hash = "600e35a3c97f7f20e006e8ad7c0e3ec35e564cf9aa431c3efa7d38326aec6cf6"
+
+[[files]]
+file = "kubejs/assets/player_tracking_chip/textures/item/trackertexture.png"
+hash = "5d69a5b92ac03e8d0c36733b394965106cc2c65b891594e1f53acd3522bdb534"
+
+[[files]]
+file = "kubejs/assets/player_tracking_chip/textures/item/trackingchip.png"
+hash = "7e40ff0bddcf0f24f3010973ef7f1c028427027e4a6acbbddaaeca64ca9c43e9"
+
+[[files]]
 file = "kubejs/client_scripts/jei_hide.js"
 hash = "ec313c55baa033661df3c04044981823ccb2635f049b22f357fbe551928374aa"
 
