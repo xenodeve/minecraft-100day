@@ -51,6 +51,49 @@ void — write two rows or discard the run.
 > Do not write a `keep` verdict for any of the four from a batch run. `inconclusive` is the correct
 > verdict until one of them has been measured alone.
 
+## The A/B recovery plan — how the batch gets un-mixed
+
+The methodology is recoverable without rewriting history, because the pre-batch state is a commit
+anyone can check out.
+
+| Run | Tree | Contains |
+|---|---|---|
+| **A** | `a62adb9` | spark and the CORE stack, **none of the four** |
+| **B1** | A + `mods/badoptimizations.pw.toml` | BadOptimizations only |
+| **B2** | A + `mods/alltheleaks.pw.toml` | AllTheLeaks only |
+| **B3** | A + `mods/dynamic-fps.pw.toml` | Dynamic FPS only |
+| **B4** | A + `mods/legendary-block-entities.pw.toml` | Legendary Block Entities only |
+| **B5** | current `main` | all four together |
+
+**A is not an empty pack.** `a62adb9` is the merge of #96, so it already carries the canonical
+Performance Spec, spark, Oculus and the full CORE stack. A vs B measures **mod lists**, not
+documentation.
+
+**Hold every one of these identical across all six runs.** A run that changes two of them measures
+nothing:
+
+```text
+seed · location · render distance · simulation distance
+Java args · RAM allocation · resource packs · scene · config freshness
+```
+
+**Use the commits, not a disabled jar.** Checking out `a62adb9` and adding one metafile is
+reproducible by anyone from the repository. Renaming a jar to `.disabled` in a local instance is a
+state nobody else can recreate, and it is not what the artifact builds from.
+
+**B5 minus A** gives the batch's total effect. **B1..B4 minus A** give each mod's individual
+contribution. If the four contributions do not sum to roughly the batch effect, they interact — and
+that interaction is a `docs/performance-conflicts.md` entry, not a rounding error.
+
+| Run | Date | Commit | Zone | Client 1% low | Server MSPT p95 | Δ vs A | Verdict |
+|---|---|---|---|---|---|---|---|
+| A | | `a62adb9` | | | | — | reference |
+| B1 | | | | | | | |
+| B2 | | | | | | | |
+| B3 | | | | | | | |
+| B4 | | | | | | | |
+| B5 | | | | | | | |
+
 ## Run log
 
 | # | Date | Commit | Zone | One variable changed | Client 1% low | Server MSPT p95 | Verdict |
