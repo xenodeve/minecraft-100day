@@ -20,7 +20,7 @@ no entry, no tag, and is never handed to a friend as if it were a release.
 
 ### Added
 
-- **107 mods**, pinned to exact versions with hashes. Create is `6.0.8` — forced by the addon
+- **115 mods**, pinned to exact versions with hashes. Create is `6.0.8` — forced by the addon
   version ranges, not chosen.
 - **A twelve-chapter quest campaign**, 48 quests. Objectives rather than a crafting checklist:
   *Establish Industrial Production*, *Build a Freight Corridor*, *Survive a Major Siege*.
@@ -42,6 +42,10 @@ no entry, no tag, and is never handed to a friend as if it were a release.
   previously showed nothing; doors, chests, levers and lanterns that animate when you use them; and
   weather you can feel — rain and snow as real particles, wind, and ripples where rain hits water.
   **None of it is verified** — see the note at the end.
+- **Two biome expansions and the loaders for custom entity models are installed but not switched on
+  as a decision.** Biomes O' Plenty and Regions Unexplored both ship; **only one of them should
+  survive**, and that choice has to be made before anyone keeps a world. Treat any world you make
+  right now as a test world.
 - **`MODLIST.md`** and a licence record for every mod in it. The pack ships 107 mods by dozens of
   authors; `docs/distribution-licenses.md` says what each one's licence is and where that was read.
 - **A mod list you can actually read.** `MODLIST.md` sits at the top of both the client and the
