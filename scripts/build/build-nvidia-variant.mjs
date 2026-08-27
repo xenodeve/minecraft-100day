@@ -22,6 +22,11 @@
 //   Each archive is named for what its own upstream verifiably claims, and no
 //   further. The per-candidate `naming` field records why that name is allowed.
 //
+//   #119 settled the question this rule was hedging: real NVIDIA DLSS-G exists
+//   in this family -- nvngx_dlssg.dll -- but it is in WISTERIA, a separate
+//   companion mod, not in Super Resolution. Candidate A does upscaling only,
+//   and its FG menu section is never built. `(Upscaling)` was the right name.
+//
 // PINS, PERF-UPFG-032
 //
 //   Every jar is checked against a recorded size and digest before it is used.
@@ -63,12 +68,15 @@ const CANDIDATES = [
     // about which frame-generation backend it uses.
     naming: 'mod name + primary function',
     what: [
-      '  ทำ upscaling แบบ DLSS / FSR2 / XeSS และมี frame generation ให้เลือกในเมนู',
+      '  ทำ upscaling อย่างเดียว — DLSS / FSR2 / XeSS',
       '  ตั้งค่าได้ในเกมที่ Options → Video Settings',
       '',
-      '  ส่วน DLSS upscaling ยืนยันแล้วว่ามีจริง (มันลิงก์ NVIDIA NGX)',
-      '  แต่ frame generation ของมันใช้ NVIDIA DLSS-G หรือไม่ ยังไม่มีใครยืนยัน',
-      '  เพราะฉะนั้นชื่อไฟล์เขียนแค่ Upscaling ไม่ได้เขียนว่า DLSS Frame Generation',
+      '  **ตัวนี้ทำ frame generation ไม่ได้ และในเมนูจะไม่มีหัวข้อนั้นให้เห็นเลย**',
+      '  ไม่ใช่ตั้งค่าผิด โค้ดมันซ่อนหัวข้อนั้นไว้จนกว่าจะมี backend จริง',
+      '  และ backend จริงอยู่ในมอดแยกอีกตัว (Wisteria) ซึ่งตอนนี้ยังลงไม่ได้',
+      '  เพราะมันบังคับว่าต้องมี Super Resolution ที่ใหม่กว่าตัวที่ปล่อยออกมาแล้ว',
+      '',
+      '  ชื่อไฟล์เขียนว่า Upscaling ด้วยเหตุผลนี้ ไม่ได้เขียนว่า Frame Gen',
     ],
     notes: [
       '  ตอนเปิดครั้งแรกมันจะโหลดไฟล์โมเดล DLSS จาก ngx.download.nvidia.com',
@@ -78,7 +86,8 @@ const CANDIDATES = [
       '  มันโหลดเวอร์ชัน "ล่าสุด" เสมอ แปลว่าไฟล์โมเดลเปลี่ยนได้เองระหว่างรอบ',
       '  ถ้าจะเอาไปเทียบผลกับตัวอื่น ต้องจดจาก log ว่ารอบนั้นได้ไฟล์ไหนมา',
       '',
-      '  ถ้าจะเปิด Frame Generation ให้เริ่มที่ 2× ก่อน อย่าเริ่มที่ 4× หรือ 6×',
+      '  อย่าไปหาปุ่ม Frame Generation ในเมนู มันไม่มี ตามที่เขียนไว้ข้างบน',
+      '  ถ้าอยากลอง frame generation ตอนนี้ ใช้ตัว PFG แทน',
     ],
   },
   {
@@ -328,9 +337,11 @@ function readmeFor(c) {
     '',
     ...c.notes,
     '',
-    '  FPS ที่เพิ่มจาก frame generation ไม่เท่ากับการตอบสนองที่ดีขึ้น',
-    '  ตัวเลขขึ้นแต่มือรู้สึกหน่วงลง เป็นเรื่องปกติของเทคนิคนี้',
-    '',
+    ...(c.key === 'A' ? [] : [
+      '  FPS ที่เพิ่มจาก frame generation ไม่เท่ากับการตอบสนองที่ดีขึ้น',
+      '  ตัวเลขขึ้นแต่มือรู้สึกหน่วงลง เป็นเรื่องปกติของเทคนิคนี้',
+      '',
+    ]),
     'เจอปัญหา',
     '',
     '  ลบ jar ออกก่อนเป็นอย่างแรก แล้วส่ง .minecraft/logs/latest.log มา',
@@ -385,3 +396,8 @@ console.log('  All three are experimental and NOTHING about them has been measur
 console.log('  None is in the pack roster; verify still reports the same mod count.')
 console.log('  Candidates A and B download a DLSS model from NVIDIA on first run — the mod')
 console.log('  fetching from NVIDIA, not this pack redistributing anything. C downloads nothing.')
+console.log('')
+console.log('  A DOES NOT DO FRAME GENERATION (#119). Super Resolution ships only automatic')
+console.log('  placeholders; the concrete DLSS-G backend is a separate mod, Wisteria, whose')
+console.log('  build requires an SR version that has never been released. Verified from the')
+console.log('  jar: MaterialConfigScreen gates the whole section on a non-automatic backend.')

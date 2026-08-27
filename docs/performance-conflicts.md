@@ -515,6 +515,64 @@ the pack — fine to hand to the group, never to publish.
 **Not known.** Everything about how it looks in motion. Optical-flow FG has characteristic artefacts
 around fast-moving thin geometry, and this pack renders gun HUDs and scopes (`C-UPFG-03`).
 
+## C-UPFG-11 — Super Resolution has no frame-generation backend, and the menu is hidden by design
+
+**Status: verified from the jar we ship and from the upstream repositories. Answers the question
+`PERF-UPFG-004` was hedging. Issue #119.**
+
+**Candidate A does upscaling only.** The Frame Generation section is not missing from its menu
+because something is set wrong — `MaterialConfigScreen` never adds it unless a **non-automatic**
+backend is registered, and Super Resolution registers none.
+
+Read out of `super_resolution-forge-1.20.1-0.9.1-alpha.1+opengl.jar`:
+
+| Class | What is in it |
+|---|---|
+| `common/gui/MaterialConfigScreen` | `hasAvailableFrameGenerationBackend`, `isAutomatic`, `frame_generation*` |
+| `common/framegeneration/FrameGenerationDescriptions` | `superresolution:auto`, `superresolution:nv_reflex`, `DLSS_FG`, `automatic`, **`wisteria:ngx`**, **`wisteria:streamline`** |
+| `common/framegeneration/BackendNegotiator` | only `superresolution:auto` and `isAutomatic` |
+| `common/framegeneration/FrameGeneration` | `VulkanPresentationFeature`, `isRequested` |
+
+**Super Resolution's own class file names Wisteria's backend ids.** The strings are in the jar.
+
+**`PERF-UPFG-004` is now answerable.** Real NVIDIA DLSS-G exists in this family — but in
+**Wisteria**, not in Super Resolution. `github.com/IReallyWantToSleep/Wisteria`, 5 stars, **0
+releases**, **no LICENSE file** (GitHub reports null). Its Forge 1.20.1 CI artifact
+(`wisteria-forge-1.20.1-0.1.0-alpha.1+1.20.1.jar`, 5,067,203 bytes, run `32444973208`, 2026-08-21)
+was downloaded and read: `mods.toml` says `GPL-3.0-or-later`, describes itself as *"NVIDIA frame
+generation and Reflex backends for Super Resolution"*, and ships `nvngx_dlssg.dll`, `sl.dlss_g.dll`,
+`sl.reflex.dll`, `sl.interposer.dll`, `NvLowLatencyVk.dll`, `sl.common.dll`, `sl.pcl.dll`. Backend
+ids inside: `wisteria:ngx`, `wisteria:streamline`, `wisteria:reflex`.
+
+**It cannot be installed, and that is measured rather than predicted.** Its `mods.toml` declares
+`super_resolution` **mandatory** at `versionRange = "[0.9.1-alpha.2,)"`. The Modrinth API for
+project `Hf3Qz2H3` returns `1.20.1-0.9.1-alpha.1+gl-forge` (`MeE6lOJf`, 2026-08-20) as the newest
+Forge 1.20.1 build — the file we pin — and **no `0.9.1-alpha.2` exists on any loader or game
+version.** Forge will show the missing-dependency screen.
+
+**Recorded as seen, not smoothed.** Wisteria's `versions/1.20.1.properties` pins
+`sr_modrinth_version_id_forge=uH0UZ7Lu`, which resolves to Super Resolution `0.8.3-alpha.6`
+(2026-07-16), while the same file sets `sr_version=0.9.0-alpha.1-SNAPSHOT` and root
+`gradle.properties` sets `sr_min_version=0.9.1-alpha.2`. Three Super Resolution versions named
+across one build config. The older commit `f511eedbfa7c` (*"增加 Forge 1.20.1 支持"*, 2026-08-14)
+does carry `mc=1.20.1` with `sr_min_version=0.9.0-alpha.1`, a range our pin satisfies — but nothing
+was built from it.
+
+**A second precondition, recorded now so it is not rediscovered.** Even with a backend present,
+`FrameGeneration.initialize()` is a no-op unless `VulkanPresentationFeature.isRequested()` — which
+on 1.20.1 means *Use Vulkan Presentation* ON and *Skip Vulkan Initialization* OFF, then a restart.
+
+**What this cost us.** The `[Optional] Super Resolution(Upscaling)` README shipped in #115 told the
+player frame generation was in the menu and to start it at 2×. It is not and they cannot. Corrected
+in the same change as this entry.
+
+**What would unblock it.** Super Resolution `0.9.1-alpha.2` or newer published for Forge 1.20.1.
+Nothing on our side.
+
+---
+
+---
+
 ## Licence discrepancy on Candidate A — recorded, not blocking
 
 The jar's `mods.toml` declares `license = "MIT"`; Modrinth reports `GPL-3.0-or-later`. Both permit
