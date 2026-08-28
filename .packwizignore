@@ -33,6 +33,13 @@
 /docs/
 *.md
 
+# --- launchers for the developer, not for the pack ---------------------------
+#
+# benchmark.bat sits at the repo root so it can be double-clicked. Without this
+# line packwiz indexes it and every friend downloads a script that tries to run
+# PresentMon against an instance path that does not exist on their machine.
+*.bat
+
 # --- repo metadata -----------------------------------------------------------
 .gitignore
 .gitattributes
