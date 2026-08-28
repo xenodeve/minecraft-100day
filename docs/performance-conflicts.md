@@ -394,10 +394,50 @@ until the GPU binding is fixed.
 
 ---
 
+## C11 — C2ME says it is not fully tested with Radium, and we shipped them together
+
+**Status: LIVE in v0.2.1-alpha. Stated by the mod's own author, not inferred. Issue #131.**
+
+C2ME for Forge's Modrinth page says, of its own mod:
+
+> *"And it's not fully tested with **Radium** (**Canary** is not recommended) and **Starlight**."*
+
+**Both halves of that pairing are in the pack as of v0.2.1-alpha**, added in the same change (#129),
+and **neither has been launched.** This is not a reason to pull either one — "not fully tested" is a
+caveat, not a defect — but it is the first thing to reach for if worlds, chunks or lighting behave
+strangely, and it should have been read before shipping rather than after.
+
+**What it changes about the order of suspicion.** If a world corrupts, generates wrongly, deadlocks
+or lights incorrectly: remove **C2ME** first, then **Radium**. Both are `side = "both"`, so both are
+in singleplayer too.
+
+**Two rules that follow, and they are hard.**
+
+- **Canary must never be installed.** C2ME says *not recommended*; Radium's own Modrinth entry
+  declares Canary **incompatible**; and Canary and Radium are both Lithium ports doing the same job.
+- **Starlight stays out for now** — same sentence names it, and adding a light-engine rewrite
+  alongside two untested-together chunk mods would make any resulting bug unattributable.
+  Recorded below as HOLD, not rejected.
+
+**Not known.** Whether the pairing is actually fine. Nobody has launched it.
+
+---
+
 ## DISCOVERED candidates — recorded, not installed
 
-`PERF-LIFECYCLE` state **DISCOVERED**. None has been run by anyone here. Metadata verified from the
-Modrinth API at the time of writing (#127) rather than recalled.
+**Six of these were INSTALLED in v0.2.1-alpha (#129) and are no longer candidates** — Colorwheel,
+CreateBetterFps, Particle Core, Radium Re-Reforged, Thulium and C2ME-Forge. Noisium was added in
+v0.2.2-alpha (#131). What remains below is what is still **not** in the pack.
+
+| Mod | State | Why |
+|---|---|---|
+| **Starlight (Forge)** `1.1.2+1.20` | **HOLD** | a light-engine rewrite, built 2023-07-08, and `C11` records C2ME naming it as untested alongside itself. Revisit only if profiling shows lighting is a hotspot — the goal is the CPU-bound frame time, not collecting performance mods |
+| **Memory Leak Fix** `v1.1.5` | **REJECTED** | AllTheLeaks `1.1.1` already occupies this role and is newer. Two mods patching the same vanilla methods is the shape that produced `C8`/#107 |
+| **Exordium** | **IMPOSSIBLE** | **no Forge 1.20.1 build exists.** The project page lists forge and 1.20.1 because that metadata is a union across all versions; checked per file, its nearest Forge builds are for 1.21.8 and 1.21.10 |
+| **Canary** | **FORBIDDEN** | see `C11`. Radium is already installed and the two are the same Lithium port |
+| **Rubidium** | **FORBIDDEN** | Embeddium is its maintained fork and already `provides` the `rubidium` id |
+
+The original DISCOVERED metadata, verified from the Modrinth API at the time of writing (#127):
 
 | Mod | Forge 1.20.1 | Published | Licence | Downloads | Declared relationships |
 |---|---|---|---|---|---|

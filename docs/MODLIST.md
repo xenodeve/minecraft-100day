@@ -1,12 +1,12 @@
-<!-- roster-digest: 06a7973a9720658dc83ae1af834b0b15a5af774d7886930e83f71c5529b01114 -->
-<!-- mod-count: 126 -->
+<!-- roster-digest: 9211eeeb8e6fa99d824ef5835b4cfb96ede032f637e1ac4922ed770c48801b46 -->
+<!-- mod-count: 127 -->
 <!-- GENERATED FILE — do not edit by hand.
      Run: node scripts/build/generate-modlist.mjs
      `verify` refuses a roster that disagrees with mods/. -->
 
 # What is in this pack · ในแพ็กนี้มีอะไรบ้าง
 
-**Industrial Civilization Survival 0.2.0-alpha** — **126 mods** on Minecraft `1.20.1`,
+**Industrial Civilization Survival 0.2.2-alpha** — **127 mods** on Minecraft `1.20.1`,
 Forge `47.4.23`.
 
 Every mod here is somebody else's work. This file exists so you can see whose, and go and find
@@ -14,17 +14,17 @@ the original.
 
 **Where you will find this file.** It ships at the top of the client instance zip and at the top of
 the server zip. The CurseForge-format zip instead carries packwiz's own `modlist.html`, which lists
-125 names — the client-side set — with no versions, sides or links. This
+126 names — the client-side set — with no versions, sides or links. This
 file is the complete one.
 
 **ไฟล์นี้อยู่ตรงไหน** มันอยู่บนสุดของ zip ตัว client instance และบนสุดของ zip ตัว server
-ส่วน zip รูปแบบ CurseForge จะมี `modlist.html` ของ packwiz เองแทน ซึ่งลงชื่อไว้ 125 ชื่อ —
+ส่วน zip รูปแบบ CurseForge จะมี `modlist.html` ของ packwiz เองแทน ซึ่งลงชื่อไว้ 126 ชื่อ —
 ชุดฝั่ง client — โดยไม่มีเวอร์ชัน ไม่มี side ไม่มีลิงก์ ไฟล์นี้คือตัวที่ครบ
 
 ## Reading the table
 
 **The File column is the exact jar filename**, not a tidied-up version number. That is deliberate:
-126 mods use 126 filename conventions, and parsing a version out of them would mean
+127 mods use 127 filename conventions, and parsing a version out of them would mean
 guessing. The
 filename is what is actually on your disk, so it is also what you can match against your `mods/`
 folder when something goes wrong.
@@ -35,20 +35,20 @@ mod's name — twice now, a guessed slug in this repo has pointed at the wrong p
 at a modpack rather than the mod.
 
 **Client / Server** tells you where a mod runs. If you are hosting a server, you need the
-97 in *Both* and the 1 in *Server only*; the 28 client-only
+98 in *Both* and the 1 in *Server only*; the 28 client-only
 mods are not installed on a server and are not missing when they are absent.
 
 ## อ่านตารางยังไง
 
-**คอลัมน์ File คือชื่อไฟล์ jar จริง ๆ** ไม่ใช่เลขเวอร์ชันที่จัดให้สวย ตั้งใจให้เป็นแบบนั้น เพราะมอด 126 ตัว
-ใช้รูปแบบการตั้งชื่อไฟล์ 126 แบบ การพยายามแกะเวอร์ชันออกมาคือการเดา ชื่อไฟล์คือสิ่งที่อยู่บนเครื่องคุณจริง ๆ
+**คอลัมน์ File คือชื่อไฟล์ jar จริง ๆ** ไม่ใช่เลขเวอร์ชันที่จัดให้สวย ตั้งใจให้เป็นแบบนั้น เพราะมอด 127 ตัว
+ใช้รูปแบบการตั้งชื่อไฟล์ 127 แบบ การพยายามแกะเวอร์ชันออกมาคือการเดา ชื่อไฟล์คือสิ่งที่อยู่บนเครื่องคุณจริง ๆ
 ดังนั้นมันจึงเป็นสิ่งที่คุณเอาไปเทียบกับโฟลเดอร์ `mods/` ได้ตอนมีอะไรผิดพลาด
 
 **ลิงก์ต้นทาง resolve มา ไม่ได้เดา** packwiz บันทึก project *id* ไว้ ไม่เคยบันทึก slug
 สคริปต์นี้จึงตาม id ไปจนถึงหน้าที่มันไปจบแล้วลิงก์หน้านั้น มันไม่ประกอบ URL ขึ้นจากชื่อมอดเด็ดขาด —
 สอง​ครั้งแล้วที่ slug ที่เดาใน repo นี้ชี้ไปผิดโปรเจกต์ ครั้งหนึ่งชี้ไปที่ modpack แทนที่จะเป็นตัวมอด
 
-**Client / Server** บอกว่ามอดตัวนั้นทำงานฝั่งไหน ถ้าคุณจะเปิด server คุณต้องใช้ 97 ตัวใน *Both*
+**Client / Server** บอกว่ามอดตัวนั้นทำงานฝั่งไหน ถ้าคุณจะเปิด server คุณต้องใช้ 98 ตัวใน *Both*
 กับ 1 ตัวใน *Server only* ส่วนมอดฝั่ง client 28 ตัวจะไม่ถูกติดตั้งบน server
 และการที่มันไม่อยู่ตรงนั้นไม่ใช่ของหาย
 
@@ -57,7 +57,7 @@ mods are not installed on a server and are not missing when they are absent.
 
 ---
 
-## Both — client and server · ทั้งสองฝั่ง (97)
+## Both — client and server · ทั้งสองฝั่ง (98)
 
 | Mod · มอด | File · ไฟล์ | Source · ต้นทาง |
 |---|---|---|
@@ -129,6 +129,7 @@ mods are not installed on a server and are not missing when they are absent.
 | MrCrayfish's Furniture Mod: Refurbished | `refurbished_furniture-forge-1.20.1-1.0.20.jar` | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/refurbished-furniture) |
 | Multi-Piston | `multipiston-1.20-0.0.47-snapshot.jar` | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/multi-piston) |
 | Naturalist | `naturalist-5.0pre4+forge-1.20.1.jar` | [Modrinth](https://modrinth.com/mod/naturalist) |
+| Noisium | `noisium-forge-2.3.0+mc1.20-1.20.1.jar` | [Modrinth](https://modrinth.com/mod/noisium) |
 | Placebo | `Placebo-1.20.1-8.6.3.jar` | [Modrinth](https://modrinth.com/mod/placebo) |
 | Player Microchip (Tracker) | `player_tracking_chip-1.0.2-forge-1.20.1.jar` | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/player-microchip) |
 | playerAnimator | `player-animation-lib-forge-1.0.2-rc1+1.20.jar` | [Modrinth](https://modrinth.com/mod/playeranimator) |

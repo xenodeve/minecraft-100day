@@ -16,6 +16,28 @@ no entry, no tag, and is never handed to a friend as if it were a release.
 
 ---
 
+## v0.2.2-alpha — pre-release, 2026-08-28
+
+**Still a pre-release and still untested in game.** Nothing in v0.2.1 or v0.2.2 has been launched.
+
+### Added
+
+- **Noisium** — speeds up the world-generation maths itself. It pairs with C2ME rather than
+  overlapping it: C2ME spreads chunk work across CPU cores, Noisium makes the work inside each of
+  those threads cheaper. Its upstream repository was archived in 2025, so this is a final build for
+  1.20.1 rather than a mod still being developed — which is fine for a pack pinned to 1.20.1.
+
+### Known issues
+
+- **C2ME's own page says it is not fully tested with Radium**, and v0.2.1 shipped both. If a world
+  generates wrongly, corrupts, freezes or lights strangely, remove **C2ME** first and **Radium**
+  second. Tracked as `C11` / #131.
+- **Do not hold a gun with shaders on for long** — a vertex buffer grows until the client runs out
+  of memory, about a minute in testing. `C9` / #117.
+- Frame generation is not available in the optional Super Resolution add-on (#119).
+
+---
+
 ## v0.2.1-alpha — pre-release, 2026-08-28
 
 **Still a pre-release, and still untested in game.** The twelve-test gate in *Distribution Spec §16*
