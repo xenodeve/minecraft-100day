@@ -54,12 +54,16 @@ if (!logPath || !existsSync(logPath)) {
   say('fields not comparable. Everything below is a fragment.\n')
 } else {
   const log = readFileSync(logPath, 'utf8')
-  const find = re => (log.match(re) || [, ''])[1].trim()
+  // These logs are CRLF. .trim() alone leaves a carriage return inside a
+  // captured line, which breaks the markdown table cell it lands in -- the
+  // first report generated did exactly that. Collapse any break, then trim.
+  const clean = v => String(v || '').replace(/[\r\n]+/g, ' ').trim()
+  const find = re => clean((log.match(re) || [, ''])[1])
   const gpu = find(/OpenGL Renderer:\s*(.+)/)
   const shader = find(/Using shaderpack:\s*(.+)/)
   const mods = find(/Loading (\d+) mods/)
-  const fw = [...log.matchAll(/Flywheel [Bb]ackend[^\n]*/g)].map(m => m[0]).slice(-1)[0] || ''
-  const cw = [...log.matchAll(/\[Colorwheel\][^\n]*/g)].map(m => m[0]).slice(0, 1)[0] || ''
+  const fw = clean([...log.matchAll(/Flywheel [Bb]ackend[^\r\n]*/g)].map(m => m[0]).slice(-1)[0])
+  const cw = clean([...log.matchAll(/\[Colorwheel\][^\r\n]*/g)].map(m => m[0]).slice(0, 1)[0])
   const expect = one('expect-gpu')
 
   say(`| Field | Value |`)
