@@ -1,0 +1,4 @@
+# PresentMon and anything else downloaded to run a benchmark.
+# Not part of the pack, not ours to redistribute.
+*
+!.gitignore
