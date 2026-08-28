@@ -287,6 +287,9 @@ if (Test-Path $csv) { Step "presentmon $([math]::Round((Get-Item $csv).Length/1K
 Write-Host "`nReport"
 $reportArgs = @("$repo\scripts\analyze\session-report.mjs",
           '--log', (Join-Path $dest 'latest.log'),
+          # The report cannot find this by editing the log path: the log it gets
+          # is a COPY under benchmarks/. Pass the real one.
+          '--shader-config', $oculusCfg,
           '--expect-gpu', $ExpectGpu,
           '--out', (Join-Path $dest 'report.md'))
 if ($sparkUrl) { $reportArgs += @('--spark', ($sparkUrl -split '/')[-1]) }

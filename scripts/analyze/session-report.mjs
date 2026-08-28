@@ -33,6 +33,10 @@ const one = (n, d = '') => { const i = argv.indexOf(`--${n}`); return i >= 0 && 
 const many = n => argv.reduce((a, v, i) => (v === `--${n}` && argv[i + 1] ? [...a, argv[i + 1]] : a), [])
 
 const out = []
+// Carried from the frames section to the verdict. It was on globalThis, which
+// hid the dependency between two sections that must agree or the verdict is
+// wrong; a plain binding makes the coupling visible where it is declared.
+let gpuBusy
 const say = l => { out.push(l); console.log(l) }
 const sum = a => (a || []).reduce((x, y) => x + y, 0)
 
@@ -80,8 +84,19 @@ if (!logPath || !existsSync(logPath)) {
   // oculus.properties is the authority on whether shaders are ON; the log only
   // says which pack was last LOADED, and a pack can be loaded and then disabled.
   let shaderState = ''
-  const oculusCfg = logPath.replace(/logs[\\/]+latest\.log$/i, 'config/oculus.properties')
-  if (existsSync(oculusCfg)) {
+  // --shader-config, or nothing. This used to derive the path by rewriting the
+  // log path -- and run-session passes a COPY of the log, so the pattern never
+  // matched, .replace() returned the path unchanged, that file existed (it was
+  // the log), and the log got parsed as a properties file. Result: every real
+  // run reported "Shaders: OFF", including the ones with shaders on. Path
+  // surgery on an unrelated path is a guess dressed as a lookup.
+  const oculusCfg = one('shader-config')
+  if (oculusCfg && !existsSync(oculusCfg)) {
+    say(`| Shaders | **unknown** — \`${oculusCfg}\` not found |`)
+  } else if (!oculusCfg) {
+    say('| Shaders | **unknown** — no `--shader-config` given, so the on/off state is not established |')
+  }
+  if (oculusCfg && existsSync(oculusCfg)) {
     const cfg = readFileSync(oculusCfg, 'utf8')
     const on = /^enableShaders\s*=\s*true/mi.test(cfg)
     const pk = clean((cfg.match(/^shaderPack\s*=\s*(.+)$/mi) || [, ''])[1])
@@ -141,9 +156,16 @@ if (!cfx || !existsSync(cfx)) {
     say(`| Frametime P99 | ${pct(0.99).toFixed(2)} ms |`)
     if (gpuB.length) {
       const g = gpuB.reduce((a, b) => a + b, 0) / gpuB.length
-      const gpuPct = g <= 1.5 ? g * 100 : (g / avgFt) * 100   // fraction, or ms-active per frame
-      say(`| GPU busy | ${gpuPct.toFixed(0)}% of frame time |`)
-      globalThis.__gpuBusy = gpuPct
+      // UNITS, AND THIS IS NOT GUESSABLE FROM THE VALUE. PresentMon v2 reports
+      // GPUBusy in MILLISECONDS per frame; a fraction would be 0..1. The old
+      // heuristic "<= 1.5 means a fraction" misreads a genuinely fast frame:
+      // 1.2 ms of GPU work at 800 FPS is ms, not a fraction, and would have been
+      // reported as 120% busy. Decide from the COLUMN NAME instead, and say so.
+      const gpuIsMs = /ms/.test(head[iGpu]) || /busy/.test(head[iGpu])
+      const gpuPct = gpuIsMs ? (g / avgFt) * 100 : g * 100
+      const gpuNote = gpuIsMs ? `${g.toFixed(2)} ms of ${avgFt.toFixed(2)} ms` : 'reported as a fraction'
+      say(`| GPU busy | ${gpuPct.toFixed(0)}% of frame time (${gpuNote}, column \`${head[iGpu]}\`) |`)
+      gpuBusy = gpuPct
     }
     say('')
   }
@@ -227,7 +249,7 @@ if (!prof || !existsSync(prof)) {
 // ---------------------------------------------------------------- verdict
 say('## Bound verdict — the reason for correlating at all\n')
 const render = threadShare['Render thread']
-const gpuBusy = globalThis.__gpuBusy
+// gpuBusy is set above if, and only if, a GPU-busy column was parsed.
 if (!render || gpuBusy === undefined) {
   const missing = []
   if (!render) missing.push('a spark profile that sampled the **Render thread** (`--thread *`)')
