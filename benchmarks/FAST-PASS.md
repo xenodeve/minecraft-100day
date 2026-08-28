@@ -74,6 +74,20 @@ It records only the ticks that took over 100 ms, so the output is entirely made 
 
 ---
 
+## Also press F3+L
+
+Right after each spark profile finishes, press **F3+L**. It runs Minecraft's own profiler for ten
+seconds and writes a result under `debug/profiling/`.
+
+**This is the source that splits a frame by engine phase** — render vs entities vs particles vs gui.
+spark sees stacks but not phases; CapFrameX sees the total but not what was inside it. F3+L is the
+bridge between a frametime spike and a stack, and it costs ten seconds.
+
+## And if CapFrameX is installed
+
+Start the capture before the spark profiler and stop it after. Sixty seconds of frametimes plus a
+GPU-busy column is what decides **CPU-bound or GPU-bound**, and no other source can decide it.
+
 ## What to send back
 
 - the two (or three) spark links
@@ -83,8 +97,16 @@ It records only the ticks that took over 100 ms, so the output is entirely made 
 ## What comes out
 
 ```bash
+# one source at a time
 node scripts/analyze/spark-profile.mjs <spark-code> --top 20
+
+# or everything from the session merged into one report
+node scripts/analyze/session-report.mjs   --log "<instance>/logs/latest.log"   --spark <code-or-json>   --capframex capture.csv   --profiler debug/profiling/<...>/profiling-result.txt   --expect-gpu "RTX 4070 SUPER"   --out benchmarks/captures/<date>/<commit>/zone-a/<variant>/report.md
 ```
+
+The session report is the one that reaches a **bound verdict**, because that needs the render-thread
+mod table *and* the GPU-busy figure together. Give it what you have — it prints, per source, what is
+missing and what that costs, rather than guessing.
 
 Per-thread, per-mod CPU share, from spark's own `classSources` map rather than a guess at package
 names, plus the hottest class inside each top mod. It prints
