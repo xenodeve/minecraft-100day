@@ -345,6 +345,88 @@ only TaCZ's Bedrock-format one; `carryon` and `securitycraft` sit in the same li
 
 ---
 
+## C10 — Oculus turns Flywheel off, so every Create machine renders on the vanilla path
+
+**Status: LIVE, measured. One question about its scope is open. Issue #127.**
+
+From the crash report:
+
+```
+Flywheel Backend: flywheel:off
+```
+
+From `config/flywheel-client.toml` in the same instance:
+
+```toml
+#Select the backend to use. Set to "DEFAULT" to let Flywheel decide.
+backend = "DEFAULT"
+```
+
+**Nobody turned it off — Flywheel turned itself off.** Flywheel 1.0.5 is loaded (JarJar'd inside
+Create 6.0.8) and its instancing backend is not running, so Create machinery draws on the vanilla
+immediate path. Flywheel disables its backend when Iris/Oculus is in play and nothing bridges the
+two, and **Oculus entered this pack as the shader loader** — this is a cost we introduced.
+
+**It fits the reported symptom better than a missing optimisation mod does.** Open field
+160–200 FPS, base 70–120 FPS, GPU not saturated: machinery is what the base has and the field does
+not.
+
+**Open question, and it decides what the fix is worth.** Whether the backend is off because Oculus
+is *installed*, or only while a shaderpack is *in use*. The measured session had
+`Bliss-Shader Dev.zip` active, and the shaderless instance that would have settled it no longer
+exists on this machine.
+
+**How to settle it,** from any crash report or `latest.log` after a boot with shaders **off**:
+
+```
+grep "Flywheel Backend" crash-reports/*.txt
+```
+
+`flywheel:instancing` or `flywheel:batching` → a shader-only cost. `flywheel:off` → Oculus disables
+it outright and the cost is permanent until something bridges Iris and Flywheel.
+
+**What would bridge it.** `Colorwheel` — which requires Oculus and declares itself **incompatible
+with `iris-flw-compat`**, the older bridge. It is recorded as a DISCOVERED candidate below and is
+**not installed**: `PERF-FREEZE` is in force and there is still no baseline (`C-UPFG-07`).
+
+**Not known.** How much it costs in frames. Nothing here is measured in FPS, and nothing can be
+until the GPU binding is fixed.
+
+---
+
+## DISCOVERED candidates — recorded, not installed
+
+`PERF-LIFECYCLE` state **DISCOVERED**. None has been run by anyone here. Metadata verified from the
+Modrinth API at the time of writing (#127) rather than recalled.
+
+| Mod | Forge 1.20.1 | Published | Licence | Downloads | Declared relationships |
+|---|---|---|---|---|---|
+| Colorwheel `1.2.9+mc1.20.1` | yes | 2026-06-06 | MIT | 2.81M | **requires Oculus**; optional Create, Vanillin, Colorwheel Patcher; **incompatible with `iris-flw-compat`** |
+| Particle Core | yes | — | MIT | 14.9M | none |
+| CreateBetterFps `1.1.2` | yes | 2026-04-19 | — | 2.27M | none |
+| Radium `0.12.4` | yes | **2024-09-09** | — | 6.25M | **incompatible with Canary** |
+| C2ME for Forge `0.2.0+alpha.12` | yes | 2025-09-13 | — | 351k | none |
+| Thulium | **not on Modrinth** | — | — | — | not investigated further |
+
+**Two things to carry forward rather than rediscover.** Colorwheel is not a general Create
+optimiser — it is specifically the Iris↔Flywheel bridge, which is why `C10` makes it the first one
+worth trying. And the Modrinth `radium` is **two years old**; "Radium Re-Reforged" on CurseForge may
+be a newer fork, and **which artifact is meant is not established** — settle that before pinning
+anything.
+
+**The order, and why it is not the order the candidates were proposed in.** Steps 1–3 cost nothing
+and are already open work; a freeze exception should be spent on evidence, not before it.
+
+1. Fix the GPU binding (`C-UPFG-07`), confirmed from `OpenGL Renderer:` in `latest.log`
+2. `simulationDistance` 32 → 12, `renderDistance` 32 → 16, heap 4096 → 8192
+3. Settle `C9` with the shaders-off run it already asks for
+4. Establish the baseline — `PERF-METHOD-ONEVAR` has nothing to compare against until it exists
+5. Read `Flywheel Backend:` with shaders off, per `C10`
+6. Then Colorwheel alone, one variable
+7. Then the rest, one at a time
+
+---
+
 ---
 
 # Upscaling / Frame Generation — `C-UPFG-*`
