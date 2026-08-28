@@ -850,7 +850,7 @@ metafile = true
 
 [[files]]
 file = "options.txt"
-hash = "04604d85ff4bea5f42e95ec91a39320c2043432a3bd1f9a98a01d9f9eca9d11e"
+hash = "b98da8d0b3e19c7f3deb95729e3428cd8d971c84194154c47b2294022bd6e8ba"
 
 [[files]]
 file = "resourcepacks/industrial-civilization-connected-textures/assets/ics_ct/textures/block/control_room_window.png"
