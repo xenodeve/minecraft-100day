@@ -147,7 +147,7 @@ to rely on something other than a written grant.
 modpacks on a bullet reading `- Large Modpacks`. In context that sits under a **Performance**
 heading and describes what the mod is suitable for, not what you may do with it. It is silent.
 
-## Permissively licensed — 71 mods
+## Permissively licensed — 72 mods
 
 Redistribution is granted by the licence text itself. GPL/LGPL/MPL additionally require that the
 licence and source remain available; shipping the jars unmodified with `docs/MODLIST.md` linking
@@ -200,6 +200,7 @@ been modified.
 | ModernFix | [Modrinth](https://modrinth.com/mod/modernfix) | GNU Lesser General Public License v3.0 only | Modrinth API |
 | Mouse Tweaks | [Modrinth](https://modrinth.com/mod/mouse-tweaks) | BSD 3 Clause "New" or "Revised" License | Modrinth API |
 | Multi-Piston | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/multi-piston) | GNU General Public License version 3 (GPLv3) | project page |
+| Noisium | [Modrinth](https://modrinth.com/mod/noisium) | GNU Lesser General Public License v3.0 | jar `META-INF/mods.toml` |
 | Particle Core | [Modrinth](https://modrinth.com/mod/particle-core) | MIT License | jar `META-INF/mods.toml` |
 | Placebo | [Modrinth](https://modrinth.com/mod/placebo) | MIT License | Modrinth API |
 | playerAnimator | [Modrinth](https://modrinth.com/mod/playeranimator) | MIT License | Modrinth API |
@@ -507,6 +508,7 @@ player-microchip      1488872   IN MANIFEST
 | ModernFix | [Modrinth](https://modrinth.com/mod/modernfix) | GNU Lesser General Public License v3.0 only | Modrinth API |
 | Mouse Tweaks | [Modrinth](https://modrinth.com/mod/mouse-tweaks) | BSD 3 Clause "New" or "Revised" License | Modrinth API |
 | Multi-Piston | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/multi-piston) | GNU General Public License version 3 (GPLv3) | project page |
+| Noisium | [Modrinth](https://modrinth.com/mod/noisium) | GNU Lesser General Public License v3.0 | jar `META-INF/mods.toml` |
 | Particle Core | [Modrinth](https://modrinth.com/mod/particle-core) | MIT License | jar `META-INF/mods.toml` |
 | Placebo | [Modrinth](https://modrinth.com/mod/placebo) | MIT License | Modrinth API |
 | playerAnimator | [Modrinth](https://modrinth.com/mod/playeranimator) | MIT License | Modrinth API |
