@@ -1,0 +1,4 @@
+version:3465
+key_iris.keybind.reload:key.keyboard.f9
+key_iris.keybind.toggleShaders:key.keyboard.f10
+key_iris.keybind.shaderPackSelection:key.keyboard.f12

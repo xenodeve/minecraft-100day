@@ -166,8 +166,11 @@ a corrupt save, and a `FAILED TO BIND TO PORT` that reads like a firewall proble
 `"/c/Program Files/GitHub CLI/gh.exe"`. Authenticated as `xenodeve`; scopes include `repo` and
 `workflow`. See `Obsidian-minecraft-100day/dev-machine-tooling.md`.
 
-**Not installed yet:** `packwiz`, `java`. Both are needed before any pack work; tracked in the
-ledger.
+**`packwiz` is installed** at `/c/Users/xenod/go/bin/packwiz.exe`, not on PATH — call it by that
+path. `packwiz refresh` after touching any pack file, or `verify` fails on a stale index hash.
+
+**Not installed:** `java`. Nothing can be boot-tested from this session; a launch is the
+developer's to run. Tracked in the ledger.
 
 ---
 

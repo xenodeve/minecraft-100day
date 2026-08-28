@@ -15,7 +15,7 @@
 // is fatal — a silently corrupt jar in a 130 MB artifact is exactly the kind
 // of failure nobody finds until a friend cannot launch.
 
-import { readdirSync, writeFileSync, mkdirSync, existsSync, statSync, rmSync, copyFileSync } from 'node:fs'
+import { readdirSync, writeFileSync, mkdirSync, existsSync, statSync, rmSync, copyFileSync, readFileSync } from 'node:fs'
 import { execFileSync } from 'node:child_process'
 import { join } from 'node:path'
 import { readPack, readMetas, fetchAndVerify, versionStamp, packOwnedJars } from './lib/pack.mjs'
@@ -62,6 +62,26 @@ for (const dir of ['config', 'defaultconfigs', 'kubejs', 'datapacks', 'resourcep
     execFileSync('cp', ['-r', src, join(STAGE, '.minecraft', dir)])
     console.log(`bundled ${dir}/`)
   }
+}
+
+// Root-level pack files. The directory list above cannot see them, and that is
+// how options.txt (#123) reached the CurseForge export -- which is built by
+// packwiz from the index -- but NOT this artifact, which is built from a
+// hardcoded list. Two distribution paths disagreeing about what the pack
+// contains is the drift Distribution Spec §38 exists to catch, and it caught
+// this one only because the archive was read back.
+//
+// Driven by index.toml rather than a second hardcoded name, so the next root
+// file added to the pack does not repeat this.
+const rootFiles = existsSync(join(ROOT, 'index.toml'))
+  ? [...readFileSync(join(ROOT, 'index.toml'), 'utf8')
+      .matchAll(/\[\[files\]\]\s*\nfile\s*=\s*"([^"/]+)"/g)].map(m => m[1])
+  : []
+for (const name of rootFiles) {
+  const src = join(ROOT, name)
+  if (!existsSync(src)) continue
+  copyFileSync(src, join(STAGE, '.minecraft', name))
+  console.log(`bundled ${name}`)
 }
 
 // Jars we author ourselves. A metafile loop cannot see them, which is how the
