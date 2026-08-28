@@ -83,14 +83,26 @@ if ($gpuLine) {
 
 # PresentMon is optional, and what it costs to skip is stated rather than implied.
 if (-not $PresentMon) {
-    foreach ($c in @("$env:ProgramFiles\PresentMon\PresentMon.exe",
-                     "$repo\tools\PresentMon.exe",
-                     "$env:USERPROFILE\Downloads\PresentMon.exe")) {
-        if (Test-Path $c) { $PresentMon = $c; break }
+    # Glob, not an exact name: the GitHub asset is PresentMon-2.5.1-x64.exe and
+    # requiring a rename is a step that will be forgotten exactly once.
+    foreach ($dir in @("$repo\tools", "$env:ProgramFiles\PresentMon", "$env:USERPROFILE\Downloads")) {
+        if (-not (Test-Path $dir)) { continue }
+        $hit = Get-ChildItem $dir -Filter 'PresentMon*.exe' -ErrorAction SilentlyContinue |
+               Sort-Object Name -Descending | Select-Object -First 1
+        if ($hit) { $PresentMon = $hit.FullName; break }
     }
 }
 if ($PresentMon -and (Test-Path $PresentMon)) {
     Step "presentmon $PresentMon"
+    $admin = ([Security.Principal.WindowsPrincipal] `
+              [Security.Principal.WindowsIdentity]::GetCurrent()
+             ).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
+    if (-not $admin) {
+        Step "           NOT RUNNING AS ADMIN. PresentMon needs an elevated shell to"
+        Step "           open its trace session; without it the CSV comes out empty"
+        Step "           and you find out after the run. Reopen PowerShell as"
+        Step "           Administrator, or accept no frame data this session."
+    }
 } else {
     $PresentMon = ""
     Step "presentmon NOT FOUND - no frametimes, no GPU-busy, and therefore NO"
@@ -143,9 +155,18 @@ public class Win {
 $csv = Join-Path $dest 'presentmon.csv'
 $pm = $null
 if ($PresentMon -and -not $DryRun) {
+    # PresentMon 2.x flags are double-dash and there is no -no_top; --no_console_stats
+    # replaced it. Read from `--help` on the actual binary, not from memory of 1.x.
+    # --v2_metrics pins the CSV column names so the parser is not guessing.
     $pm = Start-Process -FilePath $PresentMon `
-        -ArgumentList @('-process_name', 'javaw.exe', '-output_file', "`"$csv`"", '-terminate_after_timed',
-                        '-timed', ($Seconds + 20), '-no_top', '-stop_existing_session') `
+        -ArgumentList @('--process_name', 'javaw.exe',
+                        '--output_file', "`"$csv`"",
+                        '--timed', ($Seconds + 20),
+                        '--terminate_after_timed',
+                        '--terminate_on_proc_exit',
+                        '--no_console_stats',
+                        '--stop_existing_session',
+                        '--v2_metrics') `
         -PassThru -WindowStyle Hidden
     Write-Host "`nPresentMon capturing"
 }
