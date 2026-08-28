@@ -247,9 +247,16 @@ if ($sparkUrl) { $reportArgs += @('--spark', ($sparkUrl -split '/')[-1]) }
 if (Test-Path (Join-Path $dest 'profiling-result.txt')) { $reportArgs += @('--profiler', (Join-Path $dest 'profiling-result.txt')) }
 if (Test-Path $csv) { $reportArgs += @('--capframex', $csv) }
 
+# @reportArgs, not the bare automatic one. Splatting PowerShell's AUTOMATIC
+# args variable in a script that declares param() splats nothing, so node
+# launches with no arguments and drops into its REPL -- silently, no error
+# anywhere. That happened once, after a rename that changed the $-form and
+# missed the @-form.
 Push-Location $repo
-& node @args
+& node @reportArgs
+$nodeExit = $LASTEXITCODE
 Pop-Location
+if ($nodeExit -ne 0) { Fail "session-report exited $nodeExit - the report above is incomplete" }
 
 Write-Host "`n$($dest.Replace($repo,'.'))\report.md"
 Write-Host "`nNothing here is a per-mod frame cost. Correlation names suspects;"
