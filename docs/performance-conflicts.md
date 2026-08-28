@@ -480,6 +480,38 @@ worth in frames. Nothing here is measured.
 
 ---
 
+## C13 — the 2026-08-28 spark profile sampled only the server thread
+
+**Status: a correction to a conclusion this repo already acted on. Issue #135.**
+
+`QoHXwezfza`, the profile the earlier analysis rested on, contains exactly one thread — read from its
+own JSON:
+
+```
+threads: ['Server thread']
+```
+
+The conclusion drawn from it — *"no mod is above 2.1%, so the problem is the environment"* — is a
+statement about **server tick cost only**. It is not wrong about what it measured. It was applied to
+something it never looked at: **the reported problem is FPS in a dense area, which is a render-thread
+question.**
+
+**Every profile from now on uses `--thread *`.** Written into `benchmarks/FAST-PASS.md` so it is a
+procedure rather than a thing someone has to remember.
+
+**A second trap, fixed in code rather than remembered.** spark stores `thread.children` as a flat
+pool of every node with `childrenRefs` indexing into it, and `node.time` is always `0` — the values
+are in `node.times`. Summing every node counts the tree once per level: 49,908 samples against a real
+total of 1,896, percentages over 2000%. This session produced exactly that before reading the
+structure. `scripts/analyze/spark-profile.mjs` computes self time and prints
+`self-time reconstructs NNN%` as its own check; it reports 100.0% on that profile.
+
+**What still stands from the old profile:** GC 597/min against a 4 GB heap, `simulationDistance: 32`,
+and the swap figure. Those are server-side and memory observations, and this correction does not
+touch them.
+
+---
+
 ## DISCOVERED candidates — recorded, not installed
 
 **Six of these were INSTALLED in v0.2.1-alpha (#129) and are no longer candidates** — Colorwheel,
