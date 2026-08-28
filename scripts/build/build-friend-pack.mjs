@@ -81,6 +81,28 @@ for (const dir of ['config', 'kubejs', 'defaultconfigs', 'resourcepacks']) {
   console.log(`bundled ${dir}/`)
 }
 
+// Root-level pack files. The directory list above cannot see them, and that is
+// how options.txt (#123) reached the CurseForge export -- which is built by
+// packwiz from the index -- but NOT this artifact, which is built from a
+// hardcoded list. Two distribution paths disagreeing about what the pack
+// contains is the drift Distribution Spec §38 exists to catch, and it caught
+// this one only because the archive was read back.
+//
+// Driven by index.toml rather than a second hardcoded name, so the next root
+// file added to the pack does not repeat this.
+const rootFiles = existsSync(join(ROOT, 'index.toml'))
+  ? [...readFileSync(join(ROOT, 'index.toml'), 'utf8')
+      .matchAll(/\[\[files\]\]\s*\nfile\s*=\s*"([^"/]+)"/g)].map(m => m[1])
+  : []
+for (const name of rootFiles) {
+  const src = join(ROOT, name)
+  if (!existsSync(src)) continue
+  copyFileSync(src, join(STAGE, name))
+  ownedBytes += statSync(src).size
+  ownedFiles++
+  console.log(`bundled ${name}`)
+}
+
 // Maintainer READMEs are repo documentation. The connected-texture pack's README
 // is the one exception: it ships, because it tells a player why that pack does
 // nothing yet.

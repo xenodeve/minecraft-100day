@@ -849,6 +849,10 @@ hash = "f3b3d035b89519faccc4ddd8b0b4407ce96c0eb49068fe50a445d43a3baa8bea"
 metafile = true
 
 [[files]]
+file = "options.txt"
+hash = "04604d85ff4bea5f42e95ec91a39320c2043432a3bd1f9a98a01d9f9eca9d11e"
+
+[[files]]
 file = "resourcepacks/industrial-civilization-connected-textures/assets/ics_ct/textures/block/control_room_window.png"
 hash = "c7f33108275f2ef52f6d8be5ee97b2fa3ecc24780bfa77f6117b09045b76ef38"
 
