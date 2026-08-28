@@ -1,0 +1,29 @@
+{
+  "zone": "G",
+  "name": "Create Train / Fast Travel",
+  "description": "one fixed route · record length, speed, stations, new vs generated chunks",
+  "definedIn": "docs/performance-benchmarks.md",
+  "measure": [
+    "frametime spikes",
+    "chunk generation time",
+    "MSPT",
+    "chunk worker load"
+  ],
+  "primaryTargets": [
+    "C2ME for Forge",
+    "Noisium",
+    "Chunky pregeneration",
+    "Create train rendering"
+  ],
+  "world": {
+    "seed": "",
+    "dimension": "",
+    "coordinates": "",
+    "yaw": 0,
+    "pitch": 0,
+    "timeOfDay": "",
+    "weather": "",
+    "entityCount": null
+  },
+  "status": "NOT DEFINED — no world, no coordinates, never run"
+}

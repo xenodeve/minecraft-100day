@@ -1,0 +1,26 @@
+{
+  "zone": "A",
+  "name": "Empty Baseline",
+  "description": "control · renderer baseline · low entity count · no factory · no colony",
+  "definedIn": "docs/performance-benchmarks.md",
+  "measure": [
+    "Avg FPS",
+    "1% low",
+    "P99 frametime",
+    "CPU/GPU utilisation",
+    "heap",
+    "VRAM"
+  ],
+  "primaryTargets": [],
+  "world": {
+    "seed": "",
+    "dimension": "",
+    "coordinates": "",
+    "yaw": 0,
+    "pitch": 0,
+    "timeOfDay": "",
+    "weather": "",
+    "entityCount": null
+  },
+  "status": "NOT DEFINED — no world, no coordinates, never run"
+}

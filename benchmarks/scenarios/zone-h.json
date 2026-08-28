@@ -1,0 +1,23 @@
+{
+  "zone": "H",
+  "name": "Season 2 Vehicles",
+  "description": "defined in docs/performance-benchmarks.md · not part of the harness plan, kept so the zone letters do not drift",
+  "definedIn": "docs/performance-benchmarks.md",
+  "measure": [
+    "Avg FPS",
+    "1% low",
+    "MSPT"
+  ],
+  "primaryTargets": [],
+  "world": {
+    "seed": "",
+    "dimension": "",
+    "coordinates": "",
+    "yaw": 0,
+    "pitch": 0,
+    "timeOfDay": "",
+    "weather": "",
+    "entityCount": null
+  },
+  "status": "NOT DEFINED — no world, no coordinates, never run"
+}

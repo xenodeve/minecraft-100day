@@ -1,0 +1,34 @@
+{
+  "zone": "D",
+  "name": "Horde Arena",
+  "description": "fixed entity counts 50 / 100 / 150 / 200 · idle, moving, attacking, TaCZ semi/full auto, rain, particles, full combat",
+  "definedIn": "docs/performance-benchmarks.md",
+  "measure": [
+    "Avg FPS",
+    "1% low",
+    "P99 frametime",
+    "MSPT P95",
+    "entity tick"
+  ],
+  "primaryTargets": [
+    "Enhanced AI",
+    "Improved Mobs",
+    "Attract to Sound",
+    "The Hordes",
+    "TaCZ",
+    "Particle Core",
+    "Radium Re-Reforged",
+    "ServerCore"
+  ],
+  "world": {
+    "seed": "",
+    "dimension": "",
+    "coordinates": "",
+    "yaw": 0,
+    "pitch": 0,
+    "timeOfDay": "",
+    "weather": "",
+    "entityCount": null
+  },
+  "status": "NOT DEFINED — no world, no coordinates, never run"
+}
