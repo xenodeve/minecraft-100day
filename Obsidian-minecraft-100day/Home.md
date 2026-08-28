@@ -6,6 +6,7 @@
 ## feedback — how agents should work here
 - [[config-and-kubejs-fail-open]] — this pack swallows its own errors, so "it should work" is never evidence
 - [[measure-before-you-write-a-number]] — every balance figure in the docs is a measurement or it is fiction
+- [[spark-profiles-lie-twice]] — a profile answers only for the threads it sampled, and its JSON double-counts if you sum it
 
 ## project — ongoing goals / constraints not derivable from the code
 - [[create-version-is-the-pin]] — the Create major version decides the whole mod stack; nothing is pinnable before it
