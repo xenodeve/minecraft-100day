@@ -922,3 +922,7 @@ hash = "49b4c1cc9f9260ceea290f3694234ae4eeafd72b440baa44c99d3e62c02f88ea"
 [[files]]
 file = "resourcepacks/industrial-civilization-connected-textures/pack.mcmeta"
 hash = "80006d33962df7d359bbef210570fe3ad6269cf4dc5d712b837069332a5cf3c7"
+
+[[files]]
+file = "tools/PresentMon-2.5.1-x64.exe"
+hash = "9bec3083069f58f911e6a512f4806db51a27bd096103087bc1d05ef54c80a191"
