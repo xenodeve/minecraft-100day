@@ -30,7 +30,7 @@
 [CmdletBinding()]
 param(
     [Parameter(Mandatory = $true)][string]$Zone,
-    [Parameter(Mandatory = $true)][string]$Variant,
+    [string]$Variant = '',                                # omit it and the shader state names the run
     [Parameter(Mandatory = $true)][string]$Date,          # YYYY-MM-DD, not the clock: a run
                                                           # stamped from the machine clock is a
                                                           # run nobody can reproduce
@@ -47,7 +47,9 @@ $repo = (Resolve-Path "$PSScriptRoot\..\..").Path
 function Step($m) { Write-Host "  $m" }
 function Fail($m) { Write-Host "`nSTOP: $m" -ForegroundColor Red; exit 1 }
 
-Write-Host "`nBenchmark session - zone $Zone / $Variant / $Date"
+# The variant is not known yet when this prints -- it can be derived from the
+# shader state below -- so the banner names only what is certain here.
+Write-Host "`nBenchmark session - zone $Zone / $Date"
 Write-Host ("=" * 58)
 
 # ---------------------------------------------------------------- preflight
@@ -79,6 +81,50 @@ if ($gpuLine) {
     }
 } else {
     Step "gpu        (no OpenGL Renderer line yet - the client may not have finished starting)"
+}
+
+# SHADER STATE, READ RATHER THAN REMEMBERED.
+#
+# config/oculus.properties is the authority: the game rewrites it the moment you
+# change the setting. The log is not -- it records every pack LOADED, so a
+# session where you switched packs has several lines and the first one is stale.
+# The log read while writing this had six.
+#
+# The point of checking is not convenience. Mislabelling which run had shaders on
+# is the worst benchmark error available, because nothing downstream can detect
+# it: two runs get compared, the delta is attributed to the wrong variable, and
+# the number looks fine.
+$oculusCfg = Join-Path $InstanceDir 'config\oculus.properties'
+$shadersOn = $null
+$shaderPack = ''
+if (Test-Path $oculusCfg) {
+    $cfg = Get-Content $oculusCfg -Raw
+    $shadersOn = $cfg -match '(?m)^enableShaders\s*=\s*true'
+    if ($cfg -match '(?m)^shaderPack\s*=\s*(.+)$') { $shaderPack = $Matches[1].Trim() }
+    if ($shadersOn) { Step "shaders    ON - $shaderPack" } else { Step "shaders    OFF" }
+} else {
+    Step "shaders    unknown - no config\oculus.properties (Oculus may never have run)"
+}
+
+# Name the run from the state if the developer did not name it.
+if (-not $Variant) {
+    if ($null -eq $shadersOn) { Fail "-Variant is required when the shader state cannot be read." }
+    $Variant = if ($shadersOn) { 'shaders-on' } else { 'shaders-off' }
+    Step "variant    $Variant (derived from the shader state)"
+} else {
+    Step "variant    $Variant"
+}
+
+# And refuse a name that contradicts what was read.
+if ($null -ne $shadersOn) {
+    $claimsOff = $Variant -match '(?i)shaders?-?off|no-?shader'
+    $claimsOn  = $Variant -match '(?i)shaders?-?on'
+    if ($claimsOff -and $shadersOn) {
+        Fail "variant '$Variant' says shaders are off, but oculus.properties has enableShaders=true ($shaderPack). Turn them off in game, or rename the run."
+    }
+    if ($claimsOn -and -not $shadersOn) {
+        Fail "variant '$Variant' says shaders are on, but oculus.properties has enableShaders=false. Turn them on in game, or rename the run."
+    }
 }
 
 # PresentMon is optional, and what it costs to skip is stated rather than implied.

@@ -60,16 +60,35 @@ if (!logPath || !existsSync(logPath)) {
   const clean = v => String(v || '').replace(/[\r\n]+/g, ' ').trim()
   const find = re => clean((log.match(re) || [, ''])[1])
   const gpu = find(/OpenGL Renderer:\s*(.+)/)
-  const shader = find(/Using shaderpack:\s*(.+)/)
+  // THE LAST one, not the first. A session where the shader pack was switched
+  // writes several of these -- the log read while building this had six -- and
+  // log.match() returns the first, which reported a pack that had been replaced
+  // twenty minutes earlier.
+  const shaderLines = [...log.matchAll(/Using shaderpack:\s*([^\r\n]+)/g)].map(m => clean(m[1]))
+  const shader = shaderLines.length ? shaderLines[shaderLines.length - 1] : ''
   const mods = find(/Loading (\d+) mods/)
   const fw = clean([...log.matchAll(/Flywheel [Bb]ackend[^\r\n]*/g)].map(m => m[0]).slice(-1)[0])
-  const cw = clean([...log.matchAll(/\[Colorwheel\][^\r\n]*/g)].map(m => m[0]).slice(0, 1)[0])
+  // Also the LAST, and for the same reason: Colorwheel complains once per pack
+  // load, so the first complaint names a pack that may no longer be active.
+  const cwAll = [...log.matchAll(/\[Colorwheel\][^\r\n]*/g)].map(m => clean(m[0]))
+  const cw = cwAll.length ? cwAll[cwAll.length - 1] : ''
   const expect = one('expect-gpu')
 
   say(`| Field | Value |`)
   say(`|---|---|`)
   say(`| GPU | \`${gpu || 'not found'}\` |`)
-  say(`| Shader pack | \`${shader || 'none loaded'}\` |`)
+  // oculus.properties is the authority on whether shaders are ON; the log only
+  // says which pack was last LOADED, and a pack can be loaded and then disabled.
+  let shaderState = ''
+  const oculusCfg = logPath.replace(/logs[\\/]+latest\.log$/i, 'config/oculus.properties')
+  if (existsSync(oculusCfg)) {
+    const cfg = readFileSync(oculusCfg, 'utf8')
+    const on = /^enableShaders\s*=\s*true/mi.test(cfg)
+    const pk = clean((cfg.match(/^shaderPack\s*=\s*(.+)$/mi) || [, ''])[1])
+    shaderState = on ? `ON — \`${pk}\`` : 'OFF'
+    say(`| Shaders | **${shaderState}** — from \`config/oculus.properties\` |`)
+  }
+  say(`| Shader pack last loaded | \`${shader || 'none'}\`${shaderLines.length > 1 ? ` (${shaderLines.length} loads this session)` : ''} |`)
   say(`| Mods loaded | ${mods || '?'} (includes JarJar libraries) |`)
   say(`| Flywheel | \`${fw.replace(/^.*?\]:\s*/, '') || 'no line — not a Create client, or never rendered'}\` |`)
   if (cw) say(`| Colorwheel | \`${cw.replace(/^.*?\[Colorwheel\]\s*/, '')}\` |`)
