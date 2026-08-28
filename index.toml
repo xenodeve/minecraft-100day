@@ -345,6 +345,16 @@ hash = "903352ffbd84d4b95fed905893f4715d9c3f88ec9fff6fb06f6e359e0b839dc3"
 metafile = true
 
 [[files]]
+file = "mods/colorwheel.pw.toml"
+hash = "55f8316d2d00790e3e9bd1285a328706ef35e8fd2070e0248496bf9720f3f328"
+metafile = true
+
+[[files]]
+file = "mods/concurent-chunk-management-engine-forge.pw.toml"
+hash = "21c48ec56eb3018a3a4baeb85ba2b16926afae557f6b80dc937c0ce01ea1ad34"
+metafile = true
+
+[[files]]
 file = "mods/corpse.pw.toml"
 hash = "2fba2317a375669ccb1376525d4d4e0d1903cc5dc44fc70dce1d0e3dbb6aacb1"
 metafile = true
@@ -382,6 +392,11 @@ metafile = true
 [[files]]
 file = "mods/createaddition.pw.toml"
 hash = "e6d1f36e9e0193fe410d136e0cda8a7f6dbbc809c0644f06a601bddf5b38a395"
+metafile = true
+
+[[files]]
+file = "mods/createbetterfps.pw.toml"
+hash = "f54ff443e8b460c15c32ec45b84d49a62a33a4f652f2eaa613d3bc9c2a67f469"
 metafile = true
 
 [[files]]
@@ -654,6 +669,11 @@ hash = "f83b253ca6a8e6f2f847952704da0e1fb00e65cbb10b7c9cb15d1a1780618da0"
 metafile = true
 
 [[files]]
+file = "mods/particle-core.pw.toml"
+hash = "cc71ab4296fffdfca0a373adba4c7721ccad228f305fda8566507063de65e40e"
+metafile = true
+
+[[files]]
 file = "mods/particle-rain.pw.toml"
 hash = "0345711933e73891f8e1a7cff32ed0f9cef39ddee0b10e267736743f02fa4a00"
 metafile = true
@@ -691,6 +711,11 @@ metafile = true
 [[files]]
 file = "mods/puzzles-lib.pw.toml"
 hash = "4dd7038889da90e145f9d074bec64a61aaae12dc57c875aa7ad99b8b2e07979b"
+metafile = true
+
+[[files]]
+file = "mods/radium-re-reforged.pw.toml"
+hash = "b2dc6daa1c257d6adc9b42ffd07e9a3cdffe2fd6b9ea2b169023c38387073287"
 metafile = true
 
 [[files]]
@@ -821,6 +846,11 @@ metafile = true
 [[files]]
 file = "mods/the-hordes.pw.toml"
 hash = "ef4dabd18fc684f656126d1e77895e50f0789993a055a5a08e810225512dd0ba"
+metafile = true
+
+[[files]]
+file = "mods/thulium.pw.toml"
+hash = "ca5aeddfbce3bf46a9bab9ffa7b9c75fe4e6c2ab7c2e9498527d043ac687437b"
 metafile = true
 
 [[files]]

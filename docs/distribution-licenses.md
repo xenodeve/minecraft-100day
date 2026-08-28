@@ -147,7 +147,7 @@ to rely on something other than a written grant.
 modpacks on a bullet reading `- Large Modpacks`. In context that sits under a **Performance**
 heading and describes what the mod is suitable for, not what you may do with it. It is silent.
 
-## Permissively licensed — 65 mods
+## Permissively licensed — 71 mods
 
 Redistribution is granted by the licence text itself. GPL/LGPL/MPL additionally require that the
 licence and source remain available; shipping the jars unmodified with `docs/MODLIST.md` linking
@@ -170,9 +170,12 @@ been modified.
 | Cloth Config API | [Modrinth](https://modrinth.com/mod/cloth-config) | GNU Lesser General Public License v3.0 only | Modrinth API |
 | ClothingCraft | [Modrinth](https://modrinth.com/mod/clothingcraft) | MIT License | Modrinth API |
 | Clumps | [Modrinth](https://modrinth.com/mod/clumps) | MIT License | Modrinth API |
+| Colorwheel | [Modrinth](https://modrinth.com/mod/colorwheel) | MIT License | jar `META-INF/mods.toml` |
+| Concurent Chunk Management Engine - Forge | [CurseForge](https://www.curseforge.com/projects/1610389) | MIT License | jar `META-INF/mods.toml` |
 | Create Crafts & Additions | [Modrinth](https://modrinth.com/mod/createaddition) | MIT License | Modrinth API |
 | Create: Diesel Generators | [Modrinth](https://modrinth.com/mod/create-diesel-generators) | MIT License | Modrinth API |
 | Create: Steam 'n' Rails | [Modrinth](https://modrinth.com/mod/create-steam-n-rails) | GNU Lesser General Public License v3.0 only | Modrinth API |
+| CreateBetterFps | [Modrinth](https://modrinth.com/mod/createbetterfps) | MIT License | jar `META-INF/mods.toml` |
 | CreativeCore | [Modrinth](https://modrinth.com/mod/creativecore) | GNU Lesser General Public License v3.0 only | Modrinth API |
 | Curios API | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/curios) | GNU Lesser General Public License version 3 (LGPLv3) | project page |
 | Domum Ornamentum | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/domum-ornamentum) | GNU General Public License version 3 (GPLv3) | project page |
@@ -197,11 +200,13 @@ been modified.
 | ModernFix | [Modrinth](https://modrinth.com/mod/modernfix) | GNU Lesser General Public License v3.0 only | Modrinth API |
 | Mouse Tweaks | [Modrinth](https://modrinth.com/mod/mouse-tweaks) | BSD 3 Clause "New" or "Revised" License | Modrinth API |
 | Multi-Piston | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/multi-piston) | GNU General Public License version 3 (GPLv3) | project page |
+| Particle Core | [Modrinth](https://modrinth.com/mod/particle-core) | MIT License | jar `META-INF/mods.toml` |
 | Placebo | [Modrinth](https://modrinth.com/mod/placebo) | MIT License | Modrinth API |
 | playerAnimator | [Modrinth](https://modrinth.com/mod/playeranimator) | MIT License | Modrinth API |
 | PlayerRevive | [Modrinth](https://modrinth.com/mod/playerrevive) | GNU Lesser General Public License v2.1 only | Modrinth API |
 | Polymorph | [Modrinth](https://modrinth.com/mod/polymorph) | GNU Lesser General Public License v3.0 or later | Modrinth API |
 | Puzzles Lib | [Modrinth](https://modrinth.com/mod/puzzles-lib) | Mozilla Public License 2.0 | Modrinth API |
+| Radium Re-Reforged | [CurseForge](https://www.curseforge.com/projects/1649038) | GNU Lesser General Public License v3.0 only | jar `META-INF/mods.toml` |
 | Rhino | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/rhino) | Mozilla Public License 2.0 | project page |
 | Ritchie's Projectile Library | [Modrinth](https://modrinth.com/mod/rpl) | MIT License | Modrinth API |
 | Security Craft | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/security-craft) | MIT License | project page |
@@ -212,6 +217,7 @@ been modified.
 | Structurize | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/structurize) | GNU General Public License version 3 (GPLv3) | project page |
 | TaCZ x Guns Lights Addon [NEW] - Update 2.5.0 | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/tacz-x-gunslightsaddon-addon) | Academic Free License v3.0 | project page |
 | The Hordes | [Modrinth](https://modrinth.com/mod/the-hordes) | GNU Lesser General Public License v2.1 only | Modrinth API |
+| Thulium | [CurseForge](https://www.curseforge.com/projects/1462886) | MIT License | jar `META-INF/mods.toml` |
 | Uranus | [Modrinth](https://modrinth.com/mod/uranus) | GNU Lesser General Public License v3.0 or later | Modrinth API |
 | Visual Workbench | [Modrinth](https://modrinth.com/mod/visual-workbench) | Mozilla Public License 2.0 | Modrinth API |
 | YetAnotherConfigLib (YACL) | [Modrinth](https://modrinth.com/mod/yacl) | GNU Lesser General Public License v3.0 or later | Modrinth API |
@@ -471,9 +477,12 @@ player-microchip      1488872   IN MANIFEST
 | Cloth Config API | [Modrinth](https://modrinth.com/mod/cloth-config) | GNU Lesser General Public License v3.0 only | Modrinth API |
 | ClothingCraft | [Modrinth](https://modrinth.com/mod/clothingcraft) | MIT License | Modrinth API |
 | Clumps | [Modrinth](https://modrinth.com/mod/clumps) | MIT License | Modrinth API |
+| Colorwheel | [Modrinth](https://modrinth.com/mod/colorwheel) | MIT License | jar `META-INF/mods.toml` |
+| Concurent Chunk Management Engine - Forge | [CurseForge](https://www.curseforge.com/projects/1610389) | MIT License | jar `META-INF/mods.toml` |
 | Create Crafts & Additions | [Modrinth](https://modrinth.com/mod/createaddition) | MIT License | Modrinth API |
 | Create: Diesel Generators | [Modrinth](https://modrinth.com/mod/create-diesel-generators) | MIT License | Modrinth API |
 | Create: Steam 'n' Rails | [Modrinth](https://modrinth.com/mod/create-steam-n-rails) | GNU Lesser General Public License v3.0 only | Modrinth API |
+| CreateBetterFps | [Modrinth](https://modrinth.com/mod/createbetterfps) | MIT License | jar `META-INF/mods.toml` |
 | CreativeCore | [Modrinth](https://modrinth.com/mod/creativecore) | GNU Lesser General Public License v3.0 only | Modrinth API |
 | Curios API | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/curios) | GNU Lesser General Public License version 3 (LGPLv3) | project page |
 | Domum Ornamentum | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/domum-ornamentum) | GNU General Public License version 3 (GPLv3) | project page |
@@ -498,11 +507,13 @@ player-microchip      1488872   IN MANIFEST
 | ModernFix | [Modrinth](https://modrinth.com/mod/modernfix) | GNU Lesser General Public License v3.0 only | Modrinth API |
 | Mouse Tweaks | [Modrinth](https://modrinth.com/mod/mouse-tweaks) | BSD 3 Clause "New" or "Revised" License | Modrinth API |
 | Multi-Piston | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/multi-piston) | GNU General Public License version 3 (GPLv3) | project page |
+| Particle Core | [Modrinth](https://modrinth.com/mod/particle-core) | MIT License | jar `META-INF/mods.toml` |
 | Placebo | [Modrinth](https://modrinth.com/mod/placebo) | MIT License | Modrinth API |
 | playerAnimator | [Modrinth](https://modrinth.com/mod/playeranimator) | MIT License | Modrinth API |
 | PlayerRevive | [Modrinth](https://modrinth.com/mod/playerrevive) | GNU Lesser General Public License v2.1 only | Modrinth API |
 | Polymorph | [Modrinth](https://modrinth.com/mod/polymorph) | GNU Lesser General Public License v3.0 or later | Modrinth API |
 | Puzzles Lib | [Modrinth](https://modrinth.com/mod/puzzles-lib) | Mozilla Public License 2.0 | Modrinth API |
+| Radium Re-Reforged | [CurseForge](https://www.curseforge.com/projects/1649038) | GNU Lesser General Public License v3.0 only | jar `META-INF/mods.toml` |
 | Rhino | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/rhino) | Mozilla Public License 2.0 | project page |
 | Ritchie's Projectile Library | [Modrinth](https://modrinth.com/mod/rpl) | MIT License | Modrinth API |
 | Security Craft | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/security-craft) | MIT License | project page |
@@ -513,6 +524,7 @@ player-microchip      1488872   IN MANIFEST
 | Structurize | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/structurize) | GNU General Public License version 3 (GPLv3) | project page |
 | TaCZ x Guns Lights Addon [NEW] - Update 2.5.0 | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/tacz-x-gunslightsaddon-addon) | Academic Free License v3.0 | project page |
 | The Hordes | [Modrinth](https://modrinth.com/mod/the-hordes) | GNU Lesser General Public License v2.1 only | Modrinth API |
+| Thulium | [CurseForge](https://www.curseforge.com/projects/1462886) | MIT License | jar `META-INF/mods.toml` |
 | Uranus | [Modrinth](https://modrinth.com/mod/uranus) | GNU Lesser General Public License v3.0 or later | Modrinth API |
 | Visual Workbench | [Modrinth](https://modrinth.com/mod/visual-workbench) | Mozilla Public License 2.0 | Modrinth API |
 | YetAnotherConfigLib (YACL) | [Modrinth](https://modrinth.com/mod/yacl) | GNU Lesser General Public License v3.0 or later | Modrinth API |
