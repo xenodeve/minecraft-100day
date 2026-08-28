@@ -1,12 +1,12 @@
 name = "Industrial Civilization Survival"
 author = "xenodeve"
-version = "0.2.0-alpha"
+version = "0.2.1-alpha"
 pack-format = "packwiz:1.1.0"
 
 [index]
 file = "index.toml"
 hash-format = "sha256"
-hash = "d304d8cb8485addaa86ea0d4311ec4fed3936f67aa6be79040aa5571c2aded6b"
+hash = "42935f8c08d89c4602c22ca919ed2db7ab3ba4f1021ab73dc58cce9d0181315a"
 
 [versions]
 forge = "47.4.23"

@@ -16,6 +16,43 @@ no entry, no tag, and is never handed to a friend as if it were a release.
 
 ---
 
+## v0.2.1-alpha — pre-release, 2026-08-28
+
+**Still a pre-release, and still untested in game.** The twelve-test gate in *Distribution Spec §16*
+has not run. Six mods were added and **none of them has been launched once.**
+
+### Added
+
+- **Colorwheel** — lets Create's Flywheel renderer work while a shader pack is on. Until now it did
+  not: the game reported `Flywheel Backend: flywheel:off`, so every Create machine was drawn the
+  slow way. This is the one most likely to change how a machine-heavy base feels.
+- **CreateBetterFps** — further Create rendering work that Colorwheel does not cover.
+- **Particle Core** — culls and cheapens particles. This pack throws a lot of them: rain, gunfire,
+  explosions, Create.
+- **Radium Re-Reforged** — broad game-logic optimiser (the Lithium family): mob AI, collisions,
+  block ticking.
+- **Thulium** — client-side work on allocations, the sound engine and the event bus. This pack has
+  a heavy sound and event stack.
+- **C2ME for Forge** — parallel chunk generation, loading and I/O. **The riskiest of the six**: it
+  is an alpha build of a mod that rewrites how chunks are made and saved. If worlds start behaving
+  strangely, remove this one first.
+
+### Changed
+
+- **Shader keybinds no longer fight the gun.** Reloading with `R` used to recompile the whole
+  shader pack, which is why it stuttered every magazine. Oculus now uses `F8` (reload), `F10`
+  (toggle) and `F12` (shader pack selection). Shipped in a four-line `options.txt`; nothing else
+  about your settings is touched.
+
+### Known issues
+
+- **Do not hold a gun with shaders on for long.** A vertex buffer grows until the client runs out of
+  memory — about a minute in testing. Turn shaders off if it happens. Tracked as `C9` / #117.
+- Frame generation is **not** available in the optional Super Resolution add-on and its menu will
+  not appear; the backend for it lives in a mod that cannot be installed yet (#119).
+
+---
+
 ## v0.2.0-alpha — pre-release, 2026-08-28
 
 **This is a pre-release for testing, not a release.** The twelve-test gate in *Distribution Spec

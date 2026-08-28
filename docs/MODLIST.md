@@ -1,12 +1,12 @@
-<!-- roster-digest: 847e4a5c1407256231461151e39ea8cd01e9e8896a3dfeff9762924ccf0a8a51 -->
-<!-- mod-count: 120 -->
+<!-- roster-digest: 06a7973a9720658dc83ae1af834b0b15a5af774d7886930e83f71c5529b01114 -->
+<!-- mod-count: 126 -->
 <!-- GENERATED FILE — do not edit by hand.
      Run: node scripts/build/generate-modlist.mjs
      `verify` refuses a roster that disagrees with mods/. -->
 
 # What is in this pack · ในแพ็กนี้มีอะไรบ้าง
 
-**Industrial Civilization Survival 0.2.0-alpha** — **120 mods** on Minecraft `1.20.1`,
+**Industrial Civilization Survival 0.2.0-alpha** — **126 mods** on Minecraft `1.20.1`,
 Forge `47.4.23`.
 
 Every mod here is somebody else's work. This file exists so you can see whose, and go and find
@@ -14,17 +14,17 @@ the original.
 
 **Where you will find this file.** It ships at the top of the client instance zip and at the top of
 the server zip. The CurseForge-format zip instead carries packwiz's own `modlist.html`, which lists
-119 names — the client-side set — with no versions, sides or links. This
+125 names — the client-side set — with no versions, sides or links. This
 file is the complete one.
 
 **ไฟล์นี้อยู่ตรงไหน** มันอยู่บนสุดของ zip ตัว client instance และบนสุดของ zip ตัว server
-ส่วน zip รูปแบบ CurseForge จะมี `modlist.html` ของ packwiz เองแทน ซึ่งลงชื่อไว้ 119 ชื่อ —
+ส่วน zip รูปแบบ CurseForge จะมี `modlist.html` ของ packwiz เองแทน ซึ่งลงชื่อไว้ 125 ชื่อ —
 ชุดฝั่ง client — โดยไม่มีเวอร์ชัน ไม่มี side ไม่มีลิงก์ ไฟล์นี้คือตัวที่ครบ
 
 ## Reading the table
 
 **The File column is the exact jar filename**, not a tidied-up version number. That is deliberate:
-120 mods use 120 filename conventions, and parsing a version out of them would mean
+126 mods use 126 filename conventions, and parsing a version out of them would mean
 guessing. The
 filename is what is actually on your disk, so it is also what you can match against your `mods/`
 folder when something goes wrong.
@@ -35,21 +35,21 @@ mod's name — twice now, a guessed slug in this repo has pointed at the wrong p
 at a modpack rather than the mod.
 
 **Client / Server** tells you where a mod runs. If you are hosting a server, you need the
-95 in *Both* and the 1 in *Server only*; the 24 client-only
+97 in *Both* and the 1 in *Server only*; the 28 client-only
 mods are not installed on a server and are not missing when they are absent.
 
 ## อ่านตารางยังไง
 
-**คอลัมน์ File คือชื่อไฟล์ jar จริง ๆ** ไม่ใช่เลขเวอร์ชันที่จัดให้สวย ตั้งใจให้เป็นแบบนั้น เพราะมอด 120 ตัว
-ใช้รูปแบบการตั้งชื่อไฟล์ 120 แบบ การพยายามแกะเวอร์ชันออกมาคือการเดา ชื่อไฟล์คือสิ่งที่อยู่บนเครื่องคุณจริง ๆ
+**คอลัมน์ File คือชื่อไฟล์ jar จริง ๆ** ไม่ใช่เลขเวอร์ชันที่จัดให้สวย ตั้งใจให้เป็นแบบนั้น เพราะมอด 126 ตัว
+ใช้รูปแบบการตั้งชื่อไฟล์ 126 แบบ การพยายามแกะเวอร์ชันออกมาคือการเดา ชื่อไฟล์คือสิ่งที่อยู่บนเครื่องคุณจริง ๆ
 ดังนั้นมันจึงเป็นสิ่งที่คุณเอาไปเทียบกับโฟลเดอร์ `mods/` ได้ตอนมีอะไรผิดพลาด
 
 **ลิงก์ต้นทาง resolve มา ไม่ได้เดา** packwiz บันทึก project *id* ไว้ ไม่เคยบันทึก slug
 สคริปต์นี้จึงตาม id ไปจนถึงหน้าที่มันไปจบแล้วลิงก์หน้านั้น มันไม่ประกอบ URL ขึ้นจากชื่อมอดเด็ดขาด —
 สอง​ครั้งแล้วที่ slug ที่เดาใน repo นี้ชี้ไปผิดโปรเจกต์ ครั้งหนึ่งชี้ไปที่ modpack แทนที่จะเป็นตัวมอด
 
-**Client / Server** บอกว่ามอดตัวนั้นทำงานฝั่งไหน ถ้าคุณจะเปิด server คุณต้องใช้ 95 ตัวใน *Both*
-กับ 1 ตัวใน *Server only* ส่วนมอดฝั่ง client 24 ตัวจะไม่ถูกติดตั้งบน server
+**Client / Server** บอกว่ามอดตัวนั้นทำงานฝั่งไหน ถ้าคุณจะเปิด server คุณต้องใช้ 97 ตัวใน *Both*
+กับ 1 ตัวใน *Server only* ส่วนมอดฝั่ง client 28 ตัวจะไม่ถูกติดตั้งบน server
 และการที่มันไม่อยู่ตรงนั้นไม่ใช่ของหาย
 
 > **หมายเหตุ** ตารางด้านล่างมีชุดเดียว ไม่ได้ทำสองภาษา เพราะเนื้อในเป็นชื่อมอด ชื่อไฟล์ และ URL ซึ่งเป็น
@@ -57,7 +57,7 @@ mods are not installed on a server and are not missing when they are absent.
 
 ---
 
-## Both — client and server · ทั้งสองฝั่ง (95)
+## Both — client and server · ทั้งสองฝั่ง (97)
 
 | Mod · มอด | File · ไฟล์ | Source · ต้นทาง |
 |---|---|---|
@@ -78,6 +78,7 @@ mods are not installed on a server and are not missing when they are absent.
 | Cloth Config API | `cloth-config-11.1.136-forge.jar` | [Modrinth](https://modrinth.com/mod/cloth-config) |
 | ClothingCraft | `clothingcraft-1.0.0.jar` | [Modrinth](https://modrinth.com/mod/clothingcraft) |
 | Clumps | `Clumps-forge-1.20.1-12.0.0.4.jar` | [Modrinth](https://modrinth.com/mod/clumps) |
+| Concurent Chunk Management Engine - Forge | `c2meforge-0.2.0-forge.4-all.jar` | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/concurent-chunk-management-engine-forge) |
 | Corpse | `corpse-forge-1.20.1-1.0.23.jar` | [Modrinth](https://modrinth.com/mod/corpse) |
 | Countered's Terrain Slabs | `terrain_slabs-forge-4.0.2-beta.jar` | [Modrinth](https://modrinth.com/mod/countereds-terrain-slabs) |
 | Crafting Tweaks | `craftingtweaks-forge-1.20.1-18.2.9.jar` | [Modrinth](https://modrinth.com/mod/crafting-tweaks) |
@@ -134,6 +135,7 @@ mods are not installed on a server and are not missing when they are absent.
 | PlayerRevive | `PlayerRevive_FORGE_v2.0.31_mc1.20.1.jar` | [Modrinth](https://modrinth.com/mod/playerrevive) |
 | Polymorph | `polymorph-forge-0.49.10+1.20.1.jar` | [Modrinth](https://modrinth.com/mod/polymorph) |
 | Puzzles Lib | `PuzzlesLib-v8.1.33-1.20.1-Forge.jar` | [Modrinth](https://modrinth.com/mod/puzzles-lib) |
+| Radium Re-Reforged | `radium-mc1.20.1-0.14.1+git.54e0012.jar` | [CurseForge](https://www.curseforge.com/projects/1649038) |
 | Rhino | `rhino-forge-2001.2.3-build.10.jar` | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/rhino) |
 | Ritchie's Projectile Library | `ritchiesprojectilelib-2.1.1+mc.1.20.1-forge.jar` | [Modrinth](https://modrinth.com/mod/rpl) |
 | Security Craft | `[1.20.1] SecurityCraft v1.10.2.1.jar` | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/security-craft) |
@@ -157,7 +159,7 @@ mods are not installed on a server and are not missing when they are absent.
 | Visual Workbench | `VisualWorkbench-v8.0.1-1.20.1-Forge.jar` | [Modrinth](https://modrinth.com/mod/visual-workbench) |
 | YetAnotherConfigLib (YACL) | `yet_another_config_lib_v3-3.6.6+1.20.1-forge.jar` | [Modrinth](https://modrinth.com/mod/yacl) |
 
-## Client only · เฉพาะฝั่ง client (24)
+## Client only · เฉพาะฝั่ง client (28)
 
 Not installed on a server. `docs/side-classification.md` records the evidence for each call.
 
@@ -172,6 +174,8 @@ Not installed on a server. `docs/side-classification.md` records the evidence fo
 | Better Animations Collection | `BetterAnimationsCollection-v8.0.1-1.20.1-Forge.jar` | [Modrinth](https://modrinth.com/mod/better-animations-collection) |
 | Better Biome Blend | `betterbiomeblend-forge-1.20.1-1.4.0.jar` | [Modrinth](https://modrinth.com/mod/better-biome-blend) |
 | Client Dynamic Light | `clientdynamiclight-1.20.1-3.2.1.jar` | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/client-dynamic-light) |
+| Colorwheel | `colorwheel-forge-1.2.9+mc1.20.1.jar` | [Modrinth](https://modrinth.com/mod/colorwheel) |
+| CreateBetterFps | `createbetterfps-1.20.1-1.1.2.jar` | [Modrinth](https://modrinth.com/mod/createbetterfps) |
 | Dynamic FPS | `dynamic-fps-3.11.4+minecraft-1.20.0-forge.jar` | [Modrinth](https://modrinth.com/mod/dynamic-fps) |
 | Embeddium | `embeddium-0.3.31+mc1.20.1.jar` | [Modrinth](https://modrinth.com/mod/embeddium) |
 | Entity Culling | `entityculling-forge-1.10.5-mc1.20.1.jar` | [Modrinth](https://modrinth.com/mod/entityculling) |
@@ -183,12 +187,14 @@ Not installed on a server. `docs/side-classification.md` records the evidence fo
 | Mouse Tweaks | `MouseTweaks-forge-mc1.20.1-2.25.1.jar` | [Modrinth](https://modrinth.com/mod/mouse-tweaks) |
 | Not Enough Animations | `notenoughanimations-forge-1.12.4-mc1.20.1.jar` | [Modrinth](https://modrinth.com/mod/not-enough-animations) |
 | Oculus | `oculus-mc1.20.1-1.8.0.jar` | [Modrinth](https://modrinth.com/mod/oculus) |
+| Particle Core | `particle_core-0.3.3+1.20.1+forge.jar` | [Modrinth](https://modrinth.com/mod/particle-core) |
 | Particle Rain | `particlerain-4.0.0-beta.11+1.20.1-forge.jar` | [Modrinth](https://modrinth.com/mod/particle-rain) |
 | Polytone | `polytone-1.20-3.5.26.jar` | [Modrinth](https://modrinth.com/mod/polytone) |
 | SmoothPlayerAnimations | `SmoothPlayerAnimations_Forge_1.20.1_1.0.3.jar` | [Modrinth](https://modrinth.com/mod/smoothplayeranimations) |
 | Soft Imprints | `softimprints-forge-1.20.1-2.8.0.jar` | [Modrinth](https://modrinth.com/mod/snow-imprints) |
 | Sound Physics Remastered | `sound-physics-remastered-forge-1.20.1-1.5.1.jar` | [Modrinth](https://modrinth.com/mod/sound-physics-remastered) |
 | Subtle Effects | `SubtleEffects-forge-1.20.1-1.14.3.jar` | [Modrinth](https://modrinth.com/mod/subtle-effects) |
+| Thulium | `thulium-1.0.5.jar` | [CurseForge](https://www.curseforge.com/projects/1462886) |
 
 ## Server only · เฉพาะฝั่ง server (1)
 

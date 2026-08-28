@@ -61,6 +61,23 @@ about the mod, a statement by its author that the loader acts on.
 | Client Dynamic Light | `client-dynamic-light` | `clientSideOnly = true` |
 | Entity Culling | `entityculling` | `clientSideOnly = true` |
 | Not Enough Animations | `not-enough-animations` | `clientSideOnly = true` |
+| Thulium | `thulium` | `clientSideOnly = true` |
+
+### Client because the server has no renderer — #129
+
+Three of the #129 performance batch declare no `clientSideOnly`, so the reason has to be written
+rather than read off. Each is checkable without redoing the reasoning:
+
+| Mod | Slug | The checkable fact |
+|---|---|---|
+| Colorwheel | `colorwheel` | its own description is *"Allows you to use Iris Shaders with Flywheel"*, and its `mods.toml` makes **`oculus` mandatory** — Oculus is already `client` in this roster, so a server loading Colorwheel could not satisfy it |
+| CreateBetterFps | `createbetterfps` | its `mods.toml` declares **every** one of its own dependencies — `create`, `oculus`, `embeddium` — as `side = "CLIENT"`, and two of them are mandatory |
+| Particle Core | `particle-core` | its `mods.toml` declares **every** dependency as `side = "CLIENT"`, including the mandatory `kotlinforforge` and `fzzy_config` |
+
+**Radium Re-Reforged and C2ME-Forge are `both`, deliberately.** Both change game logic the
+integrated server runs, and #88 is the standing reminder that singleplayer *is* a server: a
+gameplay mod marked one-sided disappears from the side it was not marked for. Neither declares
+`clientSideOnly`, and neither is a renderer.
 
 **`client-dynamic-light` was marked `both` and was wrong.** Forge would have skipped it on a server
 anyway, so nothing was broken — but packwiz was downloading it into every server install, and the
@@ -340,6 +357,23 @@ gate ตรวจไม่ได้ว่าเหตุผล*ดี*หรื�
 | Client Dynamic Light | `client-dynamic-light` | `clientSideOnly = true` |
 | Entity Culling | `entityculling` | `clientSideOnly = true` |
 | Not Enough Animations | `not-enough-animations` | `clientSideOnly = true` |
+| Thulium | `thulium` | `clientSideOnly = true` |
+
+### Client because the server has no renderer — #129
+
+Three of the #129 performance batch declare no `clientSideOnly`, so the reason has to be written
+rather than read off. Each is checkable without redoing the reasoning:
+
+| Mod | Slug | The checkable fact |
+|---|---|---|
+| Colorwheel | `colorwheel` | its own description is *"Allows you to use Iris Shaders with Flywheel"*, and its `mods.toml` makes **`oculus` mandatory** — Oculus is already `client` in this roster, so a server loading Colorwheel could not satisfy it |
+| CreateBetterFps | `createbetterfps` | its `mods.toml` declares **every** one of its own dependencies — `create`, `oculus`, `embeddium` — as `side = "CLIENT"`, and two of them are mandatory |
+| Particle Core | `particle-core` | its `mods.toml` declares **every** dependency as `side = "CLIENT"`, including the mandatory `kotlinforforge` and `fzzy_config` |
+
+**Radium Re-Reforged and C2ME-Forge are `both`, deliberately.** Both change game logic the
+integrated server runs, and #88 is the standing reminder that singleplayer *is* a server: a
+gameplay mod marked one-sided disappears from the side it was not marked for. Neither declares
+`clientSideOnly`, and neither is a renderer.
 
 **`client-dynamic-light` เคยถูกทำเครื่องหมายเป็น `both` และมันผิด** Forge จะข้ามมันบน server
 อยู่แล้ว จึงไม่มีอะไรพัง — แต่ packwiz ดาวน์โหลดมันเข้าไปในทุก server install และ compatibility
