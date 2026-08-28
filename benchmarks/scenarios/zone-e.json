@@ -1,0 +1,29 @@
+{
+  "zone": "E",
+  "name": "Wildlife",
+  "description": "fixed totals 25 / 50 / 100 · record species composition",
+  "definedIn": "docs/performance-benchmarks.md",
+  "measure": [
+    "Avg FPS",
+    "1% low",
+    "MSPT",
+    "entity tick"
+  ],
+  "primaryTargets": [
+    "Naturalist",
+    "Critters and Companions",
+    "Ecologics",
+    "Ice and Fire ambient"
+  ],
+  "world": {
+    "seed": "",
+    "dimension": "",
+    "coordinates": "",
+    "yaw": 0,
+    "pitch": 0,
+    "timeOfDay": "",
+    "weather": "",
+    "entityCount": null
+  },
+  "status": "NOT DEFINED — no world, no coordinates, never run"
+}

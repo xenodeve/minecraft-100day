@@ -1,0 +1,27 @@
+{
+  "zone": "F",
+  "name": "Dragon",
+  "description": "one fixed encounter · record type, stage, nearby mobs, terrain damage, particles",
+  "definedIn": "docs/performance-benchmarks.md",
+  "measure": [
+    "Avg FPS",
+    "1% low",
+    "MSPT",
+    "client and server cost"
+  ],
+  "primaryTargets": [
+    "Ice and Fire",
+    "Radium Re-Reforged"
+  ],
+  "world": {
+    "seed": "",
+    "dimension": "",
+    "coordinates": "",
+    "yaw": 0,
+    "pitch": 0,
+    "timeOfDay": "",
+    "weather": "",
+    "entityCount": null
+  },
+  "status": "NOT DEFINED — no world, no coordinates, never run"
+}

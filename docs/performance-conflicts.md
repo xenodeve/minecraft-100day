@@ -423,6 +423,63 @@ in singleplayer too.
 
 ---
 
+## C12 — Colorwheel is installed and still cannot help, because no installed shader pack supports it
+
+**Status: LIVE, measured from a real 0.2.2-alpha launch on 2026-08-28. Issue #133.**
+
+`C10` recorded that Flywheel's backend was off and named Colorwheel as the bridge that would fix it.
+Colorwheel is now installed (#129) and **Flywheel is still off**:
+
+```
+[Render thread/WARN] Flywheel backend fell back from 'flywheel:indirect' to 'flywheel:off'
+```
+
+**Colorwheel says why, in chat, in the log:**
+
+```
+[Colorwheel] The shader pack Shrimple_v0.11.zip is not compatible
+You may request Colorwheel support to the shader pack developer. You may also enable
+the fallback mode for fully automatic support. There WILL BE graphical issues...
+```
+
+**Colorwheel is not a general fix — it needs the shader pack to cooperate.** From its own project
+page:
+
+| Support | Packs |
+|---|---|
+| **Official** | Complementary Unbound / Reimagined **since r5.7**, Eclipse, Shrimple **(the WIP GitHub build)** |
+| **Via Colorwheel-Patcher** | BSL 10.1, Bliss **2.1.1–2.1.2**, Complementary 5.6–5.6.1, Photon **1.3a**, Rethinking Voxels 0.1-beta9 |
+| **Fallback mode** | anything else, "best effort", author warns of graphical issues |
+
+**None of the six packs installed on the test client qualifies.** Read from `shaderpacks/`:
+`Astralex_v93.0`, `Bliss-v2.0.4` (needs 2.1.1+), `Bliss-Shader Dev` (version not established),
+`SEUS-v11.0`, `Shrimple_v0.11` (the supported Shrimple is the WIP GitHub build — this one is
+rejected by name in the log), `photon_v1.3b` (the supported one is 1.3**a**).
+
+**And `Colorwheel-Patcher` is not installed.** It was listed as an *optional* dependency in #129 and
+skipped on that basis. Optional to load; not optional to make half that table work.
+
+**So `C10`'s open question is answered, and the answer is not the one expected.** Flywheel is off
+because the shader pack is unsupported, not because Oculus is merely present. What is still unknown
+is what `Flywheel Backend:` reads with **shaders off entirely** — that is a two-line read during the
+shaders-off baseline `PERF-HARNESS-SETTINGS` requires anyway.
+
+**Four ways out, and none has been tried:**
+
+1. **A supported pack with no extra mod** — Complementary Unbound or Reimagined at r5.7 or newer.
+2. **Colorwheel-Patcher plus a matching pack** — Bliss 2.1.1–2.1.2, Photon 1.3a, BSL 10.1.
+3. **`enableFallbackMode = true`** in `config/colorwheel-client.toml`, currently `false`. Free, and
+   the mod's own author says there will be graphical issues.
+4. **No shader** — Flywheel should run natively; unverified, see above.
+
+**The pack ships no shader pack and must not start** — *Visuals Spec §22* forbids a required shader.
+Whatever is chosen is a recommendation in `INSTALL.md`, not a roster entry.
+
+**Not known.** Whether any of the four actually restores instanced Create rendering, and what it is
+worth in frames. Nothing here is measured.
+
+---
+
 ## DISCOVERED candidates — recorded, not installed
 
 **Six of these were INSTALLED in v0.2.1-alpha (#129) and are no longer candidates** — Colorwheel,
@@ -540,7 +597,7 @@ now at 1.5.5. `PERF-UPFG-011` requires this pair be tested deliberately rather t
 native and a scope drawn through reconstruction are different problems. `PERF-UPFG-036` has the
 subjective checklist.
 
-## C-UPFG-07 — the client bound to the wrong GPU
+## C-UPFG-07 — the client bound to the wrong GPU · **RESOLVED 2026-08-28**
 
 **Status: LIVE on the developer's machine. Blocks every measurement.**
 
@@ -556,8 +613,20 @@ OpenGL Renderer:     NVIDIA GeForce RTX 5060 Ti/PCIe/SSE2      <- the weaker car
 The narrow link starves texture and chunk uploads, which shows up as **frame-time spikes rather than
 lower average FPS** — the reported symptom exactly: 80–140 FPS that does not feel smooth.
 
-**No upscaling or FG verdict may be drawn until this is fixed**, and neither may any performance
-baseline. `PERF-UPFG-021` compares runs; two runs on different GPUs are not comparable.
+**RESOLVED.** `latest.log` now reads `OpenGL Renderer: NVIDIA GeForce RTX 4070 SUPER/PCIe/SSE2` in
+both instances, read on 2026-08-28 rather than taken on trust. The developer forced the binding in
+the NVIDIA App. **Benchmarking is unblocked.**
+
+**The check stays, as a precondition rather than a recorded field.** A binding that moved once can
+move again on a driver update, and `PERF-HARNESS-IDENTITY` only records the GPU — which catches it
+after the run. `scripts/build/new-benchmark-run.mjs --expect-gpu` refuses to stamp a run whose log
+names the wrong card.
+
+**What it cost while it was live:** every FPS observation made before this date was measured on an
+RTX 5060 Ti over a x4 link. None of them is a baseline.
+
+**Originally:** no upscaling or FG verdict, and no performance baseline, could be drawn — two runs
+on different GPUs are not comparable (`PERF-UPFG-021`).
 
 **How to check, in one line.** Do not judge by feel:
 

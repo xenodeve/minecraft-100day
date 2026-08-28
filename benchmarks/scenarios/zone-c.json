@@ -1,0 +1,29 @@
+{
+  "zone": "C",
+  "name": "MineColonies",
+  "description": "fixed NPC counts 10 / 25 / 50 / 75",
+  "definedIn": "docs/performance-benchmarks.md",
+  "measure": [
+    "Avg FPS",
+    "1% low",
+    "MSPT",
+    "pathfinding",
+    "entity tick cost",
+    "heap"
+  ],
+  "primaryTargets": [
+    "Radium Re-Reforged",
+    "ServerCore"
+  ],
+  "world": {
+    "seed": "",
+    "dimension": "",
+    "coordinates": "",
+    "yaw": 0,
+    "pitch": 0,
+    "timeOfDay": "",
+    "weather": "",
+    "entityCount": null
+  },
+  "status": "NOT DEFINED — no world, no coordinates, never run"
+}

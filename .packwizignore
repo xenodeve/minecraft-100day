@@ -38,6 +38,16 @@
 .gitattributes
 .packwizignore
 
+# --- measurement, not gameplay -----------------------------------------------
+#
+# benchmarks/ holds run records, scenario definitions and captures. It is
+# evidence ABOUT the pack, not part of it. Without this line `packwiz refresh`
+# indexes results.csv, every scenarios/*.json and every capture, and a friend
+# downloading the pack gets our CapFrameX exports. Added BEFORE the directory
+# existed, because this file has already been wrong twice in the other
+# direction and the failure is silent either way (#133).
+/benchmarks/
+
 # --- local build / runtime output --------------------------------------------
 /build/
 /dist/
